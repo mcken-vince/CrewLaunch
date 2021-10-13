@@ -1,4 +1,3 @@
-const { Timestamp } = require('bson');
 const mongoose = require('mongoose');
 
 const crewSchema = new mongoose.Schema({
@@ -13,8 +12,6 @@ const crewSchema = new mongoose.Schema({
   avatar: String
 }, { timestamps: true });
 
-const Crew = mongoose.model('Crew', crewSchema);
-
 const clientSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -26,8 +23,6 @@ const clientSchema = new mongoose.Schema({
     required: true
   }
 }, { timestamps: true });
-
-const Client = mongoose.model('Client', clientSchema);
 
 const packageSchema = new mongoose.Schema({
   title: {
@@ -54,8 +49,6 @@ const packageSchema = new mongoose.Schema({
   
 }, { timestamps: true });
 
-const Package = mongoose.model('Package', packageSchema);
-
 const contractSchema = new mongoose.Schema({
   package_id: {
     type: String,
@@ -77,8 +70,6 @@ const contractSchema = new mongoose.Schema({
   
 }, { timestamps: true });
 
-const Contract = mongoose.model('Contract', contractSchema);
-
 const jobSchema = new mongoose.Schema({
   crew_id: {
     type: String,
@@ -97,4 +88,10 @@ const jobSchema = new mongoose.Schema({
   }
 });
 
+const Crew = mongoose.model('Crew', crewSchema);
+const Client = mongoose.model('Client', clientSchema);
+const Package = mongoose.model('Package', packageSchema);
+const Contract = mongoose.model('Contract', contractSchema);
 const Job = mongoose.model('Job', jobSchema);
+
+export default { Crew, Client, Package, Contract, Job };
