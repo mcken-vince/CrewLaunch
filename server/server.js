@@ -2,6 +2,8 @@ const express = require('express');
 const http = require('http');
 const App = express();
 
+require('dotenv').config();
+
 const httpServer = http.Server(App);
 const PORT = 8080;
 
