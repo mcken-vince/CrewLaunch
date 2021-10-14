@@ -1,4 +1,3 @@
-import React from 'react';
 import DispatchNav from "../components/DispatchNav";
 
 export default {
