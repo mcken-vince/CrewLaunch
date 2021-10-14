@@ -82,13 +82,11 @@ const jobSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  date: Date,
-  start_time: String,
-  end_time: String,
   completed: {
     type: Boolean,
     default: false
-  }
+  },
+  date: Date
 });
 
 const Crew = mongoose.model('Crew', crewSchema);
