@@ -9,7 +9,8 @@ const crewSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  avatar: String
+  avatar: String,
+  is_active: Boolean
 }, { timestamps: true });
 
 const clientSchema = new mongoose.Schema({
@@ -17,11 +18,11 @@ const clientSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  phone: String,
   email: {
     type: String,
     required: true
-  }
+  },
+  phone: String
 }, { timestamps: true });
 
 const packageSchema = new mongoose.Schema({
@@ -29,7 +30,7 @@ const packageSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  flat_rate: {
+  cost: {
     type: Number,
     required: true
   },
@@ -66,8 +67,10 @@ const contractSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  start_date: Date
-  
+  start_date: {
+    type: Date,
+    required: true
+  }
 }, { timestamps: true });
 
 const jobSchema = new mongoose.Schema({
