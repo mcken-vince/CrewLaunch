@@ -94,4 +94,11 @@ const Package = mongoose.model('Package', packageSchema);
 const Contract = mongoose.model('Contract', contractSchema);
 const Job = mongoose.model('Job', jobSchema);
 
-export default { Crew, Client, Package, Contract, Job };
+const cli = new Client({
+  name: 'Gregory Peck',
+  phone: '403-552-9094',
+  email: 'regreg@peck.com'
+});
+cli.save().then(() => console.log('one entry added'));
+
+module.exports = { Crew, Client, Package, Contract, Job };

@@ -3,6 +3,8 @@ const http = require('http');
 const mongoose = require('mongoose');
 const App = express();
 
+require('./db/schema');
+
 require('dotenv').config();
 
 const httpServer = http.Server(App);
@@ -12,9 +14,6 @@ App.use(express.urlencoded({ extended: false }));
 App.use(express.json());
 App.use(express.static('public'));
 
-httpServer.listen(PORT, () => {
-  console.log(`Server listening at http://localhost:${PORT}`)
-});
 
 mongoose.connect(
   process.env.MONGODB_URI,
@@ -22,4 +21,9 @@ mongoose.connect(
     useNewUrlParser: true,
     useUnifiedTopology: true
   }
-);
+  );
+  
+  httpServer.listen(PORT, () => {
+    console.log(`Server listening at http://localhost:${PORT}`)
+  });
+  
