@@ -16,3 +16,9 @@ export const LoggedOut = Template.bind({});
 LoggedOut.args = {
   label: 'DispatchNav',
 };
+
+export const LoggedIn = Template.bind({});
+LoggedIn.args= {
+  label: 'DispatchNav',
+  user: {}
+}
