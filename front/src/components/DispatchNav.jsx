@@ -3,6 +3,7 @@ import '../styles/DispatchNav.scss';
 
 const DispatchNav = (props) => {
   const { user } = props;
+  
   return (
     <nav className="dispatch-nav">
       <span className="dispatch-nav-logo">CrewLauncher</span>
