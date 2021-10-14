@@ -1,6 +1,7 @@
 const express = require('express');
 const http = require('http');
 const mongoose = require('mongoose');
+const morgan = require('morgan');
 const App = express();
 
 require('./db/schema');
@@ -10,7 +11,8 @@ require('dotenv').config();
 const httpServer = http.Server(App);
 const PORT = 8080;
 
-App.use(express.urlencoded({ extended: false }));
+process.env.NODE_ENV !== "prod" && App.use(morgan('dev'));
+App.use(express.urlencoded({ extended: true }));
 App.use(express.json());
 App.use(express.static('public'));
 
