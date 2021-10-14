@@ -1,7 +1,7 @@
 import DateRangePicker from "../components/DateRangePicker";
 
 export default {
-  title: 'DateRangePicker',
+  title: 'CrewLauncher/DateRangePicker',
   component: DateRangePicker
 };
 
