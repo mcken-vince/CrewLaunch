@@ -11,6 +11,6 @@ export const LoggedOut = Template.bind({});
 
 export const LoggedIn = Template.bind({});
 
-LoggedIn.args= {
+LoggedIn.args = {
   user: {name: 'Abe', email: 'abe_rahama@mail.com'}
 };
