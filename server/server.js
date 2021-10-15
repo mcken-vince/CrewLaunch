@@ -27,8 +27,10 @@ mongoose.connect(
 
 const apiRoutes = require('./routes/apiRoutes');
 const clientsRoutes = require('./routes/clientsRoutes');
+const contractsRoutes = require('./routes/contractsRoutes');
 App.use('/api', apiRoutes(models));
 App.use('/clients', clientsRoutes(models.Client));
+App.use('/contracts', contractsRoutes(models.Contract));
 
 App.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`)
