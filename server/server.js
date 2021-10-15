@@ -17,16 +17,16 @@ App.use(express.urlencoded({ extended: true }));
 App.use(express.json());
 App.use(express.static('public'));
 
-const db = mongoose.connect(
+mongoose.connect(
   process.env.MONGODB_URI,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
   }
-).then(db => console.log('db in server.js: ', db));
+);
 
 const apiRoutes = require('./routes/apiRoutes');
-App.use('/api', apiRoutes(db, models));
+App.use('/api', apiRoutes(models));
 
 App.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`)

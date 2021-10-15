@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = (db, models) => {
+module.exports = (models) => {
   router.get('/crews', (req, res) => {
     models.Crew.find({})
     .then(result => {
