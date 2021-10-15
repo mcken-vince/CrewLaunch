@@ -114,7 +114,7 @@ Promise.all([
     crew_size: 2,
     avatar: "https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShaggyMullet&accessoriesType=Wayfarers&hairColor=Brown&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=ShirtScoopNeck&clotheColor=Red&eyeType=Happy&eyebrowType=RaisedExcitedNatural&mouthType=Twinkle&skinColor=Pale'"
   });
-  cr1.save().then((crew1) => console.log('crew1 created: ', crew1));
+  cr1.save().then((crew1) => console.log('crew1 created: '));
   
   const cr2 = new Crew({
     foreman_name: 'Heddy Ready',
