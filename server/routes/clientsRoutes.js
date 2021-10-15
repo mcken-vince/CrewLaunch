@@ -10,7 +10,7 @@ module.exports = (Client) => {
       res.json(newClient);
     })
     .catch(err => {
-      console.log(`Error: could not POST to /clients ${err}`);
+      console.log(`Error: could not create new client ${err}`);
       res.send(err);
     });
   });
@@ -32,10 +32,9 @@ module.exports = (Client) => {
       res.json(client);
     })
     .catch(err => {
-      console.log(`Error: could not POST to /clients/${req.params.id} ${err}`);
+      console.log(`Error: could not update client ${err}`);
     });
   });
-
 
   return router;
 };
