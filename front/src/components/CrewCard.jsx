@@ -6,11 +6,12 @@ import classNames from 'classnames';
 const CrewCard = (props) => {
   const { foreman_name, crew_size, avatar } = props.crew;
 
-  const jobs = props.jobs.map(job => {
+  const jobsOrderedByDate = props.jobs.sort((a, b) => a.date - b.date);
+  
+  const jobs = jobsOrderedByDate.map(job => {
     const jobClass = classNames('crewCard-job', {'crewCard-job-complete': job.complete});
     return (<h5 className={jobClass}>{job.address} - {format(job.date, 'eeee MMMM dd yyyy')}</h5>);
   });
-
 
   return (
     <div className='crewCard-container' >
