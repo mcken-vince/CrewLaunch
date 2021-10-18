@@ -1,7 +1,15 @@
 .contract-form-container {
-  width: 30em;
+  width: 40em;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  .contract-form-alert {
+    width: 100%;
+  }
+  
+  .contract-form {
+    width: 100%;
+  }
 }

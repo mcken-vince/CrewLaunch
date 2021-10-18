@@ -16,6 +16,7 @@ const PackageForm = (props) => {
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({error: false, success: false});
 
+  // is true if all required fields are not empty
   const formFilled = title && cost && interval && timeEst && length;
 
   const validate = () => {
@@ -86,8 +87,7 @@ const PackageForm = (props) => {
       </InputGroup>
       
       <Button disabled={!loading && !formFilled} type="submit" onClick={validate}>Submit</Button>
-    
-    
+  
     </Form>
   </div>
   );
