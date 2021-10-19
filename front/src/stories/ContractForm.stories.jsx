@@ -26,6 +26,10 @@ EmptyForm.args = {
       visit_interval_days: 1,
       man_hrs_per_visit: 5
     }
-  ]
+  ],
+  onSubmit: (packageInfo) => {
+    console.log(packageInfo);
+    return new Promise((res, rej) => res('yay'));
+  }
 }
 
