@@ -1,5 +1,5 @@
+// import { Router, Switch, Route } from 'react-router-dom';
 import './App.scss';
-import { Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
