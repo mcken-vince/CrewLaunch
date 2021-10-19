@@ -3,7 +3,6 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Alert from 'react-bootstrap/Alert';
-import Row from 'react-bootstrap/Row';
 import format from 'date-fns/format';
 import addDays from 'date-fns/addDays';
 import { useState } from 'react';
@@ -26,6 +25,10 @@ const ContractForm = (props) => {
   const handleDateChange = (date) => {
     setStartDate(date);
     setEndDate(selectedPackage ? addDays(date, selectedPackage.contract_length_days - 1) : date);
+  };
+
+  const openPackages = () => {
+
   };
 
   const validate = () => {
@@ -74,9 +77,17 @@ const ContractForm = (props) => {
         <Form.Control type='text' value={address} onChange={(e) => setAddress(e.target.value)} placeholder='Enter address' /> 
       </Form.Group>
       
-      <Form.Label>Select Contract Start Date:</Form.Label>
-      <DateRangePicker startDate={new Date(startDate)} endDate={new Date(endDate)} onChange={handleDateChange} inheritClassName='contract-form-daterangepicker'/>
-      
+      <InputGroup className='mb-3'>
+        <Form.Control type='text' readOnly={true} value={selectedPackage ? selectedPackage.title : 'Please select a package'} />
+        <Button onClick={openPackages}>Select Package</Button>
+      </InputGroup>
+
+      {selectedPackage && 
+      <>
+        <Form.Label>Select Contract Start Date:</Form.Label>
+        <DateRangePicker startDate={new Date(startDate)} endDate={new Date(endDate)} onChange={handleDateChange} inheritClassName='contract-form-daterangepicker'/>
+      </>}
+
       <Button disabled={!loading && !formFilled} type="submit" onClick={validate}>Submit</Button>
 
     </Form>
