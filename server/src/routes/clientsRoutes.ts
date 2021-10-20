@@ -1,9 +1,12 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
+import { Model } from 'mongoose';
+import { IClient } from '../models/client.model';
 
-module.exports = (Client) => {
+const router: express.IRouter = express.Router();
+
+const clientsRoutes = (Client: Model<IClient> ) => {
   router.post('/', (req, res) => {
-    const client = new Client(req.body);
+    const client: IClient = new Client(req.body);
     client.save()
     .then(newClient => {
       console.log('New client created successfully');
@@ -16,12 +19,15 @@ module.exports = (Client) => {
   });
 
   router.post('/:id', (req, res) => {
-    const update = req.body;
+    const update: IClient = req.body;
 
     Client.findOne({
       id: req.params.id
     })
     .then(client => {
+      if (!client) {
+        throw Error('Error updating nonexistent client');
+      }
       client.name = update.name;
       client.email = update.email;
       client.phone = update.phone;
@@ -38,3 +44,5 @@ module.exports = (Client) => {
 
   return router;
 };
+
+export default clientsRoutes;
