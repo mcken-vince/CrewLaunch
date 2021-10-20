@@ -3,8 +3,8 @@ const router = express.Router();
 
 module.exports = (Package) => {
   router.post('/', (req, res) => {
-    const package = new Package(req.body);
-    package.save()
+    const thisPackage = new Package(req.body);
+    thisPackage.save()
     .then(newPackage => {
       console.log('New package created successfully');
       res.json(newPackage);
@@ -21,15 +21,15 @@ module.exports = (Package) => {
     Package.findOne({
       id: req.params.id
     })
-    .then(package => {
-      package.name = update.name;
-      package.email = update.email;
-      package.phone = update.phone;
-      return package.save()
+    .then(thisPackage => {
+      thisPackage.name = update.name;
+      thisPackage.email = update.email;
+      thisPackage.phone = update.phone;
+      return thisPackage.save()
     })
-    .then(package => {
+    .then(thisPackage => {
       console.log('Package updated successfully');
-      res.json(package);
+      res.json(thisPackage);
     })
     .catch(err => {
       console.log(`Error: could not update package ${err}`);
