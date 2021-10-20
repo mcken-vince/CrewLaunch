@@ -1,7 +1,9 @@
 .daycard-container {
-  border: 2px black solid;
+  border: 1px black solid;
   padding: 5px;
-  width: 10em;
+  flex-basis: 100%/7;
+  text-align: center;
+  box-sizing: border-box;
 
   .daycard-job-li {
     &.daycard-job-li-complete {

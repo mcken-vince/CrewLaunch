@@ -17,12 +17,12 @@ const DispatchCalendar = () => {
   }
 
   return (
-    <>
+    <div className='dispatch-calendar-container'>
       <h1>{`${thisMonth.name} ${thisMonth.year}`}</h1>
-      <div className='dispatch-calendar-container'>
+      <div className='dispatch-calendar-days-container'>
         {dayCards}
       </div>
-    </>
+    </div>
   );
 };
 
