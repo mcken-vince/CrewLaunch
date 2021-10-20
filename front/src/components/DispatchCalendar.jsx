@@ -12,13 +12,16 @@ const DispatchCalendar = () => {
 
   const dayCards = [];
   for (let d = 1; d <= thisMonth.days; d++) {
-    dayCards.push(<DayCard date={`${thisMonth.name} ${d}, ${thisMonth.year}`} />)
+    const dayOfMonth = (0 < d && d < 10) ? `0${d}` : `${d}`;
+    dayCards.push(<DayCard date={dayOfMonth} key={d}/>)
   }
 
   return (
     <>
-      <h1>{thisMonth.name}</h1>
-      {dayCards}
+      <h1>{`${thisMonth.name} ${thisMonth.year}`}</h1>
+      <div className='dispatch-calendar-container'>
+        {dayCards}
+      </div>
     </>
   );
 };

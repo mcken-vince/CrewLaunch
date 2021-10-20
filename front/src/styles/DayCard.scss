@@ -1,5 +1,11 @@
-.daycard-job-li {
-  &.daycard-job-li-complete {
-    text-decoration: line-through;
+.daycard-container {
+  border: 2px black solid;
+  padding: 5px;
+  width: 10em;
+
+  .daycard-job-li {
+    &.daycard-job-li-complete {
+      text-decoration: line-through;
+    }
   }
 }

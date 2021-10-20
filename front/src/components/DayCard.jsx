@@ -1,8 +1,9 @@
 import '../styles/DayCard.scss';
 import classNames from 'classnames';
+import Button from 'react-bootstrap/Button';
 
 const DayCard = (props) => {
-  const { date, jobs } = props;
+  const { date, jobs, key } = props;
 
   const dayCardClass = classNames('daycard-container', {'daycard-container-empty': !jobs});
   const completeJobs = jobs && jobs.filter(job => job.complete);
@@ -14,14 +15,20 @@ const DayCard = (props) => {
     </li>);
   });
 
+  const selectDay = () => {
+
+  }
+
   return (
-    <div className={dayCardClass}>
-      <h3>{date} - ({jobs ? `${completeJobs.length}/${jobs.length}` : '0/0'})</h3>
-      {jobs && jobList.length > 0 ?
+    <div key={key} className={dayCardClass} >
+      <h3>{date}</h3>
+      <h3>({jobs ? `${completeJobs.length}/${jobs.length}` : '0/0'})</h3>
+      {/* {jobs && jobList.length > 0 ?
         (<ul>
          {jobList}
         </ul>) :
-        <h4>No jobs booked</h4>}
+        <h4>No jobs booked</h4>} */}
+        <Button disabled={!jobs || jobs.length <= 0} onClick={selectDay}>View Details</Button>
     </div>
   );
 };
