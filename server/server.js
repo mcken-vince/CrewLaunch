@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const App = express();
 
-const models = require('./db/schema');
+const models = require('./src/db/schema');
 
 
 // const httpServer = http.Server(App);
@@ -25,12 +25,12 @@ mongoose.connect(
   }
 );
 
-const apiRoutes = require('./routes/apiRoutes');
-const clientsRoutes = require('./routes/clientsRoutes');
-const contractsRoutes = require('./routes/contractsRoutes');
-const crewsRoutes = require('./routes/crewsRoutes');
-const jobsRoutes = require('./routes/jobsRoutes');
-const packagesRoutes = require('./routes/packagesRoutes');
+const apiRoutes = require('./src/routes/apiRoutes');
+const clientsRoutes = require('./src/routes/clientsRoutes');
+const contractsRoutes = require('./src/routes/contractsRoutes');
+const crewsRoutes = require('./src/routes/crewsRoutes');
+const jobsRoutes = require('./src/routes/jobsRoutes');
+const packagesRoutes = require('./src/routes/packagesRoutes');
 
 App.use('/api', apiRoutes(models));
 App.use('/clients', clientsRoutes(models.Client));
