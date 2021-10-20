@@ -9,7 +9,7 @@ const App = express();
 const { ClientModel } = require('./models/client.model');
 const { PackageModel } = require('./models/package.model');
 const { CrewModel } = require('./models/crew.model');
-const { ClientModel } = require('./models/client.model');
+const { ContractModel } = require('./models/contract.model');
 const { JobModel } = require('./models/job.model');
 
 
@@ -29,12 +29,12 @@ mongoose.connect(
   }
 );
 
-const apiRoutes = require('./routes/apiRoutes');
-const clientsRoutes = require('./routes/clientsRoutes');
-const contractsRoutes = require('./routes/contractsRoutes');
-const crewsRoutes = require('./routes/crewsRoutes');
-const jobsRoutes = require('./routes/jobsRoutes');
-const packagesRoutes = require('./routes/packagesRoutes');
+import apiRoutes from './routes/apiRoutes';
+import clientsRoutes from'./routes/clientsRoutes';
+import contractsRoutes from'./routes/contractsRoutes';
+import crewsRoutes from'./routes/crewsRoutes';
+import jobsRoutes from'./routes/jobsRoutes';
+import packagesRoutes from'./routes/packagesRoutes';
 
 App.use('/api', apiRoutes({ClientModel, ContractModel, CrewModel, JobModel, PackageModel}));
 App.use('/clients', clientsRoutes(ClientModel));
