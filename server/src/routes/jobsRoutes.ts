@@ -1,9 +1,11 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
+import { Model } from 'mongoose';
+import { IJob } from '../models/job.model';
+const router: express.IRouter = express.Router();
 
-module.exports = (Job) => {
+const jobRoutes = (Job: Model<IJob>) => {
   router.post('/', (req, res) => {
-    const job = new Job(req.body);
+    const job: IJob = new Job(req.body);
     job.save()
     .then(newJob => {
       console.log('New job created successfully');
@@ -16,15 +18,18 @@ module.exports = (Job) => {
   });
 
   router.post('/:id', (req, res) => {
-    const update = req.body;
+    const update: IJob = req.body;
 
     Job.findOne({
       id: req.params.id
     })
     .then(job => {
-      job.name = update.name;
-      job.email = update.email;
-      job.phone = update.phone;
+      if (!job) {
+        throw Error('Error updating nonexistent job');
+      }
+      job.crew_id = update.crew_id;
+      job.date = update.date;
+      job.completed = update.completed;
       return job.save()
     })
     .then(job => {
@@ -38,3 +43,5 @@ module.exports = (Job) => {
 
   return router;
 };
+
+export default jobsRoutes;
