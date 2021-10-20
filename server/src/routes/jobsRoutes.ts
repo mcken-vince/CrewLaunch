@@ -3,7 +3,7 @@ import { Model } from 'mongoose';
 import { IJob } from '../models/job.model';
 const router: express.IRouter = express.Router();
 
-const jobRoutes = (Job: Model<IJob>) => {
+const jobsRoutes = (Job: Model<IJob>) => {
   router.post('/', (req, res) => {
     const job: IJob = new Job(req.body);
     job.save()
