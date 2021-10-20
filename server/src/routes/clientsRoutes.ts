@@ -1,8 +1,8 @@
 import express from 'express';
-import mongoose, { Model } from 'mongoose';
+import { Model } from 'mongoose';
 import { IClient } from '../models/client.model';
 
-const router = express.Router();
+const router: express.IRouter = express.Router();
 
 const clientsRoutes = (Client: Model<IClient> ) => {
   router.post('/', (req, res) => {
@@ -25,6 +25,9 @@ const clientsRoutes = (Client: Model<IClient> ) => {
       id: req.params.id
     })
     .then(client => {
+      if (!client) {
+        throw Error('Error updating nonexistent client');
+      }
       client.name = update.name;
       client.email = update.email;
       client.phone = update.phone;
