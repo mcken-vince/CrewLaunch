@@ -4,7 +4,7 @@ import { IContract } from '../models/contract.model';
 
 const router: express.IRouter = express.Router();
 
-module.exports = (Contract: Model<IContract>) => {
+const contractsRoutes = (Contract: Model<IContract>) => {
   router.post('/', (req, res) => {
     const contract: IContract = new Contract(req.body);
     contract.save()
@@ -46,3 +46,5 @@ module.exports = (Contract: Model<IContract>) => {
 
   return router;
 };
+
+export default contractsRoutes;
