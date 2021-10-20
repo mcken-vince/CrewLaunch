@@ -1,4 +1,4 @@
-import mongoose, { Types, Schema, Document, model } from 'mongoose';
+import { Types, Schema, Document, model } from 'mongoose';
 
 export interface IContract extends Document {
   _id?: Types.ObjectId;

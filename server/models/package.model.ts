@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
+import { Document, Types, Schema, model} from 'mongoose';
 
-export interface IPackage extends mongoose.Document {
-  _id?: mongoose.ObjectId
+export interface IPackage extends Document {
+  _id?: Types.ObjectId
   title: string;
   cost: number;
   description?: string;
@@ -10,7 +10,7 @@ export interface IPackage extends mongoose.Document {
   contract_length_days: number;
 };
 
-const PackageSchema = new mongoose.Schema<IPackage>({
+const PackageSchema = new Schema<IPackage>({
   title: {
     type: String,
     required: true
@@ -35,4 +35,4 @@ const PackageSchema = new mongoose.Schema<IPackage>({
   
 }, { timestamps: true });
 
-export const PackageModel = mongoose.model<IPackage>('Package', PackageSchema);
+export const PackageModel = model<IPackage>('Package', PackageSchema);
