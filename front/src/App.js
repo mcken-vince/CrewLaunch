@@ -26,11 +26,11 @@ function App() {
 
               <Route path="/">
                 <h1>Welcome to Crew Launcher</h1>
-                <Link to="/dispatch">Dispatch</Link>
-                <Link to="/crews/1">Crew #1</Link>
+                <Link to="/dispatch">Dispatch</Link> <br/>
+                <Link to="/crews/1">Crew #1</Link> <br/>
                 <Link to="/crews/2">Crew #2</Link>
 
-                <p>{JSON.stringify(state)}</p>
+                <p>{JSON.stringify(state, null, 3)}</p>
               </Route>
             </Switch>
           </DataUpdate.Provider>

@@ -1,7 +1,7 @@
 import DispatchDashboardPage from "../components/pages/DispatchDashboardPage";
 
 export default {
-  title: 'CrewLauncher/Pages/DispatchDashboardPage',
+  title: 'Pages/DispatchDashboard',
   component: DispatchDashboardPage
 };
 
