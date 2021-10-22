@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import "./App.scss";
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, FC } from "react";
 import useAppData from "./hooks/useAppData";
 import CrewsDashboardPage from './components/pages/CrewsDashboardPage';
 import DispatchDashboardPage from './components/pages/DispatchDashboardPage';
