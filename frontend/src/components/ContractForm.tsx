@@ -5,15 +5,19 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner'
 import addDays from 'date-fns/addDays';
-import { useState } from 'react';
+import { useState, FC } from 'react';
 import DateRangePicker from './DateRangePicker';
 import PackagesOffcanvas from './PackagesOffcanvas';
+import { ContractFormProps } from './component-types';
 
-const ContractForm = (props) => {
+const ContractForm: FC<ContractFormProps> = (props: ContractFormProps) => {
   const { packages, onSubmit } = props;
+  // empty skeleton to satisfy typescript compiler
+  const packageSkeleton = {title: '', cost: 0, visit_interval_days: 0, man_hrs_per_visit: 0, contract_length_days: 0};
+  const clientSkeleton = {name: '', email: '', phone: ''};
   const [packagesShow, setPackagesShow] = useState(false);
-  const [selectedPackage, setSelectedPackage] = useState(props.editContract && props.editContract.selectedPackage ? props.editContract.selectedPackage : null);
-  const [client, setClient] = useState(props.editContract && props.editContract.client ? props.editContract.client : {name: '', email: '', phone: ''});
+  const [selectedPackage, setSelectedPackage] = useState(props.editContract && props.editContract.selectedPackage ? props.editContract.selectedPackage : packageSkeleton);
+  const [client, setClient] = useState(props.editContract && props.editContract.client ? props.editContract.client : clientSkeleton);
   const [address, setAddress] = useState(props.editContract && props.editContract.address ? props.editContract.address : '');
   const [startDate, setStartDate] = useState(props.editContract && props.editContract.startDate ? props.editContract.startDate : new Date());
   const [endDate, setEndDate] = useState(props.editContract && props.editContract.startDate ? addDays(new Date(props.editContract.startDate), selectedPackage.contract_length_days - 1) : new Date());
@@ -24,10 +28,9 @@ const ContractForm = (props) => {
   // is true if all required fields are not empty
   const formFilled = selectedPackage && client.name && client.email && address && startDate;
 
-  const handleDateChange = (date) => {
-    console.log(`handleDateChange: \n newStartDate: ${date} \n newEndDate:  ${addDays(date, parseInt(selectedPackage.contract_length_days) - 1)}`)
+  const handleDateChange: Function = (date: Date) => {
     setStartDate(date);
-    setEndDate(addDays(new Date(date), parseInt(selectedPackage.contract_length_days) - 1));
+    setEndDate(new Date(addDays(new Date(date), selectedPackage.contract_length_days - 1)));
   };
 
   const validate = () => {
@@ -44,15 +47,15 @@ const ContractForm = (props) => {
         job_notes: jobNotes
       };
       onSubmit(newContract)
-      .then(result => {
+      .then(() => {
         setAlert({error: false, success: true});
       })
-      .then(result => {
+      .then(() => {
         setLoading(false);
         // clear inputs
-        setSelectedPackage(null); setClient({name: '', email: '', phone: ''}); setAddress(''); setStartDate(new Date()); setJobNotes('');
+        setSelectedPackage(packageSkeleton); setClient(clientSkeleton); setAddress(''); setStartDate(new Date()); setJobNotes('');
       })
-      .catch(err => {
+      .catch(() => {
         setAlert({error: true, success: false});
       })
     }
@@ -80,7 +83,7 @@ const ContractForm = (props) => {
           </Form.Group>
           
           <InputGroup className='mb-3'>
-            <Form.Control disabled={loading} type='text' readOnly={true} value={selectedPackage ? `${selectedPackage.title} - $${selectedPackage.cost} - ${selectedPackage.contract_length_days} days` : 'Please select a package'} />
+            <Form.Control disabled={loading} type='text' readOnly={true} value={selectedPackage && selectedPackage.title ? `${selectedPackage.title} - $${selectedPackage.cost} - ${selectedPackage.contract_length_days} days` : 'Please select a package'} />
             <Button disabled={loading} onClick={() => setPackagesShow(true)}>Select Package</Button>
           </InputGroup>
 
