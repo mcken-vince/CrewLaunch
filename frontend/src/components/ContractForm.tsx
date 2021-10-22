@@ -28,12 +28,12 @@ const ContractForm: FC<ContractFormProps> = (props: ContractFormProps) => {
   // is true if all required fields are not empty
   const formFilled = selectedPackage && client.name && client.email && address && startDate;
 
-  const handleDateChange: Function = (date: Date) => {
+  const handleDateChange:Function = (date: Date) => {
     setStartDate(date);
     setEndDate(new Date(addDays(new Date(date), selectedPackage.contract_length_days - 1)));
   };
 
-  const validate = () => {
+  const validate:React.MouseEventHandler<HTMLButtonElement> = ():void => {
     if (formFilled) {
       setLoading(true);
       setAlert({error: false, success: false});
@@ -63,7 +63,7 @@ const ContractForm: FC<ContractFormProps> = (props: ContractFormProps) => {
 
   return (
     <>
-      <PackagesOffcanvas show={packagesShow} handleClose={() => setPackagesShow(false)} packages={packages} selectPackage={setSelectedPackage} />
+      <PackagesOffcanvas show={packagesShow} handleClose={():void => setPackagesShow(false)} packages={packages} selectPackage={setSelectedPackage} />
       <div className='contract-form-container'>
         <h1 className='contract-form-title'>Contract Form</h1>
         {alert.success && <Alert className='contract-form-alert' variant='success'>Great success!</Alert>}
@@ -72,19 +72,19 @@ const ContractForm: FC<ContractFormProps> = (props: ContractFormProps) => {
         <Form className='contract-form'>
           <Form.Label>Client Information:</Form.Label>
           <InputGroup className='mb-3'>
-            <Form.Control disabled={loading} type='text' value={client.name} onChange={(e) => setClient(prev => ({...prev, name: e.target.value}))} placeholder='Enter name'/>
-            <Form.Control disabled={loading} type='email' value={client.email} onChange={(e) => setClient(prev => ({...prev, email: e.target.value}))} placeholder='Enter email'/>
-            <Form.Control disabled={loading} type='text' value={client.phone} onChange={(e) => setClient(prev => ({...prev, phone: e.target.value}))} placeholder='Enter phone #'/>
+            <Form.Control disabled={loading} type='text' value={client.name} onChange={(e):void => setClient(prev => ({...prev, name: e.target.value}))} placeholder='Enter name'/>
+            <Form.Control disabled={loading} type='email' value={client.email} onChange={(e):void => setClient(prev => ({...prev, email: e.target.value}))} placeholder='Enter email'/>
+            <Form.Control disabled={loading} type='text' value={client.phone} onChange={(e):void => setClient(prev => ({...prev, phone: e.target.value}))} placeholder='Enter phone #'/>
           </InputGroup>
 
           <Form.Group className='mb-3' controlId='contractFormAddress'>
             <Form.Label>Address:</Form.Label>
-            <Form.Control disabled={loading} type='text' value={address} onChange={(e) => setAddress(e.target.value)} placeholder='Enter address' /> 
+            <Form.Control disabled={loading} type='text' value={address} onChange={(e):void => setAddress(e.target.value)} placeholder='Enter address' /> 
           </Form.Group>
           
           <InputGroup className='mb-3'>
             <Form.Control disabled={loading} type='text' readOnly={true} value={selectedPackage && selectedPackage.title ? `${selectedPackage.title} - $${selectedPackage.cost} - ${selectedPackage.contract_length_days} days` : 'Please select a package'} />
-            <Button disabled={loading} onClick={() => setPackagesShow(true)}>Select Package</Button>
+            <Button disabled={loading} onClick={():void => setPackagesShow(true)}>Select Package</Button>
           </InputGroup>
 
           {selectedPackage && 
