@@ -1,4 +1,4 @@
-import { IClient, IContract, IPackage } from '../definitions';
+import { IClient, IPackage } from '../definitions';
 import { Types } from 'mongoose';
 
 export interface ClientCardProps {
