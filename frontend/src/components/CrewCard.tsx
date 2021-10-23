@@ -3,15 +3,14 @@ import '../styles/CrewCard.scss';
 import format from 'date-fns/format';
 import classNames from 'classnames';
 import { CrewCardProps } from './component-types';
-import { ReactElement } from 'react';
 
-const CrewCard = (props: CrewCardProps): ReactElement => {
+const CrewCard = (props: CrewCardProps): JSX.Element => {
   const { foreman_name, crew_size, avatar } = props.crew;
 
   const jobsOrderedByDate = props.jobs.sort((a, b) => parseInt(a.date.toString()) - parseInt(b.date.toString());
   
-  const jobs = jobsOrderedByDate.map(job => {
-    const jobClass = classNames('crewCard-job', {'crewCard-job-complete': job.completed});
+  const jobs: JSX.Element[] = jobsOrderedByDate.map(job => {
+    const jobClass: string = classNames('crewCard-job', {'crewCard-job-complete': job.completed});
     return (<h5 className={jobClass}>{job.address} - {format(job.date, 'eeee MMMM dd yyyy')}</h5>);
   });
 
