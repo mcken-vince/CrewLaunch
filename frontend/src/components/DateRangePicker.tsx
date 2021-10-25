@@ -1,7 +1,16 @@
-import DatePicker from 'react-datepicker';
+import DatePicker, { ReactDatePickerProps} from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
-const DateRangePicker = (props) => {
+interface DateRangePickerProps extends ReactDatePickerProps {
+  onChange: VoidFunction;
+  selected: Date;
+  startDate: Date;
+  endDate: Date
+  inheritClassName? : string;
+}
+
+
+const DateRangePicker = (props: DateRangePickerProps) => {
   const { onChange, startDate, endDate, inheritClassName } = props;
 
   return (
