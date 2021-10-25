@@ -1,14 +1,17 @@
 import '../styles/DayCard.scss';
 import classNames from 'classnames';
 import Button from 'react-bootstrap/Button';
+import { DayCardProps, IJobLocal } from './component-types';
+import { ReactElement } from 'react';
 
-const DayCard = (props) => {
+
+const DayCard = (props: DayCardProps) => {
   const { date, jobs, key } = props;
 
   const dayCardClass = classNames('daycard-container', {'daycard-container-empty': !jobs});
-  const completeJobs = jobs && jobs.filter(job => job.complete);
-  const jobList = jobs && jobs.map((job) => {
-    const dayCardJobClass = classNames('daycard-job-li', {'daycard-job-li-complete': job.complete});
+  const completeJobs = jobs && jobs.filter((job: IJobLocal) => job.completed);
+  const jobList: ReactElement[] = jobs && jobs.map((job: IJobLocal) => {
+    const dayCardJobClass = classNames('daycard-job-li', {'daycard-job-li-complete': job.completed});
     return (
     <li className={dayCardJobClass}>
       {job.address}
@@ -17,7 +20,7 @@ const DayCard = (props) => {
 
   const selectDay = () => {
 
-  }
+  };
 
   return (
     <div key={key} className={dayCardClass} >

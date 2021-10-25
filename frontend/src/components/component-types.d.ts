@@ -2,6 +2,12 @@ import { IClient, IPackage, ICrew, IJob } from '../definitions';
 import { Types } from 'mongoose';
 import { ReactDatePickerProps } from 'react-datepicker';
 
+export interface DayCardProps {
+  date: Date;
+  jobs: IJobLocal[];
+  key?: number;
+}
+
 export interface DateRangePickerProps extends ReactDatePickerProps {
   onChange: VoidFunction;
   selected: Date;
