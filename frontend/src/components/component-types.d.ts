@@ -2,6 +2,9 @@ import { IClient, IPackage, ICrew, IJob, IUser } from '../definitions';
 import { Types } from 'mongoose';
 import { ReactDatePickerProps } from 'react-datepicker';
 
+export interface JobCardProps extends IJobLocal {
+
+};
 
 export interface DispatchNavProps {
   user: IUser
