@@ -2,6 +2,11 @@ import { IClient, IPackage, ICrew, IJob, IUser } from '../definitions';
 import { Types } from 'mongoose';
 import { ReactDatePickerProps } from 'react-datepicker';
 
+export interface PackageFormProps {
+  onSubmit: Function<IPackage>;
+  editPackage: IPackage;
+};
+
 export interface PackageCardProps {
   packageDetails: IPackage;
   onSelect: Function;
