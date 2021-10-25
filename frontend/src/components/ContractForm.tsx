@@ -5,12 +5,12 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner'
 import addDays from 'date-fns/addDays';
-import { useState } from 'react';
+import { FunctionComponent, ReactElement, useState } from 'react';
 import DateRangePicker from './DateRangePicker';
 import PackagesOffcanvas from './PackagesOffcanvas';
 import { ContractFormProps } from './component-types';
 
-const ContractForm = (props: ContractFormProps): JSX.Element  => {
+const ContractForm: FunctionComponent<ContractFormProps> = (props): ReactElement  => {
   const { packages, onSubmit } = props;
   // empty skeleton to satisfy typescript compiler
   const packageSkeleton = {title: '', cost: 0, visit_interval_days: 0, man_hrs_per_visit: 0, contract_length_days: 0};
@@ -26,7 +26,7 @@ const ContractForm = (props: ContractFormProps): JSX.Element  => {
   const [alert, setAlert] = useState({error: false, success: false});
 
   // is true if all required fields are not empty
-  const formFilled = selectedPackage && client.name && client.email && address && startDate;
+  const formFilled: boolean = (selectedPackage && client.name && client.email && address && startDate) ? true : false;
 
   const handleDateChange:Function = (date: Date):void => {
     setStartDate(date);

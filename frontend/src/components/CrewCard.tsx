@@ -3,8 +3,9 @@ import '../styles/CrewCard.scss';
 import format from 'date-fns/format';
 import classNames from 'classnames';
 import { CrewCardProps } from './component-types';
+import { FunctionComponent, ReactElement } from 'react';
 
-const CrewCard = (props: CrewCardProps): JSX.Element => {
+const CrewCard: FunctionComponent<CrewCardProps> = (props): ReactElement => {
   const { foreman_name, crew_size, avatar } = props.crew;
 
   const jobsOrderedByDate = props.jobs.sort((a, b) => parseInt(a.date.toString()) - parseInt(b.date.toString());

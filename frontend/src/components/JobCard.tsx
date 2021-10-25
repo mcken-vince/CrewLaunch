@@ -1,8 +1,9 @@
 import ClassNames from 'classnames';
+import { FunctionComponent, ReactElement } from 'react';
 import '../styles/JobCard.scss';
 import { JobCardProps } from './component-types';
 
-const JobCard = (props: JobCardProps) => {
+const JobCard: FunctionComponent<JobCardProps> = (props): ReactElement => {
   const { address, date, completed } = props;
   
   const jobCardClass: string = ClassNames('jobcard-container', {'jobcard-complete': completed})
