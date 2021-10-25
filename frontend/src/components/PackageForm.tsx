@@ -3,11 +3,11 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Alert from 'react-bootstrap/Alert';
-import { ReactElement, FunctionComponent, useState } from 'react';
+import { ReactElement, FC, useState } from 'react';
 import { PackageFormProps } from './component-types';
 import { IPackage } from '../definitions';
 
-const PackageForm: FunctionComponent<PackageFormProps> = (props): ReactElement => {
+const PackageForm: FC<PackageFormProps> = (props): ReactElement => {
   const { onSubmit } = props;
   const [title, setTitle] = useState(props.editPackage && props.editPackage.title ? props.editPackage.title : '');
   const [description, setDescription] = useState(props.editPackage && props.editPackage.description ? props.editPackage.description : '');
@@ -35,15 +35,15 @@ const PackageForm: FunctionComponent<PackageFormProps> = (props): ReactElement =
         man_hrs_per_visit: timeEst
       };
       onSubmit(newPackage)
-      .then((result: any) => {
+      .then((result: any): void => {
         setAlert({error: false, success: true});
         return result;
       })
-      .then((result: any) => {
+      .then((result: any): void => {
         setLoading(false);
         setTitle(''); setDescription(''); setCost(null); setInterval(null); setTimeEst(null); setLength(null);
       })
-      .catch((err: any) => {
+      .catch((err: any): void => {
         setAlert({error: true, success: false});
       })
     }

@@ -3,9 +3,13 @@ import { Types } from 'mongoose';
 import { ReactDatePickerProps } from 'react-datepicker';
 
 export interface PackageFormProps {
-  onSubmit: Function<IPackage>;
+  onSubmit: PackageFormOnSubmitFunction;
   editPackage: IPackage;
 };
+
+type PackageFormOnSubmitFunction = {
+  (IPackage): Promise<IPackage>;
+}
 
 export interface PackageCardProps {
   packageDetails: IPackage;
