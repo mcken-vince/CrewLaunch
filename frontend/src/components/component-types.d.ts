@@ -1,5 +1,14 @@
 import { IClient, IPackage, ICrew, IJob } from '../definitions';
 import { Types } from 'mongoose';
+import { ReactDatePickerProps } from 'react-datepicker';
+
+export interface DateRangePickerProps extends ReactDatePickerProps {
+  onChange: VoidFunction;
+  selected: Date;
+  startDate: Date;
+  endDate: Date
+  inheritClassName? : string;
+}
 
 export interface CrewCardProps {
   crew: ICrew;
