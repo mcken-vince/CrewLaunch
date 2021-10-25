@@ -1,7 +1,8 @@
+import { FC, ReactElement } from 'react';
 import '../../styles/DispatchDashboardPage.scss';
 import DispatchCalendar from '../DispatchCalendar';
 
-const DispatchDashboardPage = () => {
+const DispatchDashboardPage: FC<null> = (): ReactElement => {
 
   return (
     <>
