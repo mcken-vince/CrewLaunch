@@ -1,9 +1,11 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import { PackageCardProps } from './component-types';
+import { FunctionComponent } from 'react';
 
-const PackageCard = (props) => {
-  const { onSelect } = props;
-  const { title, description, cost } = props.packageDetails;
+const PackageCard: FunctionComponent<PackageCardProps> = (props: PackageCardProps) => {
+  const { onSelect, packageDetails } = props;
+  const { title, description, cost } = packageDetails;
 
   return (
     <Card>
