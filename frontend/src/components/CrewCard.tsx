@@ -2,15 +2,15 @@ import Image from 'react-bootstrap/Image';
 import '../styles/CrewCard.scss';
 import format from 'date-fns/format';
 import classNames from 'classnames';
-import { CrewCardProps } from './component-types';
-import { FunctionComponent, ReactElement } from 'react';
+import { CrewCardProps, IJobLocal } from './component-types';
+import { FC, ReactElement } from 'react';
 
-const CrewCard: FunctionComponent<CrewCardProps> = (props): ReactElement => {
+const CrewCard: FC<CrewCardProps> = (props): ReactElement => {
   const { foreman_name, crew_size, avatar } = props.crew;
 
-  const jobsOrderedByDate = props.jobs.sort((a, b) => parseInt(a.date.toString()) - parseInt(b.date.toString());
+  const jobsOrderedByDate: IJobLocal[]  = props.jobs.sort((a, b) => parseInt(a.date.toString()) - parseInt(b.date.toString());
   
-  const jobs: JSX.Element[] = jobsOrderedByDate.map(job => {
+  const jobs: ReactElement[] = jobsOrderedByDate.map(job => {
     const jobClass: string = classNames('crewCard-job', {'crewCard-job-complete': job.completed});
     return (<h5 className={jobClass}>{job.address} - {format(job.date, 'eeee MMMM dd yyyy')}</h5>);
   });

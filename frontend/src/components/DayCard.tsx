@@ -2,10 +2,10 @@ import '../styles/DayCard.scss';
 import classNames from 'classnames';
 import Button from 'react-bootstrap/Button';
 import { DayCardProps, IJobLocal } from './component-types';
-import { FunctionComponent, ReactElement } from 'react';
+import { FC, ReactElement } from 'react';
 
 
-const DayCard: FunctionComponent<DayCardProps> = (props): ReactElement => {
+const DayCard: FC<DayCardProps> = (props): ReactElement => {
   const { date, jobs, key } = props;
 
   const dayCardClass = classNames('daycard-container', {'daycard-container-empty': !jobs});

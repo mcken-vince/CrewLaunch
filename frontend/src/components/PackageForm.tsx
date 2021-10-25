@@ -3,16 +3,18 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Alert from 'react-bootstrap/Alert';
-import { useState } from 'react';
+import { ReactElement, FC, useState } from 'react';
+import { PackageFormProps } from './component-types';
+import { IPackage } from '../definitions';
 
-const PackageForm = (props) => {
+const PackageForm: FC<PackageFormProps> = (props): ReactElement => {
   const { onSubmit } = props;
   const [title, setTitle] = useState(props.editPackage && props.editPackage.title ? props.editPackage.title : '');
   const [description, setDescription] = useState(props.editPackage && props.editPackage.description ? props.editPackage.description : '');
   const [cost, setCost] = useState(props.editPackage && props.editPackage.cost ? props.editPackage.cost : null);
-  const [interval, setInterval] = useState(props.editPackage && props.editPackage.interval ? props.editPackage.interval : null);
-  const [timeEst, setTimeEst] = useState(props.editPackage && props.editPackage.timeEst ? props.editPackage.timeEst : null);
-  const [length, setLength] = useState(props.editPackage && props.editPackage.contractLength ? props.editPackage.contractLength : null);
+  const [interval, setInterval] = useState(props.editPackage && props.editPackage.visit_interval_days ? props.editPackage.visit_interval_days : null);
+  const [timeEst, setTimeEst] = useState(props.editPackage && props.editPackage.man_hrs_per_visit ? props.editPackage.man_hrs_per_visit : null);
+  const [length, setLength] = useState(props.editPackage && props.editPackage.contract_length_days ? props.editPackage.contract_length_days : null);
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({error: false, success: false});
 
@@ -22,9 +24,9 @@ const PackageForm = (props) => {
   const validate = () => {
     if (formFilled) {
       setLoading(true);
-      setAlert(false);
+      setAlert({error: false, success: false});
       
-      const newPackage = {
+      const newPackage: IPackage = {
         title,
         description,
         cost,
@@ -33,14 +35,15 @@ const PackageForm = (props) => {
         man_hrs_per_visit: timeEst
       };
       onSubmit(newPackage)
-      .then(result => {
+      .then((result: any): void => {
         setAlert({error: false, success: true});
+        return result;
       })
-      .then(result => {
+      .then((result: any): void => {
         setLoading(false);
         setTitle(''); setDescription(''); setCost(null); setInterval(null); setTimeEst(null); setLength(null);
       })
-      .catch(err => {
+      .catch((err: any): void => {
         setAlert({error: true, success: false});
       })
     }
@@ -65,24 +68,24 @@ const PackageForm = (props) => {
       <Form.Label>Cost:</Form.Label>
       <InputGroup className='mb-3'>
           <InputGroup.Text>$</InputGroup.Text>
-          <Form.Control type='text' value={cost} onChange={(e) => setCost(e.target.value)} placeholder='Enter package cost' /> 
+          <Form.Control type='text' value={cost ? cost.toString() : undefined} onChange={(e) => setCost(parseInt(e.target.value))} placeholder='Enter package cost' /> 
       </InputGroup>     
 
       <Form.Label>Visit Interval:</Form.Label>
       <InputGroup className='mb-3'>
-        <Form.Control type='text' value={interval} onChange={(e) => setInterval(e.target.value)} placeholder='Enter visit interval in days' /> 
+        <Form.Control type='text' value={interval ? interval.toString() : undefined} onChange={(e) => setInterval(parseInt(e.target.value))} placeholder='Enter visit interval in days' /> 
         <InputGroup.Text>days</InputGroup.Text>
       </InputGroup>
 
       <Form.Label>Contract Length:</Form.Label>
       <InputGroup className='mb-3'>
-        <Form.Control type='text' value={length} onChange={(e) => setLength(e.target.value)} placeholder='Enter length in days' /> 
+        <Form.Control type='text' value={length ? length.toString() : undefined} onChange={(e) => setLength(parseInt(e.target.value))} placeholder='Enter length in days' /> 
         <InputGroup.Text>days</InputGroup.Text>
       </InputGroup>
 
       <Form.Label>Time Estimate:</Form.Label>
       <InputGroup className='mb-3'>
-        <Form.Control type='text' value={timeEst} onChange={(e) => setTimeEst(e.target.value)} placeholder='Enter estimated man hrs per visit' /> 
+        <Form.Control type='text' value={timeEst ? timeEst.toString() : undefined} onChange={(e) => setTimeEst(parseInt(e.target.value))} placeholder='Enter estimated man hrs per visit' /> 
         <InputGroup.Text>hours</InputGroup.Text>
       </InputGroup>
       

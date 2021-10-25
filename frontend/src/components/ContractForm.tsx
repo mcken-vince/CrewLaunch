@@ -5,12 +5,12 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner'
 import addDays from 'date-fns/addDays';
-import { FunctionComponent, ReactElement, useState } from 'react';
+import { FC, ReactElement, useState } from 'react';
 import DateRangePicker from './DateRangePicker';
 import PackagesOffcanvas from './PackagesOffcanvas';
 import { ContractFormProps } from './component-types';
 
-const ContractForm: FunctionComponent<ContractFormProps> = (props): ReactElement  => {
+const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
   const { packages, onSubmit } = props;
   // empty skeleton to satisfy typescript compiler
   const packageSkeleton = {title: '', cost: 0, visit_interval_days: 0, man_hrs_per_visit: 0, contract_length_days: 0};
