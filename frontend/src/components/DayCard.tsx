@@ -1,23 +1,27 @@
 import '../styles/DayCard.scss';
 import classNames from 'classnames';
 import Button from 'react-bootstrap/Button';
+import { DayCardProps, IJobLocal } from './component-types';
+import { FunctionComponent, ReactElement } from 'react';
 
-const DayCard = (props) => {
+
+const DayCard: FunctionComponent<DayCardProps> = (props): ReactElement => {
   const { date, jobs, key } = props;
 
   const dayCardClass = classNames('daycard-container', {'daycard-container-empty': !jobs});
-  const completeJobs = jobs && jobs.filter(job => job.complete);
-  const jobList = jobs && jobs.map((job) => {
-    const dayCardJobClass = classNames('daycard-job-li', {'daycard-job-li-complete': job.complete});
+  const completeJobs = jobs && jobs.filter((job: IJobLocal) => job.completed);
+  const jobList: ReactElement[] = jobs && jobs.map((job: IJobLocal) => {
+    const dayCardJobClass = classNames('daycard-job-li', {'daycard-job-li-complete': job.completed});
     return (
     <li className={dayCardJobClass}>
       {job.address}
     </li>);
   });
 
-  const selectDay = () => {
+  // Opens a canvas of this day's jobs with details
+  const selectDay: VoidFunction = () => {
 
-  }
+  };
 
   return (
     <div key={key} className={dayCardClass} >

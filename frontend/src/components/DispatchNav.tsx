@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import '../styles/DispatchNav.scss';
+import { DispatchNavProps } from './component-types';
 
-const DispatchNav = (props) => {
+
+const DispatchNav: FunctionComponent<DispatchNavProps> = (props): ReactElement => {
   const { user } = props;
   
   return (

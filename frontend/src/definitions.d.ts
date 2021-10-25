@@ -8,6 +8,13 @@ export interface IState  {
   contracts: Array<IContract>;
 };
 
+export interface IUser {
+  name: string;
+  email: string;
+  // password will need to be changed to bCrypt hash
+  password: string;
+}
+
 export interface ICrew extends Document {
   _id?: Types.ObjectId;
   foreman_name: string;

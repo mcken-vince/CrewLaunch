@@ -1,8 +1,7 @@
 import '../styles/ClientCard.scss';
-import { FC } from 'react';
 import { ClientCardProps } from './component-types';
 
-const ClientCard:FC<ClientCardProps> = (props: ClientCardProps) => {
+const ClientCard = (props: ClientCardProps): JSX.Element => {
   const { name, email, phone } = props.client;
   
   return (
