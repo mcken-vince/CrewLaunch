@@ -4,7 +4,7 @@ import { getDaysInMonth, format } from 'date-fns';
 import { IthisMonth } from './component-types';
 import { FC, ReactElement } from 'react';
 
-const DispatchCalendar: FC<null> = (): ReactElement => {
+const DispatchCalendar: FC<any> = (): ReactElement => {
   const today: Date = new Date();
   const thisMonth: IthisMonth = {
     name: format(today, 'MMMM'),
