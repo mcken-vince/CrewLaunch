@@ -18,7 +18,8 @@ const DayCard = (props: DayCardProps) => {
     </li>);
   });
 
-  const selectDay = () => {
+  // Opens a canvas of this day's jobs with details
+  const selectDay: VoidFunction = () => {
 
   };
 
