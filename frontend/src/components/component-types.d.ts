@@ -2,6 +2,13 @@ import { IClient, IPackage, ICrew, IJob, IUser } from '../definitions';
 import { Types } from 'mongoose';
 import { ReactDatePickerProps } from 'react-datepicker';
 
+export interface PackagesOffcanvasProps {
+  show: Function;
+  handleClose: Function;
+  packages: IPackage[];
+  selectPackage: Function;
+};
+
 export interface PackageFormProps {
   onSubmit: PackageFormOnSubmitFunction;
   editPackage: IPackage;
@@ -9,7 +16,7 @@ export interface PackageFormProps {
 
 type PackageFormOnSubmitFunction = {
   (IPackage): Promise<IPackage>;
-}
+};
 
 export interface PackageCardProps {
   packageDetails: IPackage;

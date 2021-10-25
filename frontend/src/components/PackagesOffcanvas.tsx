@@ -1,10 +1,12 @@
+import { FC, ReactElement } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import PackageCard from '../components/PackageCard';
+import { PackagesOffcanvasProps } from '../components/component-types';
 
-const PackagesOffcanvas = (props) => {
+const PackagesOffcanvas: FC<PackagesOffcanvasProps> = (props): ReactElement => {
   const { show, handleClose, packages, selectPackage } = props;
 
-  const packageCards = packages.map(p => {
+  const packageCards: ReactElement[] = packages.map(p => {
     return (<PackageCard packageDetails={p} onSelect={selectPackage} />)
   })
 
