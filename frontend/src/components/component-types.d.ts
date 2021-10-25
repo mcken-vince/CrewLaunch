@@ -1,7 +1,11 @@
-import { IClient, IPackage, ICrew, IJob } from '../definitions';
+import { IClient, IPackage, ICrew, IJob, IUser } from '../definitions';
 import { Types } from 'mongoose';
 import { ReactDatePickerProps } from 'react-datepicker';
 
+
+export interface DispatchNavProps {
+  user: IUser
+};
 
 export interface IthisMonth {
   name: string;
