@@ -3,7 +3,7 @@ import { Types } from 'mongoose';
 import { ReactDatePickerProps } from 'react-datepicker';
 
 export interface PackagesOffcanvasProps {
-  show: Function;
+  show: boolean;
   handleClose: Function;
   packages: IPackage[];
   selectPackage: Function;
@@ -44,8 +44,8 @@ export interface DayCardProps {
 };
 
 export interface DateRangePickerProps extends ReactDatePickerProps {
-  onChange: VoidFunction;
-  selected: Date;
+  onChange: Function;
+  selected?: Date;
   startDate: Date;
   endDate: Date
   inheritClassName? : string;
@@ -78,7 +78,7 @@ export interface IContractLocal {
 };
 
 export interface ContractFormProps {
-  packages: {};
+  packages: IPackage[];
   onSubmit: Function;
   editContract: IContractLocal;
 };
