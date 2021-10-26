@@ -65,9 +65,9 @@ export interface CrewCardProps {
 // Job interface used in CrewCard component
 // Includes address & jobNotes
 export interface IJobLocal extends IJob {
-  address: string;
-  jobNotes: string;
-  servicePackage: IPackage;
+  address?: string;
+  jobNotes?: string;
+  servicePackage?: IPackage;
 };
 
 export interface ClientCardProps {

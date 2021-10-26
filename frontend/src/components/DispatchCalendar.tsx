@@ -8,7 +8,17 @@ import JobCard from './JobCard';
 
 const DispatchCalendar: FC<any> = (props): ReactElement => {
   const { jobs } = props;
-  const [showDayDetails, setShowDayDetails] = useState({show: false, day: {date: 0, jobs: [{}]}});
+
+  interface ISelectedDay {
+    date: number;
+    jobs: IJobLocal[] | [];
+  };
+  interface IShowDayDetails {
+    show: boolean;
+    day: ISelectedDay;
+  };
+
+  const [showDayDetails, setShowDayDetails] = useState<IShowDayDetails>({show: false, day: {date: 0, jobs: []}});
 
 
   // Opens a canvas of this day's jobs with details
@@ -16,8 +26,9 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
     setShowDayDetails({show: true, day: {date: date, jobs: jobs}});
   };
 
-  const selectedDayJobs: ReactElement[] = showDayDetails.day.jobs && showDayDetails.day.jobs.map((job) => {
-    return <JobCard {...job}/>
+  const selectedDayJobs: ReactElement[] = showDayDetails.day.jobs && showDayDetails.day.jobs.map((job, idx) => {
+    console.log('job: ', job);
+    return (<JobCard key={idx} {...job} />);
   });
 
   const today: Date = new Date();
@@ -36,7 +47,8 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
     const todayJobs: IJobLocal[] = jobs ? jobs.filter((job: IJobLocal) => isEqual(new Date(job.date), new Date(`${thisMonth.name} ${d}, ${thisMonth.year}`))) : [];
     dayCards.push(<DayCard date={dayOfMonth} key={d} jobs={todayJobs} selectDay={():void => selectDay(d, todayJobs)} />);
   }
-
+  console.log('selectedDayJobs: ', selectedDayJobs);
+  
   return (
     <div className='dispatch-calendar-container'>
       <h1>{`${thisMonth.name} ${thisMonth.year}`}</h1>
@@ -45,7 +57,7 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
         {dayCards}
       </div>
 
-      <Modal show={showDayDetails.show} fullscreen={true} onHide={() => setShowDayDetails({show: false, day: {date: 0, jobs: []}})}>
+      <Modal show={showDayDetails.day.jobs.length > 0 && showDayDetails.show} fullscreen={true} onHide={() => setShowDayDetails({show: false, day: {date: 0, jobs: []}})}>
         <Modal.Header closeButton>
           <Modal.Title>{thisMonth.name} {showDayDetails.day}, {thisMonth.year}</Modal.Title>
         </Modal.Header>
