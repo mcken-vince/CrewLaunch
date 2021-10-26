@@ -1,6 +1,6 @@
 import DayCard from './DayCard';
 import '../styles/DispatchCalendar.scss';
-import { getDaysInMonth, format } from 'date-fns';
+import { getDaysInMonth, format, isEqual } from 'date-fns';
 import { IthisMonth, IJobLocal } from './component-types';
 import { useState, FC, ReactElement } from 'react';
 import Modal from 'react-bootstrap/Modal';
@@ -16,8 +16,8 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
     setShowDayDetails({show: true, day: day})
   };
 
-  const selectedDayJobs: [] = jobs.map((job: IJobLocal) => {
-    <JobCard {...job}/>
+  const selectedDayJobs: ReactElement[] = jobs && jobs.map((job: IJobLocal) => {
+    return <JobCard {...job}/>
   });
 
   const today: Date = new Date();
@@ -33,7 +33,8 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
   const dayCards: ReactElement[] = [];
   for (let d = 1; d <= thisMonth.days; d++) {
     const dayOfMonth: string = (0 < d && d < 10) ? `0${d}` : `${d}`;
-    dayCards.push(<DayCard date={dayOfMonth} key={d} jobs={[]} selectDay={():void => selectDay(d)} />);
+    const todayJobs: IJobLocal[] = jobs && jobs.filter((job: IJobLocal) => isEqual(new Date(job.date), new Date(`${thisMonth.name} ${d}, ${thisMonth.year}`)));
+    dayCards.push(<DayCard date={dayOfMonth} key={d} jobs={todayJobs} selectDay={():void => selectDay(d)} />);
   }
 
   return (
