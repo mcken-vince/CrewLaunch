@@ -3,9 +3,9 @@
 .dispatch-calendar-container {
   display: flex;
   flex-direction: column;
-  width: 80%;
-  align-items: center;
- 
+  width: 95%;
+  border: 10px solid $border-color1;
+
   .dispatch-calendar-days-container {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -22,11 +22,17 @@
       
     }
     .daycard-container {
+      margin: 2px;
+
+      &:hover {
+        background-color:$border-color1;
+        color: white;
+        cursor: pointer;
+      }
+
       .daycard-day-summary {
-        &:hover {
-          color: $hover-color1;
-          cursor: pointer;
-        }
+
+
       }
 
     }
