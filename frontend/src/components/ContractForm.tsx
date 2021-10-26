@@ -5,7 +5,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner'
 import addDays from 'date-fns/addDays';
-import { FC, ReactElement, useState } from 'react';
+import { EventHandler, FC, ReactElement, useState } from 'react';
 import DateRangePicker from './DateRangePicker';
 import PackagesOffcanvas from './PackagesOffcanvas';
 import { ContractFormProps } from './component-types';
@@ -28,7 +28,7 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
   // is true if all required fields are not empty
   const formFilled: boolean = (selectedPackage && client.name && client.email && address && startDate) ? true : false;
 
-  const handleDateChange:Function = (date: Date):void => {
+  const handleDateChange:EventHandler<any> = (date: Date):void => {
     setStartDate(date);
     setEndDate(new Date(addDays(new Date(date), selectedPackage.contract_length_days - 1)));
   };

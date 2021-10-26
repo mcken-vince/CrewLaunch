@@ -1,6 +1,7 @@
 import { IClient, IPackage, ICrew, IJob, IUser } from '../definitions';
 import { Types } from 'mongoose';
 import { ReactDatePickerProps } from 'react-datepicker';
+import { EventHandler } from 'react';
 
 export interface PackagesOffcanvasProps {
   show: boolean;
@@ -44,7 +45,7 @@ export interface DayCardProps {
 };
 
 export interface DateRangePickerProps extends ReactDatePickerProps {
-  onChange: Function;
+  onChange: EventHandler<any>;
   selected?: Date;
   startDate: Date;
   endDate: Date
