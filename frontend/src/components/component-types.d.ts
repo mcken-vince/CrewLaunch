@@ -3,6 +3,10 @@ import { Types } from 'mongoose';
 import { ReactDatePickerProps } from 'react-datepicker';
 import { EventHandler } from 'react';
 
+export interface DispatchCalendarProps {
+  jobs: IJobLocal[];
+};
+
 export interface PackagesOffcanvasProps {
   show: boolean;
   handleClose: Function;
@@ -42,6 +46,7 @@ export interface DayCardProps {
   date: string;
   jobs: IJobLocal[];
   key?: number;
+  selectDay: VoidFunction<number>;
 };
 
 export interface DateRangePickerProps extends ReactDatePickerProps {

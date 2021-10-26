@@ -1,10 +1,25 @@
 import DayCard from './DayCard';
 import '../styles/DispatchCalendar.scss';
 import { getDaysInMonth, format } from 'date-fns';
-import { IthisMonth } from './component-types';
-import { FC, ReactElement } from 'react';
+import { IthisMonth, IJobLocal } from './component-types';
+import { useState, FC, ReactElement } from 'react';
+import Modal from 'react-bootstrap/Modal';
+import JobCard from './JobCard';
 
-const DispatchCalendar: FC<any> = (): ReactElement => {
+const DispatchCalendar: FC<any> = (props): ReactElement => {
+  const { jobs } = props;
+  const [showDayDetails, setShowDayDetails] = useState({show: false, day: 0});
+
+
+  // Opens a canvas of this day's jobs with details
+  const selectDay = (day: number): void => {
+    setShowDayDetails({show: true, day: day})
+  };
+
+  const selectedDayJobs: [] = jobs.map((job: IJobLocal) => {
+    <JobCard {...job}/>
+  });
+
   const today: Date = new Date();
   const thisMonth: IthisMonth = {
     name: format(today, 'MMMM'),
@@ -12,15 +27,13 @@ const DispatchCalendar: FC<any> = (): ReactElement => {
     days: getDaysInMonth(today)
   };
 
-  const week: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const week: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const daysOfWeek: ReactElement[] = week.map(wd => <div className='weekday-container'><h3>{wd}</h3></div>);
-
-
 
   const dayCards: ReactElement[] = [];
   for (let d = 1; d <= thisMonth.days; d++) {
     const dayOfMonth: string = (0 < d && d < 10) ? `0${d}` : `${d}`;
-    dayCards.push(<DayCard date={dayOfMonth} key={d} jobs={[]} />);
+    dayCards.push(<DayCard date={dayOfMonth} key={d} jobs={[]} selectDay={():void => selectDay(d)} />);
   }
 
   return (
@@ -30,6 +43,14 @@ const DispatchCalendar: FC<any> = (): ReactElement => {
         {daysOfWeek}
         {dayCards}
       </div>
+
+      <Modal show={showDayDetails.show} fullscreen={true} onHide={() => setShowDayDetails({show: false, day: 0})}>
+        <Modal.Header closeButton>
+          <Modal.Title>{thisMonth.name} {showDayDetails.day}, {thisMonth.year}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{selectedDayJobs}</Modal.Body>
+      </Modal>
+
     </div>
   );
 };

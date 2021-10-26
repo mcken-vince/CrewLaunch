@@ -1,12 +1,12 @@
 import '../styles/DayCard.scss';
 import classNames from 'classnames';
 import { DayCardProps} from './component-types';
-import { useState, FC, ReactElement } from 'react';
+import { FC, ReactElement } from 'react';
 
 
 const DayCard: FC<DayCardProps> = (props): ReactElement => {
-  const { date, jobs, key } = props;
-  const [showDetails, setShowDetails] = useState()
+  const { date, jobs, key, selectDay } = props;
+
 
   const dayCardClass = classNames('daycard-container', {'daycard-container-empty': !jobs});
   const completeJobs = jobs && jobs.filter((job) => job.completed);
@@ -17,11 +17,6 @@ const DayCard: FC<DayCardProps> = (props): ReactElement => {
       {job.address}
     </li>);
   });
-
-  // Opens a canvas of this day's jobs with details
-  const selectDay: VoidFunction = () => {
-    
-  };
 
   return (
     <div key={key} className={dayCardClass} onClick={selectDay} >
