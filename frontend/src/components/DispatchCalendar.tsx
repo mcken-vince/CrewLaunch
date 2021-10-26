@@ -13,7 +13,9 @@ const DispatchCalendar: FC<any> = (): ReactElement => {
   };
 
   const week: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const daysOfWeek: ReactElement[] = week.map(wd => <div className='weekday-container'>{wd}</div>)
+  const daysOfWeek: ReactElement[] = week.map(wd => <div className='weekday-container'><h3>{wd}</h3></div>);
+
+
 
   const dayCards: ReactElement[] = [];
   for (let d = 1; d <= thisMonth.days; d++) {
