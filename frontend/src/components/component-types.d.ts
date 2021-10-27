@@ -16,7 +16,7 @@ export interface PackagesOffcanvasProps {
 
 export interface PackageFormProps {
   onSubmit: PackageFormOnSubmitFunction;
-  editPackage: IPackage;
+  editPackage: IPackage | null;
 };
 
 type PackageFormOnSubmitFunction = {
@@ -88,5 +88,5 @@ export interface IContractLocal {
 export interface ContractFormProps {
   packages: IPackage[];
   onSubmit: Function;
-  editContract: IContractLocal;
+  editContract: IContractLocal | null;
 };
