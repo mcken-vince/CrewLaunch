@@ -1,10 +1,11 @@
 import DayCard from './DayCard';
 import '../styles/DispatchCalendar.scss';
-import { getDaysInMonth, format, isEqual } from 'date-fns';
+import { getDaysInMonth, format, isEqual, getDay } from 'date-fns';
 import { IthisMonth, IJobLocal } from './component-types';
 import { useState, FC, ReactElement } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import JobCard from './JobCard';
+import DayCardStories from '../stories/DayCard.stories';
 
 const DispatchCalendar: FC<any> = (props): ReactElement => {
   const { jobs } = props;
@@ -33,10 +34,14 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
 
   const today: Date = new Date();
   const thisMonth: IthisMonth = {
+    startsOn: 0,
     name: format(today, 'MMMM'),
     year: format(today, 'yyyy'),
-    days: getDaysInMonth(today)
+    days: getDaysInMonth(today),
+    today: parseInt(format(today, 'dd'))
   };
+  // Calculate which day of the week this month starts on
+  thisMonth.startsOn = getDay(new Date(`${thisMonth.name} 1, ${thisMonth.year}`));
 
   const week: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const daysOfWeek: ReactElement[] = week.map(wd => <div className='weekday-container'><h3>{wd}</h3></div>);
@@ -46,8 +51,12 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
     const dayOfMonth: string = (0 < d && d < 10) ? `0${d}` : `${d}`;
     const todayJobs: IJobLocal[] = jobs ? jobs.filter((job: IJobLocal) => isEqual(new Date(job.date), new Date(`${thisMonth.name} ${d}, ${thisMonth.year}`))) : [];
     dayCards.push(<DayCard date={dayOfMonth} key={d} jobs={todayJobs} selectDay={():void => selectDay(d, todayJobs)} />);
-  }
-  console.log('selectedDayJobs: ', selectedDayJobs);
+  };
+
+  // Adds blank DayCards to beginning of dayCards list
+  for (let blankDay = 1; blankDay <= thisMonth.startsOn; blankDay++) {
+    dayCards.unshift(<DayCard key={blankDay + thisMonth.days} />);
+  };
   
   return (
     <div className='dispatch-calendar-container'>
@@ -59,7 +68,7 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
 
       <Modal show={showDayDetails.day.jobs.length > 0 && showDayDetails.show} fullscreen={true} onHide={() => setShowDayDetails({show: false, day: {date: 0, jobs: []}})}>
         <Modal.Header closeButton>
-          <Modal.Title>{thisMonth.name} {showDayDetails.day}, {thisMonth.year}</Modal.Title>
+          <Modal.Title>{thisMonth.name} {showDayDetails.day.date}, {thisMonth.year}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{selectedDayJobs}</Modal.Body>
       </Modal>

@@ -16,7 +16,7 @@ export interface PackagesOffcanvasProps {
 
 export interface PackageFormProps {
   onSubmit: PackageFormOnSubmitFunction;
-  editPackage: IPackage;
+  editPackage: IPackage | null;
 };
 
 type PackageFormOnSubmitFunction = {
@@ -37,16 +37,18 @@ export interface DispatchNavProps {
 };
 
 export interface IthisMonth {
+  startsOn: number;
   name: string;
   year: string;
   days: number;
+  today: number;
 };
 
 export interface DayCardProps {
-  date: string;
-  jobs: IJobLocal[];
-  key?: number;
-  selectDay: VoidFunction<number>;
+  date?: string;
+  jobs?: IJobLocal[];
+  key: number;
+  selectDay?: VoidFunction<number>;
 };
 
 export interface DateRangePickerProps extends ReactDatePickerProps {
@@ -86,5 +88,5 @@ export interface IContractLocal {
 export interface ContractFormProps {
   packages: IPackage[];
   onSubmit: Function;
-  editContract: IContractLocal;
+  editContract: IContractLocal | null;
 };
