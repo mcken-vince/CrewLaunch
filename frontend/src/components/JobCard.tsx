@@ -5,16 +5,15 @@ import { JobCardProps } from './component-types';
 import format from 'date-fns/format';
 
 const JobCard: FC<JobCardProps> = (props): ReactElement => {
-  const { address, date, completed, contract_id, crew_id, jobNotes, servicePackage } = props;
-  console.log('address in jobCard: ', address);
-  console.log('date in jobCard: ', date);
-  console.log('completed in jobCard: ', completed);
+  const { address, date, completed } = props;
+  const servicePackage = props.servicePackage;
+
   const jobCardClass: string = ClassNames('jobcard-container', {'jobcard-complete': completed})
   return (
     <div className={jobCardClass}>
-      <h3>{address}</h3>
-      <h3>{format(new Date(date), 'MMMM dd, yyyy')}</h3>
-      {completed ? <h4>Job completed</h4> : <button>Mark Complete</button>}
+      <h4>{address}</h4>
+      <h4>{format(new Date(date), 'MMMM dd, yyyy')}</h4>
+      {completed ? <p>Job completed</p> : <button>Mark Complete</button>}
     </div>
   );
 };

@@ -54,7 +54,7 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
   };
 
   // Adds blank DayCards to beginning of dayCards list
-  for (let blankDay = 1; blankDay < thisMonth.startsOn; blankDay++) {
+  for (let blankDay = 1; blankDay <= thisMonth.startsOn; blankDay++) {
     dayCards.unshift(<DayCard key={blankDay + thisMonth.days} />);
   };
   
