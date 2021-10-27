@@ -1,9 +1,14 @@
 import { IClient, IPackage, ICrew, IJob, IUser } from '../definitions';
 import { Types } from 'mongoose';
 import { ReactDatePickerProps } from 'react-datepicker';
+import { EventHandler } from 'react';
+
+export interface DispatchCalendarProps {
+  jobs: IJobLocal[];
+};
 
 export interface PackagesOffcanvasProps {
-  show: Function;
+  show: boolean;
   handleClose: Function;
   packages: IPackage[];
   selectPackage: Function;
@@ -41,11 +46,12 @@ export interface DayCardProps {
   date: string;
   jobs: IJobLocal[];
   key?: number;
+  selectDay: VoidFunction<number>;
 };
 
 export interface DateRangePickerProps extends ReactDatePickerProps {
-  onChange: VoidFunction;
-  selected: Date;
+  onChange: EventHandler<any>;
+  selected?: Date;
   startDate: Date;
   endDate: Date
   inheritClassName? : string;
@@ -59,9 +65,9 @@ export interface CrewCardProps {
 // Job interface used in CrewCard component
 // Includes address & jobNotes
 export interface IJobLocal extends IJob {
-  address: string;
-  jobNotes: string;
-  servicePackage: IPackage;
+  address?: string;
+  jobNotes?: string;
+  servicePackage?: IPackage;
 };
 
 export interface ClientCardProps {
@@ -78,7 +84,7 @@ export interface IContractLocal {
 };
 
 export interface ContractFormProps {
-  packages: {};
+  packages: IPackage[];
   onSubmit: Function;
   editContract: IContractLocal;
 };

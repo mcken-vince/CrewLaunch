@@ -8,7 +8,7 @@ import { FC, ReactElement } from 'react';
 const CrewCard: FC<CrewCardProps> = (props): ReactElement => {
   const { foreman_name, crew_size, avatar } = props.crew;
 
-  const jobsOrderedByDate: IJobLocal[]  = props.jobs.sort((a, b) => parseInt(a.date.toString()) - parseInt(b.date.toString());
+  const jobsOrderedByDate: IJobLocal[]  = props.jobs.sort((a, b) => parseInt(a.date.toString()) - parseInt(b.date.toString()));
   
   const jobs: ReactElement[] = jobsOrderedByDate.map(job => {
     const jobClass: string = classNames('crewCard-job', {'crewCard-job-complete': job.completed});

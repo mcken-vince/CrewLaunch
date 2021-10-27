@@ -1,22 +1,35 @@
+@import 'variables';
+
 .dispatch-calendar-container {
   display: flex;
   flex-direction: column;
-  width: 80%;
-  align-items: center;
+  width: 95%;
+  border: 10px solid $border-color1;
+
   .dispatch-calendar-days-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    
     width: 100%;
-    align-items: center;
-    justify-content: center;
     
 
     .weekday-container {
       border: 1px black solid;
-      padding: 5px;
-      flex-basis: 100%/7;
+      padding: 5px 0px 0px 0px;
+
       text-align: center;
       box-sizing: border-box;
+      
+    }
+    .daycard-container {
+      margin: 2px;
+
+      &:hover {
+        background-color:$border-color1;
+        color: white;
+        cursor: pointer;
+      }
+
     }
   }
 

@@ -14,14 +14,14 @@ function App() {
   return (
     <div className="App">
       <Router>
-
+      
             <Switch>
               <Route path="/crews/:id">
-                <CrewsDashboardPage />
+                <CrewsDashboardPage state={state} updateState={updateState} />
               </Route>
 
               <Route path="/dispatch">
-                <DispatchDashboardPage />
+                <DispatchDashboardPage state={state} updateState={updateState}/>
               </Route>
 
               <Route path="/">
@@ -33,6 +33,7 @@ function App() {
                 <p>{JSON.stringify(state, null, 3)}</p>
               </Route>
             </Switch>
+
 
       </Router>
     </div>
