@@ -9,13 +9,25 @@
   align-items: center;
   padding: 1em 1.5em;
   background-color: $nav-background;
-
+  
+  .dispatch-nav-logo-link {
+    text-decoration: none;
+  }
   .dispatch-nav-logo {
     color: $logo-text-color;
     font-size: 2em;
+    
+    &:hover {
+      text-shadow: 0 0 10px white;
+    }
   }
-  
+
   .dispatch-nav-right {
     display: flex;
+
+    .dispatch-nav-dropdown {
+
+      color: white;
+    }
   }
 }

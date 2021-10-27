@@ -31,7 +31,21 @@ const DispatchDashboardPage: FC<any> = (props): ReactElement => {
             <Route path={`${url}/contracts/new`}>
               <ContractForm packages={state.packages ? state.packages : []} onSubmit={() => {console.log('contract submitted')}} editContract={null}/>
             </Route>
-
+            <Route path={`${url}/crews`}>
+              <h1>Crews Page</h1>
+            </Route>
+            <Route path={`${url}/packages`}>
+              <h1>Packages Page</h1>
+            </Route>
+            <Route path={`${url}/contracts`}>
+              <h1>Contracts Page</h1>
+            </Route>
+            <Route path={`${url}/clients`}>
+              <h1>Clients Page</h1>
+            </Route>
+            <Route path={`${url}/jobs`}>
+              <h1>Jobs Page</h1>
+            </Route>
 
             <Route path={`${url}`}>
               <DispatchCalendar jobs={detailedJobs}/>
