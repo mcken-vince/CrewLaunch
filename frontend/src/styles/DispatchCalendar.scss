@@ -22,11 +22,11 @@
       
     }
     .daycard-container {
-      margin: 2px;
+      margin: 5px;
 
       &:hover {
-        background-color:$border-color1;
-        color: white;
+
+        box-shadow: 0 0 12px $border-color1;
         cursor: pointer;
       }
 
