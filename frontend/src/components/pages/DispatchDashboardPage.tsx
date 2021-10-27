@@ -4,6 +4,7 @@ import '../../styles/DispatchDashboardPage.scss';
 import DispatchCalendar from '../DispatchCalendar';
 import DispatchNav from '../DispatchNav';
 import { getJobsWithDetails } from '../../helpers/dataCombiners';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const DispatchDashboardPage: FC<any> = (props): ReactElement => {
   const state: IState = props.state;
@@ -13,7 +14,21 @@ const DispatchDashboardPage: FC<any> = (props): ReactElement => {
     <>
       <DispatchNav user={{name: 'Testy Tester', email: 'testy.testerforce@mail.com', password: 'secretpassword' }}/>
       <div className='dispatch-dashboard-container'> 
-        <DispatchCalendar jobs={detailedJobs}/>
+        <Router>
+          <Switch>
+            <Route path='/dispatch/crews/new'>
+              <h1>New Crew Form</h1>
+            </Route>
+            <Route path='/dispatch/packages/new'>
+              <h1>New Package Form</h1>
+            </Route>
+            <Route path='/dispatch/'>
+              <DispatchCalendar jobs={detailedJobs}/>
+            </Route>
+            
+
+          </Switch>
+        </Router>
       </div>
     </>
   );
