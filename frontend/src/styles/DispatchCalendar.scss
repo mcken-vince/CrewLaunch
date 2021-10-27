@@ -6,11 +6,12 @@
   width: 95%;
   border: 10px solid $border-color1;
 
+  min-width: max-content;
   .dispatch-calendar-days-container {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     
-    width: 100%;
+    min-width: 100%;
     
 
     .weekday-container {
@@ -23,7 +24,7 @@
     }
     .daycard-container {
       margin: 5px;
-
+      
       &:hover {
 
         box-shadow: 0 0 12px $border-color1;
