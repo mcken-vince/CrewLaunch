@@ -37,16 +37,18 @@ export interface DispatchNavProps {
 };
 
 export interface IthisMonth {
+  startsOn: number;
   name: string;
   year: string;
   days: number;
+  today: number;
 };
 
 export interface DayCardProps {
-  date: string;
-  jobs: IJobLocal[];
-  key?: number;
-  selectDay: VoidFunction<number>;
+  date?: string;
+  jobs?: IJobLocal[];
+  key: number;
+  selectDay?: VoidFunction<number>;
 };
 
 export interface DateRangePickerProps extends ReactDatePickerProps {

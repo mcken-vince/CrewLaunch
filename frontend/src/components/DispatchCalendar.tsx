@@ -1,10 +1,11 @@
 import DayCard from './DayCard';
 import '../styles/DispatchCalendar.scss';
-import { getDaysInMonth, format, isEqual } from 'date-fns';
+import { getDaysInMonth, format, isEqual, getDay } from 'date-fns';
 import { IthisMonth, IJobLocal } from './component-types';
 import { useState, FC, ReactElement } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import JobCard from './JobCard';
+import DayCardStories from '../stories/DayCard.stories';
 
 const DispatchCalendar: FC<any> = (props): ReactElement => {
   const { jobs } = props;
@@ -27,17 +28,21 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
   };
 
   const selectedDayJobs: ReactElement[] = showDayDetails.day.jobs && showDayDetails.day.jobs.map((job, idx) => {
-    console.log('job: ', job);
     return (<JobCard key={idx} {...job} />);
   });
 
   const today: Date = new Date();
   const thisMonth: IthisMonth = {
+    startsOn: 0,
     name: format(today, 'MMMM'),
     year: format(today, 'yyyy'),
-    days: getDaysInMonth(today)
+    days: getDaysInMonth(today),
+    today: parseInt(format(today, 'dd'))
   };
 
+  thisMonth.startsOn = getDay(new Date(`${thisMonth.name} 1, ${thisMonth.year}`));
+
+  console.log(thisMonth.startsOn);
   const week: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const daysOfWeek: ReactElement[] = week.map(wd => <div className='weekday-container'><h3>{wd}</h3></div>);
 
@@ -46,8 +51,12 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
     const dayOfMonth: string = (0 < d && d < 10) ? `0${d}` : `${d}`;
     const todayJobs: IJobLocal[] = jobs ? jobs.filter((job: IJobLocal) => isEqual(new Date(job.date), new Date(`${thisMonth.name} ${d}, ${thisMonth.year}`))) : [];
     dayCards.push(<DayCard date={dayOfMonth} key={d} jobs={todayJobs} selectDay={():void => selectDay(d, todayJobs)} />);
-  }
-  console.log('selectedDayJobs: ', selectedDayJobs);
+  };
+
+  // Adds blank DayCards to beginning of dayCards list
+  for (let blankDay = 1; blankDay < thisMonth.startsOn; blankDay++) {
+    dayCards.unshift(<DayCard key={blankDay + thisMonth.days} />);
+  };
   
   return (
     <div className='dispatch-calendar-container'>
