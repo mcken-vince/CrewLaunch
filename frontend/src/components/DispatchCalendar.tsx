@@ -28,6 +28,7 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
   };
 
   const selectedDayJobs: ReactElement[] = showDayDetails.day.jobs && showDayDetails.day.jobs.map((job, idx) => {
+    console.log('job: ', job);
     return (<JobCard key={idx} {...job} />);
   });
 
@@ -39,10 +40,9 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
     days: getDaysInMonth(today),
     today: parseInt(format(today, 'dd'))
   };
-
+  // Calculate which day of the week this month starts on
   thisMonth.startsOn = getDay(new Date(`${thisMonth.name} 1, ${thisMonth.year}`));
 
-  console.log(thisMonth.startsOn);
   const week: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const daysOfWeek: ReactElement[] = week.map(wd => <div className='weekday-container'><h3>{wd}</h3></div>);
 
@@ -68,7 +68,7 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
 
       <Modal show={showDayDetails.day.jobs.length > 0 && showDayDetails.show} fullscreen={true} onHide={() => setShowDayDetails({show: false, day: {date: 0, jobs: []}})}>
         <Modal.Header closeButton>
-          <Modal.Title>{thisMonth.name} {showDayDetails.day}, {thisMonth.year}</Modal.Title>
+          <Modal.Title>{thisMonth.name} {showDayDetails.day.date}, {thisMonth.year}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{selectedDayJobs}</Modal.Body>
       </Modal>
