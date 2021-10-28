@@ -29,6 +29,7 @@ mongoose.connect(
   }
 );
 
+import { appendFile } from 'fs';
 import apiRoutes from './routes/apiRoutes';
 import clientsRoutes from './routes/clientsRoutes';
 import contractsRoutes from './routes/contractsRoutes';
@@ -42,6 +43,10 @@ App.use('/contracts', contractsRoutes(ContractModel));
 App.use('/crews', crewsRoutes(CrewModel));
 App.use('/jobs', jobsRoutes(JobModel));
 App.use('/packages', packagesRoutes(PackageModel));
+
+if (process.env.NODE_ENV === 'production') {
+  App.use(express.static('frontend/build'));
+}
 
 App.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`)
