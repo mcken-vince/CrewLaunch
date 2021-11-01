@@ -9,6 +9,7 @@ import { EventHandler, FC, ReactElement, useState } from 'react';
 import DateRangePicker from './DateRangePicker';
 import PackagesOffcanvas from './PackagesOffcanvas';
 import { ContractFormProps } from './component-types';
+import { IClient } from '../definitions';
 
 const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
   const { packages, onSubmit } = props;
@@ -17,7 +18,7 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
   const clientSkeleton = {name: '', email: '', phone: ''};
   const [packagesShow, setPackagesShow] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState(props.editContract && props.editContract.selectedPackage ? props.editContract.selectedPackage : packageSkeleton);
-  const [client, setClient] = useState(props.editContract && props.editContract.client ? props.editContract.client : clientSkeleton);
+  const [client, setClient] = useState<IClient>(props.editContract && props.editContract.client ? props.editContract.client : clientSkeleton);
   const [address, setAddress] = useState(props.editContract && props.editContract.address ? props.editContract.address : '');
   const [startDate, setStartDate] = useState(props.editContract && props.editContract.startDate ? props.editContract.startDate : new Date());
   const [endDate, setEndDate] = useState(props.editContract && props.editContract.startDate ? addDays(new Date(props.editContract.startDate), selectedPackage.contract_length_days - 1) : new Date());

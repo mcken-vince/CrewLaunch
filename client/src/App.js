@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import "./App.scss";
 import React, { useEffect, useContext } from "react";
 import useAppData from "./hooks/useAppData";

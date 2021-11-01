@@ -4,6 +4,7 @@ const express = require('express');
 const http = require('http');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const path = require('path');
 const App = express();
 
 const { ClientModel } = require('./models/client.model');
@@ -16,7 +17,7 @@ const { JobModel } = require('./models/job.model');
 // const httpServer = http.Server(App);
 const PORT = 8080;
 
-process.env.NODE_ENV !== "prod" && App.use(morgan('dev'));
+process.env.NODE_ENV !== "production" && App.use(morgan('dev'));
 App.use(express.urlencoded({ extended: true }));
 App.use(express.json());
 App.use(express.static('public'));
@@ -29,7 +30,6 @@ mongoose.connect(
   }
 );
 
-import { appendFile } from 'fs';
 import apiRoutes from './routes/apiRoutes';
 import clientsRoutes from './routes/clientsRoutes';
 import contractsRoutes from './routes/contractsRoutes';
@@ -44,11 +44,19 @@ App.use('/crews', crewsRoutes(CrewModel));
 App.use('/jobs', jobsRoutes(JobModel));
 App.use('/packages', packagesRoutes(PackageModel));
 
-if (process.env.NODE_ENV === 'production') {
-  App.use(express.static('frontend/build'));
-}
+App.use(express.static("build"));
+App.use(express.static("public"));
+
+App.use((req: any, res: any, next: any) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
+App.get('/*', (req: any, res: any) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 App.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`)
+  console.log(`Serving up file: ${path.join(__dirname, '/build/index.html')}`);
 });
   
