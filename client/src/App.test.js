@@ -21,9 +21,7 @@ describe('App', () => {
     .mockImplementationOnce(() => Promise.resolve(jobs));
 
     render(<App />);
-
     expect(screen.getByText(/Crew Launcher/)).toBeInTheDocument();
-  
     expect(await screen.findByText(/616f7ceea703ecd4ec419645/)).not.toBe(null);
 
   });
