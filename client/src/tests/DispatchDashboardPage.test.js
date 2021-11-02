@@ -8,13 +8,11 @@ packages: [ { "_id": "616f7ceea703ecd4ec419647", "title": "Lawn Care Silver", "c
 contracts: [ { "_id": "61787c58efa37244e2c35c13", "client_id": "616f7ceea703ecd4ec419646", "address": "177 Mornersome Drive SW, Calgary AB", "job_notes": "There are no notes. Nothing to see here.", "package_id": "616f7ceea703ecd4ec419647", "start_date": "2021-10-28T06:00:00.000Z" } ],
 jobs: [ { "_id": "61787d4cefa37244e2c35c14", "contract_id": "61787c58efa37244e2c35c13", "crew_id": "616f7ceea703ecd4ec419645", "date": "2021-10-28T06:00:00.000Z", "completed": false }]}
 
-const updateState = () => {}
-
 describe('DispatchDashboardPage component', () => {
   it('renders navbar', async () => {
     render(
       <Router basename={'/'}>
-        <DispatchDashboardPage state={state} updateState={updateState}/>
+        <DispatchDashboardPage state={state} />
       </Router>
     );
 
