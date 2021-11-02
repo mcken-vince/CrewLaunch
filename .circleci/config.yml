@@ -29,7 +29,8 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: npm test
+      - run: cd client && npm install
+      - run: npm run test
 
 workflows:
   # Below is the definition of your workflow.
