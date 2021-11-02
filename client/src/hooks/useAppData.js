@@ -20,7 +20,7 @@ const useAppData = () => {
         contracts: data[3].data.result,
         jobs: data[4].data.result
       };
-      console.log('new state: ', newState);
+      // console.log('new state: ', newState);
       setState(newState);
     })
     .catch(err => console.log('Error fetching data!', err));
