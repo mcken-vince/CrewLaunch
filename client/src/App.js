@@ -1,4 +1,4 @@
-import { HashRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import "./App.scss";
 import React, { useEffect, useContext } from "react";
 import useAppData from "./hooks/useAppData";
@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
+      <Router basename={'/'}>
       
             <Switch>
               <Route path="/crews/:id">
