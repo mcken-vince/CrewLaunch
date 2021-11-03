@@ -33,7 +33,7 @@ const CrewCard: FC<CrewCardProps> = (props): ReactElement => {
         <Button className='delete-button' variant='danger'>Delete</Button>
       </footer>
     </div>
-  )
+  );
 };
 
 export default CrewCard;
