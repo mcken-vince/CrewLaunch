@@ -1,4 +1,5 @@
 import Image from 'react-bootstrap/Image';
+import Button from 'react-bootstrap/Button';
 import '../styles/CrewCard.scss';
 import format from 'date-fns/format';
 import classNames from 'classnames';
@@ -17,14 +18,20 @@ const CrewCard: FC<CrewCardProps> = (props): ReactElement => {
 
   return (
     <div className='crewCard-container' >
-      <Image className='crewCard-avatar' src={avatar && avatar} alt='crew avatar' roundedCircle />
-      <div className='crewCard-info'>
-        <h3>{foreman_name}</h3>
-        <p>{crew_size} workers</p>
+      <div className='crewCard-body'>
+        <Image className='crewCard-avatar' src={avatar && avatar} alt='crew avatar' roundedCircle />
+        <div className='crewCard-info'>
+          <h3>{foreman_name}</h3>
+          <p>{crew_size} workers</p>
+        </div>
+        <div className='crewCard-jobs-container'>
+          {jobs}
+        </div>
       </div>
-      <div className='crewCard-jobs-container'>
-        {jobs}
-      </div>
+      <footer className='crewCard-footer'>
+        <Button className='edit-button'>Edit</Button>
+        <Button className='delete-button' variant='danger'>Delete</Button>
+      </footer>
     </div>
   )
 };
