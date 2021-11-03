@@ -20,7 +20,7 @@ function ConfirmAlert(props: ConfirmAlertProps) {
   }
 
   return (
-      <Alert show={show} variant={variantString}>
+      <Alert className='confirm-alert z-index-2 position-absolute' show={show} variant={variantString}>
         <div className="alert-body">
           <Alert.Heading>{message}</Alert.Heading>
           <div className='alert-actions'>  
