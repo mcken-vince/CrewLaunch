@@ -42,7 +42,7 @@ App.use('/crews', crewsRoutes(CrewModel));
 App.use('/jobs', jobsRoutes(JobModel));
 App.use('/packages', packagesRoutes(PackageModel));
 
-const root = path.join(__dirname, 'build', 'build');
+const root = path.join(__dirname, 'build');
 App.use(express.static(root))
 
 App.get('*', (req: Request, res: Response): void => {
