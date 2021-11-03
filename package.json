@@ -6,7 +6,7 @@
   "scripts": {
     "install": "cd client && npm install",
     "start": "node build/server.js",
-    "test": "jest",
+    "test": "cd client && npm run test",
     "client": "npm start --prefix client",
     "build": "concurrently \"tsc\" \"cd client && npm run build\"",
     "dev": "concurrently \"node build/server.js\" \"npm run client\""
