@@ -44,7 +44,7 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
   thisMonth.startsOn = getDay(new Date(`${thisMonth.name} 1, ${thisMonth.year}`));
 
   const week: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const daysOfWeek: ReactElement[] = week.map(wd => <div className='weekday-container'><h3>{wd}</h3></div>);
+  const daysOfWeek: ReactElement[] = week.map((wd, idx) => <div key={idx} className='weekday-container'><h3>{wd}</h3></div>);
 
   const dayCards: ReactElement[] = [];
   for (let d = 1; d <= thisMonth.days; d++) {

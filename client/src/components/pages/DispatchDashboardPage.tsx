@@ -9,7 +9,6 @@ import { getJobsWithDetails } from '../../helpers/dataCombiners';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
 const DispatchDashboardPage: FC<any> = (props): ReactElement => {
-  const { url } = useRouteMatch();
   const state: IState = props.state;
   const updateState = props.updateState;
 
@@ -22,32 +21,32 @@ const DispatchDashboardPage: FC<any> = (props): ReactElement => {
       <div className='dispatch-dashboard-container'> 
 
           <Switch>
-            <Route path={`${url}/crews/new`}>
+            <Route path={`/dispatch/crews/new`}>
               <h1>New Crew Form</h1>
             </Route>
-            <Route path={`${url}/packages/new`}>
+            <Route path={`/dispatch/packages/new`}>
               <PackageForm onSubmit={(newPackage) => Promise.resolve(newPackage)} editPackage={null}/>
             </Route>
-            <Route path={`${url}/contracts/new`}>
+            <Route path={`/dispatch/contracts/new`}>
               <ContractForm packages={state.packages ? state.packages : []} onSubmit={() => {console.log('contract submitted')}} editContract={null}/>
             </Route>
-            <Route path={`${url}/crews`}>
+            <Route path={`/dispatch/crews`}>
               <h1>Crews Page</h1>
             </Route>
-            <Route path={`${url}/packages`}>
+            <Route path={`/dispatch/packages`}>
               <h1>Packages Page</h1>
             </Route>
-            <Route path={`${url}/contracts`}>
+            <Route path={`/dispatch/contracts`}>
               <h1>Contracts Page</h1>
             </Route>
-            <Route path={`${url}/clients`}>
+            <Route path={`/dispatch/clients`}>
               <h1>Clients Page</h1>
             </Route>
-            <Route path={`${url}/jobs`}>
+            <Route path={`/dispatch/jobs`}>
               <h1>Jobs Page</h1>
             </Route>
 
-            <Route path={`${url}`}>
+            <Route path={`/dispatch`}>
               <DispatchCalendar jobs={detailedJobs}/>
             </Route>
           </Switch>
