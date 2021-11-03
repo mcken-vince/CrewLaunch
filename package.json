@@ -5,7 +5,7 @@
   "main": "./build/server.js",
   "scripts": {
     "start": "node build/server.js",
-    "test": "cd client && npm run test",
+    "test": "jest",
     "build": "tsc"
   },
   "author": "",
