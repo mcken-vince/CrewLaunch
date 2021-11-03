@@ -33,14 +33,14 @@ jobs:
   build-client:
     docker:
       - image: circleci/node:latest
-    working_directory: ~/client/client
+    working_directory: ~/client
     steps:
       - checkout
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
-      - run: npm install
+      - run: cd client && npm install
       - save_cache:
           paths:
             - node_modules
