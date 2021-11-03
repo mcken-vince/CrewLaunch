@@ -18,6 +18,6 @@ export const getJobsWithDetails = (jobs: IJob[], contracts: IContract[], package
     newJob.servicePackage = thisPackage;
     return newJob;
   });
-  console.log(jobsWithDetails)
+  // console.log(jobsWithDetails);
   return jobsWithDetails;
 };

@@ -5,7 +5,7 @@ import { FC, ReactElement } from 'react';
 
 
 const DayCard: FC<DayCardProps> = (props): ReactElement => {
-  const { date, jobs, key, selectDay } = props;
+  const { date, jobs, selectDay } = props;
 
 
   const dayCardClass = classNames('daycard-container', {'daycard-container-empty': !jobs});
@@ -19,7 +19,7 @@ const DayCard: FC<DayCardProps> = (props): ReactElement => {
   });
 
   return (
-    <div key={key} className={dayCardClass} onClick={selectDay} >
+    <div key={date} className={dayCardClass} onClick={selectDay} >
       <h3>{date}</h3>
       {completeJobs && <h3>({jobs ? `${completeJobs.length}/${jobs.length}` : '0/0'})</h3>}
       {/* {jobs && jobList.length > 0 ?
