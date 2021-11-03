@@ -14,7 +14,7 @@ const { ContractModel } = require('./models/contract.model');
 const { JobModel } = require('./models/job.model');
 
 // const httpServer = http.Server(App);
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 process.env.NODE_ENV !== "production" && App.use(morgan('dev'));
 App.use(express.urlencoded({ extended: true }));
