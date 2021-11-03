@@ -4,8 +4,7 @@
   "description": "",
   "main": "./build/server.js",
   "scripts": {
-    "install": "cd client && npm install",
-    "start": "node build/server.js",
+    "start": "concurrently \"node build/server.js\" \"npm run client\"",
     "test": "cd client && npm run test",
     "client": "npm start --prefix client",
     "build": "concurrently \"tsc\" \"cd client && npm run build\"",
@@ -43,5 +42,5 @@
     "node-sass": "^6.0.1",
     "typescript": "^4.4.4"
   },
-  "homepage": "."
+  "homepage": "build"
 }
