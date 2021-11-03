@@ -32,6 +32,22 @@ jobs:
       - run: cd client && npm install
       - run: npm run test
 
+  deploy:
+    machine:
+      enabled: true
+    
+    working_directory: ~/client
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "6e:8b:70:46:ca:b6:8d:b7:4a:d4:99:ed:14:32:48:69"
+      - checkout
+      - run:
+        name: Push Master to Production
+        command: |
+          git push git@github.com:mcken-vince/CrewLaunch.git master:production
+
+
 workflows:
   # Below is the definition of your workflow.
   # Inside the workflow, you provide the jobs you want to run, e.g this workflow runs the build-and-test job above.
@@ -40,11 +56,13 @@ workflows:
   sample:
     jobs:
       - build
-      - heroku/deploy-via-git:
-          force: true # this parameter instructs the push to use a force flag when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
+          filters:
+            branches:
+              only: master
+
+      - deploy:
           requires:
             - build # only run deploy-via-git job if the build job has completed
           filters:
             branches:
-              # This sample config runs this job on any branch matching the regex below, however, it's more likely you want to only run this job on master.
-              only: master # Uncomment this line
+              only: master
