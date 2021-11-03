@@ -62,8 +62,8 @@ workflows:
               only: master
 
       - deploy:
-          requires:
-            - build # only run deploy-via-git job if the build job has completed
           filters:
             branches:
               only: master
+          requires:
+            - build # only run deploy-via-git job if the build job has completed
