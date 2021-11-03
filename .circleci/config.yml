@@ -58,9 +58,9 @@ jobs:
             - "6e:8b:70:46:ca:b6:8d:b7:4a:d4:99:ed:14:32:48:69"
       - checkout
       - run:
-        name: Push Master to Production
-        command: |
-          git push git@github.com:mcken-vince/CrewLaunch.git master:production
+          name: Push Master to Production
+          command: |
+            git push git@github.com:mcken-vince/CrewLaunch.git master:production
 
 
 workflows:
@@ -68,7 +68,7 @@ workflows:
   # Inside the workflow, you provide the jobs you want to run, e.g this workflow runs the build-and-test job above.
   # CircleCI will run this workflow on every commit.
   # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
-  sample:
+  test_and_deploy:
     jobs:
       - build:
           filters:
