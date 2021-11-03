@@ -42,16 +42,16 @@ App.use('/crews', crewsRoutes(CrewModel));
 App.use('/jobs', jobsRoutes(JobModel));
 App.use('/packages', packagesRoutes(PackageModel));
 
-const root = path.join(__dirname, 'build');
-App.use(express.static(root))
+// const root = path.join(__dirname, 'build');
+// App.use(express.static(root))
 
-App.get('*', (req: Request, res: Response): void => {
-  res.sendFile('index.html', { root } );
-});
+// App.get('*', (req: Request, res: Response): void => {
+//   res.sendFile('index.html', { root } );
+// });
 
 
 App.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`)
-  console.log(`Serving up file: ${path.resolve(root, "index.html")}`);
+  // console.log(`Serving up file: ${path.resolve(root, "index.html")}`);
 });
   
