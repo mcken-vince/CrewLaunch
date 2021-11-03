@@ -45,9 +45,9 @@ App.use('/packages', packagesRoutes(PackageModel));
 const root = path.join(__dirname, 'build', 'build');
 App.use(express.static(root))
 
-// App.get('*', (req: Request, res: Response): void => {
-//   res.sendFile('index.html', { root } );
-// });
+App.get('*', (req: Request, res: Response): void => {
+  res.sendFile('index.html', { root } );
+});
 
 
 App.listen(PORT, () => {
