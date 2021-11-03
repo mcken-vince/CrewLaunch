@@ -30,42 +30,42 @@ WithJobs.args = {
     {
       address: '525 Yondervan Cres SW, Calgary AB',
       date: new Date('October 5, 2021'),
-      complete: true
+      completed: true
     },
     { 
       address: '72 Indeed Ave NW, Calgary AB',
       date: new Date('October 12, 2021'),
-      complete: true
+      completed: true
     },
     {
       address: '525 Yondervan Cres SW, Calgary AB',
       date: new Date('October 1, 2021'),
-      complete: true
+      completed: true
     },
     { 
       address: '72 Indeed Ave NW, Calgary AB',
       date: new Date('October 20, 2021'),
-      complete: false
+      completed: false
     },
     {
       address: '525 Yondervan Cres SW, Calgary AB',
       date: new Date('November 12, 2021'),
-      complete: false
+      completed: false
     },
     { 
       address: '72 Indeed Ave NW, Calgary AB',
       date: new Date('November 1, 2021'),
-      complete: false
+      completed: false
     },
     {
       address: '525 Yondervan Cres SW, Calgary AB',
       date: new Date('October 30, 2021'),
-      complete: false
+      completed: false
     },
     { 
       address: '72 Indeed Ave NW, Calgary AB',
       date: new Date('December 1, 2021'),
-      complete: false
+      completed: false
     }
   ]
 }

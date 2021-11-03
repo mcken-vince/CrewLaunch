@@ -11,7 +11,7 @@ const CrewCard: FC<CrewCardProps> = (props): ReactElement => {
   const jobsOrderedByDate: IJobLocal[]  = props.jobs.sort((a, b) => parseInt(a.date.toString()) - parseInt(b.date.toString()));
   
   const jobs: ReactElement[] = jobsOrderedByDate.map(job => {
-    const jobClass: string = classNames('crewCard-job', {'crewCard-job-complete': job.completed});
+    const jobClass: string = classNames('crewCard-job', {'crewCard-job-completed': job.completed});
     return (<h5 className={jobClass}>{job.address} - {format(job.date, 'eeee MMMM dd yyyy')}</h5>);
   });
 
