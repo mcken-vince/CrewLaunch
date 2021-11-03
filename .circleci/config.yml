@@ -29,7 +29,8 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
+      - run: npm test
+  
   build-client:
     docker:
       - image: circleci/node:latest
@@ -74,14 +75,10 @@ workflows:
           filters:
             branches:
               only: master
-      - build-client:
-          filters:
-            branches:
-              only: master
+      
       - deploy:
           filters:
             branches:
               only: master
           requires:
             - build # only run deploy-via-git job if the build job has completed
-            - build-client
