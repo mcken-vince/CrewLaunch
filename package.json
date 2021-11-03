@@ -7,7 +7,7 @@
     "start": "node build/server.js",
     "test": "jest",
     "client": "npm start --prefix client",
-    "build": "concurrently \"tsc\" \"npm run build --prefix client\"",
+    "build": "concurrently \"tsc\" \"cd client && npm run build\"",
     "dev": "concurrently \"node build/server.js\" \"npm run client\""
   },
   "author": "",
