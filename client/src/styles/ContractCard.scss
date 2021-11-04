@@ -1,0 +1,34 @@
+@import 'variables';
+
+.contractcard-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px $border-color2 solid;
+  border-radius: 10px 10px;
+  background-color: $bg-color2; 
+  padding: .5em;
+  
+  &:hover {
+    box-shadow: 0 0 15px $hover-color1;
+  }
+
+  &.selected {
+    background-color: $confirm-selected-color;
+    box-shadow: 0 0 15px $confirm-selected-color;
+  }
+
+  .contractcard-body {
+    display: flex;
+    flex-direction: column;
+    
+    p {
+      margin: 0;
+    }
+  }
+
+  .contractcard-actions {
+    padding: .5em;
+  }
+  
+}

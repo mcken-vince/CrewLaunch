@@ -19,6 +19,7 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
 
   return (
     <div className={jobCardClass}>
+      <ConfirmAlert show={confirm} message='Mark this job as complete?' onConfirm={toggleConfirm} onCancel={toggleConfirm}/>
       <h4>{address}</h4>
       <h4>{format(new Date(date), 'MMMM dd, yyyy')}</h4>
       {completed ? <p>Job completed</p> : 
@@ -28,7 +29,6 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
         > 
           Mark Complete
         </Button>}
-      <ConfirmAlert show={confirm} message='Mark this job as complete?' onConfirm={toggleConfirm} onCancel={toggleConfirm}/>
     </div>
   );
 };

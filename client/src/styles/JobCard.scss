@@ -1,11 +1,9 @@
-$jobcard-background: lightblue;
-$complete-jobcard-background: lightgray;
+@import 'variables';
 
 .jobcard-container {
   padding: 0.5em 1em 0.5em 1em;
-  background-color: $jobcard-background;
-  height: max-content;
-  width: 25em;
+  background-color: $bg-color2;
+
   border-radius: 10px 10px;
  
   .jobcard-complete-button {
@@ -13,10 +11,10 @@ $complete-jobcard-background: lightgray;
   }
 
   &.selected {
-    background-color: gray;
+    background-color: $confirm-selected-color;
   }
 
   &.jobcard-complete {
-    background-color: $complete-jobcard-background;
+    background-color: $bg-color3;
   }
 }
