@@ -30,7 +30,7 @@ npm run test
 - react-scripts: ^4.0.3
 - ts-node: ^10.4.0
 - web-vitals: ^2.1.2
-- 
+
 ## DevDependencies
 - typescript: ^4.4.4
 - @testing-library/jest-dom: ^5.15.0
