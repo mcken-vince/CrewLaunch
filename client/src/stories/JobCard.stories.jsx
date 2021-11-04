@@ -12,12 +12,12 @@ export const IncompleteJob = Template.bind({});
 IncompleteJob.args = {
   address: '121 Bowermere Crescent NW, Calgary AB',
   date: format(new Date(), 'EEEE MMMM dd, yyyy'),
-  complete: false
+  completed: false
 };
 
 export const CompleteJob = Template.bind({});
 CompleteJob.args = {
   address: '121 Bowermere Crescent NW, Calgary AB',
   date: format(new Date(), 'EEEE MMMM dd, yyyy'),
-  complete: true
+  completed: true
 };

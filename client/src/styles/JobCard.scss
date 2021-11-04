@@ -1,11 +1,22 @@
+$jobcard-background: lightblue;
+$complete-jobcard-background: lightgray;
+
 .jobcard-container {
-  padding: 0.1em 1em 1em 1em;
-  background-color: lightblue;
-  height: 125px;
+  padding: 0.5em 1em 0.5em 1em;
+  background-color: $jobcard-background;
+  height: max-content;
   width: 25em;
+  border-radius: 10px 10px;
+ 
+  .jobcard-complete-button {
+    margin: .3em 0em;
+  }
+
+  &.selected {
+    background-color: gray;
+  }
 
   &.jobcard-complete {
-    background-color: lightgray;
-    height: 125px;
+    background-color: $complete-jobcard-background;
   }
 }
