@@ -81,7 +81,7 @@ export interface IContractLocal {
   client: IClient;
   selectedPackage: IPackage;
   address: string;
-  startDate: Date;
+  start_date: Date;
   jobNotes?: string;
 };
 

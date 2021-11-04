@@ -1,5 +1,5 @@
-import { IJob, IContract, IPackage } from "../definitions";
-import { IJobLocal } from "../components/component-types";
+import { IJob, IContract, IPackage, IClient } from "../definitions";
+import { IContractLocal, IJobLocal } from "../components/component-types";
 
 
 /**
@@ -20,4 +20,24 @@ export const getJobsWithDetails = (jobs: IJob[], contracts: IContract[], package
   });
   // console.log(jobsWithDetails);
   return jobsWithDetails;
+};
+
+/**
+ * Takes in state object and returns an array of all contracts including client and package details
+ * @param state 
+ * @returns Array of contracts
+ */
+export const getContractsWithDetails = (contracts: IContract[], packages: IPackage[], clients: IClient[]): IContractLocal[] => {
+  const contractsWithDetails = contracts.map(contract => {
+    const thisClient = clients.filter(c => c._id === contract.client_id)[0];
+    const thisPackage = packages.filter(p => p._id === contract.package_id)[0];
+
+    const newContract = {...contract, client: thisClient, selectedPackage: thisPackage};
+    
+    return newContract;
+
+
+  });
+
+  return contractsWithDetails;
 };

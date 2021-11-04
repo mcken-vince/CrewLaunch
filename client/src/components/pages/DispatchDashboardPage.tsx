@@ -6,8 +6,8 @@ import DispatchNav from '../DispatchNav';
 import ContractForm from '../ContractForm';
 import PackageForm from '../PackageForm';
 import ContractsPage from './ContractsPage';
-import { getJobsWithDetails } from '../../helpers/dataCombiners';
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import { getJobsWithDetails, getContractsWithDetails } from '../../helpers/dataCombiners';
+import { Switch, Route } from 'react-router-dom';
 
 const DispatchDashboardPage: FC<any> = (props): ReactElement => {
   const state: IState = props.state;
@@ -16,6 +16,7 @@ const DispatchDashboardPage: FC<any> = (props): ReactElement => {
 
 
   const detailedJobs = state.jobs ? getJobsWithDetails(state.jobs, state.contracts, state.packages) : [];
+  const detailedContracts = state.contracts ? getContractsWithDetails(state.contracts, state.packages, state.clients) : [];
   return (
     <>
       <DispatchNav user={{name: 'Testy Tester', email: 'testy.testerforce@mail.com', password: 'secretpassword' }}/>
@@ -38,7 +39,7 @@ const DispatchDashboardPage: FC<any> = (props): ReactElement => {
               <h1>Packages Page</h1>
             </Route>
             <Route path={`/dispatch/contracts`}>
-              <ContractsPage />
+              <ContractsPage contracts={detailedContracts}/>
             </Route>
             <Route path={`/dispatch/clients`}>
               <h1>Clients Page</h1>
