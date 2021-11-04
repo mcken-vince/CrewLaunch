@@ -21,7 +21,10 @@ const ContractCard: FC<ContractCardProps> = (props): ReactElement => {
   };
   
   const contractCardClasses = classNames('contractcard-container', {'selected': confirm.show});
-  
+
+  // Need to calculate if this job is past, current, or upcoming, and use the calculation to set the classes
+  const statusClasses = classNames('contractcard-status', {past: false, current: false, upcoming: false});
+
   return (
     <div className={contractCardClasses}>
       <div className='contractcard-body'>
@@ -33,9 +36,16 @@ const ContractCard: FC<ContractCardProps> = (props): ReactElement => {
         <p><b>{thisContract.selectedPackage.title}</b> - Every {thisContract.selectedPackage.visit_interval_days} days - {thisContract.selectedPackage.man_hrs_per_visit} man hrs/visit</p>
         <p><b>Contact:</b> {thisContract.client.name} - {thisContract.client.email} - {thisContract.client.phone}</p>
       </div>
-      <div className='contractcard-actions'>
-        <Button onClick={handleEditClick} disabled={confirm.show}>Edit</Button>
-        <Button onClick={handleDeleteClick} disabled={confirm.show} variant='danger'>Delete</Button>
+      <div className='contractcard-footer'>
+        <div className='contractcard-actions'>
+          <Button onClick={handleEditClick} disabled={confirm.show}>Edit</Button>
+          <Button onClick={handleDeleteClick} disabled={confirm.show} variant='danger'>Delete</Button>
+        </div>
+        <p>Status: 
+          <span className={statusClasses}>
+          {'Active'}
+          </span>
+        </p>
       </div>
       {confirm &&
         <ConfirmAlert 

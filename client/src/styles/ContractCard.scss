@@ -26,9 +26,29 @@
       margin: 0;
     }
   }
-
-  .contractcard-actions {
-    padding: .5em;
+  .contractcard-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    span.contractcard-status {
+      margin-left: .5em;
+      padding: .5em;
+      background-color: green;
+      border-radius: 20px 20px;
+      color: white;
+      &.current {
+        background-color: green;
+      }
+      &.past {
+        background-color: gray;
+      }
+      &.upcoming {
+        background-color: purple;
+      }
+    }
+    .contractcard-actions {
+      padding: .5em;
+    }  
   }
-  
+
 }
