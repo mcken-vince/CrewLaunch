@@ -30,8 +30,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: flex-end;
+
     span.contractcard-status {
-      margin-left: .5em;
+      margin: 0em .5em;
       padding: .5em;
       background-color: green;
       border-radius: 20px 20px;

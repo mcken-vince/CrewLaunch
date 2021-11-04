@@ -5,33 +5,35 @@ import { format, addDays } from 'date-fns';
 import Button from 'react-bootstrap/Button';
 import ConfirmAlert from './ConfirmAlert';
 import classNames from 'classnames';
-
+import { formatDate } from '../helpers/dataFormatters';
 
 const ContractCard: FC<ContractCardProps> = (props): ReactElement => {
   const thisContract = props.contract;
   const clearConfirm: IConfirm = {show: false, message: ''};
   const [confirm, setConfirm] = useState<IConfirm>(clearConfirm);
   
-  const handleEditClick = () => {
+
+
+  const handleEditClick = (): void => {
     setConfirm({show: true, message: 'Are you sure you want to edit this contract?'});
   };
   
-  const handleDeleteClick = () => {
+  const handleDeleteClick = (): void => {
     setConfirm({show: true, message: 'Are you sure you want to delete this contract?'});
   };
   
-  const contractCardClasses = classNames('contractcard-container', {'selected': confirm.show});
+  const contractCardClasses: string = classNames('contractcard-container', {'selected': confirm.show});
 
   // Need to calculate if this job is past, current, or upcoming, and use the calculation to set the classes
-  const statusClasses = classNames('contractcard-status', {past: false, current: false, upcoming: false});
+  const statusClasses: string = classNames('contractcard-status', {past: false, current: false, upcoming: false});
 
   return (
     <div className={contractCardClasses}>
       <div className='contractcard-body'>
         <h3>{thisContract.address}</h3>
         <p>
-          {format(new Date(thisContract.startDate), 'eeee MMMM dd, yyyy')} - 
-          {format(addDays(new Date(thisContract.startDate), thisContract.selectedPackage.contract_length_days), 'eeee MMMM dd, yyyy')}
+          {formatDate(thisContract.startDate)} - 
+          {formatDate(addDays(new Date(thisContract.startDate), thisContract.selectedPackage.contract_length_days))}
         </p>
         <p><b>{thisContract.selectedPackage.title}</b> - Every {thisContract.selectedPackage.visit_interval_days} days - {thisContract.selectedPackage.man_hrs_per_visit} man hrs/visit</p>
         <p><b>Contact:</b> {thisContract.client.name} - {thisContract.client.email} - {thisContract.client.phone}</p>
