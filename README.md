@@ -5,6 +5,13 @@ A dual-interface single-page web-application built with React, which allows a co
 - A rebuild of https://github.com/mcken-vince/CrewLauncher
 - Practicing Typescript, Mongoose, Storybook, Jest, Cypress
 
+## Testing
+In root directory run the following terminal commands:
+- Jest test suite
+```bash
+npm run test
+```
+
 ## Dependencies
 - axios: ^0.24.0
 - bootstrap: ^5.1.3
@@ -23,3 +30,9 @@ A dual-interface single-page web-application built with React, which allows a co
 - react-scripts: ^4.0.3
 - ts-node: ^10.4.0
 - web-vitals: ^2.1.2
+- 
+## DevDependencies
+- typescript: ^4.4.4
+- @testing-library/jest-dom: ^5.15.0
+- @testing-library/react: ^12.1.2
+- @testing-library/user-event: ^13.5.0
