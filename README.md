@@ -6,11 +6,20 @@ A dual-interface single-page web-application built with React, which allows a co
 - Practicing Typescript, Mongoose, Storybook, Jest, Cypress
 
 ## Dependencies
-- react
-- express
-- mongoose / mongodb
-- axios
-- react-bootstrap
-- storybook
-- node-sass
-- dotenv
+- axios: ^0.24.0
+- bootstrap: ^5.1.3
+- classnames: ^2.3.1
+- concurrently: ^6.3.0
+- dotenv" ^10.0.0
+- express: ^4.17.1
+- mongoose: ^6.0.10
+- morgan: ^1.10.0
+- node-sass: ^6.0.1
+- react: ^17.0.2
+- react-bootstrap: ^2.0.1
+- react-datepicker: ^4.3.0
+- react-dom: ^17.0.2
+- react-router-dom: ^5.3.0
+- react-scripts: ^4.0.3
+- ts-node: ^10.4.0
+- web-vitals: ^2.1.2
