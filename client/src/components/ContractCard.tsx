@@ -30,8 +30,8 @@ const ContractCard: FC<ContractCardProps> = (props): ReactElement => {
           {format(new Date(thisContract.startDate), 'eeee MMMM dd, yyyy')} - 
           {format(addDays(new Date(thisContract.startDate), thisContract.selectedPackage.contract_length_days), 'eeee MMMM dd, yyyy')}
         </p>
+        <p><b>{thisContract.selectedPackage.title}</b> - Every {thisContract.selectedPackage.visit_interval_days} days - {thisContract.selectedPackage.man_hrs_per_visit} man hrs/visit</p>
         <p><b>Contact:</b> {thisContract.client.name} - {thisContract.client.email} - {thisContract.client.phone}</p>
-
       </div>
       <div className='contractcard-actions'>
         <Button onClick={handleEditClick} disabled={confirm.show}>Edit</Button>
