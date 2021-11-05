@@ -10,6 +10,10 @@ import { NavLink, Link } from 'react-router-dom';
 const DispatchNav: FC<DispatchNavProps> = (props): ReactElement => {
   const { user } = props;
   
+  const handleLogout = () => {};
+  const handleLogin = () => {};
+  const handleSignup = () => {};
+
   return (
     <Navbar className="dispatch-nav">
       <Link className='dispatch-nav-logo-link' to='/dispatch'><span className="dispatch-nav-logo">CrewLauncher</span></Link>
@@ -46,10 +50,10 @@ const DispatchNav: FC<DispatchNavProps> = (props): ReactElement => {
           </NavDropdown.Item>
         </NavDropdown>
         {user ? (
-          <Button>Log Out</Button>) : (
+          <Button onClick={handleLogout}>Log Out</Button>) : (
           <>
-            <Button>Log In</Button>
-            <Button>Sign Up</Button>
+            <Button onClick={handleLogin}>Log In</Button>
+            <Button onClick={handleSignup}>Sign Up</Button>
           </>)
         }
       </div>
