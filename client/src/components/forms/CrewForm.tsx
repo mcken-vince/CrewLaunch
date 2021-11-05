@@ -17,7 +17,8 @@ const CrewForm: FC<CrewFormProps> = (props): ReactElement => {
   // is true if all required fields are not empty
   const formFilled = foremanName && crewSize;
 
-  const validate = async () => {
+  const validate = async (event) => {
+    event.preventDefault();
     if (formFilled) {
       setLoading(true);
       setAlert(clearAlert);
@@ -34,7 +35,7 @@ const CrewForm: FC<CrewFormProps> = (props): ReactElement => {
         setForemanName(''); setCrewSize(0); setAvatar(''); setIsActive(false);
       } catch {
         setAlert({error: true, success: false});
-      }
+      };
     }
   };
 
@@ -73,7 +74,7 @@ const CrewForm: FC<CrewFormProps> = (props): ReactElement => {
       </InputGroup>
 
       
-      <Button className='crew-form-submit' disabled={!loading && !formFilled} onClick={validate}>
+      <Button className='crew-form-submit' disabled={!loading && !formFilled} type='submit' onClick={validate}>
       {loading ? <Spinner animation='border' variant='primary' /> : 'Submit'}
       </Button>
   

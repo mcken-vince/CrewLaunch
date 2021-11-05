@@ -12,7 +12,6 @@ import { ContractFormProps } from '../component-types';
 import { IClient } from '../../definitions';
 
 const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
-  const { packages, onSubmit } = props;
   // empty skeleton to satisfy typescript compiler
   const packageSkeleton = {title: '', cost: 0, visit_interval_days: 0, man_hrs_per_visit: 0, contract_length_days: 0};
   const clientSkeleton = {name: '', email: '', phone: ''};
@@ -24,7 +23,9 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
   const [endDate, setEndDate] = useState(props.editContract && props.editContract.start_date ? addDays(new Date(props.editContract.start_date), selectedPackage.contract_length_days - 1) : new Date());
   const [jobNotes, setJobNotes] = useState(props.editContract && props.editContract.jobNotes ? props.editContract.jobNotes : '');
   const [loading, setLoading] = useState(false);
-  const [alert, setAlert] = useState({error: false, success: false});
+  const clearAlert = {error: false, success: false};
+  const [alert, setAlert] = useState(clearAlert);
+  const { packages, onSubmit } = props;
 
   // is true if all required fields are not empty
   const formFilled: boolean = (selectedPackage && client.name && client.email && address && startDate) ? true : false;
@@ -34,31 +35,27 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
     setEndDate(new Date(addDays(new Date(date), selectedPackage.contract_length_days - 1)));
   };
 
-  const validate:React.MouseEventHandler<HTMLButtonElement> = ():void => {
+  const validate:React.MouseEventHandler<HTMLButtonElement> = async (event) => {
+    event.preventDefault();
     if (formFilled) {
       setLoading(true);
-      setAlert({error: false, success: false});
-      
-      const newContract = {
-        selectedPackage,
-        thisClient: client,
-        address,
-        start_date: startDate,
-        job_notes: jobNotes
-      };
-      onSubmit(newContract)
-      .then(() => {
+      setAlert(clearAlert);
+      try {
+        const newContract = {
+          selectedPackage,
+          thisClient: client,
+          address,
+          start_date: startDate,
+          job_notes: jobNotes
+        };
+        await onSubmit(newContract)
         setAlert({error: false, success: true});
-      })
-      .then(() => {
         setLoading(false);
-        // clear inputs
         setSelectedPackage(packageSkeleton); setClient(clientSkeleton); setAddress(''); setStartDate(new Date()); setJobNotes('');
-      })
-      .catch(() => {
+      } catch {
         setAlert({error: true, success: false});
-      })
-    }
+      };
+    };
   };
 
   return (
@@ -68,7 +65,6 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
         <h1 className='contract-form-title'>Contract Form</h1>
         {alert.success && <Alert className='contract-form-alert' variant='success'>Great success!</Alert>}
         {alert.error && <Alert className='contract-form-alert'variant='danger'>Error: Your request could not be completed. Please try again.</Alert>}
-        {loading && <Spinner animation='border' variant='primary' />}
         <Form className='contract-form'>
           <Form.Label>Client Information:</Form.Label>
           <InputGroup className='mb-3'>
@@ -93,7 +89,9 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
             <DateRangePicker startDate={new Date(startDate)} endDate={new Date(endDate)} onChange={handleDateChange} inheritClassName='contract-form-daterangepicker'/>
           </>}
 
-          <Button disabled={!loading && !formFilled} type="submit" onClick={validate}>Submit</Button>
+          <Button className='contract-form-submit' disabled={!loading && !formFilled} type='submit' onClick={validate}>
+            {loading ? <Spinner animation='border' variant='primary'/> : 'Submit'}
+          </Button>
             
         </Form>
       </div>

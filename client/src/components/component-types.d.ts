@@ -14,15 +14,6 @@ export interface PackagesOffcanvasProps {
   selectPackage: Function;
 };
 
-export interface PackageFormProps {
-  onSubmit: PackageFormOnSubmitFunction;
-  editPackage: IPackage | null;
-};
-
-type PackageFormOnSubmitFunction = {
-  (IPackage): Promise<IPackage>;
-};
-
 export interface JobCardProps extends IJobLocal {
 
 };

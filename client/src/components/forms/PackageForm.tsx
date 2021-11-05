@@ -3,12 +3,11 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Alert from 'react-bootstrap/Alert';
-import { ReactElement, FC, useState } from 'react';
-import { PackageFormProps } from '../component-types';
+import React, { ReactElement, FC, useState } from 'react';
 import { IPackage } from '../../definitions';
+import Spinner from 'react-bootstrap/Spinner';
 
 const PackageForm: FC<PackageFormProps> = (props): ReactElement => {
-  const { onSubmit } = props;
   const [title, setTitle] = useState(props.editPackage && props.editPackage.title ? props.editPackage.title : '');
   const [description, setDescription] = useState(props.editPackage && props.editPackage.description ? props.editPackage.description : '');
   const [cost, setCost] = useState(props.editPackage && props.editPackage.cost ? props.editPackage.cost : null);
@@ -17,36 +16,33 @@ const PackageForm: FC<PackageFormProps> = (props): ReactElement => {
   const [length, setLength] = useState(props.editPackage && props.editPackage.contract_length_days ? props.editPackage.contract_length_days : null);
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({error: false, success: false});
+  const { onSubmit } = props;
 
-  // is true if all required fields are not empty
+  // Will be true if all required fields are filled
   const formFilled = title && cost && interval && timeEst && length;
 
-  const validate = () => {
+  const validate: React.MouseEventHandler<HTMLButtonElement> = async (event) => {
+    event.preventDefault();
     if (formFilled) {
       setLoading(true);
       setAlert({error: false, success: false});
-      
-      const newPackage: IPackage = {
-        title,
-        description,
-        cost,
-        visit_interval_days: interval,
-        contract_length_days: length,
-        man_hrs_per_visit: timeEst
-      };
-      onSubmit(newPackage)
-      .then((result: any): void => {
+      try {
+        const newPackage: IPackage = {
+          title,
+          description,
+          cost,
+          visit_interval_days: interval,
+          contract_length_days: length,
+          man_hrs_per_visit: timeEst
+        };
+        await onSubmit(newPackage);
         setAlert({error: false, success: true});
-        return result;
-      })
-      .then((result: any): void => {
         setLoading(false);
         setTitle(''); setDescription(''); setCost(null); setInterval(null); setTimeEst(null); setLength(null);
-      })
-      .catch((err: any): void => {
+      } catch {
         setAlert({error: true, success: false});
-      })
-    }
+      };
+    };
   };
 
   return (
@@ -89,7 +85,9 @@ const PackageForm: FC<PackageFormProps> = (props): ReactElement => {
         <InputGroup.Text>hours</InputGroup.Text>
       </InputGroup>
       
-      <Button disabled={!loading && !formFilled} type="submit" onClick={validate}>Submit</Button>
+      <Button className='package-form-submit' disabled={!loading && !formFilled} type="submit" onClick={validate}>
+        {loading ? <Spinner animation='border' variant='primary' /> : 'Submit'}
+      </Button>
   
     </Form>
   </div>
@@ -97,3 +95,8 @@ const PackageForm: FC<PackageFormProps> = (props): ReactElement => {
 };
 
 export default PackageForm;
+
+export interface PackageFormProps {
+  onSubmit: Function;
+  editPackage: IPackage | null;
+};

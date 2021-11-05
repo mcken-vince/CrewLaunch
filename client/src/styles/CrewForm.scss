@@ -1,11 +1,17 @@
+@import 'mixins';
+
 .crew-form-container {
-  width: 40em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: left;
+  @include formContainerStyles;
+
+  .crew-form-alert {
+    width: 100%;
+  }
+
   .crew-form {
     width: 100%;
+
+    .crew-form-submit {
+      margin-left: 88%;
+    }
   }
 }

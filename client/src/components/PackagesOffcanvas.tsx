@@ -6,8 +6,8 @@ import { PackagesOffcanvasProps } from '../components/component-types';
 const PackagesOffcanvas: FC<PackagesOffcanvasProps> = (props): ReactElement => {
   const { show, handleClose, packages, selectPackage } = props;
 
-  const packageCards: ReactElement[] = packages.map(p => {
-    return (<PackageCard packageDetails={p} onSelect={selectPackage} />)
+  const packageCards: ReactElement[] = packages.map((p, idx) => {
+    return (<PackageCard packageDetails={p} onSelect={selectPackage} key={idx} />)
   })
 
   return (
