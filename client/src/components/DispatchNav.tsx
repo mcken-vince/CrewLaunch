@@ -4,7 +4,9 @@ import { DispatchNavProps } from './component-types';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
+import LinkContainer from 'react-bootstrap';
 import { NavLink, Link } from 'react-router-dom';
+import { Nav } from 'react-bootstrap';
 
 
 const DispatchNav: FC<DispatchNavProps> = (props): ReactElement => {
@@ -21,33 +23,17 @@ const DispatchNav: FC<DispatchNavProps> = (props): ReactElement => {
       <div className="dispatch-nav-right">
 
         <NavDropdown title={<span className='dispatch-nav-dropdown'>Forms</span>} >
-          <NavDropdown.Item>
-            <NavLink to='/dispatch/contracts/new'>New Contract</NavLink>
-          </NavDropdown.Item>
-          <NavDropdown.Item>
-            <NavLink to='/dispatch/packages/new'>New Package</NavLink>
-          </NavDropdown.Item>
-          <NavDropdown.Item>
-            <NavLink to='/dispatch/crews/new'>Add a Crew</NavLink>
-          </NavDropdown.Item>
+            <Nav.Link as={NavLink} to='/dispatch/contracts/new'>New Contract</Nav.Link>
+            <Nav.Link as={NavLink} to='/dispatch/packages/new'>New Package</Nav.Link>
+            <Nav.Link as={NavLink} to='/dispatch/crews/new'>Add a Crew</Nav.Link>
         </NavDropdown>
         
         <NavDropdown title={<span className='dispatch-nav-dropdown'>Resources</span>} >
-          <NavDropdown.Item>
-            <NavLink to='/dispatch/clients'>Clients</NavLink>
-          </NavDropdown.Item>
-          <NavDropdown.Item>
-            <NavLink to='/dispatch/jobs'>Jobs</NavLink>
-          </NavDropdown.Item>
-          <NavDropdown.Item>
-            <NavLink to='/dispatch/crews'>Crews</NavLink>
-          </NavDropdown.Item>
-          <NavDropdown.Item>
-            <NavLink to='/dispatch/contracts'>Contracts</NavLink>
-          </NavDropdown.Item>
-          <NavDropdown.Item>
-            <NavLink to='/dispatch/packages'>Packages</NavLink>
-          </NavDropdown.Item>
+            <Nav.Link as={NavLink} to='/dispatch/clients'>Clients</Nav.Link>
+            <Nav.Link as={NavLink} to='/dispatch/jobs'>Jobs</Nav.Link>
+            <Nav.Link as={NavLink} to='/dispatch/crews'>Crews</Nav.Link>
+            <Nav.Link as={NavLink} to='/dispatch/contracts'>Contracts</Nav.Link>
+            <Nav.Link as={NavLink} to='/dispatch/packages'>Packages</Nav.Link>
         </NavDropdown>
         {user ? (
           <Button onClick={handleLogout}>Log Out</Button>) : (

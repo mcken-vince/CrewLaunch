@@ -1,5 +1,7 @@
 @import "variables";
 
+$logo-shadow: 0 0 10px white;
+
 .dispatch-nav {
   position: absolute;
   width: 100%;
@@ -16,18 +18,36 @@
   .dispatch-nav-logo {
     color: $logo-text-color;
     font-size: 2em;
-    
+    text-shadow: none;
+    transition: text-shadow 500ms ease-in-out;
     &:hover {
-      text-shadow: 0 0 10px white;
+      animation: shadowFade 500ms 1;
+      text-shadow: $logo-shadow;
+    }
+
+    @keyframes shadowFade {
+      from {text-shadow: initial}
+      to {text-shadow: $logo-shadow}
     }
   }
 
   .dispatch-nav-right {
     display: flex;
     margin-left: auto;
-    .dispatch-nav-dropdown {
+    .dropdown-menu {
 
+      .nav-link {
+        &:hover {
+          background-color: lightgray;
+        }
+      }
+      
+      
+    }
+    .dispatch-nav-dropdown {
+      
       color: white;
     }
   }
+  
 }
