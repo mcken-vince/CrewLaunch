@@ -16,7 +16,12 @@ const DispatchDashboardPage: FC<any> = (props): ReactElement => {
   const state: IState = props.state;
   const updateState = props.updateState;
 
-
+  const handleSubmit = (resource: any) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+      resolve(resource)}, 500);
+    });
+  };
 
   const detailedJobs = state.jobs ? getJobsWithDetails(state.jobs, state.contracts, state.packages) : [];
   const detailedContracts = state.contracts ? getContractsWithDetails(state.contracts, state.packages, state.clients) : [];
@@ -27,13 +32,13 @@ const DispatchDashboardPage: FC<any> = (props): ReactElement => {
 
           <Switch>
             <Route path={`/dispatch/crews/new`}>
-              <CrewForm onSubmit={() => {console.log('contract submitted')}} editCrew={undefined}/>
+              <CrewForm onSubmit={handleSubmit} editCrew={null}/>
             </Route>
             <Route path={`/dispatch/packages/new`}>
-              <PackageForm onSubmit={(newPackage) => Promise.resolve(newPackage)} editPackage={null}/>
+              <PackageForm onSubmit={handleSubmit} editPackage={null}/>
             </Route>
             <Route path={`/dispatch/contracts/new`}>
-              <ContractForm packages={state.packages ? state.packages : []} onSubmit={() => {console.log('contract submitted')}} editContract={null}/>
+              <ContractForm packages={state.packages ? state.packages : []} onSubmit={handleSubmit} editContract={null}/>
             </Route>
             <Route path={`/dispatch/crews`}>
               <CrewsPage crews={state.crews ? state.crews : []}/>
