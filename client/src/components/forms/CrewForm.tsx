@@ -1,44 +1,40 @@
 import { FC, ReactElement, useState } from "react";
-import { Alert, Form, InputGroup, Button } from "react-bootstrap";
+import { Alert, Form, InputGroup, Button, Spinner } from "react-bootstrap";
 import '../../styles/CrewForm.scss';
 import { ICrew } from "../../definitions";
 
 
 const CrewForm: FC<CrewFormProps> = (props): ReactElement => {
-  const { onSubmit } = props;
   const [foremanName, setForemanName] = useState(props.editCrew && props.editCrew.foreman_name ? props.editCrew.foreman_name : '');
   const [crewSize, setCrewSize] = useState(props.editCrew && props.editCrew.crew_size ? props.editCrew.crew_size : 1);
   const [avatar, setAvatar] = useState(props.editCrew && props.editCrew.avatar ? props.editCrew.avatar : '');
   const [isActive, setIsActive] = useState<boolean>(props.editCrew && props.editCrew.is_active ? props.editCrew.is_active : true);
   const [loading, setLoading] = useState(false);
-  const [alert, setAlert] = useState({error: false, success: false});
-
+  const clearAlert = {error: false, success: false};
+  const [alert, setAlert] = useState(clearAlert);
+  const { onSubmit } = props;
+  
   // is true if all required fields are not empty
   const formFilled = foremanName && crewSize;
 
-  const validate = () => {
+  const validate = async () => {
     if (formFilled) {
       setLoading(true);
-      setAlert({error: false, success: false});
-      
-      const newCrew: ICrew = {
-        avatar,
-        foreman_name: foremanName,
-        crew_size: crewSize,
-        is_active: isActive
-      };
-      onSubmit(newCrew)
-      .then((result: any): void => {
+      setAlert(clearAlert);
+      try {
+        const newCrew: ICrew = {
+          avatar,
+          foreman_name: foremanName,
+          crew_size: crewSize,
+          is_active: isActive
+        };
+        await onSubmit(newCrew);
         setAlert({error: false, success: true});
-        return result;
-      })
-      .then((result: any): void => {
         setLoading(false);
         setForemanName(''); setCrewSize(0); setAvatar(''); setIsActive(false);
-      })
-      .catch((err: any): void => {
+      } catch {
         setAlert({error: true, success: false});
-      })
+      }
     }
   };
 
@@ -50,13 +46,12 @@ const CrewForm: FC<CrewFormProps> = (props): ReactElement => {
     <Form className='crew-form'>
       <Form.Group className='mb-3' controlId='crewFormForemanName'>
         <Form.Label>Foreman:</Form.Label>
-        <Form.Control type='text' value={foremanName} onChange={(e) => setForemanName(e.target.value)} placeholder='Enter name of foreman'/>
+        <Form.Control disabled={loading} type='text' value={foremanName} onChange={(e) => setForemanName(e.target.value)} placeholder='Enter name of foreman'/>
       </Form.Group>
 
       <Form.Group className='mb-3' controlId='crewFormCrewSize'>
         <Form.Label>Crew Size:</Form.Label>
-        
-        <Form.Select aria-label='crewsize' onChange={(e) => {setCrewSize(parseInt(e.currentTarget.value))}}>
+        <Form.Select disabled={loading} aria-label='crewsize' onChange={(e) => {setCrewSize(parseInt(e.currentTarget.value))}}>
           <option value="0">Select a number of workers</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -64,22 +59,23 @@ const CrewForm: FC<CrewFormProps> = (props): ReactElement => {
           <option value="4">4</option>
           <option value="5">5</option>
         </Form.Select>
-    
       </Form.Group>
 
       <Form.Label>Avatar:</Form.Label>
       <InputGroup className='mb-3'>
           <InputGroup.Text>url</InputGroup.Text>
-          <Form.Control type='text' value={avatar} onChange={(e) => setAvatar(e.target.value)} placeholder='Enter avatar url' /> 
+          <Form.Control disabled={loading} type='text' value={avatar} onChange={(e) => setAvatar(e.target.value)} placeholder='Enter avatar url' /> 
       </InputGroup>     
 
       <Form.Label>Status:</Form.Label>
       <InputGroup className='mb-3'>
-        <Form.Check type="checkbox" checked={isActive} onChange={(e) => setIsActive(prev => !prev)} label="Active crew" />
+        <Form.Check disabled={loading} type="checkbox" checked={isActive} onChange={(e) => setIsActive(prev => !prev)} label="Active crew" />
       </InputGroup>
 
       
-      <Button disabled={!loading && !formFilled} type="submit" onClick={validate}>Submit</Button>
+      <Button className='crew-form-submit' disabled={!loading && !formFilled} onClick={validate}>
+      {loading ? <Spinner animation='border' variant='primary' /> : 'Submit'}
+      </Button>
   
     </Form>
   </div>
@@ -90,5 +86,5 @@ export default CrewForm;
 
 interface CrewFormProps {
   onSubmit: Function;
-  editCrew?: ICrew;
+  editCrew: ICrew | null;
 };
