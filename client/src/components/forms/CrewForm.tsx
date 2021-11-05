@@ -17,7 +17,7 @@ const CrewForm: FC<CrewFormProps> = (props): ReactElement => {
   // is true if all required fields are not empty
   const formFilled = foremanName && crewSize;
 
-  const validate = async (event) => {
+  const validate: React.MouseEventHandler<HTMLButtonElement> = async (event) => {
     event.preventDefault();
     if (formFilled) {
       setLoading(true);

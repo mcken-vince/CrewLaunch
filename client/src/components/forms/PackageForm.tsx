@@ -64,24 +64,24 @@ const PackageForm: FC<PackageFormProps> = (props): ReactElement => {
       <Form.Label>Cost:</Form.Label>
       <InputGroup className='mb-3'>
           <InputGroup.Text>$</InputGroup.Text>
-          <Form.Control type='text' value={cost ? cost.toString() : undefined} onChange={(e) => setCost(parseInt(e.target.value))} placeholder='Enter package cost' /> 
+          <Form.Control type='text' value={cost ? cost.toString() : ''} onChange={(e) => setCost(parseInt(e.target.value))} placeholder='Enter package cost' /> 
       </InputGroup>     
 
       <Form.Label>Visit Interval:</Form.Label>
       <InputGroup className='mb-3'>
-        <Form.Control type='text' value={interval ? interval.toString() : undefined} onChange={(e) => setInterval(parseInt(e.target.value))} placeholder='Enter visit interval in days' /> 
+        <Form.Control type='text' value={interval ? interval.toString() : ''} onChange={(e) => setInterval(parseInt(e.target.value))} placeholder='Enter visit interval in days' /> 
         <InputGroup.Text>days</InputGroup.Text>
       </InputGroup>
 
       <Form.Label>Contract Length:</Form.Label>
       <InputGroup className='mb-3'>
-        <Form.Control type='text' value={length ? length.toString() : undefined} onChange={(e) => setLength(parseInt(e.target.value))} placeholder='Enter length in days' /> 
+        <Form.Control type='text' value={length ? length.toString() : ''} onChange={(e) => setLength(parseInt(e.target.value))} placeholder='Enter length in days' /> 
         <InputGroup.Text>days</InputGroup.Text>
       </InputGroup>
 
       <Form.Label>Time Estimate:</Form.Label>
       <InputGroup className='mb-3'>
-        <Form.Control type='text' value={timeEst ? timeEst.toString() : undefined} onChange={(e) => setTimeEst(parseInt(e.target.value))} placeholder='Enter estimated man hrs per visit' /> 
+        <Form.Control type='text' value={timeEst ? timeEst.toString() : ''} onChange={(e) => setTimeEst(parseInt(e.target.value))} placeholder='Enter estimated man hrs per visit' /> 
         <InputGroup.Text>hours</InputGroup.Text>
       </InputGroup>
       
