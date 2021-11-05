@@ -23,11 +23,6 @@ type PackageFormOnSubmitFunction = {
   (IPackage): Promise<IPackage>;
 };
 
-export interface PackageCardProps {
-  packageDetails: IPackage;
-  onSelect: Function;
-};
-
 export interface JobCardProps extends IJobLocal {
 
 };

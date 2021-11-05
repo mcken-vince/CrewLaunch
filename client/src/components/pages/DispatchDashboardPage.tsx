@@ -6,6 +6,7 @@ import DispatchNav from '../DispatchNav';
 import ContractForm from '../ContractForm';
 import PackageForm from '../PackageForm';
 import ContractsPage from './ContractsPage';
+import PackagesPage from './PackagesPage';
 import { getJobsWithDetails, getContractsWithDetails } from '../../helpers/dataCombiners';
 import { Switch, Route } from 'react-router-dom';
 
@@ -36,7 +37,7 @@ const DispatchDashboardPage: FC<any> = (props): ReactElement => {
               <h1>Crews Page</h1>
             </Route>
             <Route path={`/dispatch/packages`}>
-              <h1>Packages Page</h1>
+              <PackagesPage packages={state.packages ? state.packages : []}/>
             </Route>
             <Route path={`/dispatch/contracts`}>
               <ContractsPage contracts={detailedContracts}/>

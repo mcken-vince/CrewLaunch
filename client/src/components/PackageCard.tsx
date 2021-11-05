@@ -1,10 +1,10 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import { PackageCardProps } from './component-types';
+import { IPackage } from '../definitions';
 import { FC, ReactElement } from 'react';
 
 const PackageCard: FC<PackageCardProps> = (props): ReactElement => {
-  const { onSelect, packageDetails } = props;
+  const { onSelect, packageDetails, onEdit, onDelete } = props;
   const { title, description, cost } = packageDetails;
 
   return (
@@ -16,10 +16,19 @@ const PackageCard: FC<PackageCardProps> = (props): ReactElement => {
           <br/>
           {description}
         </Card.Text>
-        <Button onClick={() => onSelect(props.packageDetails)} >Select</Button>
+        {onSelect && <Button onClick={() => onSelect(props.packageDetails)} >Select</Button>}
+        { onEdit && <Button onClick={() => {onEdit(packageDetails._id)}}>Edit</Button>}
+        { onDelete && <Button variant='danger' onClick={() => {onDelete(packageDetails._id)}}>Delete</Button>}
       </Card.Body>
     </Card>
   )
 };
 
 export default PackageCard;
+
+interface PackageCardProps {
+  packageDetails: IPackage;
+  onSelect?: Function;
+  onEdit?: Function;
+  onDelete?: Function;
+};

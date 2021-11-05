@@ -19,7 +19,7 @@ const ContractsPage: FC<ContractsPageProps> = (props): ReactElement => {
   return (
     <>
       <div className='contracts-container'>
-        <h1>Contracts:</h1>
+        <h1>Contracts: {contracts.length}</h1>
         
         <div className='contracts-search'>
         <InputGroup className='mb-3'>
