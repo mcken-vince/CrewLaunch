@@ -10,6 +10,7 @@ import PackagesPage from './PackagesPage';
 import { getJobsWithDetails, getContractsWithDetails } from '../../helpers/dataCombiners';
 import { Switch, Route } from 'react-router-dom';
 import CrewsPage from './CrewsPage';
+import CrewForm from '../forms/CrewForm';
 
 const DispatchDashboardPage: FC<any> = (props): ReactElement => {
   const state: IState = props.state;
@@ -26,7 +27,7 @@ const DispatchDashboardPage: FC<any> = (props): ReactElement => {
 
           <Switch>
             <Route path={`/dispatch/crews/new`}>
-              <h1>New Crew Form</h1>
+              <CrewForm />
             </Route>
             <Route path={`/dispatch/packages/new`}>
               <PackageForm onSubmit={(newPackage) => Promise.resolve(newPackage)} editPackage={null}/>
