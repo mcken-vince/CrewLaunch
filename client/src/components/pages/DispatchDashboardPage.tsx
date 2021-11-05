@@ -27,7 +27,7 @@ const DispatchDashboardPage: FC<any> = (props): ReactElement => {
 
           <Switch>
             <Route path={`/dispatch/crews/new`}>
-              <CrewForm />
+              <CrewForm onSubmit={() => {console.log('contract submitted')}} editCrew={undefined}/>
             </Route>
             <Route path={`/dispatch/packages/new`}>
               <PackageForm onSubmit={(newPackage) => Promise.resolve(newPackage)} editPackage={null}/>
