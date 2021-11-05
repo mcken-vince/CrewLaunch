@@ -21,7 +21,7 @@ const DayCard: FC<DayCardProps> = (props): ReactElement => {
   return (
     <div key={date} className={dayCardClass} onClick={selectDay} >
       <h3>{date}</h3>
-      {completeJobs && <h3>({jobs ? `${completeJobs.length}/${jobs.length}` : '0/0'})</h3>}
+      {completeJobs && jobs.length > 0 && (<h3>{completeJobs.length}/{jobs.length}</h3>)}
       {/* {jobs && jobList.length > 0 ?
         (<ul>
          {jobList}

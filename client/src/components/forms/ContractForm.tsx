@@ -1,4 +1,4 @@
-import '../styles/ContractForm.scss';
+import '../../styles/ContractForm.scss';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -6,10 +6,10 @@ import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner'
 import addDays from 'date-fns/addDays';
 import { EventHandler, FC, ReactElement, useState } from 'react';
-import DateRangePicker from './DateRangePicker';
-import PackagesOffcanvas from './PackagesOffcanvas';
-import { ContractFormProps } from './component-types';
-import { IClient } from '../definitions';
+import DateRangePicker from '../DateRangePicker';
+import PackagesOffcanvas from '../PackagesOffcanvas';
+import { ContractFormProps } from '../component-types';
+import { IClient } from '../../definitions';
 
 const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
   const { packages, onSubmit } = props;

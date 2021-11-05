@@ -1,4 +1,4 @@
-import ContractForm from "../components/ContractForm";
+import ContractForm from "../components/forms/ContractForm";
 
 export default {
   title: 'Dispatch/ContractForm',

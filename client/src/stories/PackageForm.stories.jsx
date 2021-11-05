@@ -1,4 +1,4 @@
-import PackageForm from "../components/PackageForm";
+import PackageForm from "../components/forms/PackageForm";
 
 export default {
   title: 'Dispatch/PackageForm',

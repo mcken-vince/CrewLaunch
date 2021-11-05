@@ -1,11 +1,11 @@
-import '../styles/PackageForm.scss';
+import '../../styles/PackageForm.scss';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Alert from 'react-bootstrap/Alert';
 import { ReactElement, FC, useState } from 'react';
-import { PackageFormProps } from './component-types';
-import { IPackage } from '../definitions';
+import { PackageFormProps } from '../component-types';
+import { IPackage } from '../../definitions';
 
 const PackageForm: FC<PackageFormProps> = (props): ReactElement => {
   const { onSubmit } = props;

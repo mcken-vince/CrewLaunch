@@ -4,9 +4,12 @@
   display: flex;
   flex-direction: column;
   width: 95%;
-  border: 10px solid $border-color1;
+  border: 8px solid $border-color1;
+  border-radius: 20px 20px;
+  height:max-content;
+  
 
-  min-width: max-content;
+  // min-width: max-content;
   .dispatch-calendar-days-container {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
