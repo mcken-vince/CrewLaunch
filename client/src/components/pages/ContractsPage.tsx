@@ -1,8 +1,8 @@
 import { FC, ReactElement, useState } from "react";
-import { FormControl, InputGroup, Button } from "react-bootstrap";
 import '../../styles/ContractsPage.scss';
 import { IContractLocal } from "../component-types"; 
 import ContractCard from "../ContractCard";
+import CustomSearchBar from "../CustomSearchBar";
 
 const ContractsPage: FC<ContractsPageProps> = (props): ReactElement => {
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -22,14 +22,7 @@ const ContractsPage: FC<ContractsPageProps> = (props): ReactElement => {
         <h1>Contracts: {contracts.length}</h1>
         
         <div className='contracts-search'>
-        <InputGroup className='mb-3'>
-          <InputGroup.Text id='search'>Search By Address:</InputGroup.Text>
-          <FormControl
-            aria-describedby='search-term'
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          </InputGroup>
+          <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search by Address'/>
           {
             contractCards && contractCards.length > 0 ? 
             contractCards : <h2>No matching contracts found.</h2>
