@@ -1,4 +1,9 @@
 .contracts-container {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  margin: 0em 1em;
+  .contracts-search {
+    width: 100%;
+  }
 }
