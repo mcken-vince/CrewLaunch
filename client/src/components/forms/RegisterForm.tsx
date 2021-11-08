@@ -1,28 +1,43 @@
-import { Form, InputGroup, Button } from "react-bootstrap";
+import { Form, InputGroup, Button, Alert } from "react-bootstrap";
 import '../../styles/RegisterForm.scss';
 import axios from 'axios';
 import { FormEventHandler, useState } from "react";
+import { Redirect } from "react-router-dom";
+
 
 const RegisterForm = () => {
 
   const blankUser = {email: '', password1: '', password2: ''};
   const [user, setUser] = useState(blankUser);
-  const [errors, setErrors] = useState<any>([]);
+  const [errors, setErrors] = useState<any>(null);
+
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('/users/register', user);
-      
-      setErrors(response);
+      await axios.post('/users/register', user);
+      <Redirect to='/login' />
     } catch (err) {
+      // const errorsArray = (err && err.response) ? Object.values(err.response.data) : ['An unknown error occurred'];
+      setErrors(err);
       return err;
     }
   };
 
+  let errorList;
+  if (errors) {
+    errorList = Object.values(errors.response.data).join('\n');
+    // .map((e, idx) => {
+    //   if (typeof e === 'string') {
+    //     return <p key={idx}>{e}</p>;
+    //   }
+    // });
+  }
+
   return (
     <div className='register-form-container'>
       <h2>Register:</h2>
-      <h2>Errors: {errors[0]}</h2>
+
+      {errors && <Alert variant='danger'>{errorList}</Alert>}
       <Form className='register-form' onSubmit={handleSubmit}>
         <InputGroup>
           <InputGroup.Text>Email:</InputGroup.Text>

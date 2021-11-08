@@ -4,15 +4,17 @@ import crypto from 'crypto';
 import { Model } from 'mongoose';
 import { IUser } from '../models/user.model';
 import jwt from 'jsonwebtoken';
+import checkRegistrationFields from '../validation/register';
+import validateLoginInput from '../validation/login';
+import { JsonObjectExpression } from 'typescript';
+import { ResponseType } from 'axios';
 
 const router = express.Router();
 
-import checkRegistrationFields from '../validation/register';
-import validateLoginInput from '../validation/login';
 
 const usersRoutes = (User: Model<IUser>) => {
 
-  router.post('/register', async (req, res) => {
+  router.post('/register', async (req, res): any => {
     const { errors, isValid } = checkRegistrationFields(req.body);
   
     if (!isValid) {
@@ -21,9 +23,12 @@ const usersRoutes = (User: Model<IUser>) => {
     }
     
     const existingUser = await User.find({email: req.body.email});
-    console.log('Existing user:', existingUser);
-    if (existingUser) return res.status(400).json("User already exists");
-    
+
+    if (existingUser) {
+      errors.user = "User already exists";
+      return res.status(400).json(errors);
+    }
+
     let token: string;
     crypto.randomBytes(48, (err, buf) => {
       if (err) throw err;
@@ -57,7 +62,7 @@ const usersRoutes = (User: Model<IUser>) => {
         })
         .catch(err => {
           errors.email = "Email already registered";
-          res.status(400).json(errors);
+          res.status(400).json({errors: errors});
         });
       });
     });
