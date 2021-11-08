@@ -4,6 +4,7 @@ import React, { useEffect, useContext } from "react";
 import useAppData from "./hooks/useAppData";
 import CrewsDashboardPage from './components/pages/CrewsDashboardPage';
 import DispatchDashboardPage from './components/pages/DispatchDashboardPage';
+import LoginForm from './components/forms/LoginForm';
 
 
 function App() {
@@ -26,11 +27,12 @@ function App() {
 
               <Route path="/">
                 <h1>Welcome to Crew Launcher</h1>
-                <Link to="/dispatch">Dispatch</Link> <br/>
+                <LoginForm />
+                {/* <Link to="/dispatch">Dispatch</Link> <br/>
                 <Link to="/crews/1">Crew #1</Link> <br/>
                 <Link to="/crews/2">Crew #2</Link>
 
-                <p>{JSON.stringify(state, null, 3)}</p>
+                <p>{JSON.stringify(state, null, 3)}</p> */}
               </Route>
             </Switch>
 
