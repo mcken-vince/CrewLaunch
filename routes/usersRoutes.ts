@@ -14,7 +14,7 @@ const router = express.Router();
 
 const usersRoutes = (User: Model<IUser>) => {
 
-  router.post('/register', async (req, res): any => {
+  router.post('/register', async (req, res) => {
     const { errors, isValid } = checkRegistrationFields(req.body);
   
     if (!isValid) {
@@ -23,8 +23,9 @@ const usersRoutes = (User: Model<IUser>) => {
     }
     
     const existingUser = await User.find({email: req.body.email});
-
-    if (existingUser) {
+    console.log('req.body.data: ', req.body.email);
+    console.log('existing user: ', existingUser);
+    if (existingUser && existingUser[0]) {
       errors.user = "User already exists";
       return res.status(400).json(errors);
     }

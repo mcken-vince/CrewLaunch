@@ -13,6 +13,7 @@ const RegisterForm = () => {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
+    setErrors({});
     try {
       await axios.post('/users/register', user);
       <Redirect to='/login' />
@@ -25,7 +26,7 @@ const RegisterForm = () => {
 
   let errorList;
   if (errors) {
-    errorList = Object.values(errors.response.data).join('\n');
+    errorList = errors.response && Object.values(errors.response.data).join('\n');
     // .map((e, idx) => {
     //   if (typeof e === 'string') {
     //     return <p key={idx}>{e}</p>;
@@ -37,7 +38,7 @@ const RegisterForm = () => {
     <div className='register-form-container'>
       <h2>Register:</h2>
 
-      {errors && <Alert variant='danger'>{errorList}</Alert>}
+      {errors && errors.response && <Alert variant='danger'>{errorList}</Alert>}
       <Form className='register-form' onSubmit={handleSubmit}>
         <InputGroup>
           <InputGroup.Text>Email:</InputGroup.Text>
