@@ -1,0 +1,13 @@
+.register-form-container {
+  display: flex;
+  flex-direction: column;
+  
+  align-items: center;
+  
+  .input-group {
+    margin-bottom: .5em;
+    .input-group-text {
+      width: 6em;
+    }
+  }
+}
