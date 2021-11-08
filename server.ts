@@ -12,6 +12,7 @@ const { PackageModel } = require('./models/package.model');
 const { CrewModel } = require('./models/crew.model');
 const { ContractModel } = require('./models/contract.model');
 const { JobModel } = require('./models/job.model');
+const { UserModel } = require('./models/user.model');
 
 // const httpServer = http.Server(App);
 const PORT = process.env.PORT || 8080;
@@ -28,6 +29,7 @@ mongoose.connect(
   }
 );
 
+import usersRoutes from './routes/usersRoutes';
 import apiRoutes from './routes/apiRoutes';
 import clientsRoutes from './routes/clientsRoutes';
 import contractsRoutes from './routes/contractsRoutes';
@@ -35,6 +37,7 @@ import crewsRoutes from './routes/crewsRoutes';
 import jobsRoutes from './routes/jobsRoutes';
 import packagesRoutes from './routes/packagesRoutes';
 
+App.use('/users', usersRoutes(UserModel));
 App.use('/api', apiRoutes({ClientModel, ContractModel, CrewModel, JobModel, PackageModel}));
 App.use('/clients', clientsRoutes(ClientModel));
 App.use('/contracts', contractsRoutes(ContractModel));
