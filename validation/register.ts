@@ -1,9 +1,15 @@
-const Validator = require('validator');
-const ifEmpty = require('./checkForEmpty');
+import Validator from 'validator';
+import ifEmpty from './checkForEmpty';
 
-module.exports = function checkRegistrationFields(data) {
+interface registrationErrors {
+  email?: string;
+  password1?: string;
+  password2?: string;
+}
+
+const checkRegistrationFields = (data: any) => {
   // An errors object is created
-  let errors = {};
+  let errors: registrationErrors = {};
 
   data.email = !ifEmpty(data.email) ? data.email : "";
   data.password1 = !ifEmpty(data.password1) ? data.password1 : "";
@@ -19,7 +25,7 @@ module.exports = function checkRegistrationFields(data) {
     errors.password1 = "Password is required";
   }
   if (!Validator.isLength(data.password1, { min: 8, max: 120 })) {
-    errors.password1 = "Passwords must be greater than 8 characters";
+    errors.password1 = "Passwords must be at least 8 characters";
   }
 
   return {
@@ -27,3 +33,5 @@ module.exports = function checkRegistrationFields(data) {
     isValid: ifEmpty(errors)
   };
 };
+
+export default checkRegistrationFields;
