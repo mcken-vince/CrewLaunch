@@ -37,8 +37,8 @@ import crewsRoutes from './routes/crewsRoutes';
 import jobsRoutes from './routes/jobsRoutes';
 import packagesRoutes from './routes/packagesRoutes';
 
-App.use('/users', usersRoutes(UserModel));
 App.use('/api', apiRoutes({ClientModel, ContractModel, CrewModel, JobModel, PackageModel}));
+App.use('/users', usersRoutes(UserModel));
 App.use('/clients', clientsRoutes(ClientModel));
 App.use('/contracts', contractsRoutes(ContractModel));
 App.use('/crews', crewsRoutes(CrewModel));
