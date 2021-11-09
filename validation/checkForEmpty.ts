@@ -1,6 +1,6 @@
-const ifEmpty = field => {
+const ifEmpty = (field: any): boolean | any => {
   try {
-    let result = false;
+    let result: boolean = false;
 
     if (
       field === undefined ||
@@ -16,4 +16,4 @@ const ifEmpty = field => {
   }
 };
 
-module.exports = ifEmpty;
+export default ifEmpty;
