@@ -19,7 +19,7 @@ const LoginForm = (props: any) => {
     try {
       const response: any = await axios.post('/users/login', user);
       setAlert({error: false, success: true, admin: response.data.admin});
-      console.log('response.data: ', response.data);
+      onLogin(user.email, response.data.admin);
       setTimeout(() => {
         history.push('/dispatch');
       }, 1500);

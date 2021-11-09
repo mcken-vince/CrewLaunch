@@ -1,5 +1,5 @@
-import { FC, ReactElement } from 'react';
-import { IState } from '../../definitions';
+import { FC, MouseEventHandler, ReactElement } from 'react';
+import { IState, IUser } from '../../definitions';
 import '../../styles/DispatchDashboardPage.scss';
 import DispatchCalendar from '../DispatchCalendar';
 import DispatchNav from '../DispatchNav';
@@ -12,7 +12,8 @@ import { Switch, Route } from 'react-router-dom';
 import CrewsPage from './CrewsPage';
 import CrewForm from '../forms/CrewForm';
 
-const DispatchDashboardPage: FC<any> = (props): ReactElement => {
+const DispatchDashboardPage: FC<DispatchDashboardPageProps> = (props): ReactElement => {
+  const { user, onLogout } = props;
   const state: IState = props.state;
   const updateState = props.updateState;
 
@@ -29,7 +30,7 @@ const DispatchDashboardPage: FC<any> = (props): ReactElement => {
   const detailedContracts = state.contracts ? getContractsWithDetails(state.contracts, state.packages, state.clients) : [];
   return (
     <>
-      <DispatchNav />
+      <DispatchNav user={user} onLogout={onLogout}/>
       <div className='dispatch-dashboard-container'> 
 
           <Switch>
@@ -69,3 +70,10 @@ const DispatchDashboardPage: FC<any> = (props): ReactElement => {
 };
 
 export default DispatchDashboardPage;
+
+interface DispatchDashboardPageProps {
+  user: IUser;
+  onLogout: MouseEventHandler<HTMLButtonElement>;
+  state: IState;
+  updateState: any;
+}

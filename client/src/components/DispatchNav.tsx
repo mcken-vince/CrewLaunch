@@ -1,21 +1,17 @@
-import { FC, ReactElement } from 'react';
+import { FC, MouseEventHandler, ReactElement } from 'react';
 import '../styles/DispatchNav.scss';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
-import LinkContainer from 'react-bootstrap';
-import { NavLink, Link, Redirect } from 'react-router-dom';
+import { NavLink, Link, useHistory } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import { IUser } from '../definitions';
 
 
 const DispatchNav: FC<DispatchNavProps> = (props): ReactElement => {
-  const { user } = props;
+  const history = useHistory();
+  const { user, onLogout } = props;
   
-  const handleLogout = () => {};
-  const handleLogin = () => {};
-  const handleSignup = () => {};
-
   return (
     <Navbar className="dispatch-nav">
       <Link className='dispatch-nav-logo-link' to='/dispatch'><span className="dispatch-nav-logo">CrewLauncher</span></Link>
@@ -39,11 +35,18 @@ const DispatchNav: FC<DispatchNavProps> = (props): ReactElement => {
           </NavDropdown>
         </>}
         <div className='nav-buttons'>
-          {user ? (
-            <Button onClick={handleLogout}>Log Out</Button>) : (
+          {user && user.email ? (
             <>
-              <Button onClick={handleLogin}><Link to='/login'>Log In</Link></Button>
-              <Button onClick={handleSignup}><Link to='/register'>Sign Up</Link></Button>
+              <span>{user.email}</span>
+              <Button onClick={(e) => {
+                history.push('/login');
+                onLogout(e);
+                }}>Log Out</Button>
+            </>
+          ) : (
+            <>
+              <Button><Link to='/login'>Log In</Link></Button>
+              <Button><Link to='/register'>Sign Up</Link></Button>
             </>)
           }
         </div>
@@ -55,5 +58,6 @@ const DispatchNav: FC<DispatchNavProps> = (props): ReactElement => {
 export default DispatchNav;
 
 export interface DispatchNavProps {
-  user?: IUser
+  user?: IUser,
+  onLogout: MouseEventHandler<HTMLButtonElement>
 };
