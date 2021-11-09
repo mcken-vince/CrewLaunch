@@ -80,6 +80,7 @@ const usersRoutes = (User: Model<IUser>) => {
     } else {
       User.find({email: req.body.email})
       .then(data => {
+        console.log('data:', data)
         bcrypt.compare(req.body.password, data[0].password).then(isMatch => {
           if (isMatch) {
             const payload = { id: data[0].id, email: data[0].email };
@@ -92,12 +93,12 @@ const usersRoutes = (User: Model<IUser>) => {
               }
             )
           } else {
-            res.status(400).json("Bad request");
+            res.status(400).json("Incorrect email or password");
           }
         });
       })
       .catch(err => {
-        res.status(400).json("Bad request");
+        res.status(400).json("Bad request. Please try again.");
       });
     }
   });
