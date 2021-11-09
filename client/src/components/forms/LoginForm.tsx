@@ -2,25 +2,32 @@ import { Form, InputGroup, Button, Alert, Spinner } from "react-bootstrap";
 import '../../styles/LoginForm.scss';
 import axios from 'axios';
 import { FormEventHandler, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
-const LoginForm = () => {
-  const blankUser = {email: '', password: ''};
+const LoginForm = (props: any) => {
+  const onLogin = props.onLogin;
+  const blankUser = {email: '', password: '', privileges: ''};
   const [user, setUser] = useState(blankUser);
-  const [alert, setAlert] = useState<any>({error: false, success: false, message: ''});
+  const [alert, setAlert] = useState<any>({error: false, success: false, message: '', admin: false});
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
     setLoading(true);
-    setAlert({success: false, error: false, message: ''});
+    setAlert({success: false, error: false, message: '', admin: false});
     try {
-      const response = await axios.post('/users/login', user);
-      setAlert({error: false, success: true});
+      const response: any = await axios.post('/users/login', user);
+      setAlert({error: false, success: true, admin: response.data.admin});
+      console.log('response.data: ', response.data);
+      setTimeout(() => {
+        history.push('/dispatch');
+      }, 1500);
       return response;
+      
     } catch (err: any) {
       const errorsArray = err.response ? Object.values(err.response.data) : ['An unknown error occurred'];
-      setAlert({error: true, success: false, message: errorsArray})
+      setAlert({error: true, success: false, message: errorsArray, privileges: ''})
       return err;
     } finally {
       setLoading(false);
@@ -29,17 +36,20 @@ const LoginForm = () => {
 
   return (
     <div className='login-form-container'>
-      <h2>Login:</h2>
       {alert.error && 
         <Alert variant='danger'>
           <Alert.Heading>Error</Alert.Heading>
-          {alert.message.join(', ')}
+          {typeof alert.message === 'string' ? alert.message : alert.message.join(', ')}
           <br/> Not registered? <Link to='/register'>Register here.</Link>
         </Alert>}
       {alert.success &&
         <Alert variant='success'>
           <Alert.Heading>Success!</Alert.Heading>
+          Logged in as a{alert.admin ? 'n admin' : ' guest'}
+          <br/> Redirecting to home page...
+          <br/><Spinner animation='border'/>
         </Alert>}
+      <h2>Login:</h2>
       <Form className='login-form' onSubmit={handleSubmit}>
         <InputGroup>
           <InputGroup.Text>Email:</InputGroup.Text>

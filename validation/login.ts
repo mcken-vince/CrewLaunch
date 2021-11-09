@@ -4,6 +4,7 @@ import ifEmpty from "./checkForEmpty";
 interface loginErrors {
   email?: string;
   password?: string;
+  user?: string;
 }
 
 const validateLoginInput = (data: any) => {

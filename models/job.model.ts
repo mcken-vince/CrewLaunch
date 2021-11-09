@@ -11,11 +11,13 @@ export interface IJob extends Document {
 const JobSchema = new Schema<IJob>({
   crew_id: {
     type: Schema.Types.ObjectId,
-    required: true
+    required: true,
+    ref: "Crew"
   },
   contract_id: {
     type: Schema.Types.ObjectId,
-    required: true
+    required: true,
+    ref: "Contract"
   },
   completed: {
     type: Boolean,

@@ -1,12 +1,15 @@
 import { Document, Types, Schema, model} from 'mongoose';
-import { JsonWebTokenError, Jwt } from 'jsonwebtoken';
+import { Jwt } from 'jsonwebtoken';
 
 export interface IUser extends Document {
   _id?: Types.ObjectId;
   email: string;
-  password: string; 
+  password: string;
+  admin: boolean;
   registered: Date;
   token: Jwt;
+  createdAt?: Date;
+  updatedAt?: Date;
 };
 
 const UserSchema = new Schema<IUser>({
@@ -22,7 +25,11 @@ const UserSchema = new Schema<IUser>({
     type: Date,
     default: new Date()
   },
+  admin: {
+    type: Boolean,
+    default: false
+  },
   token: String
-});
+}, { timestamps: true });
 
 export const UserModel = model<IUser>('User', UserSchema);

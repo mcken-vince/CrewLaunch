@@ -35,7 +35,7 @@ const RegisterForm = () => {
       {alert.error && 
         <Alert variant='danger'>
           <Alert.Heading>There has been an error</Alert.Heading>
-          {alert.message.join(', ')}
+          {typeof alert.message === 'string' ? alert.message : alert.message.join(', ')}
         </Alert>}
       {alert.success &&
         <Alert variant='success'>

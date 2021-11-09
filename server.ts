@@ -13,6 +13,7 @@ const { CrewModel } = require('./models/crew.model');
 const { ContractModel } = require('./models/contract.model');
 const { JobModel } = require('./models/job.model');
 const { UserModel } = require('./models/user.model');
+const { AdminModel } = require('./models/admin.model');
 
 // const httpServer = http.Server(App);
 const PORT = process.env.PORT || 8080;
@@ -38,7 +39,7 @@ import jobsRoutes from './routes/jobsRoutes';
 import packagesRoutes from './routes/packagesRoutes';
 
 App.use('/api', apiRoutes({ClientModel, ContractModel, CrewModel, JobModel, PackageModel}));
-App.use('/users', usersRoutes(UserModel));
+App.use('/users', usersRoutes(UserModel, AdminModel));
 App.use('/clients', clientsRoutes(ClientModel));
 App.use('/contracts', contractsRoutes(ContractModel));
 App.use('/crews', crewsRoutes(CrewModel));

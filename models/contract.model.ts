@@ -12,11 +12,13 @@ export interface IContract extends Document {
 const ContractSchema = new Schema<IContract>({
   package_id: {
     type: Schema.Types.ObjectId,
-    required: true
+    required: true,
+    ref: "Package"
   },
   client_id: {
     type: Schema.Types.ObjectId,
-    required: true
+    required: true,
+    ref: "Client"
   },
   address: {
     type: String,
