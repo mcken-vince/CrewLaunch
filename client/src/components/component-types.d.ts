@@ -18,10 +18,6 @@ export interface JobCardProps extends IJobLocal {
 
 };
 
-export interface DispatchNavProps {
-  user: IUser
-};
-
 export interface IthisMonth {
   startsOn: number;
   name: string;

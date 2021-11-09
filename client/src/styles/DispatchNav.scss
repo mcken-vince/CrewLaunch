@@ -41,12 +41,15 @@ $logo-shadow: 0 0 10px white;
           background-color: lightgray;
         }
       }
-      
-      
     }
     .dispatch-nav-dropdown {
-      
       color: white;
+    }
+
+    .nav-buttons {
+      button {
+        margin-left: .5em;
+      }
     }
   }
   

@@ -24,6 +24,7 @@ function App() {
               <Route path="/register">
                 <RegisterForm />
               </Route>
+              
               <Route path="/crews/:id">
                 <CrewsDashboardPage state={state} updateState={updateState} />
               </Route>

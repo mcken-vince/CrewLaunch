@@ -1,12 +1,12 @@
 import { FC, ReactElement } from 'react';
 import '../styles/DispatchNav.scss';
-import { DispatchNavProps } from './component-types';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import LinkContainer from 'react-bootstrap';
 import { NavLink, Link } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
+import { IUser } from '../definitions';
 
 
 const DispatchNav: FC<DispatchNavProps> = (props): ReactElement => {
@@ -35,16 +35,22 @@ const DispatchNav: FC<DispatchNavProps> = (props): ReactElement => {
             <Nav.Link as={NavLink} to='/dispatch/contracts'>Contracts</Nav.Link>
             <Nav.Link as={NavLink} to='/dispatch/packages'>Packages</Nav.Link>
         </NavDropdown>
-        {user ? (
-          <Button onClick={handleLogout}>Log Out</Button>) : (
-          <>
-            <Button onClick={handleLogin}>Log In</Button>
-            <Button onClick={handleSignup}>Sign Up</Button>
-          </>)
-        }
+        <div className='nav-buttons'>
+          {user ? (
+            <Button onClick={handleLogout}>Log Out</Button>) : (
+            <>
+              <Button onClick={handleLogin}>Log In</Button>
+              <Button onClick={handleSignup}>Sign Up</Button>
+            </>)
+          }
+        </div>
       </div>
     </Navbar>
   );
 };
 
 export default DispatchNav;
+
+export interface DispatchNavProps {
+  user?: IUser
+};

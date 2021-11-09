@@ -23,11 +23,13 @@ const DispatchDashboardPage: FC<any> = (props): ReactElement => {
     });
   };
 
+  // test user, can be deleted when user validation is functional
+  const testUser = {name: 'Testy Tester', email: 'testy.testerforce@mail.com', password: 'secretpassword' };
   const detailedJobs = state.jobs ? getJobsWithDetails(state.jobs, state.contracts, state.packages) : [];
   const detailedContracts = state.contracts ? getContractsWithDetails(state.contracts, state.packages, state.clients) : [];
   return (
     <>
-      <DispatchNav user={{name: 'Testy Tester', email: 'testy.testerforce@mail.com', password: 'secretpassword' }}/>
+      <DispatchNav />
       <div className='dispatch-dashboard-container'> 
 
           <Switch>
