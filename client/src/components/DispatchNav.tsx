@@ -39,7 +39,7 @@ const DispatchNav: FC<DispatchNavProps> = (props): ReactElement => {
             <>
               <span>{user.email}</span>
               <Button onClick={(e) => {
-                history.push('/login');
+                history.push('/');
                 onLogout(e);
                 }}>Log Out</Button>
             </>

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
 import "./App.scss";
 import React, { useEffect, useContext, useState } from "react";
 import useAppData from "./hooks/useAppData";
@@ -43,32 +43,40 @@ function App() {
       
             <Switch>
               <Route path="/login">
-                <LoginForm onLogin={handleLogin} />
+                {!user ? 
+                <LoginForm onLogin={handleLogin} /> : <Redirect to='/'/>}
               </Route>
               <Route path="/register">
-                <RegisterForm />
+                {!user ? 
+                <RegisterForm /> : <Redirect to='/'/>}
               </Route>
                
               <Route path="/crews/:id">
-                <CrewsDashboardPage user={user} state={state} updateState={updateState} />
+                {user ?
+                <CrewsDashboardPage user={user} state={state} updateState={updateState} /> :
+                <Redirect to='/'/>}
               </Route>
 
               <Route path="/dispatch" user={user}>
-                <DispatchDashboardPage onLogout={handleLogout} user={user} state={state} updateState={updateState}/>
+                {user ?
+                <DispatchDashboardPage onLogout={handleLogout} user={user} state={state} updateState={updateState}/> :
+                <Redirect to='/'/>}
               </Route>
 
               <Route path="/">
                 <DispatchNav user={user} onLogout={handleLogout}/>
                 <h1>Welcome to Crew Launcher</h1>
-                
-                {/* <Link to="/dispatch">Dispatch</Link> <br/>
-                <Link to="/crews/1">Crew #1</Link> <br/>
-                <Link to="/crews/2">Crew #2</Link>
+                {!user ? <h3>Sign up to create a new account, <br/>or sign in with an existing account.</h3> :
+                <>
+                  <Link to="/dispatch">Dispatch</Link> <br/>
+                  <Link to="/crews/1">Crew #1</Link> <br/>
+                  <Link to="/crews/2">Crew #2</Link>
+                </>
+                }
 
-                <p>{JSON.stringify(state, null, 3)}</p> */}
+              
               </Route>
             </Switch>
-
 
       </Router>
     </div>
