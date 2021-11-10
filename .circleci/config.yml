@@ -17,7 +17,8 @@ orbs:
 jobs:
   build:
     docker:
-      - image: circleci/node:16.8.0
+
+      - image: cypress/base:14.16.0
     working_directory: ~/client
     steps:
       - checkout
@@ -32,22 +33,6 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm test
 
-  build-client:
-    docker:
-      - image: circleci/node:latest
-    working_directory: ~/client
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
-      - run: cd client && npm install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      - run: npm test
 
   deploy:
     machine:
@@ -81,6 +66,8 @@ workflows:
             record: true 
             parallel: true 
             env: HOST_URL=http://localhost:3000 
+            requires: 
+              - build
 
       - deploy:
           filters:
