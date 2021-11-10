@@ -22,15 +22,17 @@ const DispatchNav: FC<DispatchNavProps> = (props): ReactElement => {
           {user && user.email ? (
             <>
               <span>{user.email}</span>
-              <Button onClick={(e) => {
+              <Button 
+                data-testid='logout-button'
+                onClick={(e) => {
                 history.push('/');
                 onLogout(e);
                 }}>Log Out</Button>
             </>
           ) : (
             <>
-              <Button><Link to='/login'>Log In</Link></Button>
-              <Button><Link to='/register'>Sign Up</Link></Button>
+              <Button data-testid='login-button'><Link to='/login'>Log In</Link></Button>
+              <Button data-testid='signup-button'><Link to='/register'>Sign Up</Link></Button>
             </>)
           }
         </div>

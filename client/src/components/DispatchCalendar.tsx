@@ -60,7 +60,7 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
     });
   };
 
-  const selectToday = () => {
+  const selectCurrentMonth = () => {
     const thisMonth = getMonthObject(new Date());
     setSelectedMonth(thisMonth);
   };
@@ -68,7 +68,7 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
   return (
     <div className='dispatch-calendar-container'>
       <div className='dispatch-calendar-header'>
-      <Button onClick={selectToday}>Today</Button>
+      <Button onClick={selectCurrentMonth}>Today</Button>
       <Button onClick={selectPreviousMonth}>{'<'}</Button>
       <h1 className='dispatch-calendar-title'>{`${selectedMonth.name} ${selectedMonth.year}`}</h1>
       <Button onClick={selectNextMonth}>{'>'}</Button>

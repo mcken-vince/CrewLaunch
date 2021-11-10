@@ -13,9 +13,9 @@ import CrewsPage from './CrewsPage';
 import CrewForm from '../forms/CrewForm';
 
 const DispatchDashboardPage: FC<DispatchDashboardPageProps> = (props): ReactElement => {
-  const { user, onLogout } = props;
   const state: IState = props.state;
-  const updateState = props.updateState;
+  // const { user, onLogout } = props;
+  // const updateState = props.updateState;
 
   const handleSubmit = (resource: any) => {
     return new Promise((resolve, reject) => {
@@ -23,9 +23,6 @@ const DispatchDashboardPage: FC<DispatchDashboardPageProps> = (props): ReactElem
       resolve(resource)}, 500);
     });
   };
-
-  // test user, can be deleted when user validation is functional
-  const testUser = {name: 'Testy Tester', email: 'testy.testerforce@mail.com', password: 'secretpassword' };
 
   const detailedJobs = state.jobs ? getJobsWithDetails(state.jobs, state.contracts, state.packages) : [];
   const detailedContracts = state.contracts ? getContractsWithDetails(state.contracts, state.packages, state.clients) : [];

@@ -1,4 +1,4 @@
-import { screen, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import DispatchDashboardPage from "../components/pages/DispatchDashboardPage";
 import { BrowserRouter as Router } from 'react-router-dom';
 import { sampleState } from './sampleData';
