@@ -55,13 +55,13 @@ const LoginForm = (props: any) => {
       <Form className='login-form' onSubmit={handleSubmit}>
         <InputGroup>
           <InputGroup.Text>Email:</InputGroup.Text>
-          <Form.Control value={user.email} onChange={(e) => setUser(prev => ({...prev, email: e.target.value}))} name='email' type='email' placeholder='Enter email'/>
+          <Form.Control className='login-form-email' value={user.email} onChange={(e) => setUser(prev => ({...prev, email: e.target.value}))} name='email' type='email' placeholder='Enter email'/>
         </InputGroup>
         <InputGroup>
           <InputGroup.Text>Password:</InputGroup.Text>
-          <Form.Control value={user.password} onChange={(e) => setUser(prev => ({...prev, password: e.target.value}))} name='password' type='password' placeholder='Enter password'/>
+          <Form.Control className='login-form-password' value={user.password} onChange={(e) => setUser(prev => ({...prev, password: e.target.value}))} name='password' type='password' placeholder='Enter password'/>
         </InputGroup>
-        <Button disabled={!fieldsFilled} type='submit'>{loading ? <Spinner animation='border' /> : 'Login'}</Button>
+        <Button className='login-form-submit form-submit' disabled={!fieldsFilled} type='submit'>{loading ? <Spinner animation='border' /> : 'Login'}</Button>
       </Form>
     </div>
   );
