@@ -1,6 +1,6 @@
 import DayCard from './DayCard';
 import '../styles/DispatchCalendar.scss';
-import { getDaysInMonth, format, isEqual, getDay, addMonths } from 'date-fns';
+import { isEqual, addMonths } from 'date-fns';
 import { IthisMonth, IJobLocal } from './component-types';
 import { useState, FC, ReactElement } from 'react';
 import Modal from 'react-bootstrap/Modal';

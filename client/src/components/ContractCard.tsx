@@ -1,7 +1,7 @@
 import { FC, ReactElement, useState } from 'react';
 import '../styles/ContractCard.scss';
 import { IContractLocal } from './component-types';
-import { format, addDays } from 'date-fns';
+import { addDays } from 'date-fns';
 import Button from 'react-bootstrap/Button';
 import ConfirmAlert from './ConfirmAlert';
 import classNames from 'classnames';

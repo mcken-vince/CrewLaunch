@@ -10,13 +10,13 @@ const DayCard: FC<DayCardProps> = (props): ReactElement => {
 
   const dayCardClass = classNames('daycard-container', {'daycard-container-empty': !jobs});
   const completeJobs = jobs && jobs.filter((job) => job.completed);
-  const jobList = jobs && jobs.map((job) => {
-    const dayCardJobClass = classNames('daycard-job-li', {'daycard-job-li-complete': job.completed});
-    return (
-    <li className={dayCardJobClass}>
-      {job.address}
-    </li>);
-  });
+  // const jobList = jobs && jobs.map((job) => {
+  //   const dayCardJobClass = classNames('daycard-job-li', {'daycard-job-li-complete': job.completed});
+  //   return (
+  //   <li className={dayCardJobClass}>
+  //     {job.address}
+  //   </li>);
+  // });
 
   return (
     <div key={date} className={dayCardClass} onClick={selectDay} >
