@@ -3,8 +3,9 @@
 .dispatch-calendar-container {
   display: flex;
   flex-direction: column;
-  width: 95%;
-  border: 8px solid $border-color1;
+  max-width: 100%;
+  min-width: 95%;
+  border: 5px solid $border-color1;
   border-radius: 20px 20px;
   height:max-content;
   

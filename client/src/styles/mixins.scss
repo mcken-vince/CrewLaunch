@@ -1,7 +1,6 @@
 @import 'variables';
 
 @mixin formContainerStyles {
-  padding-top: $nav-height;
   width: 40em;
   display: flex;
   flex-direction: column;
@@ -13,26 +12,39 @@
     width: 100%;
   }
 
-  @media (max-width: 444px) {
-    padding-top: $nav-height-mobile;
-    font-size: 1.5em;
-    width: 100%;
+  button.form-submit {
+    position: relative;
+    margin-left: 88%;
   }
+
+  @media (max-width: $med) {
+    width: 100%;
+    font-size: 1.4em;
+    button.form-submit {
+      position: absolute;
+      margin-left: 0;
+      right: 5px;
+    }
+  }
+
+  @media (max-width: $sm) {
+
+    font-size: 1.1em;
+
+  }
+
+
 }
 
 @mixin pageStyles {
-  padding-top: $nav-height;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 50%;
-  max-width: 80%;
-  alert {
-    padding-top: $nav-height;
-  }
+  justify-content: center;
 
-  @media (max-width: 444px) {
-    // padding-top: $nav-height-mobile;
+  @media (max-width: $sm) {
+    width: 100%;
     font-size: 1.5em;
   }
 }

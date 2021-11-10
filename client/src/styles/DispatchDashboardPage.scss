@@ -3,7 +3,8 @@
 
 .dispatch-dashboard-container {
   @include pageStyles;
-  // padding-top: 1em;
+  padding: 0;
+  max-width: 98vw;
   display: flex;
   justify-content: center;
   flex-direction: column;

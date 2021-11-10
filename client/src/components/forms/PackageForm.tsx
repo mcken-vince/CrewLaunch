@@ -85,7 +85,7 @@ const PackageForm: FC<PackageFormProps> = (props): ReactElement => {
         <InputGroup.Text>hours</InputGroup.Text>
       </InputGroup>
       
-      <Button className='package-form-submit' disabled={!loading && !formFilled} type="submit" onClick={validate}>
+      <Button className='package-form-submit form-submit' disabled={!loading && !formFilled} type="submit" onClick={validate}>
         {loading ? <Spinner animation='border' variant='primary' /> : 'Submit'}
       </Button>
   

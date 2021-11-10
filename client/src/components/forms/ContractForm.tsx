@@ -67,7 +67,7 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
         {alert.error && <Alert className='contract-form-alert'variant='danger'>Error: Your request could not be completed. Please try again.</Alert>}
         <Form className='contract-form'>
           <Form.Label>Client Information:</Form.Label>
-          <InputGroup className='mb-3'>
+          <InputGroup className='mb-3 client-information'>
             <Form.Control disabled={loading} type='text' value={client.name} onChange={(e):void => setClient(prev => ({...prev, name: e.target.value}))} placeholder='Enter name'/>
             <Form.Control disabled={loading} type='email' value={client.email} onChange={(e):void => setClient(prev => ({...prev, email: e.target.value}))} placeholder='Enter email'/>
             <Form.Control disabled={loading} type='text' value={client.phone} onChange={(e):void => setClient(prev => ({...prev, phone: e.target.value}))} placeholder='Enter phone #'/>
@@ -89,7 +89,7 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
             <DateRangePicker startDate={new Date(startDate)} endDate={new Date(endDate)} onChange={handleDateChange} inheritClassName='contract-form-daterangepicker'/>
           </>}
 
-          <Button className='contract-form-submit' disabled={!loading && !formFilled} type='submit' onClick={validate}>
+          <Button className='contract-form-submit form-submit' disabled={!loading && !formFilled} type='submit' onClick={validate}>
             {loading ? <Spinner animation='border' variant='primary'/> : 'Submit'}
           </Button>
             
