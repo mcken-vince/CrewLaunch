@@ -2,7 +2,6 @@ import { FC, MouseEventHandler, ReactElement } from 'react';
 import { IState, IUser } from '../../definitions';
 import '../../styles/DispatchDashboardPage.scss';
 import DispatchCalendar from '../DispatchCalendar';
-import DispatchNav from '../DispatchNav';
 import ContractForm from '../forms/ContractForm';
 import PackageForm from '../forms/PackageForm';
 import ContractsPage from './ContractsPage';

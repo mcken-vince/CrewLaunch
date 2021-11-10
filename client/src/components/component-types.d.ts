@@ -1,4 +1,4 @@
-import { IClient, IPackage, ICrew, IJob, IUser } from '../definitions';
+import { IClient, IPackage, ICrew, IJob } from '../definitions';
 import { Types } from 'mongoose';
 import { ReactDatePickerProps } from 'react-datepicker';
 import { EventHandler } from 'react';

@@ -9,7 +9,7 @@ import ConfirmAlert from './ConfirmAlert';
 const JobCard: FC<JobCardProps> = (props): ReactElement => {
   const [confirm, setConfirm] = useState<boolean>(false);
   const { address, date, completed } = props;
-  const servicePackage = props.servicePackage;
+  // const servicePackage = props.servicePackage;
 
   const jobCardClass: string = ClassNames('jobcard-container', {'jobcard-complete': completed, 'selected': confirm})
 
