@@ -53,4 +53,12 @@
     }  
   }
 
+  
+  @media (max-width: $med) {
+    flex-direction: column;
+    .contractcard-body {
+      flex-direction: column;
+    }
+  }
+
 }
