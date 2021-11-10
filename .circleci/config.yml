@@ -17,9 +17,11 @@ orbs:
 jobs:
   build:
     docker:
-
       - image: cypress/base:14.16.0
-    working_directory: ~/client
+        environment:
+          ## this enables colors in the output
+          TERM: xterm
+    working_directory: ~/app
     steps:
       - checkout
       - restore_cache:
