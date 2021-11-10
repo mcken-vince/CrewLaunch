@@ -3,7 +3,7 @@
 
 describe('User Login', () => {
   it('can login with an existing account', () => {
-    cy.visit('/login');
+    cy.visit(`http://localhost:${Cypress.env('port')}/login`);
     cy.contains('Login');
     cy.get('.login-form-email')
       .type('hello@mail.com');
@@ -15,7 +15,7 @@ describe('User Login', () => {
     });
 
   it('cannot login with nonexistent account', () => {
-    cy.visit('/login');
+    cy.visit(`http://localhost:${Cypress.env('port')}/login`);
     cy.contains('Login');
     cy.get('.login-form-email')
       .type('nonexistent234987234987234987234@fake.com');
