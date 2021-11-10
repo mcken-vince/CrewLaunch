@@ -35,8 +35,6 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm test
 
-  test:
-
 
   deploy:
     machine:
@@ -66,15 +64,9 @@ workflows:
             branches:
               only: master
 
-      - cypress/run: 
-          requires: 
-            - build
-          start: 'npm start'
-
       - deploy:
           filters:
             branches:
               only: master
           requires:
             - build # only run deploy-via-git job if the build job has completed
-            - cypress/run
