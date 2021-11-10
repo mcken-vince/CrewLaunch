@@ -22,6 +22,7 @@ describe('DispatchNav component', () => {
         <DispatchNav user={testUser}/>
       </Router>
     );
+    expect(screen.getByText(/test@user.com/)).toBeInTheDocument();
     expect(screen.getByTestId('logout-button')).toBeInTheDocument();
     expect(screen.queryByTestId('login-button')).not.toBeInTheDocument();
     expect(screen.queryByTestId('signup-button')).not.toBeInTheDocument();
