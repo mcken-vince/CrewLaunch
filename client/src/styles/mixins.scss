@@ -1,50 +1,61 @@
 @import 'variables';
 
 @mixin formContainerStyles {
-  width: 40em;
+  text-align: left;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: left;
-
-  form  {
-    width: 100%;
-  }
-
-  button.form-submit {
-    position: relative;
-    margin-left: 88%;
+  
+  @media (max-width: $sm) {
+    font-size: 1.1em;
   }
 
   @media (max-width: $med) {
     width: 100%;
-    font-size: 1.4em;
+    font-size: 1.2em;
     button.form-submit {
       position: absolute;
       margin-left: 0;
       right: 5px;
     }
   }
+  
+  @media (min-width: $lg) {
 
-  @media (max-width: $sm) {
-
-    font-size: 1.1em;
-
+    width: 40em;
+    
+    
+    form  {
+      width: 100%;
+    }
+    
+    button.form-submit {
+      position: relative;
+      margin-left: 88%;
+    }
   }
-
-
+  
+  
 }
 
 @mixin pageStyles {
-
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
+  
   @media (max-width: $sm) {
-    width: 100%;
-    font-size: 1.5em;
+    font-size: 1.3em;
+  }
+
+  @media (max-width: $med) {
+
+  }
+
+  @media (min-width: $lg) {
+
   }
 }

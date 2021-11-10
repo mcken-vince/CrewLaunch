@@ -8,7 +8,7 @@ const PackageCard: FC<PackageCardProps> = (props): ReactElement => {
   const { title, description, cost } = packageDetails;
 
   return (
-    <Card>
+    <Card className='package-card'>
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Text>

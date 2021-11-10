@@ -9,7 +9,7 @@ import { EventHandler, FC, ReactElement, useState } from 'react';
 import DateRangePicker from '../DateRangePicker';
 import PackagesOffcanvas from '../PackagesOffcanvas';
 import { ContractFormProps } from '../component-types';
-import { IClient } from '../../definitions';
+import { IClient, IPackage } from '../../definitions';
 
 const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
   // empty skeleton to satisfy typescript compiler
@@ -33,6 +33,11 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
   const handleDateChange:EventHandler<any> = (date: Date):void => {
     setStartDate(date);
     setEndDate(new Date(addDays(new Date(date), selectedPackage.contract_length_days - 1)));
+  };
+
+  const handlePackageSelect = (packageDetails: IPackage) => {
+    setSelectedPackage(packageDetails); 
+    setPackagesShow(false);
   };
 
   const validate:React.MouseEventHandler<HTMLButtonElement> = async (event) => {
@@ -60,7 +65,7 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
 
   return (
     <>
-      <PackagesOffcanvas show={packagesShow} handleClose={():void => setPackagesShow(false)} packages={packages} selectPackage={setSelectedPackage} />
+      <PackagesOffcanvas show={packagesShow} handleClose={():void => setPackagesShow(false)} packages={packages} selectPackage={handlePackageSelect} />
       <div className='contract-form-container'>
         <h1 className='contract-form-title'>Contract Form</h1>
         {alert.success && <Alert className='contract-form-alert' variant='success'>Great success!</Alert>}

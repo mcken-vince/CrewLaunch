@@ -74,7 +74,7 @@ const CrewForm: FC<CrewFormProps> = (props): ReactElement => {
       </InputGroup>
 
       
-      <Button className='crew-form-submit' disabled={!loading && !formFilled} type='submit' onClick={validate}>
+      <Button className='crew-form-submit form-submit' disabled={!loading && !formFilled} type='submit' onClick={validate}>
       {loading ? <Spinner animation='border' variant='primary' /> : 'Submit'}
       </Button>
   

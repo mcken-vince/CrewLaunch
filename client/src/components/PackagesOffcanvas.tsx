@@ -8,7 +8,7 @@ const PackagesOffcanvas: FC<PackagesOffcanvasProps> = (props): ReactElement => {
 
   const packageCards: ReactElement[] = packages.map((p, idx) => {
     return (<PackageCard packageDetails={p} onSelect={selectPackage} key={idx} />)
-  })
+  });
 
   return (
     <Offcanvas show={show} onHide={handleClose} placement='end'>
