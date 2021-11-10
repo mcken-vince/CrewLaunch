@@ -2,6 +2,7 @@ import { screen, render } from '@testing-library/react';
 import axios from 'axios';
 import { getCrews, getClients, getPackages, getContracts, getJobs } from './sampleData';
 import App from '../App';
+import userEvent from '@testing-library/user-event';
 
 jest.mock('axios');
 
@@ -12,12 +13,15 @@ describe('App', () => {
     .mockImplementationOnce(() => Promise.resolve(getClients))
     .mockImplementationOnce(() => Promise.resolve(getPackages))
     .mockImplementationOnce(() => Promise.resolve(getContracts))
-    .mockImplementationOnce(() => Promise.resolve(getJobs));
-
+    .mockImplementationOnce(() => Promise.resolve(getJobs))
+    
+    
     render(<App />);
     expect(screen.getByText(/Crew Launcher/)).toBeInTheDocument();
-    expect(await screen.findByText(/616f7ceea703ecd4ec419645/)).not.toBe(null);
-
+    expect(screen.getByText(/Log In/)).toBeInTheDocument();
+    expect(screen.getByText(/Sign Up/)).toBeInTheDocument();
+    userEvent.click(screen.getByText('Log In'));
+    expect(screen.getByText(/Login:/)).toBeInTheDocument();
   });
   
 });

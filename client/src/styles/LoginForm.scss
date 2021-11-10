@@ -1,9 +1,12 @@
+@import 'variables';
+@import 'mixins';
+
 .login-form-container {
+  @include pageStyles;
   display: flex;
   flex-direction: column;
-
   align-items: center;
-  
+
   .alert {
     width: 100%;
   }
@@ -11,7 +14,7 @@
   .input-group {
     margin-bottom: .5em;
     .input-group-text {
-      width: 6em;
+      width: 6.2em;
     }
   }
 }

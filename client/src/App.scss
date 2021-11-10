@@ -1,5 +1,12 @@
 @import "~bootstrap/scss/bootstrap";
+@import './styles/variables.scss';
+@import './styles/mixins.scss';
 
 .App {
+  justify-content: center;
   text-align: center;
+  .home-page-container {
+    @include pageStyles;
+  }
+
 }

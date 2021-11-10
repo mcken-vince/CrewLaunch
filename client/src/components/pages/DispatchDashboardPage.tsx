@@ -26,11 +26,10 @@ const DispatchDashboardPage: FC<DispatchDashboardPageProps> = (props): ReactElem
 
   // test user, can be deleted when user validation is functional
   const testUser = {name: 'Testy Tester', email: 'testy.testerforce@mail.com', password: 'secretpassword' };
+
   const detailedJobs = state.jobs ? getJobsWithDetails(state.jobs, state.contracts, state.packages) : [];
   const detailedContracts = state.contracts ? getContractsWithDetails(state.contracts, state.packages, state.clients) : [];
   return (
-    <>
-      <DispatchNav user={user} onLogout={onLogout}/>
       <div className='dispatch-dashboard-container'> 
 
           <Switch>
@@ -65,7 +64,6 @@ const DispatchDashboardPage: FC<DispatchDashboardPageProps> = (props): ReactElem
           </Switch>
 
       </div>
-    </>
   );
 };
 

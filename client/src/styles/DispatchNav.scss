@@ -7,9 +7,9 @@ $logo-shadow: 0 0 10px white;
   width: 100%;
   display: flex;
   flex-direction: row;
-  
+  align-self: center;
   align-items: center;
-  padding: 1em 1.5em;
+  padding: 1em;
   background-color: $nav-background;
   
   .dispatch-nav-logo-link {
@@ -32,7 +32,7 @@ $logo-shadow: 0 0 10px white;
   }
 
   .dispatch-nav-right {
-    display: flex;
+    // display: flex;
     margin-left: auto;
     .dropdown-menu {
 
@@ -56,5 +56,17 @@ $logo-shadow: 0 0 10px white;
       }
     }
   }
-  
+}
+
+@media (max-width: 444px) {
+  .dispatch-nav {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .dispatch-nav-right {
+      margin-left: 0em;
+    }
+  }
 }

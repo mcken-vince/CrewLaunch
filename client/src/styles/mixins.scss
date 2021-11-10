@@ -1,8 +1,38 @@
+@import 'variables';
+
 @mixin formContainerStyles {
+  padding-top: $nav-height;
   width: 40em;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: left;
+
+  form  {
+    width: 100%;
+  }
+
+  @media (max-width: 444px) {
+    padding-top: $nav-height-mobile;
+    font-size: 1.5em;
+    width: 100%;
+  }
+}
+
+@mixin pageStyles {
+  padding-top: $nav-height;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 50%;
+  max-width: 80%;
+  alert {
+    padding-top: $nav-height;
+  }
+
+  @media (max-width: 444px) {
+    // padding-top: $nav-height-mobile;
+    font-size: 1.5em;
+  }
 }

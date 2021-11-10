@@ -34,6 +34,8 @@ const LoginForm = (props: any) => {
     }
   };
 
+  const fieldsFilled: boolean = (user.email && user.password && user.email.includes('@') && user.password.length >= 8) ? true : false;
+
   return (
     <div className='login-form-container'>
       {alert.error && 
@@ -59,7 +61,7 @@ const LoginForm = (props: any) => {
           <InputGroup.Text>Password:</InputGroup.Text>
           <Form.Control value={user.password} onChange={(e) => setUser(prev => ({...prev, password: e.target.value}))} name='password' type='password' placeholder='Enter password'/>
         </InputGroup>
-        <Button type='submit'>{loading ? <Spinner animation='border' /> : 'Login'}</Button>
+        <Button disabled={!fieldsFilled} type='submit'>{loading ? <Spinner animation='border' /> : 'Login'}</Button>
       </Form>
     </div>
   );

@@ -24,6 +24,10 @@ function App() {
       const foundUser = JSON.parse(loggedInUser);
       setUser(foundUser);
     }
+
+    return (() => {
+
+    });
   }, []);
 
   const handleLogin = (email, admin) => {
@@ -40,39 +44,40 @@ function App() {
     <div className="App">
 
       <Router basename={'/'}>
-      
+        <DispatchNav user={user} onLogout={handleLogout}/>
             <Switch>
               <Route path="/login">
-                {!user ? 
-                <LoginForm onLogin={handleLogin} /> : <Redirect to='/'/>}
+                <LoginForm onLogin={handleLogin} /> 
               </Route>
               <Route path="/register">
-                {!user ? 
-                <RegisterForm /> : <Redirect to='/'/>}
+                <RegisterForm /> 
               </Route>
                
               <Route path="/crews/:id">
                 {user ?
                 <CrewsDashboardPage user={user} state={state} updateState={updateState} /> :
-                <Redirect to='/'/>}
+                <Redirect to='/'/>
+                }
               </Route>
 
               <Route path="/dispatch" user={user}>
                 {user ?
                 <DispatchDashboardPage onLogout={handleLogout} user={user} state={state} updateState={updateState}/> :
-                <Redirect to='/'/>}
+                <Redirect to='/'/>
+                }
               </Route>
 
               <Route path="/">
-                <DispatchNav user={user} onLogout={handleLogout}/>
-                <h1>Welcome to Crew Launcher</h1>
-                {!user ? <h3>Sign up to create a new account, <br/>or sign in with an existing account.</h3> :
-                <>
-                  <Link to="/dispatch">Dispatch</Link> <br/>
-                  <Link to="/crews/1">Crew #1</Link> <br/>
-                  <Link to="/crews/2">Crew #2</Link>
-                </>
-                }
+                <div className='home-page-container'>
+                  <h1>Welcome to Crew Launcher</h1>
+                  {!user ? <h3>Sign up to create a new account, <br/>or sign in with an existing account.</h3> :
+                    <>
+                      <Link to="/dispatch">Dispatch</Link> <br/>
+                      <Link to="/crews/1">Crew #1</Link> <br/>
+                      <Link to="/crews/2">Crew #2</Link>
+                    </>
+                  }
+                </div>
 
               
               </Route>

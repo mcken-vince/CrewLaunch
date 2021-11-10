@@ -1,10 +1,11 @@
 @import 'variables';
+@import 'mixins';
 
 .dispatch-dashboard-container {
-  padding-top: 1em;
+  @include pageStyles;
+  // padding-top: 1em;
   display: flex;
   justify-content: center;
-
-
+  flex-direction: column;
   
 }
