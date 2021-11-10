@@ -5,11 +5,12 @@
   "main": "./build/server.js",
   "scripts": {
     "start": "concurrently \"node build/server.js\" \"npm run client\"",
-    "test": "concurrently \"cd client && npm run test\" \"cypress run\"",
+    "test": "cd client && npm run test",
     "client": "cd client && npm start",
     "build": "concurrently \"tsc\" \"cd client && npm run build\"",
     "dev": "concurrently \"ts-node server.ts\" \"npm run client\"",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "author": "",
   "license": "ISC",
