@@ -3,18 +3,25 @@
 .dispatch-calendar-container {
   display: flex;
   flex-direction: column;
-  max-width: 100%;
-  min-width: 95%;
+  width: 100%;
+  max-width: 50em;
+  min-width: fit-content;
   border: 5px solid $border-color1;
   border-radius: 20px 20px;
-  height:max-content;
-  
+  height: max-content;
+  align-self: flex-start;
+  .dispatch-calendar-header {
+    
+    display: flex;
+    justify-content: center;
 
-  // min-width: max-content;
+    .dispatch-calendar-title {
+      margin: 0em 1em;
+    }
+  }
   .dispatch-calendar-days-container {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    
     min-width: 100%;
     
 

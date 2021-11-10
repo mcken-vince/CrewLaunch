@@ -3,7 +3,6 @@
 @import './styles/mixins.scss';
 
 .App {
-  justify-content: center;
   text-align: center;
   .home-page-container {
     @include pageStyles;
