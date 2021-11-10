@@ -36,8 +36,8 @@ jobs:
 
   deploy:
     machine:
-      enabled: true
-    
+
+      image: "ubuntu-1604:202004-01"
     working_directory: ~/client
     steps:
       - add_ssh_keys:
