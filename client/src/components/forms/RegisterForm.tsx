@@ -45,17 +45,17 @@ const RegisterForm = () => {
       <Form className='register-form' onSubmit={handleSubmit}>
         <InputGroup>
           <InputGroup.Text>Email:</InputGroup.Text>
-          <Form.Control value={user.email} onChange={(e) => setUser(prev => ({...prev, email: e.target.value}))} name='email' type='email' placeholder='Enter email'/>
+          <Form.Control className='register-form-email' value={user.email} onChange={(e) => setUser(prev => ({...prev, email: e.target.value}))} name='email' type='email' placeholder='Enter email'/>
         </InputGroup>
         <InputGroup>
           <InputGroup.Text>Password:</InputGroup.Text>
-          <Form.Control value={user.password1} onChange={(e) => setUser(prev => ({...prev, password1: e.target.value}))} name='password1' type='password' placeholder='Enter password'/>
+          <Form.Control className='register-form-password1' value={user.password1} onChange={(e) => setUser(prev => ({...prev, password1: e.target.value}))} name='password1' type='password' placeholder='Enter password'/>
         </InputGroup>
         <InputGroup>
           <InputGroup.Text>Confirm Password:</InputGroup.Text>
-          <Form.Control value={user.password2} onChange={(e) => setUser(prev => ({...prev, password2: e.target.value}))} name='password2' type='password' placeholder='Enter password again'/>
+          <Form.Control className='register-form-password2' value={user.password2} onChange={(e) => setUser(prev => ({...prev, password2: e.target.value}))} name='password2' type='password' placeholder='Enter password again'/>
         </InputGroup>
-        <Button disabled={user.email.length <= 0 || !matchingPasswords} type='submit'>{loading ? <Spinner animation='border' /> : 'Register'}</Button>
+        <Button className='register-form-submit form-submit' disabled={user.email.length <= 0 || !matchingPasswords} type='submit'>{loading ? <Spinner animation='border' /> : 'Register'}</Button>
       </Form>
     </div>
   );
