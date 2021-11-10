@@ -21,7 +21,7 @@ jobs:
         environment:
           ## this enables colors in the output
           TERM: xterm
-    working_directory: ~/client
+    working_directory: ~/
     steps:
       - checkout
       - restore_cache:
@@ -40,7 +40,7 @@ jobs:
     machine:
 
       image: "ubuntu-1604:202004-01"
-    working_directory: ~/client
+    working_directory: ~/
     steps:
       - add_ssh_keys:
           fingerprints:
@@ -64,10 +64,13 @@ workflows:
             branches:
               only: master
 
+      - cypress/install:
+          build: 'npm run build'
+
       - cypress/run: 
-          env: HOST_URL=http://localhost:3000 
           requires: 
             - build
+            - cypress/install
           start: 'npm start'
 
       - deploy:
