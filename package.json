@@ -8,7 +8,8 @@
     "test": "concurrently \"cd client && npm run test\" \"cypress run\"",
     "client": "cd client && npm start",
     "build": "concurrently \"tsc\" \"cd client && npm run build\"",
-    "dev": "concurrently \"ts-node server.ts\" \"npm run client\""
+    "dev": "concurrently \"ts-node server.ts\" \"npm run client\"",
+    "cypress:open": "cypress open"
   },
   "author": "",
   "license": "ISC",

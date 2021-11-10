@@ -3,7 +3,7 @@
 
 describe('User Login', () => {
   it('can login with an existing account', () => {
-    cy.visit('http://localhost:3000/login');
+    cy.visit(Cypress.env('homepage') + '/login');
     cy.contains('Login');
     cy.get('.login-form-email')
       .type('hello@mail.com');
