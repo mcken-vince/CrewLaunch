@@ -80,7 +80,6 @@ workflows:
       - cypress/run:
             record: true 
             parallel: true 
-            env: HOST_URL=http://localhost:3000 
 
       - deploy:
           filters:
