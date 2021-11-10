@@ -21,7 +21,7 @@ jobs:
         environment:
           ## this enables colors in the output
           TERM: xterm
-    working_directory: ~/
+
     steps:
       - checkout
       - restore_cache:
@@ -40,7 +40,7 @@ jobs:
     machine:
 
       image: "ubuntu-1604:202004-01"
-    working_directory: ~/
+
     steps:
       - add_ssh_keys:
           fingerprints:
