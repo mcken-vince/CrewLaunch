@@ -21,7 +21,7 @@ jobs:
         environment:
           ## this enables colors in the output
           TERM: xterm
-    working_directory: ~/app
+    working_directory: ~/client
     steps:
       - checkout
       - restore_cache:
@@ -64,12 +64,11 @@ workflows:
             branches:
               only: master
 
-      - cypress/run:
-            record: true 
-            parallel: true 
-            env: HOST_URL=http://localhost:3000 
-            requires: 
-              - build
+      - cypress/run: 
+          env: HOST_URL=http://localhost:3000 
+          requires: 
+            - build
+          start: 'npm start'
 
       - deploy:
           filters:
