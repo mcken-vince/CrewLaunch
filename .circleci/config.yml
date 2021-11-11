@@ -17,10 +17,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: circleci/node:latest
-        environment:
-          ## this enables colors in the output
-          TERM: xterm
+      - image: cimg/node:16.8.0
 
     steps:
       - checkout
