@@ -30,9 +30,9 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
   // is true if all required fields are not empty
   const formFilled: boolean = (selectedPackage && client.name && client.email && address && startDate) ? true : false;
 
-  const handleDateChange:EventHandler<any> = (date: Date):void => {
-    setStartDate(date);
-    setEndDate(new Date(addDays(new Date(date), selectedPackage.contract_length_days - 1)));
+  const handleDateChange: EventHandler<any> = (date: any):void => {
+    setStartDate(new Date(date[0]));
+    setEndDate(new Date(addDays(new Date(date[0]), selectedPackage.contract_length_days - 1)));
   };
 
   const handlePackageSelect = (packageDetails: IPackage) => {
@@ -50,7 +50,7 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
           selectedPackage,
           thisClient: client,
           address,
-          start_date: startDate,
+          start_date: new Date(startDate),
           job_notes: jobNotes
         };
         await onSubmit(newContract)

@@ -1,5 +1,5 @@
 import { FC, MouseEventHandler, ReactElement } from 'react';
-import { IPackage, IState, IUser } from '../../definitions';
+import { IContract, IPackage, IState, IUser } from '../../definitions';
 import '../../styles/DispatchDashboardPage.scss';
 import DispatchCalendar from '../DispatchCalendar';
 import ContractForm from '../forms/ContractForm';
@@ -12,6 +12,7 @@ import CrewsPage from './CrewsPage';
 import CrewForm from '../forms/CrewForm';
 import { handlePackageCreation, handlePackageDeletion } from '../../helpers/packageHandlers';
 import useAppData from '../../hooks/useAppData';
+import { handleContractCreation } from '../../helpers/contractHandlers';
 
 const DispatchDashboardPage: FC<DispatchDashboardPageProps> = (props): ReactElement => {
   const {state, updateState} = useAppData();
@@ -39,7 +40,7 @@ const DispatchDashboardPage: FC<DispatchDashboardPageProps> = (props): ReactElem
               <PackageForm onSubmit={(pkg: IPackage) => {state && handlePackageCreation(pkg, state, updateState)}} editPackage={null}/>
             </Route>
             <Route path={`/dispatch/contracts/new`}>
-              <ContractForm packages={state ? state.packages : []} onSubmit={handleSubmit} editContract={null}/>
+              <ContractForm packages={state ? state.packages : []} onSubmit={(con: IContract) => {state && handleContractCreation(con, state, updateState)}} editContract={null}/>
             </Route>
             <Route path={`/dispatch/crews`}>
               <CrewsPage crews={state ? state.crews : []}/>
