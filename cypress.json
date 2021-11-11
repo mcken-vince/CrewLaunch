@@ -1,7 +1,0 @@
-{
-  "baseUrl": "http://localhost:3000",
-  "ignoreTestFiles": [
-    "*.example.spec.js"
-  ],
-  "watchForFileChanges": true
-}
