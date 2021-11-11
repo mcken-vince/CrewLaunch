@@ -10,6 +10,7 @@ import { getJobsWithDetails, getContractsWithDetails } from '../../helpers/dataC
 import { Switch, Route } from 'react-router-dom';
 import CrewsPage from './CrewsPage';
 import CrewForm from '../forms/CrewForm';
+import { createNewPackage } from '../../helpers/dbPostFunctions';
 
 const DispatchDashboardPage: FC<DispatchDashboardPageProps> = (props): ReactElement => {
   const state: IState = props.state;
@@ -23,6 +24,7 @@ const DispatchDashboardPage: FC<DispatchDashboardPageProps> = (props): ReactElem
     });
   };
 
+
   const detailedJobs = state.jobs ? getJobsWithDetails(state.jobs, state.contracts, state.packages) : [];
   const detailedContracts = state.contracts ? getContractsWithDetails(state.contracts, state.packages, state.clients) : [];
   return (
@@ -33,7 +35,7 @@ const DispatchDashboardPage: FC<DispatchDashboardPageProps> = (props): ReactElem
               <CrewForm onSubmit={handleSubmit} editCrew={null}/>
             </Route>
             <Route path={`/dispatch/packages/new`}>
-              <PackageForm onSubmit={handleSubmit} editPackage={null}/>
+              <PackageForm onSubmit={createNewPackage} editPackage={null}/>
             </Route>
             <Route path={`/dispatch/contracts/new`}>
               <ContractForm packages={state.packages ? state.packages : []} onSubmit={handleSubmit} editContract={null}/>
