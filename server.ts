@@ -1,22 +1,20 @@
-import  { Express, Request, Response } from 'express';
-import dotenv from 'dotenv';
-dotenv.config();
+import express, { Request, Response } from 'express';
+require('dotenv').config();
 
 
 // const http = require('http');
-import express from 'express';
-import mongoose from 'mongoose';
-import morgan from 'morgan';
-import path from 'path';
+const mongoose = require('mongoose');
+const morgan = require('morgan');
+const path = require('path');
 const App = express();
 
-import { ClientModel } from './models/client.model';
-import { PackageModel } from './models/package.model';
-import { CrewModel } from './models/crew.model';
-import { ContractModel } from './models/contract.model';
-import { JobModel } from './models/job.model';
-import { UserModel } from './models/user.model';
-import { AdminModel } from './models/admin.model';
+const { ClientModel } = require('./models/client.model');
+const { PackageModel } = require('./models/package.model');
+const { CrewModel } = require('./models/crew.model');
+const { ContractModel } = require('./models/contract.model');
+const { JobModel } = require('./models/job.model');
+const { UserModel } = require('./models/user.model');
+const { AdminModel } = require('./models/admin.model');
 
 // const httpServer = http.Server(App);
 const PORT = process.env.PORT || 8080;
@@ -25,15 +23,13 @@ process.env.NODE_ENV !== "production" && App.use(morgan('dev'));
 App.use(express.urlencoded({ extended: true }));
 App.use(express.json());
 
-const URI = process.env.MONGODB_URI || 'NO VALID MONGODB_URI SPECIFIED';
-
 mongoose.connect(
-  URI,
+  process.env.MONGODB_URI,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }
   );
-  // {
-  //   useNewUrlParser: true,
-  //   useUnifiedTopology: true
-  // }
   
 import usersRoutes from './routes/usersRoutes';
 import apiRoutes from './routes/apiRoutes';
@@ -63,5 +59,3 @@ App.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`)
   // console.log(`Serving up file: ${path.resolve(root, "index.html")}`);
 });
-
-export default App;
