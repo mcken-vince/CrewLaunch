@@ -17,7 +17,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cypress/base:14.16.0
+      - image: circleci/node:latest
         environment:
           ## this enables colors in the output
           TERM: xterm
@@ -38,8 +38,7 @@ jobs:
 
   deploy:
     machine:
-
-      image: "ubuntu-1604:202004-01"
+      enabled: true
 
     steps:
       - add_ssh_keys:
