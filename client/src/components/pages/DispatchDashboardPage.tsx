@@ -10,9 +10,8 @@ import { getJobsWithDetails, getContractsWithDetails } from '../../helpers/dataC
 import { Switch, Route } from 'react-router-dom';
 import CrewsPage from './CrewsPage';
 import CrewForm from '../forms/CrewForm';
-import { handlePackageCreation } from '../../helpers/creatorFunctions';
+import { handlePackageCreation, handlePackageDeletion } from '../../helpers/packageHandlers';
 import useAppData from '../../hooks/useAppData';
-import { handlePackageDeletion } from '../../helpers/deleterFunctions';
 
 const DispatchDashboardPage: FC<DispatchDashboardPageProps> = (props): ReactElement => {
   const {state, updateState} = useAppData();
