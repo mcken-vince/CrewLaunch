@@ -1,4 +1,4 @@
-import { Document, Types } from 'mongoose';
+import { Types } from 'mongoose';
 
 export interface IState  {
   crews: Array<ICrew>;

@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { IState } from '../definitions';
 
-const useAppData = () => {
-  const [state, setState] = useState({});
+const useAppData = (): IAppData => {
+  const [state, setState] = useState<IState | null>(null);
 
   useEffect(() => {
     Promise.all([
@@ -12,7 +13,7 @@ const useAppData = () => {
       axios.get('/api/contracts'),
       axios.get('/api/jobs')
     ])
-    .then(data => {
+    .then((data: any) => {
       const newState = {
         crews: data[0].data.result,
         clients: data[1].data.result,
@@ -26,7 +27,7 @@ const useAppData = () => {
     .catch(err => console.log('Error fetching data!', err));
   }, []);
 
-  const updateState = (update) => {
+  const updateState = (update: any) => {
     setState(prev => ({...prev, ...update}));
   };
 
@@ -34,3 +35,8 @@ const useAppData = () => {
 };
 
 export default useAppData;
+
+interface IAppData {
+  state: IState | null;
+  updateState: any;
+};

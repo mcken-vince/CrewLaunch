@@ -15,7 +15,7 @@ import DispatchNav from './components/DispatchNav';
 
 function App() {
   const [user, setUser] = useState(null);
-  const {state, updateState} = useAppData();
+
   // const Data = React.createContext(state);
   // const DataUpdate = React.createContext(updateState);
   useEffect(() => {
@@ -55,14 +55,14 @@ function App() {
                
               <Route path="/crews/:id">
                 {user ?
-                <CrewsDashboardPage user={user} state={state} updateState={updateState} /> :
+                <CrewsDashboardPage user={user}  /> :
                 <Redirect to='/'/>
                 }
               </Route>
 
               <Route path="/dispatch" user={user}>
                 {user ?
-                <DispatchDashboardPage onLogout={handleLogout} user={user} state={state} updateState={updateState}/> :
+                <DispatchDashboardPage onLogout={handleLogout} user={user} /> :
                 <Redirect to='/'/>
                 }
               </Route>
