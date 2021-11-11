@@ -20,3 +20,4 @@ const ClientSchema = new Schema<IClient>({
 }, { timestamps: true });
 
 export const ClientModel = model<IClient>('Client', ClientSchema);
+export default ClientModel;

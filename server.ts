@@ -1,20 +1,22 @@
-import express, { Request, Response } from 'express';
-require('dotenv').config();
-
+import { Request, Response } from 'express';
+import dotenv from 'dotenv';
+dotenv.config();
+import express from 'express';
 
 // const http = require('http');
-const mongoose = require('mongoose');
-const morgan = require('morgan');
-const path = require('path');
+import mongoose from 'mongoose';
+import morgan from 'morgan';
+import path from 'path';
+import { error } from 'console';
 const App = express();
 
-const { ClientModel } = require('./models/client.model');
-const { PackageModel } = require('./models/package.model');
-const { CrewModel } = require('./models/crew.model');
-const { ContractModel } = require('./models/contract.model');
-const { JobModel } = require('./models/job.model');
-const { UserModel } = require('./models/user.model');
-const { AdminModel } = require('./models/admin.model');
+import { ClientModel } from './models/client.model';
+import { PackageModel } from './models/package.model';
+import { CrewModel } from './models/crew.model';
+import { ContractModel } from './models/contract.model';
+import { JobModel } from './models/job.model';
+import { UserModel } from './models/user.model';
+import { AdminModel } from './models/admin.model';
 
 // const httpServer = http.Server(App);
 const PORT = process.env.PORT || 8080;
@@ -23,13 +25,15 @@ process.env.NODE_ENV !== "production" && App.use(morgan('dev'));
 App.use(express.urlencoded({ extended: true }));
 App.use(express.json());
 
+if (!process.env.MONGODB_URI || process.env.MONGODB_URI === undefined) throw error('MONGODB_URI must be defined')
+
 mongoose.connect(
   process.env.MONGODB_URI,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  }
   );
+  // {
+  //   useNewUrlParser: true,
+  //   useUnifiedTopology: true
+  // }
   
 import usersRoutes from './routes/usersRoutes';
 import apiRoutes from './routes/apiRoutes';

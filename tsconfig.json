@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es5",
     "rootDir": "./",
     "allowJs": true,
+    "module":"commonjs",
     "outDir": "build",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -14,11 +15,10 @@
       "esnext"
     ],
     "allowSyntheticDefaultImports": true,
-    "noFallthroughCasesInSwitch": true,
+    // "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
     "jsx": "react-jsx"
   },
   "include": [
