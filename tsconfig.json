@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "module": "esnext",
+    "module": "CommonJS",
     "rootDir": "./",
     "allowJs": true,
     "outDir": "build",
@@ -26,6 +26,7 @@
     "**.ts"
   ],
   "exclude": [
-    "./client"
+    "./client",
+    "node_modules"
   ]
 }

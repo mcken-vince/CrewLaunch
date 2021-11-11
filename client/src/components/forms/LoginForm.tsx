@@ -26,7 +26,7 @@ const LoginForm = (props: any) => {
       return response;
       
     } catch (err: any) {
-      const errorsArray = err.response ? Object.values(err.response.data) : ['An unknown error occurred'];
+      const errorsArray = err.response ? err.response.data : ['An unknown error occurred'];
       setAlert({error: true, success: false, message: errorsArray, privileges: ''})
       return err;
     } finally {
