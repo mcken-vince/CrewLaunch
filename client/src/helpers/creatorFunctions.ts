@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { IPackage } from "../definitions";
+import { IPackage, IState } from "../definitions";
 
-const createNewPackage = (newPackage: IPackage) => {
+export const createNewPackage = (newPackage: IPackage) => {
   try {
     return axios.post('/packages', newPackage);
   } catch (err){
@@ -9,5 +9,15 @@ const createNewPackage = (newPackage: IPackage) => {
   }
 };
 
+export const handlePackageCreation = async (pkg: IPackage, state: IState, updateState: Function) => {
+  if (!state) return false;
+  try {
+    const newPackage = await createNewPackage(pkg);
+    const packages = [ ...state.packages, newPackage ];
+    updateState({packages});
 
-export { createNewPackage }; 
+    return 'Package created!';
+  } catch (err){
+    throw err;
+  }
+};

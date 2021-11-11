@@ -10,14 +10,13 @@ import { getJobsWithDetails, getContractsWithDetails } from '../../helpers/dataC
 import { Switch, Route } from 'react-router-dom';
 import CrewsPage from './CrewsPage';
 import CrewForm from '../forms/CrewForm';
-import { createNewPackage } from '../../helpers/creatorFunctions';
+import { handlePackageCreation } from '../../helpers/creatorFunctions';
 import useAppData from '../../hooks/useAppData';
+import { handlePackageDeletion } from '../../helpers/deleterFunctions';
 
 const DispatchDashboardPage: FC<DispatchDashboardPageProps> = (props): ReactElement => {
   const {state, updateState} = useAppData();
   // const { user, onLogout } = props;
-
-
 
   const handleSubmit = (resource: any) => {
     return new Promise((resolve, reject) => {
@@ -26,18 +25,6 @@ const DispatchDashboardPage: FC<DispatchDashboardPageProps> = (props): ReactElem
     });
   };
 
-  const handlePackageCreation = async (pkg: IPackage) => {
-    if (!state) return false;
-    try {
-      const newPackage = await createNewPackage(pkg);
-      const packages = [ ...state.packages, newPackage ];
-      updateState({packages});
-
-      return 'Package created!';
-    } catch (err){
-      throw err;
-    }
-  };
 
   const detailedJobs = state ? getJobsWithDetails(state.jobs, state.contracts, state.packages) : [];
   const detailedContracts = state ? getContractsWithDetails(state.contracts, state.packages, state.clients) : [];
@@ -50,7 +37,7 @@ const DispatchDashboardPage: FC<DispatchDashboardPageProps> = (props): ReactElem
               <CrewForm onSubmit={handleSubmit} editCrew={null}/>
             </Route>
             <Route path={`/dispatch/packages/new`}>
-              <PackageForm onSubmit={handlePackageCreation} editPackage={null}/>
+              <PackageForm onSubmit={(pkg: IPackage) => {state && handlePackageCreation(pkg, state, updateState)}} editPackage={null}/>
             </Route>
             <Route path={`/dispatch/contracts/new`}>
               <ContractForm packages={state ? state.packages : []} onSubmit={handleSubmit} editContract={null}/>
@@ -59,7 +46,7 @@ const DispatchDashboardPage: FC<DispatchDashboardPageProps> = (props): ReactElem
               <CrewsPage crews={state ? state.crews : []}/>
             </Route>
             <Route path={`/dispatch/packages`}>
-              <PackagesPage packages={state ? state.packages : []}/>
+              <PackagesPage packages={state ? state.packages : []} onDelete={(id: string) => {state && handlePackageDeletion(id, state, updateState)}}/>
             </Route>
             <Route path={`/dispatch/contracts`}>
               <ContractsPage contracts={detailedContracts}/>

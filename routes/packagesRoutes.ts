@@ -1,5 +1,5 @@
 import express from 'express';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { IPackage } from '../models/package.model';
 const router: express.IRouter = express.Router();
 
@@ -41,6 +41,16 @@ const packagesRoutes = (Package: Model<IPackage>) => {
     })
     .catch(err => {
       console.log(`Error: could not update package ${err}`);
+    });
+  });
+
+  router.delete('/:id', (req, res) => {
+    Package.findByIdAndDelete(req.params.id)
+    .then(() => {
+      res.status(200).send('Package deleted');
+    })
+    .catch((err) => {
+      console.log(`Error: could not delete package ${err}`);
     });
   });
 

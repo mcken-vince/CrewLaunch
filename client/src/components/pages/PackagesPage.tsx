@@ -7,6 +7,7 @@ import CustomSearchBar from '../CustomSearchBar';
 const PackagesPage: FC<PackagesPageProps> = (props): ReactElement => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const packages: IPackage[] = props.packages;
+  const onDelete = props.onDelete;
 
   const filteredPackages = searchTerm ? packages.filter((p, idx) => {
     return p.title.toLowerCase().includes(searchTerm.toLowerCase());
@@ -18,7 +19,7 @@ const PackagesPage: FC<PackagesPageProps> = (props): ReactElement => {
         key={idx}
         packageDetails={p} 
         onEdit={() => {alert(`Edit ${p.title}!`)}} 
-        onDelete={() => {alert(`Delete ${p.title}!`)}}
+        onDelete={onDelete}
       />);
   });
 
@@ -35,4 +36,5 @@ export default PackagesPage;
 
 interface PackagesPageProps {
   packages: IPackage[];
+  onDelete: Function;
 };
