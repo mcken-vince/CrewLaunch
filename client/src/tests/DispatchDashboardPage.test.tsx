@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 const testUser: {email: string, admin: boolean, password: string, name: string} = {email: 'test@email.com', admin: false, password: 'shouldntbehere', name: "Testy Testerson"};
 
-function renderDispatchDashboardPage(props: Partial<DispatchDashboardPageProps> = {}) {
+const renderDispatchDashboardPage = (props: Partial<DispatchDashboardPageProps> = {}) => {
   const defaultProps: DispatchDashboardPageProps = {
     user: testUser,
     onLogout: () => {},
