@@ -13,6 +13,8 @@ export interface IUser {
   email: string;
   // password will need to be changed to bCrypt hash
   password: string;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
 }
 
 export interface ICrew {
@@ -21,6 +23,8 @@ export interface ICrew {
   crew_size: number;
   is_active: boolean;
   avatar?: string;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
 };
 
 export interface IClient {
@@ -28,6 +32,8 @@ export interface IClient {
   phone?: string;
   name: string;
   email: string;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
 };
 
 export interface IJob {
@@ -36,6 +42,8 @@ export interface IJob {
   contract_id: Types.ObjectId;
   date: Date;
   completed: boolean; 
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
 };
 
 export interface IPackage {
@@ -46,6 +54,8 @@ export interface IPackage {
   visit_interval_days: number;
   man_hrs_per_visit: number;
   contract_length_days: number;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
 };
 
 export interface IContract {
@@ -55,4 +65,6 @@ export interface IContract {
   address: string;
   start_date: Date;
   job_notes?: string;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
 };

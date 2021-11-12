@@ -1,7 +1,7 @@
 import { getJobsWithDetails, getContractsWithDetails } from './dataCombiners';
 import { sampleState } from '../tests/sampleData';
 
-const { jobs, contracts, crews, packages, clients } = sampleState;
+const { jobs, contracts, packages, clients } = sampleState;
 
 describe('getJobsWithDetails helper function', () => {
   it("should return an array of jobs with 'address', 'jobNotes', and 'servicePackage' properties", () => {

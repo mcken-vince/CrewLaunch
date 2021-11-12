@@ -7,17 +7,10 @@ import userEvent from '@testing-library/user-event';
 jest.mock('axios');
 
 describe('App', () => {
-  it('fetches data from the database', async () => {
-    axios.get
-    .mockImplementationOnce(() => Promise.resolve(getCrews))
-    .mockImplementationOnce(() => Promise.resolve(getClients))
-    .mockImplementationOnce(() => Promise.resolve(getPackages))
-    .mockImplementationOnce(() => Promise.resolve(getContracts))
-    .mockImplementationOnce(() => Promise.resolve(getJobs))
-    
-    
+  it('fetches data from the database', () => {
+
     render(<App />);
-    expect(await screen.findByText(/Crew Launcher/)).toBeInTheDocument();
+    expect(screen.getByText(/Crew Launcher/)).toBeInTheDocument();
     expect(screen.getByText(/Log In/)).toBeInTheDocument();
     expect(screen.getByText(/Sign Up/)).toBeInTheDocument();
     userEvent.click(screen.getByText('Log In'));

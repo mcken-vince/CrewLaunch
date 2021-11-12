@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { IContract, IState } from "../definitions";
 
+
 export const createNewContract = (newContract: IContract) => {
   try {
     return axios.post('/contracts', newContract);

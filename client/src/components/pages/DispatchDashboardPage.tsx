@@ -1,5 +1,5 @@
-import { FC, MouseEventHandler, ReactElement } from 'react';
-import { IContract, IPackage, IState, IUser } from '../../definitions';
+import { MouseEventHandler } from 'react';
+import { IContract, IPackage, IUser } from '../../definitions';
 import '../../styles/DispatchDashboardPage.scss';
 import DispatchCalendar from '../DispatchCalendar';
 import ContractForm from '../forms/ContractForm';
@@ -14,7 +14,7 @@ import { handlePackageCreation, handlePackageDeletion } from '../../helpers/pack
 import useAppData from '../../hooks/useAppData';
 import { handleContractCreation } from '../../helpers/contractHandlers';
 
-const DispatchDashboardPage: FC<DispatchDashboardPageProps> = (props): ReactElement => {
+const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
   const {state, updateState} = useAppData();
   // const { user, onLogout } = props;
 
@@ -69,7 +69,7 @@ const DispatchDashboardPage: FC<DispatchDashboardPageProps> = (props): ReactElem
 
 export default DispatchDashboardPage;
 
-interface DispatchDashboardPageProps {
+export interface DispatchDashboardPageProps {
   user: IUser;
   onLogout: MouseEventHandler<HTMLButtonElement>;
 }
