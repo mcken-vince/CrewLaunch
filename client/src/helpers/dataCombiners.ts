@@ -31,12 +31,8 @@ export const getContractsWithDetails = (contracts: IContract[], packages: IPacka
   const contractsWithDetails = contracts.map(contract => {
     const thisClient = clients.filter(c => c._id === contract.client_id)[0];
     const thisPackage = packages.filter(p => p._id === contract.package_id)[0];
-
     const newContract = {...contract, client: thisClient, selectedPackage: thisPackage};
-    
     return newContract;
-
-
   });
 
   return contractsWithDetails;

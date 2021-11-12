@@ -27,7 +27,11 @@ export const deletePackage = (packageId: string) => {
 };
 
 export const handlePackageDeletion = async (packageId: string, state: IState, updateState: Function) => {
-  await deletePackage(packageId);
-  const packages = state.packages.filter(p => p._id?.toString() !== packageId);
-  updateState({packages});
+  try {
+    await deletePackage(packageId);
+    const packages = state.packages.filter(p => p._id?.toString() !== packageId);
+    updateState({packages});
+  } catch (err) {
+    throw err;
+  }
 };

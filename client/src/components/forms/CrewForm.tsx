@@ -62,7 +62,7 @@ const CrewForm: FC<CrewFormProps> = (props): ReactElement => {
         </Form.Select>
       </Form.Group>
 
-      <Form.Label>Avatar:</Form.Label>
+      <Form.Label>Avatar: -- Generate an avatar at <a href="https://getavataaars.com/" target="_blank" rel="noreferrer noopener">getavataaars.com</a></Form.Label>
       <InputGroup className='mb-3'>
           <InputGroup.Text>url</InputGroup.Text>
           <Form.Control disabled={loading} type='text' value={avatar} onChange={(e) => setAvatar(e.target.value)} placeholder='Enter avatar url' /> 

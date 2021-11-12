@@ -42,6 +42,16 @@ const crewsRoutes = (Crew: Model<ICrew>) => {
     });
   });
 
+  router.delete('/:id', (req, res) => {
+    Crew.findByIdAndDelete(req.params.id)
+    .then(() => {
+      res.status(200).send('Crew deleted');
+    })
+    .catch((err) => {
+      console.log(`Error: could not delete crew ${err}`);
+    });
+  });
+
   return router;
 };
 

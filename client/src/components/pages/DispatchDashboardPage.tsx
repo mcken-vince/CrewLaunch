@@ -1,5 +1,5 @@
 import { MouseEventHandler } from 'react';
-import { IContract, IPackage, IUser } from '../../definitions';
+import { IContract, ICrew, IPackage, IUser } from '../../definitions';
 import '../../styles/DispatchDashboardPage.scss';
 import DispatchCalendar from '../DispatchCalendar';
 import ContractForm from '../forms/ContractForm';
@@ -13,6 +13,7 @@ import CrewForm from '../forms/CrewForm';
 import { handlePackageCreation, handlePackageDeletion } from '../../helpers/packageHandlers';
 import useAppData from '../../hooks/useAppData';
 import { handleContractCreation } from '../../helpers/contractHandlers';
+import { handleCrewCreation, handleCrewDeletion } from '../../helpers/crewHandlers';
 
 const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
   const {state, updateState} = useAppData();
@@ -34,7 +35,7 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
 
           <Switch>
             <Route path={`/dispatch/crews/new`}>
-              <CrewForm onSubmit={handleSubmit} editCrew={null}/>
+              <CrewForm onSubmit={(crew: ICrew) => {state && handleCrewCreation(crew, state, updateState)}} editCrew={null}/>
             </Route>
             <Route path={`/dispatch/packages/new`}>
               <PackageForm onSubmit={(pkg: IPackage) => {state && handlePackageCreation(pkg, state, updateState)}} editPackage={null}/>
@@ -43,7 +44,7 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
               <ContractForm packages={state ? state.packages : []} onSubmit={(con: IContract) => {state && handleContractCreation(con, state, updateState)}} editContract={null}/>
             </Route>
             <Route path={`/dispatch/crews`}>
-              <CrewsPage crews={state ? state.crews : []}/>
+              <CrewsPage onDelete={(id: string) => {state && handleCrewDeletion(id, state, updateState)}} crews={state ? state.crews : []}/>
             </Route>
             <Route path={`/dispatch/packages`}>
               <PackagesPage packages={state ? state.packages : []} onDelete={(id: string) => {state && handlePackageDeletion(id, state, updateState)}}/>

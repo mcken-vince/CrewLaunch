@@ -6,14 +6,14 @@ import CustomSearchBar from "../CustomSearchBar";
 
 const CrewsPage: FC<CrewsPageProps> = (props): ReactElement => {
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const crews = props.crews;
+  const { crews, onDelete } = props;
 
   const filteredCrews = searchTerm ? crews.filter(c => {
     return c.foreman_name.toLowerCase().includes(searchTerm.toLowerCase());
   }) : crews;
 
   const crewCards = filteredCrews.map((c, idx) => {
-    return <CrewCard crew={c} key={idx} jobs={[]}/>;
+    return <CrewCard crew={c} key={idx} jobs={[]} onDelete={onDelete}/>;
   });
 
   return (
@@ -29,4 +29,5 @@ export default CrewsPage;
 
 interface CrewsPageProps {
   crews: ICrew[];
+  onDelete: Function;
 };

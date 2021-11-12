@@ -1,4 +1,4 @@
-import { IClient, IPackage, ICrew, IJob } from '../definitions';
+import { IClient, IPackage, ICrew, IJob, IContract } from '../definitions';
 import { Types } from 'mongoose';
 import { ReactDatePickerProps } from 'react-datepicker';
 import { EventHandler } from 'react';
@@ -41,11 +41,6 @@ export interface DateRangePickerProps extends ReactDatePickerProps {
   inheritClassName? : string;
 };
 
-export interface CrewCardProps {
-  crew: ICrew;
-  jobs: IJobLocal[];
-};
-
 // Job interface used in CrewCard component
 // Includes address & jobNotes
 export interface IJobLocal extends IJob {
@@ -58,8 +53,7 @@ export interface ClientCardProps {
   client: IClient;
 };
 
-export interface IContractLocal {
-  _id?: Types.ObjectId;
+export interface IContractLocal extends IContract {
   client: IClient;
   selectedPackage: IPackage;
   address: string;
