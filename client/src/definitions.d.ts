@@ -18,7 +18,7 @@ export interface IUser {
 }
 
 export interface ICrew {
-  _id?: Types.ObjectId;
+  _id?: Types.ObjectId | string;
   foreman_name: string;
   crew_size: number;
   is_active: boolean;
@@ -28,7 +28,7 @@ export interface ICrew {
 };
 
 export interface IClient {
-  _id?: Types.ObjectId;
+  _id?: Types.ObjectId | string;
   phone?: string;
   name: string;
   email: string;
@@ -37,9 +37,9 @@ export interface IClient {
 };
 
 export interface IJob {
-  _id?: Types.ObjectId;
-  crew_id?: Types.ObjectId;
-  contract_id: Types.ObjectId;
+  _id?: Types.ObjectId | string;
+  crew_id?: Types.ObjectId | string;
+  contract_id: Types.ObjectId | string;
   date: Date;
   completed: boolean; 
   createdAt?: Date | string;
@@ -47,7 +47,7 @@ export interface IJob {
 };
 
 export interface IPackage {
-  _id?: Types.ObjectId
+  _id?: Types.ObjectId | string;
   title: string;
   cost: number;
   description?: string;
@@ -59,9 +59,9 @@ export interface IPackage {
 };
 
 export interface IContract {
-  _id?: Types.ObjectId;
-  client_id: Types.ObjectId;
-  package_id: Types.ObjectId;
+  _id?: Types.ObjectId | string;
+  client_id: Types.ObjectId | string;
+  package_id: Types.ObjectId | string;
   address: string;
   start_date: Date;
   job_notes?: string;

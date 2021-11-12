@@ -1,8 +1,9 @@
+import { IthisMonth } from "../components/component-types";
 import { getMonthObject, formatDate } from "./dataFormatters";
 
 describe('formatDate helper function', () => {
   it('should return a string', () => {
-    const result = formatDate(new Date());
+    const result: string = formatDate(new Date());
     expect(typeof result).toBe('string');
   });
 });
@@ -10,7 +11,7 @@ describe('formatDate helper function', () => {
 
 describe('getMonthObject helper function', () => {
   it("should return an object with 'startsOn', 'name', 'days' properties", () => {
-    const result = getMonthObject(new Date());
+    const result: IthisMonth = getMonthObject(new Date());
     expect(typeof result.startsOn).not.toBe(undefined);
     expect(typeof result.name).toBe('string');
     expect(typeof result.year).toBe('string');

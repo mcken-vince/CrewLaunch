@@ -24,7 +24,7 @@ const useAppData = (): IAppData => {
       // console.log('new state: ', newState);
       setState(newState);
     })
-    .catch(err => console.log('Error fetching data!', err));
+    .catch(err => 'Error fetching data!');
   }, []);
 
   const updateState = (update: any) => {
