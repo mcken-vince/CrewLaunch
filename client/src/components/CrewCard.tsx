@@ -40,9 +40,9 @@ const CrewCard: FC<CrewCardProps> = (props): ReactElement => {
   });
 
   return (
-    <div className='crewCard-container' >
+    <div className='crewCard-container'>
       <div className='crewCard-body'>
-        <Image className='crewCard-avatar' src={avatar && avatar} alt='crew avatar' roundedCircle />
+        <Image className='crewCard-avatar' src={avatar ? avatar : 'https://www.pngfind.com/pngs/m/154-1540407_png-file-svg-silhouette-of-head-and-shoulders.png'} alt='foreman avatar' roundedCircle />
         <div className='crewCard-info'>
           <h3>{foreman_name}</h3>
           <p>{crew_size} workers</p>
