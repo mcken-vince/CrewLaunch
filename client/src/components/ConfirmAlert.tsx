@@ -2,12 +2,12 @@ import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import '../styles/ConfirmAlert.scss';
 
-interface ConfirmAlertProps {
+export interface ConfirmAlertProps {
   show: boolean;
   message: String;
   onConfirm: (...args: any) => void;
   onCancel: (...args: any) => void;
-  variant?: 'EDIT' | 'DELETE';
+  variant?: 'EDIT' | 'DELETE' | 'NONE';
   customClass?: String;
 };
 
@@ -20,7 +20,7 @@ function ConfirmAlert(props: ConfirmAlertProps) {
   }
 
   return (
-      <Alert className='confirm-alert z-index-10 position-absolute' show={show} variant={variantString}>
+      <Alert className='confirm-alert z-index-10' show={show} variant={variantString}>
         <div className="alert-body">
           <Alert.Heading>{message}</Alert.Heading>
           <div className='alert-actions'>  

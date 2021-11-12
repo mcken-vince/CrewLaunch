@@ -1,9 +1,20 @@
 import axios, { AxiosResponse } from 'axios';
-import { IClient } from '../definitions';
+import { IClient, IState } from '../definitions';
 
 
-export const createNewClient = (client: IClient) => {
+const createNewClient = (client: IClient) => {
   return axios.post('/clients', client);  
+};
+
+export const handleClientCreation = async (client: IClient, state: IState, updateState: Function) => {
+  try {
+    const response = await createNewClient(client);
+    const newClient = response.data;
+    const updatedClients = [...state.clients, newClient];
+    updateState({clients: updatedClients});
+  } catch (err) {
+    throw err;
+  }
 };
 
 /**

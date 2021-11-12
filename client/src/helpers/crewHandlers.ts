@@ -7,7 +7,8 @@ const createNewCrew = (crew: ICrew) => {
 
 export const handleCrewCreation = async (crew: ICrew, state: IState, updateState: Function) => {
   try {
-    const newCrew = await createNewCrew(crew);
+    const response = await createNewCrew(crew);
+    const newCrew = response.data;
     const updatedCrews = [...state.crews, newCrew];
     updateState({crews: updatedCrews});
     return 'Crew created!';

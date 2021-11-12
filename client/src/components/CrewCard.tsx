@@ -4,9 +4,9 @@ import '../styles/CrewCard.scss';
 import format from 'date-fns/format';
 import classNames from 'classnames';
 import { IJobLocal } from './component-types';
-import { FC, ReactElement, useState } from 'react';
+import { FC, ReactElement, useMemo, useState } from 'react';
 import ConfirmAlert from './ConfirmAlert';
-import { ICrew } from '../definitions';
+import { ICrew, IConfirm } from '../definitions';
 
 
 const CrewCard: FC<CrewCardProps> = (props): ReactElement => {
@@ -14,7 +14,7 @@ const CrewCard: FC<CrewCardProps> = (props): ReactElement => {
   const onDelete = props.onDelete;
   const clearConfirm: IConfirm = {show: false, message: '', action: 'NONE'};
   const [confirm, setConfirm] = useState<IConfirm>(clearConfirm);
-  const jobsOrderedByDate: IJobLocal[]  = props.jobs.sort((a, b) => parseInt(a.date.toString()) - parseInt(b.date.toString()));
+  const jobsOrderedByDate: IJobLocal[]  = useMemo(() => props.jobs.sort((a, b) => parseInt(a.date.toString()) - parseInt(b.date.toString())), [props.jobs]);
   
   const handleConfirm = () => {
     if (confirm.action === 'DELETE') {
@@ -34,39 +34,33 @@ const CrewCard: FC<CrewCardProps> = (props): ReactElement => {
   };
 
 
-  const jobs: ReactElement[] = jobsOrderedByDate.map(job => {
+  const jobs: ReactElement<any>[] = useMemo(() => jobsOrderedByDate.map(job => {
     const jobClass: string = classNames('crewCard-job', {'crewCard-job-completed': job.completed});
     return (<h5 className={jobClass}>{job.address} - {format(job.date, 'eeee MMMM dd yyyy')}</h5>);
-  });
-
+  }), [jobsOrderedByDate]);
+  
   return (
     <div className='crewCard-container'>
-      <div className='crewCard-body'>
-        <Image className='crewCard-avatar' src={avatar ? avatar : 'https://www.pngfind.com/pngs/m/154-1540407_png-file-svg-silhouette-of-head-and-shoulders.png'} alt='foreman avatar' roundedCircle />
-        <div className='crewCard-info'>
-          <h3>{foreman_name}</h3>
-          <p>{crew_size} workers</p>
+        <div className='crewCard-body'>
+          <Image className='crewCard-avatar' src={avatar ? avatar : 'https://www.pngfind.com/pngs/m/154-1540407_png-file-svg-silhouette-of-head-and-shoulders.png'} alt='foreman avatar' roundedCircle />
+          <div className='crewCard-info'>
+            <h3>{foreman_name}</h3>
+            <p>{crew_size} workers</p>
+          </div>
+          <div className='crewCard-jobs-container'>
+            {jobs}
+          </div>
         </div>
-        <div className='crewCard-jobs-container'>
-          {jobs}
-        </div>
-      </div>
-      <footer className='crewCard-footer'>
-        <Button className='edit-button' onClick={() => {setConfirm({show: true, message: 'Are you sure you want to edit this crew?', action: 'EDIT'})}}>Edit</Button>
-        <Button className='delete-button' variant='danger' onClick={() => {setConfirm({show: true, message: 'Are you sure you want to delete this crew?', action: 'DELETE'})}}>Delete</Button>
-      </footer>
-      {<ConfirmAlert show={confirm.show} onCancel={handleCancel} onConfirm={handleConfirm} message={confirm.message}/>}
+      <ConfirmAlert variant={confirm.action} show={confirm.show} onCancel={handleCancel} onConfirm={handleConfirm} message={confirm.message}/>
+      {!confirm.show && <footer className='crewCard-footer'>
+          <Button className='edit-button' onClick={() => {setConfirm({show: true, message: 'Are you sure you want to edit this crew?', action: 'EDIT'})}}>Edit</Button>
+          <Button className='delete-button' variant='danger' onClick={() => {setConfirm({show: true, message: 'Are you sure you want to delete this crew?', action: 'DELETE'})}}>Delete</Button>
+      </footer>}
     </div>
   );
 };
 
 export default CrewCard;
-
-interface IConfirm {
-  show: boolean;
-  message: string;
-  action: string;
-};
 
 export interface CrewCardProps {
   crew: ICrew;

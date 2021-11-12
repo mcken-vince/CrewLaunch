@@ -13,7 +13,8 @@ export const createNewContract = (newContract: IContract) => {
 export const handleContractCreation = async (contract: IContract, state: IState, updateState: Function) => {
   if (!state) return false;
   try {
-    const newContract = await createNewContract(contract);
+    const response = await createNewContract(contract);
+    const newContract = response.data;
     const contracts = [ ...state.contracts, newContract ];
     updateState({contracts});
 

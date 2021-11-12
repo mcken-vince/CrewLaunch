@@ -1,8 +1,9 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import { IPackage } from '../definitions';
+import { IPackage, IConfirm } from '../definitions';
 import { FC, ReactElement, useState } from 'react';
 import ConfirmAlert from './ConfirmAlert';
+import '../styles/PackageCard.scss';
 
 const PackageCard: FC<PackageCardProps> = (props): ReactElement => {
   const clearConfirm: IConfirm = {show: false, message: '', action: 'NONE'};
@@ -38,21 +39,15 @@ const PackageCard: FC<PackageCardProps> = (props): ReactElement => {
           {description}
         </Card.Text>
         {onSelect && <Button onClick={() => onSelect(props.packageDetails)} >Select</Button>}
-        { onEdit && <Button onClick={() => {setConfirm({show: true, message: 'Are you sure you want to edit this package?', action: 'EDIT'})}}>Edit</Button>}
-        { onDelete && <Button variant='danger' onClick={()=>{setConfirm({show: true, message: 'Are you sure you want to delete this package?', action: 'DELETE'})}}>Delete</Button>}
+        {onEdit && <Button onClick={() => {setConfirm({show: true, message: 'Are you sure you want to edit this package?', action: 'EDIT'})}}>Edit</Button>}
+        {onDelete && <Button variant='danger' onClick={()=>{setConfirm({show: true, message: 'Are you sure you want to delete this package?', action: 'DELETE'})}}>Delete</Button>}
       </Card.Body>
-      {confirm.show && <ConfirmAlert show={confirm.show} onCancel={handleCancel} onConfirm={handleConfirm} message={confirm.message}/>}
+      {confirm.show && <ConfirmAlert variant={confirm.action} show={confirm.show} onCancel={handleCancel} onConfirm={handleConfirm} message={confirm.message}/>}
     </Card>
-  )
+  );
 };
 
 export default PackageCard;
-
-interface IConfirm {
-  show: boolean;
-  message: string;
-  action: string;
-};
 
 interface PackageCardProps {
   packageDetails: IPackage;

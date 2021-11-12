@@ -27,7 +27,9 @@ const PackagesPage: FC<PackagesPageProps> = (props): ReactElement => {
     <div className='packages-container'>
       <h1>Packages: {packages.length}</h1>
       <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search by title'/>
-      {packageCards}
+      <div className='packages-grid'>
+        {packageCards}
+      </div>
     </div>
   );
 };

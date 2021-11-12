@@ -1,5 +1,11 @@
 import { Types } from 'mongoose';
 
+export interface IConfirm {
+  show: boolean;
+  message: string;
+  action: 'DELETE' | 'EDIT' | 'NONE';
+};
+
 export interface IState  {
   crews: Array<ICrew>;
   clients: Array<IClient>;

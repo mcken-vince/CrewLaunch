@@ -6,20 +6,21 @@ import Button from 'react-bootstrap/Button';
 import ConfirmAlert from './ConfirmAlert';
 import classNames from 'classnames';
 import { formatDate } from '../helpers/dataFormatters';
+import { IConfirm } from '../definitions';
 
 const ContractCard: FC<ContractCardProps> = (props): ReactElement => {
   const thisContract = props.contract;
-  const clearConfirm: IConfirm = {show: false, message: ''};
+  const clearConfirm: IConfirm = {show: false, message: '', action: 'NONE'};
   const [confirm, setConfirm] = useState<IConfirm>(clearConfirm);
   
 
 
   const handleEditClick = (): void => {
-    setConfirm({show: true, message: 'Are you sure you want to edit this contract?'});
+    setConfirm({show: true, message: 'Are you sure you want to edit this contract?', action: 'EDIT'});
   };
   
   const handleDeleteClick = (): void => {
-    setConfirm({show: true, message: 'Are you sure you want to delete this contract?'});
+    setConfirm({show: true, message: 'Are you sure you want to delete this contract?', action: 'DELETE'});
   };
   
   const contractCardClasses: string = classNames('contractcard-container', {'selected': confirm.show});
@@ -51,6 +52,7 @@ const ContractCard: FC<ContractCardProps> = (props): ReactElement => {
       </div>
       {confirm &&
         <ConfirmAlert 
+        variant={confirm.action}
         show={confirm.show} 
         message={confirm.message} 
         onConfirm={() => {alert('confirmed!'); setConfirm(clearConfirm)}}
@@ -66,7 +68,3 @@ interface ContractCardProps {
   contract: IContractLocal;
 };
 
-interface IConfirm {
-  show: boolean;
-  message: String;
-};

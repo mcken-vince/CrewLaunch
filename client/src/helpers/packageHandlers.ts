@@ -12,7 +12,8 @@ export const createNewPackage = (newPackage: IPackage) => {
 export const handlePackageCreation = async (pkg: IPackage, state: IState, updateState: Function) => {
   if (!state) return false;
   try {
-    const newPackage = await createNewPackage(pkg);
+    const response = await createNewPackage(pkg);
+    const newPackage = response.data;
     const packages = [ ...state.packages, newPackage ];
     updateState({packages});
 
