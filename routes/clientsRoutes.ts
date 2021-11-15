@@ -42,6 +42,16 @@ const clientsRoutes = (Client: Model<IClient> ) => {
     });
   });
 
+  router.delete('/:id', (req, res) => {
+    Client.findByIdAndDelete(req.params.id)
+    .then(() => {
+      res.status(200).send('Client deleted');
+    })
+    .catch((err) => {
+      console.log(`Error: could not delete client ${err}`);
+    });
+  })
+
   return router;
 };
 

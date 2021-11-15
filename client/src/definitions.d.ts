@@ -35,7 +35,7 @@ export interface ICrew {
 };
 
 export interface IClient {
-  _id?: Types.ObjectId | string;
+  _id: Types.ObjectId | string;
   phone?: string;
   name: string;
   email: string;

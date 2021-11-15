@@ -1,24 +1,22 @@
-import axios from 'axios';
-import { IContract, IState } from "../definitions";
+import axios, { AxiosResponse } from 'axios';
+import { IContractLocal } from '../components/component-types';
+import { IClient, IContract, IState } from "../definitions";
+import { handleClientCreation } from './clientHandlers';
 
-
-export const createNewContract = (newContract: IContract) => {
-  try {
+export const createNewContract = (newContract: IContract): Promise<AxiosResponse<IContract>> => {
     return axios.post('/contracts', newContract);
-  } catch (err){
-    throw err;
-  }
 };
 
-export const handleContractCreation = async (contract: IContract, state: IState, updateState: Function) => {
-  if (!state) return false;
+export const handleContractCreation = async (contract: IContractLocal, state: IState, updateState: Function): Promise<IContract> => {
   try {
-    const response = await createNewContract(contract);
-    const newContract = response.data;
+    const client: IClient = await handleClientCreation(contract.client, state, updateState);
+    
+    const response = await createNewContract({...contract, client_id: client._id});
+    const newContract: IContract = response.data;
     const contracts = [ ...state.contracts, newContract ];
     updateState({contracts});
 
-    return 'Contract created!';
+    return newContract;
   } catch (err){
     throw err;
   }

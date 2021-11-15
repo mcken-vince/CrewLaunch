@@ -44,6 +44,16 @@ const contractsRoutes = (Contract: Model<IContract>) => {
     });
   });
 
+  router.delete('/:id', (req, res) => {
+    Contract.findByIdAndDelete(req.params.id)
+    .then(() => {
+      res.status(200).send('Contract deleted');
+    })
+    .catch((err) => {
+      console.log(`Error: could not delete contract ${err}`);
+    });
+  });
+
   return router;
 };
 

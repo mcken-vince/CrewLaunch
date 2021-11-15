@@ -1,15 +1,16 @@
-import { MouseEventHandler } from 'react';
-import { IContract, ICrew, IPackage, IUser } from '../../definitions';
 import '../../styles/DispatchDashboardPage.scss';
+import { MouseEventHandler } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import { ICrew, IPackage, IUser } from '../../definitions';
+import { IContractLocal } from '../component-types';
 import DispatchCalendar from '../DispatchCalendar';
 import ContractForm from '../forms/ContractForm';
 import PackageForm from '../forms/PackageForm';
 import ContractsPage from './ContractsPage';
 import PackagesPage from './PackagesPage';
-import { getJobsWithDetails, getContractsWithDetails } from '../../helpers/dataCombiners';
-import { Switch, Route } from 'react-router-dom';
 import CrewsPage from './CrewsPage';
 import CrewForm from '../forms/CrewForm';
+import { getJobsWithDetails, getContractsWithDetails } from '../../helpers/dataCombiners';
 import { handlePackageCreation, handlePackageDeletion } from '../../helpers/packageHandlers';
 import useAppData from '../../hooks/useAppData';
 import { handleContractCreation } from '../../helpers/contractHandlers';
@@ -19,12 +20,12 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
   const {state, updateState} = useAppData();
   // const { user, onLogout } = props;
 
-  const handleSubmit = (resource: any) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-      resolve(resource)}, 500);
-    });
-  };
+  // const handleSubmit = (resource: any) => {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //     resolve(resource)}, 500);
+  //   });
+  // };
 
 
   const detailedJobs = state ? getJobsWithDetails(state.jobs, state.contracts, state.packages) : [];
@@ -41,7 +42,7 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
               <PackageForm onSubmit={(pkg: IPackage) => {state && handlePackageCreation(pkg, state, updateState)}} editPackage={null}/>
             </Route>
             <Route path={`/dispatch/contracts/new`}>
-              <ContractForm packages={state ? state.packages : []} onSubmit={(con: IContract) => {state && handleContractCreation(con, state, updateState)}} editContract={null}/>
+              <ContractForm packages={state ? state.packages : []} onSubmit={(con: IContractLocal) => {state && handleContractCreation(con, state, updateState)}} editContract={null}/>
             </Route>
             <Route path={`/dispatch/crews`}>
               <CrewsPage onDelete={(id: string) => {state && handleCrewDeletion(id, state, updateState)}} crews={state ? state.crews : []}/>
