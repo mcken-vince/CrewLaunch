@@ -14,7 +14,7 @@ const CrewsPage: FC<CrewsPageProps> = (props): ReactElement => {
 
   const crewCards = filteredCrews.map((c, idx) => {
     return <CrewCard crew={c} key={idx} jobs={[]} onDelete={onDelete}/>;
-  });
+  }).reverse();
 
   return (
     <div className='crews-container'>

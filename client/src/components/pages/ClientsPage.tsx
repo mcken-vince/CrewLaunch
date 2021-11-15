@@ -1,8 +1,9 @@
 import { ReactElement, useState } from "react";
-import { IClient } from "../../definitions";
+import { IClient, IContract } from "../../definitions";
 import ClientCard from "../ClientCard";
 import CustomSearchBar from "../CustomSearchBar";
 import '../../styles/ClientsPage.scss';
+import { IClientLocal } from "../component-types";
 
 const ClientsPage = (props: ClientsPageProps): ReactElement => {
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -12,14 +13,14 @@ const ClientsPage = (props: ClientsPageProps): ReactElement => {
 
   const clientCards = filteredClients.map((client, idx) => {
     return <ClientCard key={idx} client={client} />;
-  });
+  }).reverse();
 
 
   return (
     <div className='clients-container'>
        <h1>Clients: {clients.length}</h1>
 
-       <div className='contracts-search'>
+       <div className='clients-search search'>
           <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search by name'/>
           {
             clientCards && clientCards.length > 0 ? 
@@ -33,5 +34,5 @@ const ClientsPage = (props: ClientsPageProps): ReactElement => {
 export default ClientsPage;
 
 interface ClientsPageProps {
-  clients: IClient[];
+  clients: IClientLocal[];
 };

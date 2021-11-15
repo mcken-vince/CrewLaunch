@@ -1,0 +1,9 @@
+@import 'variables';
+
+.client-card-container {
+  border: 1px $border-color2 solid;
+  border-radius: 5px 5px;
+  text-align: left;
+  padding: .5em;
+  margin-bottom: 5px;
+}

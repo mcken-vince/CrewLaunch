@@ -14,14 +14,14 @@ const ContractsPage: FC<ContractsPageProps> = (props): ReactElement => {
 
   const contractCards = filteredContracts.map((contract, idx) => {
     return <ContractCard key={idx} contract={contract}/>
-  });
+  }).reverse();
 
   return (
     <>
       <div className='contracts-container'>
         <h1>Contracts: {contracts.length}</h1>
         
-        <div className='contracts-search'>
+        <div className='contracts-search search'>
           <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search by Address'/>
           {
             contractCards && contractCards.length > 0 ? 

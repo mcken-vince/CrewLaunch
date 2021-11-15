@@ -10,7 +10,7 @@ import ContractsPage from './ContractsPage';
 import PackagesPage from './PackagesPage';
 import CrewsPage from './CrewsPage';
 import CrewForm from '../forms/CrewForm';
-import { getJobsWithDetails, getContractsWithDetails } from '../../helpers/dataCombiners';
+import { getJobsWithDetails, getContractsWithDetails, getClientsWithContracts } from '../../helpers/dataCombiners';
 import { handlePackageCreation, handlePackageDeletion } from '../../helpers/packageHandlers';
 import useAppData from '../../hooks/useAppData';
 import { handleContractCreation } from '../../helpers/contractHandlers';
@@ -31,6 +31,7 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
 
   const detailedJobs = state ? getJobsWithDetails(state.jobs, state.contracts, state.packages) : [];
   const detailedContracts = state ? getContractsWithDetails(state.contracts, state.packages, state.clients) : [];
+  const clientsWithContracts = state ? getClientsWithContracts(state.clients, state.contracts) : [];
 
   return (
       <div className='dispatch-dashboard-container'> 
@@ -55,7 +56,7 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
               <ContractsPage contracts={detailedContracts}/>
             </Route>
             <Route path={`/dispatch/clients`}>
-              <ClientsPage clients={state ? state.clients : []}/>
+              <ClientsPage clients={clientsWithContracts}/>
             </Route>
             <Route path={`/dispatch/jobs`}>
               <h1>Jobs Page</h1>

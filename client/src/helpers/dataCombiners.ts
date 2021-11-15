@@ -37,3 +37,11 @@ export const getContractsWithDetails = (contracts: IContract[], packages: IPacka
 
   return contractsWithDetails;
 };
+
+export const getClientsWithContracts = (clients: IClient[], contracts: IContract[]) => {
+  const clientsWithContracts = clients.map(client => {
+    const thisClientsContracts = contracts.filter(contract => contract.client_id.toString() === client._id.toString());
+    return {...client, contracts: thisClientsContracts};
+  });
+  return clientsWithContracts;
+};

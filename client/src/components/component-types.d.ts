@@ -49,8 +49,8 @@ export interface IJobLocal extends IJob {
   servicePackage?: IPackage;
 };
 
-export interface ClientCardProps {
-  client: IClient;
+export interface IClientLocal extends IClient {
+  contracts: IContract[];
 };
 
 export interface IContractLocal extends IContract {
