@@ -15,6 +15,7 @@ import { handlePackageCreation, handlePackageDeletion } from '../../helpers/pack
 import useAppData from '../../hooks/useAppData';
 import { handleContractCreation } from '../../helpers/contractHandlers';
 import { handleCrewCreation, handleCrewDeletion } from '../../helpers/crewHandlers';
+import ClientsPage from './ClientsPage';
 
 const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
   const {state, updateState} = useAppData();
@@ -54,7 +55,7 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
               <ContractsPage contracts={detailedContracts}/>
             </Route>
             <Route path={`/dispatch/clients`}>
-              <h1>Clients Page</h1>
+              <ClientsPage clients={state ? state.clients : []}/>
             </Route>
             <Route path={`/dispatch/jobs`}>
               <h1>Jobs Page</h1>

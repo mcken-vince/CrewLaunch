@@ -1,0 +1,5 @@
+@import 'mixins';
+
+.clients-container {
+  @include pageStyles;
+}
