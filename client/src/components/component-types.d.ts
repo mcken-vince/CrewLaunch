@@ -1,5 +1,5 @@
-import { IClient, IPackage, ICrew, IJob, IContract } from '../definitions';
-import { Types } from 'mongoose';
+/* istanbul ignore file */
+import { IClient, IPackage, IJob, IContract } from '../definitions';
 import { ReactDatePickerProps } from 'react-datepicker';
 import { EventHandler } from 'react';
 

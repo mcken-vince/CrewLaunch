@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { Types } from 'mongoose';
 
 export interface IConfirm {
