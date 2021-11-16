@@ -14,10 +14,6 @@ export interface PackagesOffcanvasProps {
   selectPackage: Function;
 };
 
-export interface JobCardProps extends IJobLocal {
-
-};
-
 export interface IthisMonth {
   startsOn: number;
   name: string;

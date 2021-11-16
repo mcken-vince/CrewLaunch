@@ -19,8 +19,10 @@ const CrewsPage: FC<CrewsPageProps> = (props): ReactElement => {
   return (
     <div className='crews-container'>
       <h1>Crews: {crews.length}</h1>
-      <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search by foreman name'/>
-      {crewCards}
+      <div className='crews-search search'>
+        <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search by foreman name'/>
+        {crewCards}
+      </div>
     </div>
   );
 };

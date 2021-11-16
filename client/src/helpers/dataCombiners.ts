@@ -29,7 +29,6 @@ export const getJobsWithDetails = (jobs: IJob[], contracts: IContract[], package
  */
 export const getContractsWithDetails = (contracts: IContract[], packages: IPackage[], clients: IClient[]): IContractLocal[] => {
   const contractsWithDetails = contracts.map(contract => {
-    console.log('get contract with details: ', contract);
     const thisClient = clients.filter(c => c._id.toString() === contract.client_id.toString())[0];
     const thisPackage = packages.filter(p => p._id.toString() === contract.package_id.toString())[0];
     const newContract = {...contract, client: thisClient, selectedPackage: thisPackage};

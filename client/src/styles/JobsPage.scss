@@ -1,0 +1,15 @@
+@import 'mixins';
+
+.jobs-container {
+  @include pageStyles;
+  
+  .jobs-grid {
+    width: 100%;
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(auto-fit, 15em);
+  }
+  .jobcard-container {
+    width: 100%;
+  }
+}

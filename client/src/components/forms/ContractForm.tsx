@@ -9,18 +9,19 @@ import { EventHandler, FC, ReactElement, useState } from 'react';
 import DateRangePicker from '../DateRangePicker';
 import PackagesOffcanvas from '../PackagesOffcanvas';
 import { IContractLocal } from '../component-types';
-import { IPackage } from '../../definitions';
+import { IClient, IPackage } from '../../definitions';
 import { useParams } from 'react-router';
 
 const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
-  const params: {id?: string} = useParams();
-  // empty skeleton to satisfy typescript compiler
+  const params: {id?: string, client_id?: string} = useParams();
   const editContract = params.id && props.contracts.filter(c => c._id.toString() === params.id)[0];
+  // empty skeleton to satisfy typescript compiler
   const packageSkeleton = {title: '', cost: 0, visit_interval_days: 0, man_hrs_per_visit: 0, contract_length_days: 0, _id: ''};
   const clientSkeleton = {name: '', email: '', phone: ''};
+  const genFromClient = params.client_id ? props.clients.filter(c => c._id.toString() === params.client_id)[0] : clientSkeleton;
   const [packagesShow, setPackagesShow] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState(editContract && editContract.selectedPackage ? editContract.selectedPackage : packageSkeleton);
-  const [client, setClient] = useState<IClientLocal>(editContract && editContract.client ? editContract.client : clientSkeleton);
+  const [client, setClient] = useState<IClientLocal>(editContract && editContract.client ? editContract.client : genFromClient);
   const [address, setAddress] = useState(editContract && editContract.address ? editContract.address : '');
   const [startDate, setStartDate] = useState(editContract && editContract.start_date ? editContract.start_date : new Date());
   const [endDate, setEndDate] = useState(editContract && editContract.start_date ? addDays(new Date(editContract.start_date), selectedPackage.contract_length_days - 1) : new Date());
@@ -116,6 +117,7 @@ export default ContractForm;
 export interface ContractFormProps {
   packages: IPackage[];
   contracts: IContractLocal[];
+  clients: IClient[];
   onSubmit: Function;
 };
 

@@ -8,9 +8,9 @@ import { Link } from 'react-router-dom';
 const ClientCard: FC<ClientCardProps> = (props): ReactElement => {
   const { name, email, phone, contracts } = props.client;
   
-  const contractCards = contracts.map((c, idx) => {
+  const clientContractCards = contracts.map((c, idx) => {
     return (
-      <div className='client-contract-container'>
+      <div key={idx} className='client-contract-container'>
         <p>{c.address}</p>
         <p>{formatDate(c.start_date)}</p>
         <Button><Link to={`/dispatch/contracts/edit/${c._id}`}>View Details</Link></Button>
@@ -25,9 +25,10 @@ const ClientCard: FC<ClientCardProps> = (props): ReactElement => {
         <h3>{email}</h3>
         <h3>{phone}</h3>
         <h4>Contracts: {contracts.length}</h4>
+        <Button><Link to={`/dispatch/contracts/clients/${props.client._id.toString()}`}>New Contract</Link></Button>
       </div>
       <div className='client-card-body'>
-        {contractCards}
+        {clientContractCards}
       </div>
     </div>
   );

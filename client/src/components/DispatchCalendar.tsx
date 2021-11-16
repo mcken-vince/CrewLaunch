@@ -23,7 +23,7 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
   
   const selectedDayJobs: ReactElement[] = showDayDetails.day.jobs && showDayDetails.day.jobs.map((job, idx) => {
     console.log('job: ', job);
-    return (<JobCard key={idx} {...job} />);
+    return (<JobCard key={idx} job={job} />);
   });
   
   

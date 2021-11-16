@@ -1,14 +1,14 @@
 import ClassNames from 'classnames';
 import { FC, ReactElement, useState } from 'react';
 import '../styles/JobCard.scss';
-import { JobCardProps } from './component-types';
 import format from 'date-fns/format';
 import Button from 'react-bootstrap/Button';
 import ConfirmAlert from './ConfirmAlert';
+import { IJobLocal } from './component-types';
 
 const JobCard: FC<JobCardProps> = (props): ReactElement => {
   const [confirm, setConfirm] = useState<boolean>(false);
-  const { address, date, completed } = props;
+  const { address, date, completed } = props.job;
   // const servicePackage = props.servicePackage;
 
   const jobCardClass: string = ClassNames('jobcard-container', {'jobcard-complete': completed, 'selected': confirm})
@@ -34,3 +34,7 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
 };
 
 export default JobCard;
+
+export interface JobCardProps {
+  job: IJobLocal;
+};
