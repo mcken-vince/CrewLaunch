@@ -60,9 +60,3 @@ export interface IContractLocal extends IContract {
   start_date: Date;
   jobNotes?: string;
 };
-
-export interface ContractFormProps {
-  packages: IPackage[];
-  onSubmit: Function;
-  editContract: IContractLocal | null;
-};

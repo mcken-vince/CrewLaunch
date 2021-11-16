@@ -1,5 +1,5 @@
 import { IJob, IContract, IPackage, IClient } from "../definitions";
-import { IContractLocal, IJobLocal } from "../components/component-types";
+import { IClientLocal, IContractLocal, IJobLocal } from "../components/component-types";
 
 
 /**
@@ -29,8 +29,8 @@ export const getJobsWithDetails = (jobs: IJob[], contracts: IContract[], package
  */
 export const getContractsWithDetails = (contracts: IContract[], packages: IPackage[], clients: IClient[]): IContractLocal[] => {
   const contractsWithDetails = contracts.map(contract => {
-    const thisClient = clients.filter(c => c._id === contract.client_id)[0];
-    const thisPackage = packages.filter(p => p._id === contract.package_id)[0];
+    const thisClient = clients.filter(c => c._id.toString() === contract.client_id.toString())[0];
+    const thisPackage = packages.filter(p => p._id.toString() === contract.package_id.toString())[0];
     const newContract = {...contract, client: thisClient, selectedPackage: thisPackage};
     return newContract;
   });
@@ -38,7 +38,7 @@ export const getContractsWithDetails = (contracts: IContract[], packages: IPacka
   return contractsWithDetails;
 };
 
-export const getClientsWithContracts = (clients: IClient[], contracts: IContract[]) => {
+export const getClientsWithContracts = (clients: IClient[], contracts: IContract[]): IClientLocal[] => {
   const clientsWithContracts = clients.map(client => {
     const thisClientsContracts = contracts.filter(contract => contract.client_id.toString() === client._id.toString());
     return {...client, contracts: thisClientsContracts};

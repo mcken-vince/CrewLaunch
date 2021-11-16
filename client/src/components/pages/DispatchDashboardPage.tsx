@@ -21,12 +21,12 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
   const {state, updateState} = useAppData();
   // const { user, onLogout } = props;
 
-  // const handleSubmit = (resource: any) => {
-  //   return new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //     resolve(resource)}, 500);
-  //   });
-  // };
+  const handleSubmit = (resource: any) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+      resolve(resource)}, 500);
+    });
+  };
 
 
   const detailedJobs = state ? getJobsWithDetails(state.jobs, state.contracts, state.packages) : [];
@@ -41,16 +41,19 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
               <CrewForm onSubmit={(crew: ICrew) => {state && handleCrewCreation(crew, state, updateState)}} editCrew={null}/>
             </Route>
             <Route path={`/dispatch/packages/new`}>
-              <PackageForm onSubmit={(pkg: IPackage) => {state && handlePackageCreation(pkg, state, updateState)}} editPackage={null}/>
+              <PackageForm onSubmit={(pkg: IPackage) => {state && handlePackageCreation(pkg, state, updateState)}} packages={state ? state.packages : []}/>
             </Route>
             <Route path={`/dispatch/contracts/new`}>
-              <ContractForm packages={state ? state.packages : []} onSubmit={(con: IContractLocal) => {state && handleContractCreation(con, state, updateState)}} editContract={null}/>
+              <ContractForm packages={state ? state.packages : []} onSubmit={(con: IContractLocal) => {state && handleContractCreation(con, state, updateState)}} contracts={detailedContracts}/>
             </Route>
             <Route path={`/dispatch/crews`}>
               <CrewsPage onDelete={(id: string) => {state && handleCrewDeletion(id, state, updateState)}} crews={state ? state.crews : []}/>
             </Route>
             <Route path={`/dispatch/packages`}>
               <PackagesPage packages={state ? state.packages : []} onDelete={(id: string) => {state && handlePackageDeletion(id, state, updateState)}}/>
+            </Route>
+            <Route path={`/dispatch/contracts/edit/:id`}>
+              <ContractForm contracts={detailedContracts} packages={state ? state.packages : []} onSubmit={handleSubmit} />
             </Route>
             <Route path={`/dispatch/contracts`}>
               <ContractsPage contracts={detailedContracts}/>
@@ -76,4 +79,4 @@ export default DispatchDashboardPage;
 export interface DispatchDashboardPageProps {
   user: IUser;
   onLogout: MouseEventHandler<HTMLButtonElement>;
-}
+};

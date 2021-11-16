@@ -8,20 +8,23 @@ import addDays from 'date-fns/addDays';
 import { EventHandler, FC, ReactElement, useState } from 'react';
 import DateRangePicker from '../DateRangePicker';
 import PackagesOffcanvas from '../PackagesOffcanvas';
-import { ContractFormProps, } from '../component-types';
+import { IContractLocal } from '../component-types';
 import { IPackage } from '../../definitions';
+import { useParams } from 'react-router';
 
 const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
+  const params: {id?: string} = useParams();
   // empty skeleton to satisfy typescript compiler
-  const packageSkeleton = {title: '', cost: 0, visit_interval_days: 0, man_hrs_per_visit: 0, contract_length_days: 0};
+  const editContract = params.id && props.contracts.filter(c => c._id.toString() === params.id)[0];
+  const packageSkeleton = {title: '', cost: 0, visit_interval_days: 0, man_hrs_per_visit: 0, contract_length_days: 0, _id: ''};
   const clientSkeleton = {name: '', email: '', phone: ''};
   const [packagesShow, setPackagesShow] = useState(false);
-  const [selectedPackage, setSelectedPackage] = useState(props.editContract && props.editContract.selectedPackage ? props.editContract.selectedPackage : packageSkeleton);
-  const [client, setClient] = useState<IClientLocal>(props.editContract && props.editContract.client ? props.editContract.client : clientSkeleton);
-  const [address, setAddress] = useState(props.editContract && props.editContract.address ? props.editContract.address : '');
-  const [startDate, setStartDate] = useState(props.editContract && props.editContract.start_date ? props.editContract.start_date : new Date());
-  const [endDate, setEndDate] = useState(props.editContract && props.editContract.start_date ? addDays(new Date(props.editContract.start_date), selectedPackage.contract_length_days - 1) : new Date());
-  const [jobNotes, setJobNotes] = useState(props.editContract && props.editContract.jobNotes ? props.editContract.jobNotes : '');
+  const [selectedPackage, setSelectedPackage] = useState(editContract && editContract.selectedPackage ? editContract.selectedPackage : packageSkeleton);
+  const [client, setClient] = useState<IClientLocal>(editContract && editContract.client ? editContract.client : clientSkeleton);
+  const [address, setAddress] = useState(editContract && editContract.address ? editContract.address : '');
+  const [startDate, setStartDate] = useState(editContract && editContract.start_date ? editContract.start_date : new Date());
+  const [endDate, setEndDate] = useState(editContract && editContract.start_date ? addDays(new Date(editContract.start_date), selectedPackage.contract_length_days - 1) : new Date());
+  const [jobNotes, setJobNotes] = useState(editContract && editContract.jobNotes ? editContract.jobNotes : '');
   const [loading, setLoading] = useState(false);
   const clearAlert = {error: false, success: false};
   const [alert, setAlert] = useState(clearAlert);
@@ -47,7 +50,8 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
       setAlert(clearAlert);
       try {
         const newContract = {
-          selectedPackage,
+          _id: params.id,
+          package_id: selectedPackage._id,
           client,
           address,
           start_date: new Date(startDate),
@@ -106,7 +110,13 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
 
 export default ContractForm;
 
-interface IClientLocal {
+export interface ContractFormProps {
+  packages: IPackage[];
+  contracts: IContractLocal[];
+  onSubmit: Function;
+};
+
+export interface IClientLocal {
   name: string,
   email: string,
   phone?: string,
