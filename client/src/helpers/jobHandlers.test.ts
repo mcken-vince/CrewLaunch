@@ -1,6 +1,6 @@
 import { IContractLocal } from "../components/component-types";
 import { generateJobsFromContract } from "./jobHandlers";
-import { IJob } from "../definitions";
+
 
 const contract: IContractLocal = {
   _id: '1111',
