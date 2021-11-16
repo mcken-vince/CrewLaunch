@@ -46,14 +46,17 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
             <Route path={`/dispatch/contracts/new`}>
               <ContractForm packages={state ? state.packages : []} onSubmit={(con: IContractLocal) => {state && handleContractCreation(con, state, updateState)}} contracts={detailedContracts}/>
             </Route>
+            <Route path={`/dispatch/contracts/edit/:id`}>
+              <ContractForm contracts={detailedContracts} packages={state ? state.packages : []} onSubmit={handleSubmit} />
+            </Route>
+            <Route path={`/dispatch/packages/edit/:id`}>
+              <PackageForm onSubmit={handleSubmit} packages={state ? state.packages : []}/>
+            </Route>
             <Route path={`/dispatch/crews`}>
               <CrewsPage onDelete={(id: string) => {state && handleCrewDeletion(id, state, updateState)}} crews={state ? state.crews : []}/>
             </Route>
             <Route path={`/dispatch/packages`}>
               <PackagesPage packages={state ? state.packages : []} onDelete={(id: string) => {state && handlePackageDeletion(id, state, updateState)}}/>
-            </Route>
-            <Route path={`/dispatch/contracts/edit/:id`}>
-              <ContractForm contracts={detailedContracts} packages={state ? state.packages : []} onSubmit={handleSubmit} />
             </Route>
             <Route path={`/dispatch/contracts`}>
               <ContractsPage contracts={detailedContracts}/>
