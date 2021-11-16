@@ -30,7 +30,9 @@ const clientsRoutes = (Client: Model<IClient> ) => {
       }
       client.name = update.name;
       client.email = update.email;
-      client.phone = update.phone;
+      if (update.phone) {
+        client.phone = update.phone;
+      }
       return client.save()
     })
     .then(client => {
@@ -41,6 +43,16 @@ const clientsRoutes = (Client: Model<IClient> ) => {
       console.log(`Error: could not update client ${err}`);
     });
   });
+
+  router.delete('/:id', (req, res) => {
+    Client.findByIdAndDelete(req.params.id)
+    .then(() => {
+      res.status(200).send('Client deleted');
+    })
+    .catch((err) => {
+      console.log(`Error: could not delete client ${err}`);
+    });
+  })
 
   return router;
 };

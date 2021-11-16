@@ -4,22 +4,27 @@ import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Alert from 'react-bootstrap/Alert';
 import React, { ReactElement, FC, useState } from 'react';
-import { IPackage } from '../../definitions';
 import Spinner from 'react-bootstrap/Spinner';
+import { IPackage } from '../../definitions';
+import { Types } from 'mongoose';
+import { useParams } from 'react-router';
 
 const PackageForm: FC<PackageFormProps> = (props): ReactElement => {
-  const [title, setTitle] = useState(props.editPackage && props.editPackage.title ? props.editPackage.title : '');
-  const [description, setDescription] = useState(props.editPackage && props.editPackage.description ? props.editPackage.description : '');
-  const [cost, setCost] = useState(props.editPackage && props.editPackage.cost ? props.editPackage.cost : null);
-  const [interval, setInterval] = useState(props.editPackage && props.editPackage.visit_interval_days ? props.editPackage.visit_interval_days : null);
-  const [timeEst, setTimeEst] = useState(props.editPackage && props.editPackage.man_hrs_per_visit ? props.editPackage.man_hrs_per_visit : null);
-  const [length, setLength] = useState(props.editPackage && props.editPackage.contract_length_days ? props.editPackage.contract_length_days : null);
+  const params: {id?: string} = useParams();
+  const editPackage = params.id && props.packages.filter(p => p._id.toString() === params.id)[0];
+
+  const [title, setTitle] = useState(editPackage && editPackage.title ? editPackage.title : '');
+  const [description, setDescription] = useState(editPackage && editPackage.description ? editPackage.description : '');
+  const [cost, setCost] = useState(editPackage && editPackage.cost ? editPackage.cost : null);
+  const [interval, setInterval] = useState(editPackage && editPackage.visit_interval_days ? editPackage.visit_interval_days : null);
+  const [timeEst, setTimeEst] = useState(editPackage && editPackage.man_hrs_per_visit ? editPackage.man_hrs_per_visit : null);
+  const [length, setLength] = useState(editPackage && editPackage.contract_length_days ? editPackage.contract_length_days : null);
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({error: false, success: false});
   const { onSubmit } = props;
 
-  // Will be true if all required fields are filled
-  const formFilled = title && cost && interval && timeEst && length;
+  // Will be truthy if all required fields are filled
+  const formFilled = title && cost && interval && timeEst && length && true;
 
   const validate: React.MouseEventHandler<HTMLButtonElement> = async (event) => {
     event.preventDefault();
@@ -27,7 +32,7 @@ const PackageForm: FC<PackageFormProps> = (props): ReactElement => {
       setLoading(true);
       setAlert({error: false, success: false});
       try {
-        const newPackage: IPackage = {
+        const newPackage: IPackageLocal = {
           title,
           description,
           cost,
@@ -98,5 +103,17 @@ export default PackageForm;
 
 export interface PackageFormProps {
   onSubmit: Function;
-  editPackage: IPackage | null;
+  packages: IPackage[];
+};
+
+export interface IPackageLocal {
+  _id?: Types.ObjectId | string;
+  title: string;
+  cost: number;
+  description?: string;
+  visit_interval_days: number;
+  man_hrs_per_visit: number;
+  contract_length_days: number;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
 };

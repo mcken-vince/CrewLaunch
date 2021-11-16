@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { Types } from 'mongoose';
 
 export interface IConfirm {
@@ -34,7 +35,7 @@ export interface ICrew {
 };
 
 export interface IClient {
-  _id?: Types.ObjectId | string;
+  _id: Types.ObjectId | string;
   phone?: string;
   name: string;
   email: string;
@@ -53,7 +54,7 @@ export interface IJob {
 };
 
 export interface IPackage {
-  _id?: Types.ObjectId | string;
+  _id: Types.ObjectId | string;
   title: string;
   cost: number;
   description?: string;
@@ -65,7 +66,7 @@ export interface IPackage {
 };
 
 export interface IContract {
-  _id?: Types.ObjectId | string;
+  _id: Types.ObjectId | string;
   client_id: Types.ObjectId | string;
   package_id: Types.ObjectId | string;
   address: string;

@@ -1,0 +1,40 @@
+@import 'variables';
+
+.client-card-container {
+  border: 1px $border-color2 solid;
+  border-radius: 10px 10px;
+  text-align: left;
+  padding: .5em;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  background-color: $bg-color2;
+
+  .client-card-info {
+    padding: .5em;
+  }
+
+  .client-card-body {
+    .client-contract-container {
+      background-color: white;
+      border: 1px $border-color2 solid;
+      border-radius: 10px 10px;
+      padding: .5em;
+      &.current {
+        background-color: $current-color;
+      }
+      &.upcoming {
+        background-color: $upcoming-color;
+      }
+      &.past {
+        background-color: $past-color;
+      }
+
+    }
+  }
+  
+  a {
+    text-decoration: none;
+    color: white;
+  }
+}

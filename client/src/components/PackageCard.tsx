@@ -4,8 +4,10 @@ import { IPackage, IConfirm } from '../definitions';
 import { FC, ReactElement, useState } from 'react';
 import ConfirmAlert from './ConfirmAlert';
 import '../styles/PackageCard.scss';
+import { useHistory } from 'react-router';
 
 const PackageCard: FC<PackageCardProps> = (props): ReactElement => {
+  const url = useHistory();
   const clearConfirm: IConfirm = {show: false, message: '', action: 'NONE'};
   const [confirm, setConfirm] = useState<IConfirm>(clearConfirm);
   const { onSelect, packageDetails, onEdit, onDelete } = props;
@@ -20,7 +22,7 @@ const PackageCard: FC<PackageCardProps> = (props): ReactElement => {
       onDelete(id);
     }
     if (confirm.action === 'EDIT') {
-
+      url.push(`/dispatch/packages/edit/${packageDetails._id}`);
     }
     setConfirm(clearConfirm);
   };
@@ -38,7 +40,7 @@ const PackageCard: FC<PackageCardProps> = (props): ReactElement => {
           <br/>
           {description}
         </Card.Text>
-        {onSelect && <Button onClick={() => onSelect(props.packageDetails)} >Select</Button>}
+        {onSelect && <Button onClick={() => onSelect(props.packageDetails)}>Select</Button>}
         {onEdit && <Button onClick={() => {setConfirm({show: true, message: 'Are you sure you want to edit this package?', action: 'EDIT'})}}>Edit</Button>}
         {onDelete && <Button variant='danger' onClick={()=>{setConfirm({show: true, message: 'Are you sure you want to delete this package?', action: 'DELETE'})}}>Delete</Button>}
       </Card.Body>

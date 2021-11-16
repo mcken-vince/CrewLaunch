@@ -1,19 +1,22 @@
-import { MouseEventHandler } from 'react';
-import { IContract, ICrew, IPackage, IUser } from '../../definitions';
 import '../../styles/DispatchDashboardPage.scss';
+import { MouseEventHandler } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import { ICrew, IPackage, IUser } from '../../definitions';
+import { IClientLocal, IContractLocal, IJobLocal } from '../component-types';
 import DispatchCalendar from '../DispatchCalendar';
 import ContractForm from '../forms/ContractForm';
 import PackageForm from '../forms/PackageForm';
 import ContractsPage from './ContractsPage';
 import PackagesPage from './PackagesPage';
-import { getJobsWithDetails, getContractsWithDetails } from '../../helpers/dataCombiners';
-import { Switch, Route } from 'react-router-dom';
 import CrewsPage from './CrewsPage';
 import CrewForm from '../forms/CrewForm';
+import { getJobsWithDetails, getContractsWithDetails, getClientsWithContracts } from '../../helpers/dataCombiners';
 import { handlePackageCreation, handlePackageDeletion } from '../../helpers/packageHandlers';
 import useAppData from '../../hooks/useAppData';
 import { handleContractCreation } from '../../helpers/contractHandlers';
 import { handleCrewCreation, handleCrewDeletion } from '../../helpers/crewHandlers';
+import ClientsPage from './ClientsPage';
+import JobsPage from './JobsPage';
 
 const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
   const {state, updateState} = useAppData();
@@ -27,8 +30,9 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
   };
 
 
-  const detailedJobs = state ? getJobsWithDetails(state.jobs, state.contracts, state.packages) : [];
-  const detailedContracts = state ? getContractsWithDetails(state.contracts, state.packages, state.clients) : [];
+  const detailedJobs: IJobLocal[] = state ? getJobsWithDetails(state.jobs, state.contracts, state.packages) : [];
+  const detailedContracts: IContractLocal[] = state ? getContractsWithDetails(state.contracts, state.packages, state.clients) : [];
+  const clientsWithContracts: IClientLocal[] = state ? getClientsWithContracts(state.clients, state.contracts) : [];
 
   return (
       <div className='dispatch-dashboard-container'> 
@@ -38,10 +42,19 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
               <CrewForm onSubmit={(crew: ICrew) => {state && handleCrewCreation(crew, state, updateState)}} editCrew={null}/>
             </Route>
             <Route path={`/dispatch/packages/new`}>
-              <PackageForm onSubmit={(pkg: IPackage) => {state && handlePackageCreation(pkg, state, updateState)}} editPackage={null}/>
+              <PackageForm onSubmit={(pkg: IPackage) => {state && handlePackageCreation(pkg, state, updateState)}} packages={state ? state.packages : []}/>
             </Route>
             <Route path={`/dispatch/contracts/new`}>
-              <ContractForm packages={state ? state.packages : []} onSubmit={(con: IContract) => {state && handleContractCreation(con, state, updateState)}} editContract={null}/>
+              <ContractForm packages={state ? state.packages : []} onSubmit={(con: IContractLocal) => {state && handleContractCreation(con, state, updateState)}} contracts={detailedContracts} clients={state ? state.clients : []}/>
+            </Route>
+            <Route path={`/dispatch/contracts/clients/:client_id`}>
+              <ContractForm packages={state ? state.packages : []} onSubmit={handleSubmit} contracts={detailedContracts} clients={state ? state.clients : []}/>
+            </Route>
+            <Route path={`/dispatch/contracts/edit/:id`}>
+              <ContractForm contracts={detailedContracts} packages={state ? state.packages : []} onSubmit={handleSubmit} clients={state ? state.clients : []}/>
+            </Route>
+            <Route path={`/dispatch/packages/edit/:id`}>
+              <PackageForm onSubmit={handleSubmit} packages={state ? state.packages : []}/>
             </Route>
             <Route path={`/dispatch/crews`}>
               <CrewsPage onDelete={(id: string) => {state && handleCrewDeletion(id, state, updateState)}} crews={state ? state.crews : []}/>
@@ -53,10 +66,10 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
               <ContractsPage contracts={detailedContracts}/>
             </Route>
             <Route path={`/dispatch/clients`}>
-              <h1>Clients Page</h1>
+              <ClientsPage clients={clientsWithContracts}/>
             </Route>
             <Route path={`/dispatch/jobs`}>
-              <h1>Jobs Page</h1>
+              <JobsPage jobs={detailedJobs} />
             </Route>
 
             <Route path={`/dispatch`}>
@@ -73,4 +86,4 @@ export default DispatchDashboardPage;
 export interface DispatchDashboardPageProps {
   user: IUser;
   onLogout: MouseEventHandler<HTMLButtonElement>;
-}
+};

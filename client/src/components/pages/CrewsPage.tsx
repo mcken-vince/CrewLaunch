@@ -14,13 +14,15 @@ const CrewsPage: FC<CrewsPageProps> = (props): ReactElement => {
 
   const crewCards = filteredCrews.map((c, idx) => {
     return <CrewCard crew={c} key={idx} jobs={[]} onDelete={onDelete}/>;
-  });
+  }).reverse();
 
   return (
     <div className='crews-container'>
       <h1>Crews: {crews.length}</h1>
-      <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search by foreman name'/>
-      {crewCards}
+      <div className='crews-search search'>
+        <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search by foreman name'/>
+        {crewCards}
+      </div>
     </div>
   );
 };

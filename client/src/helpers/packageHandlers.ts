@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { IPackage, IState } from "../definitions";
 
-export const createNewPackage = (newPackage: IPackage) => {
+export const createNewPackage = (newPackage: IPackage): Promise<AxiosResponse<IPackage>> => {
   try {
     return axios.post('/packages', newPackage);
   } catch (err){
@@ -9,29 +9,30 @@ export const createNewPackage = (newPackage: IPackage) => {
   }
 };
 
-export const handlePackageCreation = async (pkg: IPackage, state: IState, updateState: Function) => {
-  if (!state) return false;
+export const handlePackageCreation = async (pkg: IPackage, state: IState, updateState: Function): Promise<IPackage | null> => {
+  if (!state) return null;
   try {
     const response = await createNewPackage(pkg);
-    const newPackage = response.data;
+    const newPackage: IPackage = response.data;
     const packages = [ ...state.packages, newPackage ];
     updateState({packages});
 
-    return 'Package created!';
+    return newPackage;
   } catch (err){
     throw err;
   }
 };
 
-export const deletePackage = (packageId: string) => {
+export const deletePackage = (packageId: string): Promise<AxiosResponse<any>> => {
   return axios.delete(`/packages/${packageId}`);
 };
 
-export const handlePackageDeletion = async (packageId: string, state: IState, updateState: Function) => {
+export const handlePackageDeletion = async (packageId: string, state: IState, updateState: Function): Promise<string> => {
   try {
     await deletePackage(packageId);
     const packages = state.packages.filter(p => p._id?.toString() !== packageId);
     updateState({packages});
+    return 'Package deleted!';
   } catch (err) {
     throw err;
   }

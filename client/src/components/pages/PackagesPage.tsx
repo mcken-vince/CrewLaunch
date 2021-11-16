@@ -21,7 +21,7 @@ const PackagesPage: FC<PackagesPageProps> = (props): ReactElement => {
         onEdit={() => {alert(`Edit ${p.title}!`)}} 
         onDelete={onDelete}
       />);
-  });
+  }).reverse();
 
   return (
     <div className='packages-container'>

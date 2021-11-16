@@ -1,17 +1,12 @@
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
 import "./App.scss";
 import { useEffect, useState } from "react";
-import useAppData from "./hooks/useAppData";
 import CrewsDashboardPage from './components/pages/CrewsDashboardPage';
 import DispatchDashboardPage from './components/pages/DispatchDashboardPage';
 import LoginForm from './components/forms/LoginForm';
 import RegisterForm from './components/forms/RegisterForm';
 import DispatchNav from './components/DispatchNav';
 
-// interface IUser {
-//   email: String;
-//   admin: Boolean;
-// };
 
 function App() {
   const [user, setUser] = useState(null);

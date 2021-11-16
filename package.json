@@ -5,7 +5,7 @@
   "scripts": {
     "start": "concurrently \"node build/server.js\" \"npm run client\"",
     "test": "cd client && npm run test",
-    "test:coverage": "cd client && react-scripts test --coverage --watchAll=false",
+    "test:coverage": "cd client && react-scripts test --coverage --watchAll=false --collectCoverageFrom='[\"!src/**/stories/*\", \"!src/**/styles/*\"]'",
     "client": "cd client && npm start",
     "build": "concurrently \"tsc\" \"cd client && npm run build\"",
     "dev": "concurrently \"ts-node server.ts\" \"npm run client\""

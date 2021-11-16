@@ -1,5 +1,5 @@
-import { IClient, IPackage, ICrew, IJob, IContract } from '../definitions';
-import { Types } from 'mongoose';
+/* istanbul ignore file */
+import { IClient, IPackage, IJob, IContract } from '../definitions';
 import { ReactDatePickerProps } from 'react-datepicker';
 import { EventHandler } from 'react';
 
@@ -12,10 +12,6 @@ export interface PackagesOffcanvasProps {
   handleClose: Function;
   packages: IPackage[];
   selectPackage: Function;
-};
-
-export interface JobCardProps extends IJobLocal {
-
 };
 
 export interface IthisMonth {
@@ -49,8 +45,8 @@ export interface IJobLocal extends IJob {
   servicePackage?: IPackage;
 };
 
-export interface ClientCardProps {
-  client: IClient;
+export interface IClientLocal extends IClient {
+  contracts: IContract[];
 };
 
 export interface IContractLocal extends IContract {
@@ -59,10 +55,4 @@ export interface IContractLocal extends IContract {
   address: string;
   start_date: Date;
   jobNotes?: string;
-};
-
-export interface ContractFormProps {
-  packages: IPackage[];
-  onSubmit: Function;
-  editContract: IContractLocal | null;
 };

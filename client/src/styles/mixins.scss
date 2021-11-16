@@ -35,16 +35,19 @@
       margin-left: 88%;
     }
   }
-  
-  
 }
 
 @mixin pageStyles {
-  width: 100%;
+  width: 98vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 0vh 1vw;
+  
+  .search {
+    width: 100%;
+  }
 
   
   @media (max-width: $sm) {
@@ -58,4 +61,10 @@
   @media (min-width: $lg) {
 
   }
+}
+
+
+@mixin containerStyles {
+  width: 100%;
+  padding: 0em 1em;
 }
