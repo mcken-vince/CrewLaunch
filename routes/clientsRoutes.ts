@@ -30,7 +30,9 @@ const clientsRoutes = (Client: Model<IClient> ) => {
       }
       client.name = update.name;
       client.email = update.email;
-      client.phone = update.phone;
+      if (update.phone) {
+        client.phone = update.phone;
+      }
       return client.save()
     })
     .then(client => {

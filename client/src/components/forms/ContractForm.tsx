@@ -31,7 +31,7 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
   const { packages, onSubmit } = props;
 
   // is true if all required fields are not empty
-  const formFilled: boolean = (selectedPackage && client.name && client.email && address && startDate) ? true : false;
+  const formFilled: boolean = (selectedPackage && client.name && client.email && address && startDate && jobNotes) ? true : false;
 
   const handleDateChange: EventHandler<any> = (date: any):void => {
     setStartDate(new Date(date[0]));
@@ -97,7 +97,10 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
             <Form.Label>Select Contract Start Date:</Form.Label>
             <DateRangePicker startDate={new Date(startDate)} endDate={new Date(endDate)} onChange={handleDateChange} inheritClassName='contract-form-daterangepicker'/>
           </>}
-
+          <Form.Group className='mb-3' controlId='contractFormJobNotes'>
+            <Form.Label>Job Notes:</Form.Label>
+            <Form.Control disabled={loading} type='textarea' value={jobNotes} onChange={(e):void => setJobNotes(e.target.value)} placeholder='Enter relevant job notes here.' />
+          </Form.Group>
           <Button className='contract-form-submit form-submit' disabled={!loading && !formFilled} type='submit' onClick={validate}>
             {loading ? <Spinner animation='border' variant='primary'/> : 'Submit'}
           </Button>

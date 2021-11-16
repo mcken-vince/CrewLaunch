@@ -1,7 +1,7 @@
 import { Types, Document, Schema, model} from 'mongoose';
 
 export interface IClient extends Document {
-  _id?: Types.ObjectId;
+  _id: Types.ObjectId;
   phone?: string;
   name: string;
   email: string;
