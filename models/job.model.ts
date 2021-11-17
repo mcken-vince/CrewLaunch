@@ -11,7 +11,6 @@ export interface IJob extends Document {
 const JobSchema = new Schema<IJob>({
   crew_id: {
     type: Schema.Types.ObjectId,
-    required: true,
     ref: "Crew"
   },
   contract_id: {

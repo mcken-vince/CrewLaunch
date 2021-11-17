@@ -38,7 +38,7 @@
 }
 
 @mixin pageStyles {
-  width: 98vw;
+  width: 97vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -67,4 +67,12 @@
 @mixin containerStyles {
   width: 100%;
   padding: 0em 1em;
+}
+
+@mixin gridStyles {
+  width: 100%;
+  display: grid;
+  gap: $grid-gap;
+  grid-template-columns: repeat(auto-fit, 20em);
+  justify-content: center;
 }

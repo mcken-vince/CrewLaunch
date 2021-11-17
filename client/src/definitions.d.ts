@@ -1,6 +1,13 @@
 /* istanbul ignore file */
 import { Types } from 'mongoose';
 
+
+export interface IAlert {
+  show: boolean;
+  type: boolean;
+  message: string;
+};
+
 export interface IConfirm {
   show: boolean;
   message: string;
@@ -22,7 +29,7 @@ export interface IUser {
   password: string;
   createdAt?: Date | string;
   updatedAt?: Date | string;
-}
+};
 
 export interface ICrew {
   _id?: Types.ObjectId | string;

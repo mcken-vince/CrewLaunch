@@ -7,18 +7,18 @@ import { IClientLocal, IContractLocal, IJobLocal } from "../components/component
  * @param state 
  * @returns Array of jobs
  */
-export const getJobsWithDetails = (jobs: IJob[], contracts: IContract[], packages: IPackage[]):IJobLocal[] => {
-
-  const jobsWithDetails = jobs.map(job => {
+export const getJobsWithDetails = (jobs: IJob[], contracts: IContract[], packages: IPackage[]): IJobLocal[] => {
+  const jobsWithDetails: IJobLocal[] = jobs.map(job => {
     const newJob: IJobLocal = {...job};
-    const thisContract = contracts.filter(c => c._id === job.contract_id)[0];
+    const thisContract = contracts.filter(c => c._id.toString() === job.contract_id.toString())[0];
     newJob.address = thisContract.address;
     newJob.jobNotes = thisContract.job_notes; 
-    const thisPackage = packages.filter(p => p._id === thisContract.package_id)[0];
+    const thisPackage = packages.filter(p => p._id.toString() === thisContract.package_id.toString())[0];
     newJob.servicePackage = thisPackage;
     return newJob;
   });
-  // console.log(jobsWithDetails);
+  console.log(jobsWithDetails);
+   
   return jobsWithDetails;
 };
 

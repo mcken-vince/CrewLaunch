@@ -21,12 +21,17 @@ const deleteCrew = (id: string): Promise<AxiosResponse<any>> => {
   return axios.delete(`/crews/${id}`);
 };
 
-export const handleCrewDeletion = async (id: string, state: IState, updateState: Function): Promise<string> => {
+export const handleCrewDeletion = async (id: string, state: IState, updateState: Function): Promise<{type: boolean, message: string}> => {
   try {
+    const jobsAssignedToCrew = state.jobs.filter(j => j.crew_id && j.crew_id.toString() === id);
+    console.log('jobsAssignedToCrew: ', jobsAssignedToCrew);
+    if (jobsAssignedToCrew.length !== 0) {
+      return {type: false, message: 'This crew cannot be deleted, they still have jobs assigned.'};
+    }
     await deleteCrew(id);
     const updatedCrews = state.crews.filter(c => c._id?.toString() !== id);
     updateState({crews: updatedCrews});
-    return 'Crew deleted!';
+    return {type: true, message: 'Crew deleted!'};
   } catch (err) {
     throw err;
   }

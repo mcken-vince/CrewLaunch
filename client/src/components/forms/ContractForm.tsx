@@ -53,6 +53,7 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
         const newContract = {
           _id: params.id,
           package_id: selectedPackage._id,
+          selectedPackage: selectedPackage,
           client,
           address,
           start_date: new Date(startDate),
