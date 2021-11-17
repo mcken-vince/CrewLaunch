@@ -32,7 +32,7 @@ const PackageCard: FC<PackageCardProps> = (props): ReactElement => {
   };
 
   return (
-    <Card className='package-card'>
+    <Card className='package-card-container'>
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Text>
@@ -40,10 +40,12 @@ const PackageCard: FC<PackageCardProps> = (props): ReactElement => {
           <br/>
           {description}
         </Card.Text>
+      </Card.Body>
+      <div className='package-card-actions'>
         {onSelect && <Button onClick={() => onSelect(props.packageDetails)}>Select</Button>}
         {onEdit && <Button onClick={() => {setConfirm({show: true, message: 'Are you sure you want to edit this package?', action: 'EDIT'})}}>Edit</Button>}
         {onDelete && <Button variant='danger' onClick={()=>{setConfirm({show: true, message: 'Are you sure you want to delete this package?', action: 'DELETE'})}}>Delete</Button>}
-      </Card.Body>
+      </div>
       {confirm.show && <ConfirmAlert variant={confirm.action} show={confirm.show} onCancel={handleCancel} onConfirm={handleConfirm} message={confirm.message}/>}
     </Card>
   );

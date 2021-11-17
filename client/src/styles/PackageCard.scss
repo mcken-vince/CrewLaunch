@@ -1,3 +1,9 @@
-.package-card {
+.package-card-container {
   min-height: 11em;
+  .package-card-actions {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1em;
+    
+  }
 }
