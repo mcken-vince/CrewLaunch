@@ -32,7 +32,7 @@ export interface IUser {
 };
 
 export interface ICrew {
-  _id?: Types.ObjectId | string;
+  _id: Types.ObjectId | string;
   foreman_name: string;
   crew_size: number;
   is_active: boolean;

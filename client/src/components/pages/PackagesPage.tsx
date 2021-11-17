@@ -23,9 +23,14 @@ const PackagesPage: FC<PackagesPageProps> = (props): ReactElement => {
       setAlert({show: true, type: false, message: `Internal Error: ${err.message}`});
     }
   };
-
+  const lcSearchTerm: string = searchTerm.toLowerCase();
   const filteredPackages = searchTerm ? packages.filter((p, idx) => {
-    return p.title.toLowerCase().includes(searchTerm.toLowerCase());
+    return (
+      p.title.toLowerCase().includes(lcSearchTerm) ||
+      (p.description && p.description.toLowerCase().includes(lcSearchTerm)) ||
+      p.cost.toString().includes(lcSearchTerm)
+      
+    );
   }) : packages;
 
   const packageCards = filteredPackages.map((p, idx) => {
@@ -46,7 +51,7 @@ const PackagesPage: FC<PackagesPageProps> = (props): ReactElement => {
       <Alert dismissible show={alert.show} variant={alertVariant} onClose={() => setAlert({show: false, type: true, message: ''})}>
         <Alert.Heading>{alert.message}</Alert.Heading>
       </Alert>
-      <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search by title'/>
+      <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search'/>
       <div className='packages-grid'>
         {packageCards}
       </div>

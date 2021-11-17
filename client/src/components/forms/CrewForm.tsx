@@ -2,7 +2,7 @@ import { FC, ReactElement, useState } from "react";
 import { Alert, Form, InputGroup, Button, Spinner } from "react-bootstrap";
 import '../../styles/CrewForm.scss';
 import { ICrew } from "../../definitions";
-
+import { ICrewLocal } from "../component-types";
 
 const CrewForm: FC<CrewFormProps> = (props): ReactElement => {
   const [foremanName, setForemanName] = useState(props.editCrew && props.editCrew.foreman_name ? props.editCrew.foreman_name : '');
@@ -23,7 +23,7 @@ const CrewForm: FC<CrewFormProps> = (props): ReactElement => {
       setLoading(true);
       setAlert(clearAlert);
       try {
-        const newCrew: ICrew = {
+        const newCrew: ICrewLocal = {
           avatar,
           foreman_name: foremanName,
           crew_size: crewSize,

@@ -25,19 +25,16 @@ const ContractsPage: FC<ContractsPageProps> = (props): ReactElement => {
   }).reverse();
 
   return (
-    <>
-      <div className='contracts-container'>
-        <h1>Contracts: {contracts.length}</h1>
-        
-        <div className='contracts-search search'>
-          <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search'/>
-          {
-            contractCards && contractCards.length > 0 ? 
-            contractCards : <h2>No matching contracts found.</h2>
-          }
-        </div>
+    <div className='contracts-container'>
+      <h1>Contracts: {contracts.length}</h1> 
+      <div className='contracts-search search'>
+        <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search'/>
+        {
+          contractCards && contractCards.length > 0 ? 
+          contractCards : <h2>No matching contracts found.</h2>
+        }
       </div>
-    </>
+    </div>
   );
 };
 

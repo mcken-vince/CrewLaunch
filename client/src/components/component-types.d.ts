@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import { IClient, IPackage, IJob, IContract } from '../definitions';
+import { IClient, IPackage, IJob, IContract, ICrew } from '../definitions';
 import { ReactDatePickerProps } from 'react-datepicker';
 import { EventHandler } from 'react';
 
@@ -43,6 +43,16 @@ export interface IJobLocal extends IJob {
   address?: string;
   jobNotes?: string;
   servicePackage?: IPackage;
+  crew? : ICrew;
+};
+
+export interface ICrewLocal {
+  foreman_name: string;
+  crew_size: number;
+  is_active: boolean;
+  avatar?: string;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
 };
 
 export interface IClientLocal extends IClient {

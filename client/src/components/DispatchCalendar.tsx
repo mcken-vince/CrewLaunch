@@ -1,6 +1,6 @@
 import DayCard from './DayCard';
 import '../styles/DispatchCalendar.scss';
-import { isEqual, addMonths } from 'date-fns';
+import { isEqual, addMonths, getDaysInMonth } from 'date-fns';
 import { IthisMonth, IJobLocal } from './component-types';
 import { useState, FC, ReactElement } from 'react';
 import Modal from 'react-bootstrap/Modal';
@@ -37,11 +37,12 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
     dayCards.push(<DayCard date={dayOfMonth} key={d} jobs={todayJobs} selectDay={():void => selectDay(d, todayJobs)} />);
   };
   
+  const prevMonthDays = getDaysInMonth(addMonths(new Date(), -1))
   // Adds blank DayCards to beginning of dayCards list
   for (let blankDay = 1; blankDay <= selectedMonth.startsOn; blankDay++) {
-    dayCards.unshift(<DayCard key={blankDay + selectedMonth.days} />);
+    dayCards.unshift(<DayCard date={(prevMonthDays + 1 - blankDay).toString()} key={blankDay + selectedMonth.days} />);
   };
-  
+
   const selectPreviousMonth = () => {
     setSelectedMonth(prev => {
       const date = new Date(`${prev.name} 1, ${prev.year}`);

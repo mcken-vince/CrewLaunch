@@ -30,7 +30,10 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
   };
 
  
-  const detailedJobs: IJobLocal[] = useMemo(() => getJobsWithDetails(state ? state.jobs : [], state ? state.contracts : [], state ? state.packages : []), [state]);
+  const detailedJobs: IJobLocal[] = useMemo(() => {
+    return state ? getJobsWithDetails(state.jobs, state.contracts, state.packages, state.crews) : 
+    getJobsWithDetails([], [] , [], [])
+  }, [state]);
   const detailedContracts: IContractLocal[] = useMemo(() => getContractsWithDetails(state ? state.contracts : [], state ? state.packages : [], state ? state.clients : []), [state]);
   const clientsWithContracts: IClientLocal[] = useMemo(() => getClientsWithContracts(state ? state.clients : [], state ? state.contracts : []), [state]);
 
