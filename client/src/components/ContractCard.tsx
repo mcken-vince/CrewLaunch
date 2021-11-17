@@ -1,4 +1,4 @@
-import { FC, ReactElement, useState } from 'react';
+import { FC, ReactElement, useMemo, useState } from 'react';
 import '../styles/ContractCard.scss';
 import { IContractLocal } from './component-types';
 import { addDays } from 'date-fns';
@@ -7,6 +7,7 @@ import ConfirmAlert from './ConfirmAlert';
 import classNames from 'classnames';
 import { formatDate } from '../helpers/dataFormatters';
 import { IConfirm } from '../definitions';
+import { calculateContractStatus } from '../helpers/dataFormatters';
 
 const ContractCard: FC<ContractCardProps> = (props): ReactElement => {
   const thisContract = props.contract;
@@ -25,8 +26,12 @@ const ContractCard: FC<ContractCardProps> = (props): ReactElement => {
   
   const contractCardClasses: string = classNames('contractcard-container', {'selected': confirm.show});
 
+  const startDate: Date = new Date(thisContract.start_date);
+  const endDate: Date = addDays(startDate, thisContract.selectedPackage.contract_length_days);
+  const status = calculateContractStatus(startDate, endDate);
+  console.log(thisContract.address, status, startDate, endDate);
   // Need to calculate if this job is past, current, or upcoming, and use the calculation to set the classes
-  const statusClasses: string = classNames('contractcard-status', {past: false, current: false, upcoming: false});
+  const statusClasses: string = classNames('contractcard-status', {complete: status === 'Complete', active: status === 'Active', upcoming: status === 'Upcoming'});
 
   return (
     <div className={contractCardClasses}>
@@ -46,7 +51,7 @@ const ContractCard: FC<ContractCardProps> = (props): ReactElement => {
         </div>
         <p>Status: 
           <span className={statusClasses}>
-          {'Active'}
+          {status}
           </span>
         </p>
       </div>

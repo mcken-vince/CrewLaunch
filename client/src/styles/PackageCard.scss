@@ -1,9 +1,10 @@
 .package-card-container {
   min-height: 11em;
+  max-width: 100vw;
   .package-card-actions {
     display: flex;
-    justify-content: center;
-    padding-bottom: 1em;
-    
+    justify-content: flex-end;
+    margin: 0em .5em .5em 0em;
+
   }
 }

@@ -1,13 +1,17 @@
 @import 'variables';
 
 .jobcard-container {
+
   padding: 0.5em 1em 0.5em 1em;
   background-color: $bg-color2;
-
+  display: flex;
   border-radius: 10px 10px;
- 
+  margin-top: $grid-gap;
+  align-items: center;
+  justify-content: center;
   .jobcard-complete-button {
     margin: .3em 0em;
+    max-height: 4em;
   }
 
   &.selected {
