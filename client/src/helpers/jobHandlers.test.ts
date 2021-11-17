@@ -1,4 +1,5 @@
 import { IContractLocal } from "../components/component-types";
+import { IJob } from "../definitions";
 import { generateJobsFromContract } from "./jobHandlers";
 
 
@@ -19,11 +20,17 @@ const contract: IContractLocal = {
     contract_length_days: 56
   }
 }
-const result = generateJobsFromContract(contract);
-console.log('result: ', result);
 describe('generateJobsFromContract()', () => {
+  let result: IJob[];
+  generateJobsFromContract(contract)
+  .then(res => result = res);
+
   it('should return an array of jobs', () => {
     expect(result).toBeInstanceOf(Array);
+    const firstRes = result[0];
+    expect(firstRes.completed).not.toBe(undefined);
+    expect(firstRes.date).not.toBe(undefined);
+    expect(firstRes.contract_id).not.toBe(undefined);
   });
 
   it('should return the correct number of jobs', () => {
