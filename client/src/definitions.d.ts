@@ -1,6 +1,13 @@
 /* istanbul ignore file */
 import { Types } from 'mongoose';
 
+
+export interface IAlert {
+  show: boolean;
+  type: boolean;
+  message: string;
+};
+
 export interface IConfirm {
   show: boolean;
   message: string;

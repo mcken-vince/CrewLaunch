@@ -5,6 +5,8 @@ import PackageCard from '../PackageCard';
 import CustomSearchBar from '../CustomSearchBar';
 import { Alert } from 'react-bootstrap';
 import classNames from 'classnames';
+import { IAlert } from '../../definitions';
+
 
 const PackagesPage: FC<PackagesPageProps> = (props): ReactElement => {
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -12,14 +14,11 @@ const PackagesPage: FC<PackagesPageProps> = (props): ReactElement => {
   const packages: IPackage[] = props.packages;
   const onDelete = props.onDelete;
 
-  const handlePackageDeletion = async (id: string) => {
+  const handleDelete = async (id: string) => {
     try {
       const result: {type: boolean, message: string} = await onDelete(id);
       console.log('result: ', result);
       setAlert({show: true, type: result.type, message: result.message});
-      // setTimeout(() => {
-      //   setAlert({show: false, type: true, message: ''});
-      // }, 5000);
     } catch (err: any) {
       setAlert({show: true, type: false, message: `Internal Error: ${err.message}`});
     }
@@ -35,7 +34,7 @@ const PackagesPage: FC<PackagesPageProps> = (props): ReactElement => {
         key={idx}
         packageDetails={p} 
         onEdit={() => {}} 
-        onDelete={handlePackageDeletion}
+        onDelete={handleDelete}
       />);
   }).reverse();
 
@@ -60,10 +59,4 @@ export default PackagesPage;
 interface PackagesPageProps {
   packages: IPackage[];
   onDelete: any;
-};
-
-interface IAlert {
-  show: boolean;
-  type: boolean;
-  message: string;
 };

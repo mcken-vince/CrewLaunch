@@ -57,7 +57,7 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
               <PackageForm onSubmit={handleSubmit} packages={state ? state.packages : []}/>
             </Route>
             <Route path={`/dispatch/crews`}>
-              <CrewsPage onDelete={(id: string) => {state && handleCrewDeletion(id, state, updateState)}} crews={state ? state.crews : []}/>
+              <CrewsPage onDelete={(id: string) => state && handleCrewDeletion(id, state, updateState)} crews={state ? state.crews : []}/>
             </Route>
             <Route path={`/dispatch/packages`}>
               <PackagesPage packages={state ? state.packages : []} onDelete={(id: string) => state && handlePackageDeletion(id, state, updateState)}/>
