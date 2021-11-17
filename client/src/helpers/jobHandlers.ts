@@ -25,7 +25,7 @@ export const generateJobsFromContract = async (contract: IContractLocal): Promis
         {
           contract_id: contract._id,
           date: thisJobDate,
-          completed: false
+          completed: false,
         }
         );
       };
