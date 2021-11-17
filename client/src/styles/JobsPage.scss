@@ -8,6 +8,7 @@
     display: grid;
     gap: 5px;
     grid-template-columns: repeat(auto-fit, 15em);
+    justify-content: center;
   }
   .jobcard-container {
     width: 100%;
