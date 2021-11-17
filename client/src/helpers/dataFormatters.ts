@@ -19,3 +19,18 @@ export const getMonthObject = (date: Date) => {
   
   return thisMonth;
 };
+
+export const calculateContractStatus = (startDate: Date, endDate: Date): IContractStatus => {
+  const today: Date = new Date();
+  let status: IContractStatus;
+  if (new Date(endDate) < today) {
+    status = 'Complete';
+  } else if (new Date(startDate) > today) {
+    status = 'Upcoming';
+  } else {
+    status = 'Active';
+  }
+  return status;
+};
+
+type IContractStatus = 'Active' | 'Complete' | 'Upcoming';

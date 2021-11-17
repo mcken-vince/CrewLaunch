@@ -38,12 +38,12 @@
 }
 
 @mixin pageStyles {
-  width: 97vw;
+  width: 99%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0vh 1vw;
+  margin: 0% 0.5%;
   
   .search {
     width: 100%;
