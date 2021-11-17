@@ -1,5 +1,5 @@
 import '../../styles/DispatchDashboardPage.scss';
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useMemo } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { ICrew, IPackage, IUser } from '../../definitions';
 import { IClientLocal, IContractLocal, IJobLocal } from '../component-types';
@@ -29,10 +29,10 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
     });
   };
 
-
-  const detailedJobs: IJobLocal[] = state ? getJobsWithDetails(state.jobs, state.contracts, state.packages) : [];
-  const detailedContracts: IContractLocal[] = state ? getContractsWithDetails(state.contracts, state.packages, state.clients) : [];
-  const clientsWithContracts: IClientLocal[] = state ? getClientsWithContracts(state.clients, state.contracts) : [];
+ 
+  const detailedJobs: IJobLocal[] = useMemo(() => getJobsWithDetails(state ? state.jobs : [], state ? state.contracts : [], state ? state.packages : []), [state]);
+  const detailedContracts: IContractLocal[] = useMemo(() => getContractsWithDetails(state ? state.contracts : [], state ? state.packages : [], state ? state.clients : []), [state]);
+  const clientsWithContracts: IClientLocal[] = useMemo(() => getClientsWithContracts(state ? state.clients : [], state ? state.contracts : []), [state]);
 
   return (
       <div className='dispatch-dashboard-container'> 
