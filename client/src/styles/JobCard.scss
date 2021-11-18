@@ -1,12 +1,12 @@
 @import 'variables';
 
-.jobcard-container {
+.card.jobcard-container {
 
   padding: 0.5em 1em 0.5em 1em;
   background-color: $bg-color2;
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
-  border-radius: 10px 10px;
+  border-radius: $card-border-radius;
   align-items: center;
 
   .jobcard-date {

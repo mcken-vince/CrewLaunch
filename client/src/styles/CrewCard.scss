@@ -7,7 +7,7 @@
   align-items: flex-start;
   justify-content: space-between;
   border: 2px $accent-color1 solid;
-  border-radius: 15px;
+  border-radius: $card-border-radius;
   background-color: $bg-color1;
   margin-bottom: 5px;
 
