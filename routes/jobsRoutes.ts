@@ -20,6 +20,7 @@ const jobsRoutes = (Job: Model<IJob>) => {
   router.post('/:id', async (req, res) => {
     const update: IJob = req.body;
     const query = { _id: req.params.id };
+    console.log('update: ', update);
     await Job.findOneAndUpdate(
       query,
       {
@@ -28,10 +29,10 @@ const jobsRoutes = (Job: Model<IJob>) => {
         date: update.date,
         completed: update.completed
       },
-      { new: true }
+      { new: true, overwrite: true }
     )
     .then(job => {
-      console.log('Job updated successfully');
+      console.log('Job updated successfully', job);
       res.json(job);
     })
     .catch(err => {
