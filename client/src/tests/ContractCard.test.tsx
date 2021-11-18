@@ -7,7 +7,7 @@ const contract = {
    client: { "_id": "616f7ceea703ecd4ec419646", "name": "Gregory Peck", "email": "regreg@peck.com", "phone": "403-552-9094", "createdAt": "2021-10-20T02:20:30.796Z", "updatedAt": "2021-10-20T02:20:30.796Z" },
    selectedPackage: { "_id": "616f7ceea703ecd4ec419647", "title": "Lawn Care Silver", "cost": 5000, "contract_length_days": 90, "visit_interval_days": 14, "man_hrs_per_visit": 4, "description": "3 Month, Biweekly: Mow, edge trim, blow off pathways", "createdAt": "2021-10-20T02:20:30.796Z", "updatedAt": "2021-10-20T02:20:30.796Z" }
 };
-const formattedDate: string = formatDate(new Date("2020-10-28T06:00:00.000Z"));
+const formattedDate: string = formatDate(contract.start_date);
 const packageTitle: string = contract.selectedPackage.title;
 const clientName: string = contract.client.name;
 const clientEmail: string = contract.client.email;
@@ -16,7 +16,6 @@ const renderContractCard = (props: Partial<ContractCardProps> = {}) => {
   const defaultProps = {
     contract
   };
-
   return render(
     <ContractCard {...defaultProps} {...props}/>
   );

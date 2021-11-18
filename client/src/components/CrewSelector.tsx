@@ -8,7 +8,7 @@ const CrewSelector = (props: CrewSelectorProps) => {
 
   const crewItems = crews.map(c => {
     return (
-      <Dropdown.Item onClick={() => onSelect(c)}>
+      <Dropdown.Item key={c._id.toString()} onClick={() => onSelect(c)}>
         <Image className='crew-image' src={c.avatar} alt={c.foreman_name + "'s avatar"} />
         <p>{c.foreman_name} - {c.crew_size} workers</p>
       </Dropdown.Item>);

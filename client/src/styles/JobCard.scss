@@ -8,6 +8,11 @@
   grid-template-columns: 25% 25% 25% 25%;
   border-radius: 10px 10px;
   align-items: center;
+
+  .jobcard-date {
+    display: flex;
+    flex-direction: column;
+  }
   .jobcard-crew {
     
     img {

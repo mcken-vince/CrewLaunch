@@ -1,13 +1,13 @@
 import ClassNames from 'classnames';
 import { FC, ReactElement, useState } from 'react';
 import '../styles/JobCard.scss';
-import format from 'date-fns/format';
 import Button from 'react-bootstrap/Button';
 import ConfirmAlert from './ConfirmAlert';
 import { IJobLocal } from './component-types';
 import { Image } from 'react-bootstrap';
 import CrewSelector from './CrewSelector';
 import { ICrew } from '../definitions';
+import { formatDate } from '../helpers/dataFormatters';
 
 
 const JobCard: FC<JobCardProps> = (props): ReactElement => {
@@ -28,12 +28,12 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
   };
 
   const jobCardClass: string = ClassNames('jobcard-container container', {'jobcard-complete': completed, 'selected': confirm})
-
+  const formattedDate = formatDate(new Date(date)).split(' ');
   return (
     <div className={jobCardClass}>
       <ConfirmAlert show={confirm} message='Mark this job as complete?' onConfirm={toggleConfirm} onCancel={toggleConfirm}/>
       <h4>{address}</h4>
-      <h4>{format(new Date(date), 'MMMM dd, yyyy')}</h4> 
+      <h4 className='jobcard-date'><span>{formattedDate[0]}</span><span>{formattedDate.slice(1).join(' ')}</span></h4> 
       <div className='jobcard-crew'>
         {selectedCrew ? 
           (<Image alt={selectedCrew.foreman_name} src={selectedCrew.avatar || 'https://www.pngfind.com/pngs/m/154-1540407_png-file-svg-silhouette-of-head-and-shoulders.png'} />) : 
