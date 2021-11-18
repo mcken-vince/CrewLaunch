@@ -1,5 +1,5 @@
 import { FC, ReactElement, useState } from "react";
-import { Alert, Form, InputGroup, Button, Spinner } from "react-bootstrap";
+import { Alert, Form, InputGroup, Button, Spinner, Image } from "react-bootstrap";
 import '../../styles/CrewForm.scss';
 import { ICrew } from "../../definitions";
 import { ICrewLocal } from "../component-types";
@@ -62,16 +62,23 @@ const CrewForm: FC<CrewFormProps> = (props): ReactElement => {
         </Form.Select>
       </Form.Group>
 
-      <Form.Label>Avatar: -- Generate an avatar at <a href="https://getavataaars.com/" target="_blank" rel="noreferrer noopener">getavataaars.com</a></Form.Label>
-      <InputGroup className='mb-3'>
-          <InputGroup.Text>url</InputGroup.Text>
-          <Form.Control disabled={loading} type='text' value={avatar} onChange={(e) => setAvatar(e.target.value)} placeholder='Enter avatar url' /> 
-      </InputGroup>     
-
-      <Form.Label>Status:</Form.Label>
-      <InputGroup className='mb-3'>
-        <Form.Check disabled={loading} type="checkbox" checked={isActive} onChange={(e) => setIsActive(prev => !prev)} label="Active crew" />
-      </InputGroup>
+      <div className='crew-form-sidebyside'>
+        <div className='crew-form-avatar-input'>
+          <Form.Label>Avatar: -- Generate an avatar at <a href="https://getavataaars.com/" target="_blank" rel="noreferrer noopener">getavataaars.com</a></Form.Label>
+          <InputGroup className='mb-3'>
+            <InputGroup.Text>url</InputGroup.Text>
+            <Form.Control disabled={loading} type='text' value={avatar} onChange={(e) => setAvatar(e.target.value)} placeholder='Enter avatar url' /> 
+          </InputGroup>     
+        </div>
+          <Image src={avatar} alt='avatar preview'/>
+      </div>
+  
+          <Form.Label>Status:</Form.Label>
+          <InputGroup className='mb-3'>
+            <Form.Check disabled={loading} type="checkbox" checked={isActive} onChange={(e) => setIsActive(prev => !prev)} label="Active crew" />
+          </InputGroup>
+    
+   
 
       
       <Button className='crew-form-submit form-submit' disabled={!loading && !formFilled} type='submit' onClick={validate}>

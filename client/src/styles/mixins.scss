@@ -6,7 +6,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
+
   @media (max-width: $sm) {
     font-size: 1.1em;
   }
@@ -23,7 +23,7 @@
   
   @media (min-width: $lg) {
 
-    width: 40em;
+    width: 50em;
     
     
     form  {
@@ -51,7 +51,7 @@
 
   
   @media (max-width: $sm) {
-    font-size: 1.3em;
+    font-size: 1.1em;
   }
 
   @media (max-width: $med) {
