@@ -1,7 +1,14 @@
 @import 'variables';
 
-.dropdown-item {
-  display: flex;
-  align-items: center;
-  border-bottom: 1px $accent-color1 dotted;
+.crew-selector {
+
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px $accent-color1 dotted;
+    .crew-image {
+      height: 5em;
+      width: 5em;
+    }
+  }
 }
