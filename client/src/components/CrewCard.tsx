@@ -7,6 +7,7 @@ import { IJobLocal } from './component-types';
 import { FC, ReactElement, useMemo, useState } from 'react';
 import ConfirmAlert from './ConfirmAlert';
 import { ICrew, IConfirm } from '../definitions';
+import Card from 'react-bootstrap/Card';
 
 
 const CrewCard: FC<CrewCardProps> = (props): ReactElement => {
@@ -41,8 +42,8 @@ const CrewCard: FC<CrewCardProps> = (props): ReactElement => {
   const statusClasses: string = classNames('crewCard-status', {'active-crew': is_active, 'inactive-crew': !is_active});
 
   return (
-    <div className='crewCard-container'>
-        <div className='crewCard-body'>
+    <Card className='crewCard-container'>
+        <Card.Body className='crewCard-body'>
           <Image className='crewCard-avatar' src={avatar ? avatar : 'https://www.pngfind.com/pngs/m/154-1540407_png-file-svg-silhouette-of-head-and-shoulders.png'} alt='foreman avatar' roundedCircle />
           <div className='crewCard-info'>
             <h3>{foreman_name}</h3>
@@ -57,13 +58,13 @@ const CrewCard: FC<CrewCardProps> = (props): ReactElement => {
           <div className='crewCard-jobs-container'>
             {jobs}
           </div>
-        </div>
-      <ConfirmAlert variant={confirm.action} show={confirm.show} onCancel={handleCancel} onConfirm={handleConfirm} message={confirm.message}/>
+        </Card.Body>
       {!confirm.show && <footer className='crewCard-footer'>
           <Button className='edit-button' onClick={() => {setConfirm({show: true, message: 'Are you sure you want to edit this crew?', action: 'EDIT'})}}>Edit</Button>
           <Button className='delete-button' variant='danger' onClick={() => {setConfirm({show: true, message: 'Are you sure you want to delete this crew?', action: 'DELETE'})}}>Delete</Button>
       </footer>}
-    </div>
+      <ConfirmAlert variant={confirm.action} show={confirm.show} onCancel={handleCancel} onConfirm={handleConfirm} message={confirm.message}/>
+    </Card>
   );
 };
 

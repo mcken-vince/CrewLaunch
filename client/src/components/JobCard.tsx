@@ -27,7 +27,7 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
     setConfirm(prev => !prev);
   };
 
-  const jobCardClass: string = ClassNames('jobcard-container container', {'jobcard-complete': completed, 'selected': confirm})
+  const jobCardClass: string = ClassNames('jobcard-container', {'jobcard-complete': completed, 'selected': confirm})
   const formattedDate = formatDate(new Date(date)).split(' ');
   return (
     <div className={jobCardClass}>

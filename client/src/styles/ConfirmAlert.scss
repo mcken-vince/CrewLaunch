@@ -1,17 +1,21 @@
 @import "~bootstrap/scss/bootstrap";
 
-.confirm-alert {
+.alert.confirm-alert {
+  margin: 0;
   width: 100%;
   height: 100%;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  justify-self: center;
   .alert-body {
     display: flex;
     justify-content: space-between;
-    padding-top: 0.5em;
     align-items: center;
-    Button {
-      margin: .25em 0em .5em .25em;
 
+      Button {
+        margin: .25em 0em .5em .25em;
+      }
     }
-  } 
 }
