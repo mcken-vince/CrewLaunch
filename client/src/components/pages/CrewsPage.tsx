@@ -21,9 +21,12 @@ const CrewsPage: FC<CrewsPageProps> = (props): ReactElement => {
       setAlert({show: true, type: false, message: `Internal Error: ${err.message}`});
     }
   };
-
+  const lcSearchTerm: string = searchTerm.toLowerCase();
   const filteredCrews = searchTerm ? crews.filter(c => {
-    return c.foreman_name.toLowerCase().includes(searchTerm.toLowerCase());
+    return (
+      c.foreman_name.toLowerCase().includes(lcSearchTerm) ||
+      c.crew_size.toString().includes(lcSearchTerm)
+    );
   }) : crews;
 
   const crewCards = filteredCrews.map((c, idx) => {
@@ -39,7 +42,7 @@ const CrewsPage: FC<CrewsPageProps> = (props): ReactElement => {
         <Alert.Heading>{alert.message}</Alert.Heading>
       </Alert>
       <div className='crews-search search'>
-        <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search by foreman name'/>
+        <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search by name or crew size'/>
         {crewCards}
       </div>
     </div>
