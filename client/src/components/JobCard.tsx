@@ -49,7 +49,7 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
           (<span className='crew-image' />)
         }
         <p>{selectedCrew ? selectedCrew.foreman_name : 'No crew assigned'}</p>
-        <CrewSelector crews={crews} onSelect={handleCrewSelect} selectedCrew={selectedCrew}/>
+        <CrewSelector disabled={completed} crews={crews} onSelect={handleCrewSelect} selectedCrew={selectedCrew}/>
       </div>
         {markJobComplete && 
         <Button disabled={confirm || completed || !selectedCrew}

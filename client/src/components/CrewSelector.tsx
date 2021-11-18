@@ -4,7 +4,7 @@ import '../styles/CrewSelector.scss';
 import { Image } from "react-bootstrap";
 
 const CrewSelector = (props: CrewSelectorProps) => {
-  const { crews, onSelect, selectedCrew } = props;
+  const { crews, onSelect, selectedCrew, disabled } = props;
 
   const crewItems = crews.map(c => {
     return (
@@ -17,7 +17,7 @@ const CrewSelector = (props: CrewSelectorProps) => {
   return (
     <div className='crew-selector'>
       <Dropdown>
-        <Dropdown.Toggle className='crew-selector-button'>{selectedCrew ? 'Change crew' : 'Select a crew'}</Dropdown.Toggle>
+        <Dropdown.Toggle disabled={disabled} className='crew-selector-button'>{selectedCrew ? 'Change crew' : 'Select a crew'}</Dropdown.Toggle>
         <Dropdown.Menu>
           <Dropdown.Item className='reset-crew-field'onClick={() => onSelect({_id: undefined})}>
             <p>** Reset crew field **</p>
@@ -35,4 +35,5 @@ interface CrewSelectorProps {
   crews: ICrew[];
   onSelect: Function;
   selectedCrew: ICrew | null;
-}
+  disabled?: boolean;
+};
