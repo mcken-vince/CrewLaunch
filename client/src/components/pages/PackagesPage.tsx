@@ -6,6 +6,7 @@ import CustomSearchBar from '../CustomSearchBar';
 import { Alert } from 'react-bootstrap';
 import classNames from 'classnames';
 import { IAlert } from '../../definitions';
+import { useHistory } from 'react-router-dom';
 
 
 const PackagesPage: FC<PackagesPageProps> = (props): ReactElement => {
@@ -13,6 +14,7 @@ const PackagesPage: FC<PackagesPageProps> = (props): ReactElement => {
   const [alert, setAlert] = useState<IAlert>({show: false, type: true, message: ''});
   const packages: IPackage[] = props.packages;
   const onDelete = props.onDelete;
+  const url = useHistory();
 
   const handleDelete = async (id: string) => {
     try {
@@ -38,7 +40,7 @@ const PackagesPage: FC<PackagesPageProps> = (props): ReactElement => {
       <PackageCard 
         key={idx}
         packageDetails={p} 
-        onEdit={() => {}} 
+        onEdit={(id: string) => url.push(`/dispatch/packages/${id}/edit`)} 
         onDelete={handleDelete}
       />);
   }).reverse();
