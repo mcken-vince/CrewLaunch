@@ -64,7 +64,7 @@ const ContractCard: FC<ContractCardProps> = (props): ReactElement => {
 
 export default ContractCard;
 
-interface ContractCardProps {
+export interface ContractCardProps {
   contract: IContractLocal;
 };
 
