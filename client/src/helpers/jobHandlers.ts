@@ -7,17 +7,16 @@ const createNewJob = (job: IJobLocal): Promise<AxiosResponse<IJob>> => {
   return axios.post('/jobs', job);
 };
 
-const assignJob = (job: IJob, crewId: string): Promise<AxiosResponse<IJob>> => {
+const assignJob = (job: IJob, crewId: string | undefined): Promise<AxiosResponse<IJob>> => {
  
   const updatedJob: IJob = {
     _id: job._id,
     contract_id: job.contract_id,
     date: job.date,
     completed: job.completed,
+    crew_id: crewId
   };
-  if (crewId) {
-    updatedJob.crew_id = crewId;
-  }
+  console.log('updatedJob before posting: ', updatedJob);
   return axios.post(`/jobs/${job._id}`, updatedJob);
 };
 
@@ -69,7 +68,7 @@ export const handleJobCreation = async (contract: IContractLocal, state: IState,
   }
 };
 
-export const assignJobToCrew = async (crewId: string, job: IJob, state: IState, updateState: Function): Promise<IJob> => {
+export const assignJobToCrew = async (crewId: string | undefined, job: IJob, state: IState, updateState: Function): Promise<IJob> => {
   try {
     const response = await assignJob(job, crewId);
     const updatedJob = response.data;

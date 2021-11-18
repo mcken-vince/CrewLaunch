@@ -18,9 +18,9 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
   
   // const servicePackage = props.servicePackage;
 
-  const handleCrewSelect = async (thisCrew: ICrew) => {
+  const handleCrewSelect = async (thisCrew: ICrew | {_id: undefined}) => {
     assignJobToCrew(thisCrew._id, props.job)
-    setSelectedCrew(thisCrew);
+    setSelectedCrew(thisCrew._id ? thisCrew : null);
   };
 
   const toggleConfirm = () => {
