@@ -4,10 +4,9 @@ import { IPackage, IConfirm } from '../definitions';
 import { FC, ReactElement, useState } from 'react';
 import ConfirmAlert from './ConfirmAlert';
 import '../styles/PackageCard.scss';
-import { useHistory } from 'react-router';
+
 
 const PackageCard: FC<PackageCardProps> = (props): ReactElement => {
-  const url = useHistory();
   const clearConfirm: IConfirm = {show: false, message: '', action: 'NONE'};
   const [confirm, setConfirm] = useState<IConfirm>(clearConfirm);
   const { onSelect, packageDetails, onEdit, onDelete } = props;
@@ -22,7 +21,8 @@ const PackageCard: FC<PackageCardProps> = (props): ReactElement => {
       onDelete(id);
     }
     if (confirm.action === 'EDIT') {
-      url.push(`/dispatch/packages/edit/${packageDetails._id}`);
+      onEdit && packageDetails && onEdit(packageDetails._id);
+      
     }
     setConfirm(clearConfirm);
   };
@@ -53,7 +53,7 @@ const PackageCard: FC<PackageCardProps> = (props): ReactElement => {
 
 export default PackageCard;
 
-interface PackageCardProps {
+export interface PackageCardProps {
   packageDetails: IPackage;
   onSelect?: Function;
   onEdit?: Function;

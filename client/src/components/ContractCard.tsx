@@ -27,7 +27,7 @@ const ContractCard: FC<ContractCardProps> = (props): ReactElement => {
   const startDate: Date = new Date(thisContract.start_date);
   const endDate: Date = addDays(startDate, thisContract.selectedPackage.contract_length_days);
   const status = calculateContractStatus(startDate, endDate);
-  console.log(thisContract.address, status, startDate, endDate);
+
   // Need to calculate if this job is past, current, or upcoming, and use the calculation to set the classes
   const statusClasses: string = classNames('contractcard-status', {complete: status === 'Complete', active: status === 'Active', upcoming: status === 'Upcoming'});
 
@@ -67,7 +67,7 @@ const ContractCard: FC<ContractCardProps> = (props): ReactElement => {
 
 export default ContractCard;
 
-interface ContractCardProps {
+export interface ContractCardProps {
   contract: IContractLocal;
 };
 

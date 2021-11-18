@@ -13,7 +13,7 @@ const ClientCard: FC<ClientCardProps> = (props): ReactElement => {
       <div key={idx} className='client-contract-container'>
         <p>{c.address}</p>
         <p>{formatDate(c.start_date)}</p>
-        <Button><Link to={`/dispatch/contracts/edit/${c._id}`}>View Details</Link></Button>
+        <Button>View Details</Button>
       </div>
     );
   });
