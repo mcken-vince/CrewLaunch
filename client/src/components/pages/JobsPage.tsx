@@ -72,25 +72,21 @@ const JobsPage = (props: JobsPageProps) => {
           <h3>Unassigned jobs: {unassignedJobs.length}</h3>
           <h3>Incomplete jobs: {uncompletedJobs.length}</h3>
         </div>
-        <Accordion>
-          <Accordion.Item eventKey='0'>
-            <Accordion.Header onClick={() => setChecked('none')}>Filter:</Accordion.Header>
-            <Accordion.Body>
+        <div className='radio-filters'>
+          <h5>Filter by:</h5>
               <Form.Group onChange={(e: ChangeEvent<HTMLFormElement>) => {setChecked(e.target.getAttribute('value'))}}>
-                <Form.Check type='radio' label='None' name='jobFilter' id='none' value='none' checked={checked === 'none'} />
-                <Form.Check type='radio' label='Completed jobs' name='jobFilter' id='completedJobs' value='completed' checked={checked === 'completed'}/>
-                <Form.Check type='radio' label='Uncompleted jobs' name = 'jobFilter' id='uncompletedJobs' value='uncompleted' checked={checked === 'uncompleted'}/>
-                <Form.Check type='radio' label='Unassigned jobs' name='jobFilter' id='unassignedJobs' value='unassigned'checked={checked === 'unassigned'}/>
-                <Form.Check type='radio' label='Assigned jobs' name='jobFilter' id='assignedJobs' value='assigned' checked={checked === 'assigned'}/>
+                <Form.Check inline type='radio' label='None' name='jobFilter' id='none' value='none' checked={checked === 'none'} />
+                <Form.Check inline type='radio' label='Completed jobs' name='jobFilter' id='completedJobs' value='completed' checked={checked === 'completed'}/>
+                <Form.Check inline type='radio' label='Uncompleted jobs' name = 'jobFilter' id='uncompletedJobs' value='uncompleted' checked={checked === 'uncompleted'}/>
+                <Form.Check inline type='radio' label='Unassigned jobs' name='jobFilter' id='unassignedJobs' value='unassigned'checked={checked === 'unassigned'}/>
+                <Form.Check inline type='radio' label='Assigned jobs' name='jobFilter' id='assignedJobs' value='assigned' checked={checked === 'assigned'}/>
               </Form.Group>
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
+        </div>
       </div>
       <Alert dismissible show={alert.show} variant={alertVariant} onClose={() => setAlert({show: false, type: true, message: ''})}>
         <Alert.Heading>{alert.message}</Alert.Heading>
       </Alert>
-      <CustomSearchBar value={searchTerm} onChange={(val: string) => setSearchTerm(val)} placeholder='Search by address, or foreman name'/>
+      <CustomSearchBar value={searchTerm} onChange={(val: string) => setSearchTerm(val)} placeholder='Search by address or foreman name'/>
       <div className='jobs-grid'>
       {
         jobCards && jobCards.length > 0 ? 
