@@ -7,7 +7,7 @@
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
   border-radius: 10px 10px;
-  
+  align-items: center;
   .jobcard-crew {
     
     img {
@@ -21,7 +21,8 @@
   .jobcard-complete-button {
     margin: .3em 0em;
     max-height: 4em;
-
+    max-width: 10em;
+    justify-self: end;
   }
 
   &.selected {

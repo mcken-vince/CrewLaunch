@@ -19,8 +19,8 @@ const CrewSelector = (props: CrewSelectorProps) => {
       <Dropdown>
         <Dropdown.Toggle>{selectedCrew ? 'Change crew' : 'Select a crew'}</Dropdown.Toggle>
         <Dropdown.Menu>
-          <Dropdown.Item onClick={() => onSelect({_id: undefined})}>
-            <p>Reset crew field</p>
+          <Dropdown.Item className='reset-crew-field'onClick={() => onSelect({_id: undefined})}>
+            <p>** Reset crew field **</p>
           </Dropdown.Item>
           {crewItems}
         </Dropdown.Menu>
