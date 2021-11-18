@@ -1,0 +1,10 @@
+@import 'variables';
+
+.offcanvas-body {
+  flex-direction: column;
+  overflow: scroll;
+  
+  .package-card-container {
+    margin-bottom: $grid-gap;
+  }
+}

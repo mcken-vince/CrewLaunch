@@ -8,9 +8,6 @@
     width: 100%;
     display: grid;
     grid-template-columns: 1fr;
-   
-    .package-card-container {
-      width: 100%;
-    }
+    gap: $grid-gap;
   }
 }

@@ -51,7 +51,7 @@ const PackagesPage: FC<PackagesPageProps> = (props): ReactElement => {
       <Alert dismissible show={alert.show} variant={alertVariant} onClose={() => setAlert({show: false, type: true, message: ''})}>
         <Alert.Heading>{alert.message}</Alert.Heading>
       </Alert>
-      <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search'/>
+      <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search by title, description, or cost'/>
       <div className='packages-grid'>
         {packageCards}
       </div>

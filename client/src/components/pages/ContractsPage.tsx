@@ -28,7 +28,7 @@ const ContractsPage: FC<ContractsPageProps> = (props): ReactElement => {
     <div className='contracts-container'>
       <h1>Contracts: {contracts.length}</h1> 
       <div className='contracts-search search'>
-        <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search'/>
+        <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search by address, job notes, client name, email, or package title'/>
         {
           contractCards && contractCards.length > 0 ? 
           contractCards : <h2>No matching contracts found.</h2>

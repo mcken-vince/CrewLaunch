@@ -1,6 +1,9 @@
-.package-card-container {
-  min-height: 11em;
+@import 'variables';
+
+.card.package-card-container {
+  min-height: max-content;
   max-width: 100vw;
+  background-color: $bg-color2;
   .package-card-actions {
     display: flex;
     justify-content: flex-end;
