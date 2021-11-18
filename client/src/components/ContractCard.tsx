@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import { formatDate } from '../helpers/dataFormatters';
 import { IConfirm } from '../definitions';
 import { calculateContractStatus } from '../helpers/dataFormatters';
+import { Card } from 'react-bootstrap';
 
 const ContractCard: FC<ContractCardProps> = (props): ReactElement => {
   const thisContract = props.contract;
@@ -32,8 +33,8 @@ const ContractCard: FC<ContractCardProps> = (props): ReactElement => {
   const statusClasses: string = classNames('contractcard-status', {complete: status === 'Complete', active: status === 'Active', upcoming: status === 'Upcoming'});
 
   return (
-    <div className={contractCardClasses}>
-      <div className='contractcard-body'>
+    <Card className={contractCardClasses}>
+      <Card.Body className='contractcard-body'>
         <h3>{thisContract.address}</h3>
         <p>
           {formatDate(thisContract.start_date)} - 
@@ -41,8 +42,8 @@ const ContractCard: FC<ContractCardProps> = (props): ReactElement => {
         </p>
         <p><b>{thisContract.selectedPackage.title}</b> - Every {thisContract.selectedPackage.visit_interval_days} days - {thisContract.selectedPackage.man_hrs_per_visit} man hrs/visit</p>
         <p><b>Contact:</b> {thisContract.client.name} - {thisContract.client.email} - {thisContract.client.phone}</p>
-      </div>
-      <div className='contractcard-footer'>
+      </Card.Body>
+      <Card.Footer className='contractcard-footer'>
         <div className='contractcard-actions'>
           <Button onClick={handleEditClick} disabled={confirm.show}>Edit</Button>
           <Button onClick={handleDeleteClick} disabled={confirm.show} variant='danger'>Delete</Button>
@@ -52,7 +53,7 @@ const ContractCard: FC<ContractCardProps> = (props): ReactElement => {
           {status}
           </span>
         </p>
-      </div>
+      </Card.Footer>
       {confirm &&
         <ConfirmAlert 
         variant={confirm.action}
@@ -61,7 +62,7 @@ const ContractCard: FC<ContractCardProps> = (props): ReactElement => {
         onConfirm={() => {alert('confirmed!'); setConfirm(clearConfirm)}}
         onCancel={() => {alert('canceled!'); setConfirm(clearConfirm)}}
         />}
-    </div>
+    </Card>
   );
 };
 

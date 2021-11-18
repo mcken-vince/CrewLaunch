@@ -1,23 +1,23 @@
 @import "~bootstrap/scss/bootstrap";
 @import 'variables.scss';
 
-.crewCard-container {
+.card.crewCard-container {
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   border: 2px $accent-color1 solid;
-  border-radius: 15px;
+  border-radius: $card-border-radius;
   background-color: $bg-color1;
   margin-bottom: 5px;
-  padding: 1em;
 
-  .crewCard-body {
+  .card-body.crewCard-body {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     min-width: 30%;
-    max-width: 50%;
+    max-width: 60%;
+    padding: 1em;
 
     .crewCard-avatar {
       height: 7em;
@@ -52,25 +52,30 @@
   }
     
   .crewCard-footer {
+    position: absolute;
     min-width: max-content;
-    align-self: flex-start;
+    align-self: flex-end;
+    top: 1em;
+    right: 1em;
   }
 
   @media (max-width: $sm) {
     flex-direction: column;
-    .crewCard-body {
-      width: 80%;
+    .card-body.crewCard-body {
+      width: 90%;
       image.crewCard-avatar {
         margin-right: 0em;
       }
     }
     .crewCard-footer {
       align-self: center;
+      display: flex;
+      flex-direction: column;
     }
   }
   
   @media (max-width: $lg) {
-    .crewCard-body {
+    .card-body.crewCard-body {
       flex-direction: column;
       align-items: center;
       justify-content: center;

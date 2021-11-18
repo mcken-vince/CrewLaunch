@@ -1,25 +1,24 @@
 @import 'variables';
 
-.contractcard-container {
+.card.contractcard-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   border: 1px $border-color2 solid;
-  border-radius: 10px 10px;
+  border-radius: $card-border-radius;
   background-color: $bg-color2; 
-  padding: .5em;
   margin-bottom: 5px;
-  
+
   &:hover {
     box-shadow: 0 0 15px $hover-color1;
   }
 
-  &.selected {
-    background-color: $confirm-selected-color;
-    box-shadow: 0 0 15px $confirm-selected-color;
-  }
+  // &.selected {
+  //   background-color: $confirm-selected-color;
+  //   box-shadow: 0 0 15px $confirm-selected-color;
+  // }
 
-  .contractcard-body {
+  .card-body.contractcard-body {
     display: flex;
     flex-direction: column;
     
@@ -27,11 +26,14 @@
       margin: 0;
     }
   }
-  .contractcard-footer {
+  .card-footer.contractcard-footer {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
+    // bg color and border-top are bootstrap styles, so they need to be removed
+    background-color: transparent;
+    border-top: none;
 
     span.contractcard-status {
       margin: 0em .5em;

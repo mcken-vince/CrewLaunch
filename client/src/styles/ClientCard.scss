@@ -2,7 +2,7 @@
 
 .client-card-container {
   border: 1px $border-color2 solid;
-  border-radius: 10px 10px;
+  border-radius: $card-border-radius;
   text-align: left;
   padding: .5em;
   margin-bottom: 5px;

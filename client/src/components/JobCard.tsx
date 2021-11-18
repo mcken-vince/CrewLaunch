@@ -4,7 +4,7 @@ import '../styles/JobCard.scss';
 import Button from 'react-bootstrap/Button';
 import ConfirmAlert from './ConfirmAlert';
 import { IJobLocal } from './component-types';
-import { Image } from 'react-bootstrap';
+import { Card, Image } from 'react-bootstrap';
 import CrewSelector from './CrewSelector';
 import { ICrew } from '../definitions';
 import { formatDate } from '../helpers/dataFormatters';
@@ -27,11 +27,10 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
     setConfirm(prev => !prev);
   };
 
-  const jobCardClass: string = ClassNames('jobcard-container container', {'jobcard-complete': completed, 'selected': confirm})
+  const jobCardClass: string = ClassNames('jobcard-container', {'jobcard-complete': completed, 'selected': confirm})
   const formattedDate = formatDate(new Date(date)).split(' ');
   return (
-    <div className={jobCardClass}>
-      <ConfirmAlert show={confirm} message='Mark this job as complete?' onConfirm={toggleConfirm} onCancel={toggleConfirm}/>
+    <Card className={jobCardClass}>
       <h4>{address}</h4>
       <h4 className='jobcard-date'><span>{formattedDate[0]}</span><span>{formattedDate.slice(1).join(' ')}</span></h4> 
       <div className='jobcard-crew'>
@@ -42,13 +41,14 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
         <p>{selectedCrew ? selectedCrew.foreman_name : 'No crew assigned'}</p>
         <CrewSelector crews={crews} onSelect={handleCrewSelect} selectedCrew={selectedCrew}/>
       </div>
-        <Button disabled={confirm || completed}
+        <Button disabled={confirm || completed || !selectedCrew}
           className='jobcard-complete-button' 
           onClick={toggleConfirm}
         > 
           {completed ? 'Job Completed' : 'Mark Complete'}
         </Button>
-    </div>
+        <ConfirmAlert show={confirm} message='Mark this job as complete?' onConfirm={toggleConfirm} onCancel={toggleConfirm}/>
+    </Card>
   );
 };
 
