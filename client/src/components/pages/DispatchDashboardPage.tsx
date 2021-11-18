@@ -1,7 +1,7 @@
 import '../../styles/DispatchDashboardPage.scss';
 import { MouseEventHandler, useMemo } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { ICrew, IPackage, IUser } from '../../definitions';
+import { ICrew, IJob, IPackage, IUser } from '../../definitions';
 import { IClientLocal, IContractLocal, IJobLocal } from '../component-types';
 import DispatchCalendar from '../DispatchCalendar';
 import ContractForm from '../forms/ContractForm';
@@ -17,6 +17,7 @@ import { handleContractCreation } from '../../helpers/contractHandlers';
 import { handleCrewCreation, handleCrewDeletion } from '../../helpers/crewHandlers';
 import ClientsPage from './ClientsPage';
 import JobsPage from './JobsPage';
+import { assignJobToCrew } from '../../helpers/jobHandlers';
 
 const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
   const {state, updateState} = useAppData();
@@ -30,7 +31,10 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
   };
 
  
-  const detailedJobs: IJobLocal[] = useMemo(() => getJobsWithDetails(state ? state.jobs : [], state ? state.contracts : [], state ? state.packages : []), [state]);
+  const detailedJobs: IJobLocal[] = useMemo(() => {
+    return state ? getJobsWithDetails(state.jobs, state.contracts, state.packages, state.crews) : 
+    getJobsWithDetails([], [] , [], [])
+  }, [state]);
   const detailedContracts: IContractLocal[] = useMemo(() => getContractsWithDetails(state ? state.contracts : [], state ? state.packages : [], state ? state.clients : []), [state]);
   const clientsWithContracts: IClientLocal[] = useMemo(() => getClientsWithContracts(state ? state.clients : [], state ? state.contracts : []), [state]);
 
@@ -69,11 +73,11 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
               <ClientsPage clients={clientsWithContracts}/>
             </Route>
             <Route path={`/dispatch/jobs`}>
-              <JobsPage jobs={detailedJobs} />
+              <JobsPage jobs={detailedJobs} crews={state ? state.crews : []} assignJobToCrew={(crewId: string, job: IJob) => state && assignJobToCrew(crewId, job, state, updateState)} />
             </Route>
 
             <Route path={`/dispatch`}>
-              <DispatchCalendar jobs={detailedJobs}/>
+              <DispatchCalendar jobs={detailedJobs} crews={state ? state.crews : []} assignJobToCrew={(crewId: string, job: IJob) => state && assignJobToCrew(crewId, job, state, updateState)}/>
             </Route>
           </Switch>
 

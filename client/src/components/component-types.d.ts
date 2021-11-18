@@ -1,11 +1,7 @@
 /* istanbul ignore file */
-import { IClient, IPackage, IJob, IContract } from '../definitions';
+import { IClient, IPackage, IJob, IContract, ICrew } from '../definitions';
 import { ReactDatePickerProps } from 'react-datepicker';
 import { EventHandler } from 'react';
-
-export interface DispatchCalendarProps {
-  jobs: IJobLocal[];
-};
 
 export interface PackagesOffcanvasProps {
   show: boolean;
@@ -39,10 +35,26 @@ export interface DateRangePickerProps extends ReactDatePickerProps {
 
 // Job interface used in CrewCard component
 // Includes address & jobNotes
-export interface IJobLocal extends IJob {
+export interface IJobLocal {
+  crew_id?: Types.ObjectId | string;
+  contract_id: Types.ObjectId | string;
+  date: Date;
+  completed: boolean; 
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
   address?: string;
   jobNotes?: string;
   servicePackage?: IPackage;
+  crew? : ICrew;
+};
+
+export interface ICrewLocal {
+  foreman_name: string;
+  crew_size: number;
+  is_active: boolean;
+  avatar?: string;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
 };
 
 export interface IClientLocal extends IClient {

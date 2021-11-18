@@ -5,10 +5,9 @@
   @include pageStyles;
   
   .jobs-grid {
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr;
   }
-  .jobcard-container {
-    width: 100%;
-  }
+
 }

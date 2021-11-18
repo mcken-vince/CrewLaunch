@@ -1,24 +1,33 @@
-import { IContractLocal } from "../components/component-types";
+import { IContractLocal, IJobLocal } from "../components/component-types";
 import addDays from 'date-fns/addDays';
 import { IJob, IState } from "../definitions";
 import axios, { AxiosResponse } from "axios";
 
-const createNewJob = (job: IJob): Promise<AxiosResponse<IJob>> => {
+const createNewJob = (job: IJobLocal): Promise<AxiosResponse<IJob>> => {
   return axios.post('/jobs', job);
 };
 
-export const generateJobsFromContract = async (contract: IContractLocal): Promise<IJob[]> => {
+const assignJob = (job: IJob, crewId: string): Promise<AxiosResponse<IJob>> => {
+ 
+  const updatedJob: IJob = {
+    _id: job._id,
+    contract_id: job.contract_id,
+    date: job.date,
+    completed: job.completed,
+  };
+  if (crewId) {
+    updatedJob.crew_id = crewId;
+  }
+  return axios.post(`/jobs/${job._id}`, updatedJob);
+};
+
+export const generateJobsFromContract = async (contract: IContractLocal): Promise<IJobLocal[]> => {
   try {
-    // if (!contract._id) {
-    //   console.log('no contract id!!!!!');
-    //   return []
-    // };
-    console.log('contract to generate jobs from: ', contract);
     const start: Date = new Date(contract.start_date);
     const contractLength: number = contract.selectedPackage.contract_length_days;
     const visitInterval: number = contract.selectedPackage.visit_interval_days;
     const jobCount = Math.round(contractLength / visitInterval);
-    const jobsArray: IJob[] = [];
+    const jobsArray: IJobLocal[] = [];
     for (let x = 0; x < jobCount; x++) {
       const thisJobDate: Date = addDays(start, x * visitInterval);
       jobsArray.push(
@@ -29,7 +38,6 @@ export const generateJobsFromContract = async (contract: IContractLocal): Promis
         }
         );
       };
-    console.log('jobsArray in genjobsfromcontract', jobsArray);
     return jobsArray;
   } catch (err) {
     throw err;
@@ -37,7 +45,7 @@ export const generateJobsFromContract = async (contract: IContractLocal): Promis
 };
 
 
-export const createJobs = async (jobs: IJob[]): Promise<IJob[]> => {
+export const createJobs = async (jobs: IJobLocal[]): Promise<IJobLocal[]> => {
   try {
     const response: AxiosResponse<IJob>[] = await Promise.all(
       jobs.map(j => createNewJob(j))
@@ -52,14 +60,22 @@ export const createJobs = async (jobs: IJob[]): Promise<IJob[]> => {
 export const handleJobCreation = async (contract: IContractLocal, state: IState, updateState: Function): Promise<string> => {
   try {
     const jobArray = await generateJobsFromContract(contract);
-    console.log('jobArray: ', jobArray);
-    const createdJobs = await createJobs(jobArray);
-    console.log('createdJobs: ', createdJobs);
+    const createdJobs: IJobLocal[] = await createJobs(jobArray);
     const updatedJobs = [...state.jobs, ...createdJobs];
-    console.log('updatedJobs: ', updatedJobs);
     updateState({jobs: updatedJobs});
-    console.log('Jobs created!');
     return 'Jobs created!';
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const assignJobToCrew = async (crewId: string, job: IJob, state: IState, updateState: Function): Promise<IJob> => {
+  try {
+    const response = await assignJob(job, crewId);
+    const updatedJob = response.data;
+    const updatedJobs = [...[...state.jobs].filter(j => j._id.toString() !== job._id), updatedJob];
+    updateState({jobs: updatedJobs});
+    return updatedJob;
   } catch (err) {
     throw err;
   }

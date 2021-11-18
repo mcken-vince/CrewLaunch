@@ -1,15 +1,16 @@
 import DayCard from './DayCard';
 import '../styles/DispatchCalendar.scss';
-import { isEqual, addMonths } from 'date-fns';
+import { isEqual, addMonths, getDaysInMonth } from 'date-fns';
 import { IthisMonth, IJobLocal } from './component-types';
 import { useState, FC, ReactElement } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import JobCard from './JobCard';
 import { getMonthObject } from '../helpers/dataFormatters';
+import { ICrew } from '../definitions';
 
-const DispatchCalendar: FC<any> = (props): ReactElement => {
-  const { jobs } = props;
+const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement => {
+  const { jobs, crews, assignJobToCrew } = props;
   const [showDayDetails, setShowDayDetails] = useState<IShowDayDetails>({show: false, day: {date: 0, jobs: []}});
   
   const today: Date = new Date();
@@ -23,7 +24,7 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
   
   const selectedDayJobs: ReactElement[] = showDayDetails.day.jobs && showDayDetails.day.jobs.map((job, idx) => {
     console.log('job: ', job);
-    return (<JobCard key={idx} job={job} />);
+    return (<JobCard key={idx} job={job} crews={crews} assignJobToCrew={assignJobToCrew}/>);
   });
   
   
@@ -37,11 +38,12 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
     dayCards.push(<DayCard date={dayOfMonth} key={d} jobs={todayJobs} selectDay={():void => selectDay(d, todayJobs)} />);
   };
   
+  const prevMonthDays = getDaysInMonth(addMonths(new Date(), -1))
   // Adds blank DayCards to beginning of dayCards list
   for (let blankDay = 1; blankDay <= selectedMonth.startsOn; blankDay++) {
-    dayCards.unshift(<DayCard key={blankDay + selectedMonth.days} />);
+    dayCards.unshift(<DayCard date={(prevMonthDays + 1 - blankDay).toString()} key={blankDay + selectedMonth.days} />);
   };
-  
+
   const selectPreviousMonth = () => {
     setSelectedMonth(prev => {
       const date = new Date(`${prev.name} 1, ${prev.year}`);
@@ -98,4 +100,10 @@ interface ISelectedDay {
 interface IShowDayDetails {
   show: boolean;
   day: ISelectedDay;
+};
+
+export interface DispatchCalendarProps {
+  jobs: IJobLocal[];
+  crews: ICrew[];
+  assignJobToCrew: Function;
 };

@@ -1,4 +1,4 @@
-import { FC, ReactElement, useMemo, useState } from 'react';
+import { FC, ReactElement, useState } from 'react';
 import '../styles/ContractCard.scss';
 import { IContractLocal } from './component-types';
 import { addDays } from 'date-fns';
@@ -14,8 +14,6 @@ const ContractCard: FC<ContractCardProps> = (props): ReactElement => {
   const clearConfirm: IConfirm = {show: false, message: '', action: 'NONE'};
   const [confirm, setConfirm] = useState<IConfirm>(clearConfirm);
   
-
-
   const handleEditClick = (): void => {
     setConfirm({show: true, message: 'Are you sure you want to edit this contract?', action: 'EDIT'});
   };

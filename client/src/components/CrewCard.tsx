@@ -10,7 +10,7 @@ import { ICrew, IConfirm } from '../definitions';
 
 
 const CrewCard: FC<CrewCardProps> = (props): ReactElement => {
-  const { foreman_name, crew_size, avatar } = props.crew;
+  const { foreman_name, crew_size, avatar, is_active } = props.crew;
   const onDelete = props.onDelete;
   const clearConfirm: IConfirm = {show: false, message: '', action: 'NONE'};
   const [confirm, setConfirm] = useState<IConfirm>(clearConfirm);
@@ -20,7 +20,6 @@ const CrewCard: FC<CrewCardProps> = (props): ReactElement => {
     if (confirm.action === 'DELETE') {
       const id = props.crew._id;
       onDelete(id);
-
     }
     if (confirm.action === 'EDIT') {
 
@@ -39,12 +38,20 @@ const CrewCard: FC<CrewCardProps> = (props): ReactElement => {
     return (<h5 className={jobClass}>{job.address} - {format(job.date, 'eeee MMMM dd yyyy')}</h5>);
   }), [jobsOrderedByDate]);
   
+  const statusClasses: string = classNames('crewCard-status', {'active-crew': is_active, 'inactive-crew': !is_active});
+
   return (
     <div className='crewCard-container'>
         <div className='crewCard-body'>
           <Image className='crewCard-avatar' src={avatar ? avatar : 'https://www.pngfind.com/pngs/m/154-1540407_png-file-svg-silhouette-of-head-and-shoulders.png'} alt='foreman avatar' roundedCircle />
           <div className='crewCard-info'>
             <h3>{foreman_name}</h3>
+            <p>Status:
+              <span className={statusClasses}>
+              {is_active ? 'Active' : 'Inactive'}
+              </span>
+          
+            </p>
             <p>{crew_size} workers</p>
           </div>
           <div className='crewCard-jobs-container'>
