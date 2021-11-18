@@ -27,7 +27,7 @@
     margin: .3em 0em;
     max-height: 4em;
     max-width: 10em;
-    justify-self: end;
+    justify-self: center;
   }
 
   &.selected {
@@ -41,5 +41,13 @@
       color: black;
       background-color: lightgray;
     }
+  }
+
+  @media (max-width: $med) {
+    grid-template-columns: 50% 50%;
+  }
+
+  @media (max-width: $sm) {
+
   }
 }
