@@ -20,7 +20,6 @@ const jobsRoutes = (Job: Model<IJob>) => {
   router.post('/:id', async (req, res) => {
     const update: IJob = req.body;
     const query = { _id: req.params.id };
-    console.log('update: ', update);
     await Job.findOneAndUpdate(
       query,
       {
