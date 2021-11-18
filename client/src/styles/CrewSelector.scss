@@ -1,0 +1,22 @@
+@import 'variables';
+
+.crew-selector {
+
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px $accent-color1 dotted;
+    &.reset-crew-field {
+      padding-top: 1em;
+      border-top: 1px $accent-color1 dotted;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .crew-image {
+      height: 5em;
+      width: 5em;
+    }
+  }
+}

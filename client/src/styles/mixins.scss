@@ -6,7 +6,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
+
   @media (max-width: $sm) {
     font-size: 1.1em;
   }
@@ -23,7 +23,7 @@
   
   @media (min-width: $lg) {
 
-    width: 40em;
+    width: 50em;
     
     
     form  {
@@ -38,12 +38,12 @@
 }
 
 @mixin pageStyles {
-  width: 97vw;
+  width: 99%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0vh 1vw;
+  margin: 0% 0.5%;
   
   .search {
     width: 100%;
@@ -51,7 +51,7 @@
 
   
   @media (max-width: $sm) {
-    font-size: 1.3em;
+    font-size: 1.1em;
   }
 
   @media (max-width: $med) {
@@ -67,4 +67,12 @@
 @mixin containerStyles {
   width: 100%;
   padding: 0em 1em;
+}
+
+@mixin gridStyles {
+  width: 100%;
+  display: grid;
+  gap: $grid-gap;
+  grid-template-columns: repeat(auto-fit, 20em);
+  justify-content: center;
 }

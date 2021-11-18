@@ -1,6 +1,13 @@
 /* istanbul ignore file */
 import { Types } from 'mongoose';
 
+
+export interface IAlert {
+  show: boolean;
+  type: boolean;
+  message: string;
+};
+
 export interface IConfirm {
   show: boolean;
   message: string;
@@ -25,7 +32,7 @@ export interface IUser {
 };
 
 export interface ICrew {
-  _id?: Types.ObjectId | string;
+  _id: Types.ObjectId | string;
   foreman_name: string;
   crew_size: number;
   is_active: boolean;
@@ -44,7 +51,7 @@ export interface IClient {
 };
 
 export interface IJob {
-  _id?: Types.ObjectId | string;
+  _id: Types.ObjectId | string;
   crew_id?: Types.ObjectId | string;
   contract_id: Types.ObjectId | string;
   date: Date;

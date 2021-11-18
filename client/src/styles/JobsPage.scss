@@ -1,4 +1,5 @@
 @import 'mixins';
+@import 'variables';
 
 .jobs-container {
   @include pageStyles;
@@ -6,10 +7,8 @@
   .jobs-grid {
     width: 100%;
     display: grid;
-    gap: 5px;
-    grid-template-columns: repeat(auto-fit, 15em);
+    grid-template-columns: 1fr;
+    gap: $grid-gap;
   }
-  .jobcard-container {
-    width: 100%;
-  }
+
 }

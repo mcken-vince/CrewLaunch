@@ -14,7 +14,7 @@ const DispatchNav: FC<DispatchNavProps> = (props): ReactElement => {
   
   return (
     <Navbar className="dispatch-nav">
-      <Link className='dispatch-nav-logo-link' to='/dispatch'><span className="dispatch-nav-logo">CrewLauncher</span></Link>
+      <Link className='dispatch-nav-logo-link' to='/'><span className="dispatch-nav-logo">CrewLauncher</span></Link>
       
       <div className="dispatch-nav-right">
 
@@ -45,11 +45,12 @@ const DispatchNav: FC<DispatchNavProps> = (props): ReactElement => {
             </NavDropdown>
             
             <NavDropdown title={<span className='dispatch-nav-dropdown'>Resources</span>} align='end' >
-                <Nav.Link as={NavLink} to='/dispatch/clients'>Clients</Nav.Link>
-                <Nav.Link as={NavLink} to='/dispatch/jobs'>Jobs</Nav.Link>
-                <Nav.Link as={NavLink} to='/dispatch/crews'>Crews</Nav.Link>
-                <Nav.Link as={NavLink} to='/dispatch/contracts'>Contracts</Nav.Link>
-                <Nav.Link as={NavLink} to='/dispatch/packages'>Packages</Nav.Link>
+              <Nav.Link as={NavLink} to='/dispatch/'>Calendar</Nav.Link>
+              <Nav.Link as={NavLink} to='/dispatch/clients'>Clients</Nav.Link>
+              <Nav.Link as={NavLink} to='/dispatch/jobs'>Jobs</Nav.Link>
+              <Nav.Link as={NavLink} to='/dispatch/crews'>Crews</Nav.Link>
+              <Nav.Link as={NavLink} to='/dispatch/contracts'>Contracts</Nav.Link>
+              <Nav.Link as={NavLink} to='/dispatch/packages'>Packages</Nav.Link>
             </NavDropdown>
           </div>}
       </div>

@@ -1,4 +1,5 @@
 @import 'mixins';
+@import 'variables';
 
 .crew-form-container {
   @include formContainerStyles;
@@ -9,6 +10,27 @@
 
   .crew-form {
     width: 100%;
-
+    .crew-form-sidebyside {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .crew-form-avatar-input {
+        min-width: 50%;
+        max-width: 75%;
+      }
+      img {
+        margin-left: 1em;
+        background-color: $accent-color1;
+        width: 8em;
+        height: 8em;
+        border:1px lightblue dotted;
+        border-radius: 50% 50%; 
+        text-align: center;
+        @media (max-width: $med) {
+          width: 5em;
+          height: 5em;
+        }
+      }
+    }
   }
 }

@@ -1,4 +1,5 @@
 @import 'mixins';
+@import 'variables';
 
 .packages-container {
   @include pageStyles;
@@ -6,8 +7,7 @@
   .packages-grid {
     width: 100%;
     display: grid;
-    gap: 5px;
-    grid-template-columns: repeat(auto-fit, 20em);
-    
+    grid-template-columns: 1fr;
+    gap: $grid-gap;
   }
 }

@@ -11,6 +11,10 @@
   .contract-form {
     width: 100%;
 
+    .select-package-button {
+      z-index: 0;
+    }
+
     input.contract-form-daterangepicker {
       margin-bottom: 1em;
       width: 100%;

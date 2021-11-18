@@ -1,7 +1,7 @@
 import '../../styles/DispatchDashboardPage.scss';
 import { MouseEventHandler, useMemo } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { ICrew, IPackage, IUser } from '../../definitions';
+import { ICrew, IJob, IPackage, IUser } from '../../definitions';
 import { IClientLocal, IContractLocal, IJobLocal } from '../component-types';
 import DispatchCalendar from '../DispatchCalendar';
 import ContractForm from '../forms/ContractForm';
@@ -17,6 +17,7 @@ import { handleContractCreation } from '../../helpers/contractHandlers';
 import { handleCrewCreation, handleCrewDeletion } from '../../helpers/crewHandlers';
 import ClientsPage from './ClientsPage';
 import JobsPage from './JobsPage';
+import { assignJobToCrew } from '../../helpers/jobHandlers';
 
 const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
   const {state, updateState} = useAppData();
@@ -30,7 +31,10 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
   };
 
  
-  const detailedJobs: IJobLocal[] = useMemo(() => getJobsWithDetails(state ? state.jobs : [], state ? state.contracts : [], state ? state.packages : []), [state]);
+  const detailedJobs: IJobLocal[] = useMemo(() => {
+    return state ? getJobsWithDetails(state.jobs, state.contracts, state.packages, state.crews) : 
+    getJobsWithDetails([], [] , [], [])
+  }, [state]);
   const detailedContracts: IContractLocal[] = useMemo(() => getContractsWithDetails(state ? state.contracts : [], state ? state.packages : [], state ? state.clients : []), [state]);
   const clientsWithContracts: IClientLocal[] = useMemo(() => getClientsWithContracts(state ? state.clients : [], state ? state.contracts : []), [state]);
 
@@ -42,7 +46,7 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
               <CrewForm onSubmit={(crew: ICrew) => {state && handleCrewCreation(crew, state, updateState)}} editCrew={null}/>
             </Route>
             <Route path={`/dispatch/packages/new`}>
-              <PackageForm onSubmit={(pkg: IPackage) => {state && handlePackageCreation(pkg, state, updateState)}} packages={state ? state.packages : []}/>
+              <PackageForm onSubmit={(pkg: IPackage) => state && handlePackageCreation(pkg, state, updateState)} packages={state ? state.packages : []}/>
             </Route>
             <Route path={`/dispatch/contracts/new`}>
               <ContractForm packages={state ? state.packages : []} onSubmit={(con: IContractLocal) => {state && handleContractCreation(con, state, updateState)}} contracts={detailedContracts} clients={state ? state.clients : []}/>
@@ -57,10 +61,10 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
               <PackageForm onSubmit={handleSubmit} packages={state ? state.packages : []}/>
             </Route>
             <Route path={`/dispatch/crews`}>
-              <CrewsPage onDelete={(id: string) => {state && handleCrewDeletion(id, state, updateState)}} crews={state ? state.crews : []}/>
+              <CrewsPage onDelete={(id: string) => state && handleCrewDeletion(id, state, updateState)} crews={state ? state.crews : []}/>
             </Route>
             <Route path={`/dispatch/packages`}>
-              <PackagesPage packages={state ? state.packages : []} onDelete={(id: string) => {state && handlePackageDeletion(id, state, updateState)}}/>
+              <PackagesPage packages={state ? state.packages : []} onDelete={(id: string) => state && handlePackageDeletion(id, state, updateState)}/>
             </Route>
             <Route path={`/dispatch/contracts`}>
               <ContractsPage contracts={detailedContracts}/>
@@ -69,11 +73,11 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
               <ClientsPage clients={clientsWithContracts}/>
             </Route>
             <Route path={`/dispatch/jobs`}>
-              <JobsPage jobs={detailedJobs} />
+              <JobsPage jobs={detailedJobs} crews={state ? state.crews : []} assignJobToCrew={(crewId: string, job: IJob) => state && assignJobToCrew(crewId, job, state, updateState)} />
             </Route>
 
             <Route path={`/dispatch`}>
-              <DispatchCalendar jobs={detailedJobs}/>
+              <DispatchCalendar jobs={detailedJobs} crews={state ? state.crews : []} assignJobToCrew={(crewId: string, job: IJob) => state && assignJobToCrew(crewId, job, state, updateState)}/>
             </Route>
           </Switch>
 

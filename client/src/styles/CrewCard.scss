@@ -16,14 +16,32 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-
+    min-width: 30%;
+    max-width: 50%;
 
     .crewCard-avatar {
       height: 7em;
       width: 7em;
+      max-width: 8rem;
+      max-height: 8rem;
       background-color: $accent-color1;
     }
-    
+
+    .crewCard-info {
+      .crewCard-status {
+        border: 1px $accent-color1 solid;
+        margin: 0em .5em;
+        padding: .5em;
+        border-radius: 20px 20px;
+        color: white;
+        &.active-crew {
+          background-color: green;
+        }
+        &.inactive-crew {
+          background-color: gray;
+        }
+      }
+    }
     .crewCard-jobs-container {
       margin-left: 1em;
 
@@ -40,8 +58,11 @@
 
   @media (max-width: $sm) {
     flex-direction: column;
-    image.crewCard-avatar {
-      margin-right: 0em;
+    .crewCard-body {
+      width: 80%;
+      image.crewCard-avatar {
+        margin-right: 0em;
+      }
     }
     .crewCard-footer {
       align-self: center;

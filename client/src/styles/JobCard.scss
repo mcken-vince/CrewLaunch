@@ -1,13 +1,28 @@
 @import 'variables';
 
 .jobcard-container {
+
   padding: 0.5em 1em 0.5em 1em;
   background-color: $bg-color2;
-
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
   border-radius: 10px 10px;
- 
+  align-items: center;
+  .jobcard-crew {
+    
+    img {
+      background-color: $accent-color1;
+      border-radius: 50% 50%;
+      height: 5em;
+      width: 5em;
+    }
+  }
+
   .jobcard-complete-button {
     margin: .3em 0em;
+    max-height: 4em;
+    max-width: 10em;
+    justify-self: end;
   }
 
   &.selected {
@@ -16,5 +31,10 @@
 
   &.jobcard-complete {
     background-color: $bg-color3;
+    .jobcard-complete-button {
+      border-color: black;
+      color: black;
+      background-color: lightgray;
+    }
   }
 }
