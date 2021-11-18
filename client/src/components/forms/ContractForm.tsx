@@ -91,7 +91,7 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
           
           <InputGroup className='mb-3'>
             <Form.Control disabled={loading} type='text' readOnly={true} value={selectedPackage && selectedPackage.title ? `${selectedPackage.title} - $${selectedPackage.cost} - ${selectedPackage.contract_length_days} days` : 'Please select a package'} />
-            <Button disabled={loading} onClick={():void => setPackagesShow(true)}>Select Package</Button>
+            <Button className='select-package-button' disabled={loading} onClick={():void => setPackagesShow(true)}>Select Package</Button>
           </InputGroup>
 
           {selectedPackage && 
