@@ -39,7 +39,13 @@ export interface DateRangePickerProps extends ReactDatePickerProps {
 
 // Job interface used in CrewCard component
 // Includes address & jobNotes
-export interface IJobLocal extends IJob {
+export interface IJobLocal {
+  crew_id?: Types.ObjectId | string;
+  contract_id: Types.ObjectId | string;
+  date: Date;
+  completed: boolean; 
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
   address?: string;
   jobNotes?: string;
   servicePackage?: IPackage;

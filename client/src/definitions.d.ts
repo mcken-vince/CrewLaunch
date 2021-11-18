@@ -51,7 +51,7 @@ export interface IClient {
 };
 
 export interface IJob {
-  _id?: Types.ObjectId | string;
+  _id: Types.ObjectId | string;
   crew_id?: Types.ObjectId | string;
   contract_id: Types.ObjectId | string;
   date: Date;

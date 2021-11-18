@@ -5,7 +5,11 @@ import { IJobLocal } from "../component-types";
 const JobsPage = (props: JobsPageProps) => {
   const { jobs } = props;
 
-  const jobCards = jobs.map((j, idx) => {
+  const filteredJobs = [...jobs].sort((a, b) => {
+    return a.date > b.date ? 1 : -1;
+  });
+
+  const jobCards = filteredJobs.map((j, idx) => {
     return (<JobCard key={idx} job={j}/>);
   });
 
