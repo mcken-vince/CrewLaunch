@@ -31,7 +31,6 @@ const PackagesPage: FC<PackagesPageProps> = (props): ReactElement => {
       p.title.toLowerCase().includes(lcSearchTerm) ||
       (p.description && p.description.toLowerCase().includes(lcSearchTerm)) ||
       p.cost.toString().includes(lcSearchTerm)
-      
     );
   }) : packages;
 
@@ -55,7 +54,10 @@ const PackagesPage: FC<PackagesPageProps> = (props): ReactElement => {
       </Alert>
       <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search by title, description, or cost'/>
       <div className='packages-grid'>
-        {packageCards}
+        {
+          packageCards && packageCards.length > 0 ? 
+          packageCards : <h2>No matching packages found.</h2>
+        }
       </div>
     </div>
   );

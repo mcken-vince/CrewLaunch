@@ -43,7 +43,10 @@ const CrewsPage: FC<CrewsPageProps> = (props): ReactElement => {
       </Alert>
       <div className='crews-search search'>
         <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search by name or crew size'/>
-        {crewCards}
+        {
+          crewCards && crewCards.length > 0 ? 
+          crewCards : <h2>No matching crews found.</h2>
+        }
       </div>
     </div>
   );
