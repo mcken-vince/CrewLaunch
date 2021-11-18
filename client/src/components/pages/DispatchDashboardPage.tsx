@@ -17,7 +17,7 @@ import { handleContractCreation } from '../../helpers/contractHandlers';
 import { handleCrewCreation, handleCrewDeletion } from '../../helpers/crewHandlers';
 import ClientsPage from './ClientsPage';
 import JobsPage from './JobsPage';
-import { assignJobToCrew } from '../../helpers/jobHandlers';
+import { assignJobToCrew, markJobComplete } from '../../helpers/jobHandlers';
 
 const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
   const {state, updateState} = useAppData();
@@ -73,7 +73,7 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
               <ClientsPage clients={clientsWithContracts}/>
             </Route>
             <Route path={`/dispatch/jobs`}>
-              <JobsPage jobs={detailedJobs} crews={state ? state.crews : []} assignJobToCrew={(crewId: string | undefined, job: IJob) => state && assignJobToCrew(crewId, job, state, updateState)} />
+              <JobsPage jobs={detailedJobs} crews={state ? state.crews : []} assignJobToCrew={(crewId: string | undefined, job: IJob) => state && assignJobToCrew(crewId, job, state, updateState)} markJobComplete={(job: IJob) => state && markJobComplete(job, state, updateState)} />
             </Route>
 
             <Route path={`/dispatch`}>

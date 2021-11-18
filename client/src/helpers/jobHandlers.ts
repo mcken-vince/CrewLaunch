@@ -8,15 +8,18 @@ const createNewJob = (job: IJobLocal): Promise<AxiosResponse<IJob>> => {
 };
 
 const assignJob = (job: IJob, crewId: string | undefined): Promise<AxiosResponse<IJob>> => {
- 
   const updatedJob: IJob = {
-    _id: job._id,
-    contract_id: job.contract_id,
-    date: job.date,
-    completed: job.completed,
+    ...job,
     crew_id: crewId
   };
-  console.log('updatedJob before posting: ', updatedJob);
+  return axios.post(`/jobs/${job._id}`, updatedJob);
+};
+
+const markComplete = (job: IJob): Promise<AxiosResponse<IJob>> => {
+  const updatedJob: IJob = {
+    ...job,
+    completed: true
+  };
   return axios.post(`/jobs/${job._id}`, updatedJob);
 };
 
@@ -61,7 +64,7 @@ export const handleJobCreation = async (contract: IContractLocal, state: IState,
     const jobArray = await generateJobsFromContract(contract);
     const createdJobs: IJobLocal[] = await createJobs(jobArray);
     const updatedJobs = [...state.jobs, ...createdJobs];
-    updateState({jobs: updatedJobs});
+    await updateState({jobs: updatedJobs});
     return 'Jobs created!';
   } catch (err) {
     throw err;
@@ -71,9 +74,22 @@ export const handleJobCreation = async (contract: IContractLocal, state: IState,
 export const assignJobToCrew = async (crewId: string | undefined, job: IJob, state: IState, updateState: Function): Promise<IJob> => {
   try {
     const response = await assignJob(job, crewId);
-    const updatedJob = response.data;
-    const updatedJobs = [...[...state.jobs].filter(j => j._id.toString() !== job._id), updatedJob];
-    updateState({jobs: updatedJobs});
+    const updatedJob: IJob = response.data;
+    const updatedJobs: IJob[] = [...[...state.jobs].filter(j => j._id.toString() !== job._id), updatedJob];
+    await updateState({jobs: updatedJobs});
+    return updatedJob;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const markJobComplete = async (job: IJob, state: IState, updateState: Function): Promise<IJob> => {
+  try {
+    if (!state) throw new Error('NO STATE');
+    const response = await markComplete(job);
+    const updatedJob: IJob = response.data;
+    const updatedJobs: IJob[] = [...[...state.jobs].filter(j => j._id.toString() !== job._id), updatedJob];
+    await updateState({jobs: updatedJobs});
     return updatedJob;
   } catch (err) {
     throw err;
