@@ -15,13 +15,17 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
   const [loading, setLoading] = useState<boolean>(false);
   const { crews, assignJobToCrew, markJobComplete, job } = props;
   const { address, date, completed, crew } = job;
-  const [selectedCrew, setSelectedCrew] = useState<ICrew | null>(crew || null);
   
   // const servicePackage = props.servicePackage;
 
   const handleCrewSelect = async (thisCrew: ICrew | {_id: undefined}) => {
-    assignJobToCrew(thisCrew._id, props.job)
-    setSelectedCrew(thisCrew._id ? thisCrew : null);
+    try {
+      setLoading(true);
+      await assignJobToCrew(thisCrew._id, props.job);
+      setLoading(false);
+    } catch (err) {
+      throw err;
+    }
   };
 
   const handleConfirm = async () => {
@@ -44,15 +48,15 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
       <h4>{address}</h4>
       <h4 className='jobcard-date'><span>{formattedDate[0]}</span><span>{formattedDate.slice(1).join(' ')}</span></h4> 
       <div className='jobcard-crew'>
-        {selectedCrew ? 
-          (<Image alt={selectedCrew.foreman_name} src={selectedCrew.avatar || 'https://www.pngfind.com/pngs/m/154-1540407_png-file-svg-silhouette-of-head-and-shoulders.png'} />) : 
+        {crew ? 
+          (<Image alt={crew.foreman_name} src={crew.avatar || 'https://www.pngfind.com/pngs/m/154-1540407_png-file-svg-silhouette-of-head-and-shoulders.png'} />) : 
           (<span className='crew-image' />)
         }
-        <p>{selectedCrew ? selectedCrew.foreman_name : 'No crew assigned'}</p>
-        <CrewSelector disabled={completed} crews={crews} onSelect={handleCrewSelect} selectedCrew={selectedCrew}/>
+        <p>{crew ? crew.foreman_name : 'No crew assigned'}</p>
+        <CrewSelector disabled={completed} crews={crews} onSelect={handleCrewSelect} selectedCrew={crew ? crew : null}/>
       </div>
         {markJobComplete && 
-        <Button disabled={confirm || completed || !selectedCrew}
+        <Button disabled={confirm || completed || !crew}
           className='jobcard-complete-button' 
           onClick={toggleConfirm}
         > 

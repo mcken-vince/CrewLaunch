@@ -3,7 +3,15 @@
 
 .jobs-container {
   @include pageStyles;
-  
+  .jobs-page-header {
+    width: 90vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .accordion {
+      width: 15em;
+    }
+  }
   .jobs-grid {
     width: 100%;
     display: grid;
