@@ -1,0 +1,7 @@
+@import 'variables';
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px $accent-color1 dotted;
+}

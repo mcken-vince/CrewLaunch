@@ -17,23 +17,21 @@ const jobsRoutes = (Job: Model<IJob>) => {
     });
   });
 
-  router.post('/:id', (req, res) => {
+  router.post('/:id', async (req, res) => {
     const update: IJob = req.body;
-
-    Job.findOne({
-      id: req.params.id
-    })
+    const query = { _id: req.params.id };
+    await Job.findOneAndUpdate(
+      query,
+      {
+        contract_id: update.contract_id,
+        crew_id: update.crew_id,
+        date: update.date,
+        completed: update.completed
+      },
+      { new: true }
+    )
     .then(job => {
-      if (!job) {
-        throw Error('Error updating nonexistent job');
-      }
-      job.crew_id = update.crew_id;
-      job.date = update.date;
-      job.completed = update.completed;
-      return job.save()
-    })
-    .then(job => {
-      console.log('Job updated successfully');
+      console.log('Job updated successfully', job);
       res.json(job);
     })
     .catch(err => {

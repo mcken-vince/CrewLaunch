@@ -7,9 +7,10 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import JobCard from './JobCard';
 import { getMonthObject } from '../helpers/dataFormatters';
+import { ICrew } from '../definitions';
 
-const DispatchCalendar: FC<any> = (props): ReactElement => {
-  const { jobs } = props;
+const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement => {
+  const { jobs, crews, assignJobToCrew } = props;
   const [showDayDetails, setShowDayDetails] = useState<IShowDayDetails>({show: false, day: {date: 0, jobs: []}});
   
   const today: Date = new Date();
@@ -23,7 +24,7 @@ const DispatchCalendar: FC<any> = (props): ReactElement => {
   
   const selectedDayJobs: ReactElement[] = showDayDetails.day.jobs && showDayDetails.day.jobs.map((job, idx) => {
     console.log('job: ', job);
-    return (<JobCard key={idx} job={job} />);
+    return (<JobCard key={idx} job={job} crews={crews} assignJobToCrew={assignJobToCrew}/>);
   });
   
   
@@ -99,4 +100,10 @@ interface ISelectedDay {
 interface IShowDayDetails {
   show: boolean;
   day: ISelectedDay;
+};
+
+export interface DispatchCalendarProps {
+  jobs: IJobLocal[];
+  crews: ICrew[];
+  assignJobToCrew: Function;
 };

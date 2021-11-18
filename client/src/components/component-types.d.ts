@@ -3,10 +3,6 @@ import { IClient, IPackage, IJob, IContract, ICrew } from '../definitions';
 import { ReactDatePickerProps } from 'react-datepicker';
 import { EventHandler } from 'react';
 
-export interface DispatchCalendarProps {
-  jobs: IJobLocal[];
-};
-
 export interface PackagesOffcanvasProps {
   show: boolean;
   handleClose: Function;

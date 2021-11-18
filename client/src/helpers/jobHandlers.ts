@@ -7,6 +7,20 @@ const createNewJob = (job: IJobLocal): Promise<AxiosResponse<IJob>> => {
   return axios.post('/jobs', job);
 };
 
+const assignJob = (job: IJob, crewId: string): Promise<AxiosResponse<IJob>> => {
+ 
+  const updatedJob: IJob = {
+    _id: job._id,
+    contract_id: job.contract_id,
+    date: job.date,
+    completed: job.completed,
+  };
+  if (crewId) {
+    updatedJob.crew_id = crewId;
+  }
+  return axios.post(`/jobs/${job._id}`, updatedJob);
+};
+
 export const generateJobsFromContract = async (contract: IContractLocal): Promise<IJobLocal[]> => {
   try {
     const start: Date = new Date(contract.start_date);
@@ -55,8 +69,14 @@ export const handleJobCreation = async (contract: IContractLocal, state: IState,
   }
 };
 
-export const assignJobToCrew = (crewId: string, job: IJob, state: IState, updateState: Function) => {
-  const updatedJob = {...job, crew_id: crewId};
-  const updatedJobs = [...[...state.jobs].filter(j => j._id.toString() !== job._id), updatedJob];
-  updateState({jobs: updatedJobs});
+export const assignJobToCrew = async (crewId: string, job: IJob, state: IState, updateState: Function): Promise<IJob> => {
+  try {
+    const response = await assignJob(job, crewId);
+    const updatedJob = response.data;
+    const updatedJobs = [...[...state.jobs].filter(j => j._id.toString() !== job._id), updatedJob];
+    updateState({jobs: updatedJobs});
+    return updatedJob;
+  } catch (err) {
+    throw err;
+  }
 };

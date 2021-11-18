@@ -6,12 +6,13 @@
   background-color: $bg-color2;
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
-
   border-radius: 10px 10px;
   
   .jobcard-crew {
-
+    
     img {
+      background-color: $accent-color1;
+      border-radius: 50% 50%;
       height: 5em;
       width: 5em;
     }
