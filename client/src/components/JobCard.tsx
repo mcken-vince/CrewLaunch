@@ -35,9 +35,12 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
       <h4>{address}</h4>
       <h4>{format(new Date(date), 'MMMM dd, yyyy')}</h4> 
       <div className='jobcard-crew'>
-        <Image alt={selectedCrew ? selectedCrew.foreman_name : 'avatar'} src={selectedCrew ? selectedCrew.avatar : 'https://www.pngfind.com/pngs/m/154-1540407_png-file-svg-silhouette-of-head-and-shoulders.png'} />
+        {selectedCrew ? 
+          (<Image alt={selectedCrew.foreman_name} src={selectedCrew.avatar || 'https://www.pngfind.com/pngs/m/154-1540407_png-file-svg-silhouette-of-head-and-shoulders.png'} />) : 
+          (<span className='crew-image' />)
+        }
         <p>{selectedCrew ? selectedCrew.foreman_name : 'No crew assigned'}</p>
-        <CrewSelector crews={crews} onSelect={handleCrewSelect}/>
+        <CrewSelector crews={crews} onSelect={handleCrewSelect} selectedCrew={selectedCrew}/>
       </div>
         <Button disabled={confirm || completed}
           className='jobcard-complete-button' 
