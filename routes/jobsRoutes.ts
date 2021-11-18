@@ -31,7 +31,7 @@ const jobsRoutes = (Job: Model<IJob>) => {
       { new: true }
     )
     .then(job => {
-      console.log('Job updated successfully', job);
+      console.log('Job updated successfully');
       res.json(job);
     })
     .catch(err => {
