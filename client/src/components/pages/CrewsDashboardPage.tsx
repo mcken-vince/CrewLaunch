@@ -1,12 +1,17 @@
 import { MouseEventHandler, useEffect, useState } from 'react';
-import { ICrew, IUser } from '../../definitions';
+import { ICrew, IJob, IUser } from '../../definitions';
 import useAppData from '../../hooks/useAppData';
 import '../../styles/CrewsDashboardPage.scss';
 import CrewsNav from '../CrewsNav';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, Route, Switch } from 'react-router-dom';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import classNames from 'classnames';
+import EditProfileForm from '../forms/EditProfileForm';
+import { getCrewJobsWithDetails } from '../../helpers/dataCombiners';
+import { IJobLocal } from '../component-types';
+import CrewJobsPage from './CrewJobsPage';
+import { assignJobToCrew, markJobComplete } from '../../helpers/jobHandlers';
 
 const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
   const params: {id: string | undefined} = useParams();
@@ -19,13 +24,31 @@ const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
     const findCrew = state && state.crews.filter(c => c._id.toString() === crewId)[0];
     setCrew(findCrew);
   }, [state, crewId]);
-  
+
+
   const statusClasses = classNames('crew-status', crew && {'active-crew': crew.is_active, 'inactive-crew': !crew.is_active});
 
+  const jobs: IJobLocal[] = (state && crewId) ? getCrewJobsWithDetails(crewId, state.crews, state.jobs, state.packages, state.contracts, state.clients) : [];
+
   return (<>
-    <CrewsNav onLogout={onLogout} user={user}/>
-    {crew && 
-      <div className='crews-dashboard-container'>
+    <CrewsNav onLogout={onLogout} user={user} crew={crew}/>
+    <div className='crews-dashboard-container'>
+    {crew && <>
+    <Switch>
+      <Route path='/crews/:id/edit'>
+        <EditProfileForm crew={crew}/>
+      </Route>
+      
+      <Route path='/crews/:id/jobs'>
+        <CrewJobsPage 
+          jobs={jobs} 
+          assignJobtoCrew={(crewId: string, job: IJob) => state && assignJobToCrew(crewId, job, state, updateState)} 
+          markJobComplete={(job: IJob) => state && markJobComplete(job, state, updateState)}
+        />
+      </Route>
+      
+      <Route path='/crews/:id'>
+      
         <h1>Welcome, {crew.foreman_name}.</h1>
         <div className='profile'>
           <div className='profile-details'>
@@ -35,8 +58,10 @@ const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
           </div>
         <Button className='edit-profile-button'><Link to={`/crews/${crewId}/edit`}>Edit Profile</Link></Button>
         </div>
-      </div>
-    }
+      </Route>
+      </Switch>
+    </>}
+    </div>
   </>);
 };
 

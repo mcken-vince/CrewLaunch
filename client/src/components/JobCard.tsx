@@ -54,7 +54,7 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
           (<span className='crew-image' />)
         }
         <p>{crew ? crew.foreman_name : 'No crew assigned'}</p>
-        <CrewSelector disabled={completed} crews={crews} onSelect={handleCrewSelect} selectedCrew={crew ? crew : null}/>
+        {crews && <CrewSelector disabled={completed} crews={crews || []} onSelect={handleCrewSelect} selectedCrew={crew ? crew : null}/>}
       </div>
       <Button disabled={confirm || completed || !crew}
         className='jobcard-complete-button' 
@@ -72,7 +72,7 @@ export default JobCard;
 
 export interface JobCardProps {
   job: IJobLocal;
-  crews: ICrew[];
+  crews?: ICrew[];
   assignJobToCrew: Function;
   markJobComplete: Function;
 };

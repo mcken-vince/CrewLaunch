@@ -3,12 +3,14 @@ import '../styles/CrewsNav.scss';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import { NavLink, Link, useHistory } from 'react-router-dom';
-import { IUser } from '../definitions';
+import { ICrew, IUser } from '../definitions';
+import { Nav } from 'react-bootstrap';
+import { markJobComplete } from '../helpers/jobHandlers';
 
 
 const CrewsNav = (props: CrewsNavProps) => {
   const history = useHistory();
-  const { user, onLogout } = props;
+  const { user, crew, onLogout } = props;
   
   return (
     <Navbar className="crews-nav">
@@ -16,7 +18,7 @@ const CrewsNav = (props: CrewsNavProps) => {
       
       <div className="crews-nav-right">
 
-        <div className='nav-buttons'>
+        <div className='crews-nav-buttons'>
           {user && user.email ? (
             <>
               <span>{user.email}</span>
@@ -34,10 +36,13 @@ const CrewsNav = (props: CrewsNavProps) => {
             </>)
           }
         </div>
-          {user && user.email && 
-          <div className='crews-nav-links'>  
-            
-          </div>}
+          {user && user.email && crew &&
+            <div className='crews-nav-links'>  
+              <Nav.Link as={NavLink} to={`/crews/${crew._id}/jobs`}>My Jobs</Nav.Link>
+              <Nav.Link as={NavLink} to={`/crews/${crew._id}`}>Dashboard</Nav.Link>
+              
+            </div>
+          }
       </div>
     </Navbar>
   );
@@ -48,4 +53,5 @@ export default CrewsNav;
 export interface CrewsNavProps {
   user?: IUser;
   onLogout: MouseEventHandler<HTMLButtonElement>;
+  crew: ICrew | null;
 };
