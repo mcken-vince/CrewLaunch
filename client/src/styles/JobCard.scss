@@ -48,10 +48,15 @@
 
     .jobcard-complete-button {  
       align-self: flex-end;
+      margin: 0;
     }
   }
 
   @media (max-width: $sm) {
     grid-template-columns: 100%;
+    
+    .jobcard-complete-button {
+      margin: .3em 0em;
+    }
   }
 }

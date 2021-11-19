@@ -2,10 +2,8 @@ import JobCard from "../JobCard";
 import '../../styles/JobsPage.scss';
 import { IJobLocal } from "../component-types";
 import { IAlert, ICrew } from "../../definitions";
-
 import { ChangeEvent, useState } from "react";
 import { Alert, Form } from "react-bootstrap";
-import Accordion from 'react-bootstrap/Accordion';
 import classNames from "classnames";
 import CustomSearchBar from "../CustomSearchBar";
 
@@ -25,7 +23,7 @@ const JobsPage = (props: JobsPageProps) => {
       return 'Error marking job complete';
     }
   };
-
+  // Radio 'Filter by:'
   let filterFn;
   switch(checked) {
     case 'completed':
