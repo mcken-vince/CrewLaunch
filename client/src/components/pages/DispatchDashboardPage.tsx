@@ -18,10 +18,11 @@ import { handleCrewCreation, handleCrewDeletion } from '../../helpers/crewHandle
 import ClientsPage from './ClientsPage';
 import JobsPage from './JobsPage';
 import { assignJobToCrew, markJobComplete } from '../../helpers/jobHandlers';
+import DispatchNav from '../DispatchNav';
 
 const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
   const {state, updateState} = useAppData();
-  // const { user, onLogout } = props;
+  const { user, onLogout } = props;
 
   const handleSubmit = (resource: any) => {
     return new Promise((resolve, reject) => {
@@ -40,7 +41,7 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
 
   return (
       <div className='dispatch-dashboard-container'> 
-
+        <DispatchNav user={user} onLogout={onLogout}/>
           <Switch>
             <Route path={`/dispatch/crews/new`}>
               <CrewForm onSubmit={(crew: ICrew) => {state && handleCrewCreation(crew, state, updateState)}} editCrew={null}/>

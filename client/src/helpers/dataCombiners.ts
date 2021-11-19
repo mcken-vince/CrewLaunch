@@ -1,5 +1,5 @@
 import { IJob, IContract, IPackage, IClient, ICrew } from "../definitions";
-import { IClientLocal, IContractLocal, IJobLocal } from "../components/component-types";
+import { IClientLocal, IContractLocal, ICrewLocal, IJobLocal } from "../components/component-types";
 
 
 /**
@@ -45,4 +45,10 @@ export const getClientsWithContracts = (clients: IClient[], contracts: IContract
     return {...client, contracts: thisClientsContracts};
   });
   return clientsWithContracts;
+};
+
+export const getCrewJobsWithDetails = (crewId: string, crews: ICrew[], jobs: IJob[], packages: IPackage[], contracts: IContract[], clients: IClient[]): IJobLocal[] => {
+  const crewJobs = jobs.filter(j => j.crew_id === crewId);
+  const crewJobsWithDetails = getJobsWithDetails(crewJobs, contracts, packages, crews);
+  return crewJobsWithDetails;
 };
