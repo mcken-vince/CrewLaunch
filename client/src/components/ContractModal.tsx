@@ -1,4 +1,5 @@
 import { Modal } from "react-bootstrap"
+import { IContractLocal } from "./component-types";
 
 const ContractModal = (props: ContractModalProps) => {
 
@@ -12,5 +13,5 @@ const ContractModal = (props: ContractModalProps) => {
 export default ContractModal;
 
 export interface ContractModalProps {
-
+  contract: IContractLocal;
 };
