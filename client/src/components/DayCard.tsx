@@ -8,14 +8,13 @@ const DayCard: FC<DayCardProps> = (props): ReactElement => {
   const { date, jobs, selectDay } = props;
 
 
-  const dayCardClass = classNames('daycard-container', {'daycard-container-empty': !jobs});
+  const dayCardClass = classNames('daycard-container', {'daycard-container-empty': !jobs || jobs.length <= 0});
   const completeJobs = jobs && jobs.filter((job) => job.completed);
   
   return (
     <div key={date} className={dayCardClass} onClick={selectDay} >
-      <h3>{date}</h3>
-      {jobs && completeJobs && <h3>{completeJobs.length}/{jobs.length}</h3>}
-      
+      <h3 className='daycard-date'>{date}</h3>
+      {jobs && completeJobs && <h3 className='daycard-jobcount'>{completeJobs.length}/{jobs.length}</h3>}
     </div>
   );
 };
