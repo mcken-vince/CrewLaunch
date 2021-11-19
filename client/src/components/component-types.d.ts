@@ -3,13 +3,6 @@ import { IClient, IPackage, IJob, IContract, ICrew } from '../definitions';
 import { ReactDatePickerProps } from 'react-datepicker';
 import { EventHandler } from 'react';
 
-export interface PackagesOffcanvasProps {
-  show: boolean;
-  handleClose: Function;
-  packages: IPackage[];
-  selectPackage: Function;
-};
-
 export interface IthisMonth {
   startsOn: number;
   name: string;
@@ -23,14 +16,6 @@ export interface DayCardProps {
   jobs?: IJobLocal[];
   key: number;
   selectDay?: VoidFunction<number>;
-};
-
-export interface DateRangePickerProps extends ReactDatePickerProps {
-  onChange: EventHandler<any>;
-  selected?: Date;
-  startDate: Date;
-  endDate: Date
-  inheritClassName? : string;
 };
 
 // Job interface used in CrewCard component

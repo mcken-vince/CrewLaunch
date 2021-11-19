@@ -1,4 +1,4 @@
-import { IContractLocal } from "../components/component-types";
+import { IContractLocal, IJobLocal } from "../components/component-types";
 import { IJob } from "../definitions";
 import { generateJobsFromContract } from "./jobHandlers";
 
@@ -21,7 +21,7 @@ const contract: IContractLocal = {
   }
 }
 describe('generateJobsFromContract()', () => {
-  let result: IJob[];
+  let result: IJobLocal[];
   generateJobsFromContract(contract)
   .then(res => result = res);
 

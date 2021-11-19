@@ -20,7 +20,7 @@ const CustomSearchBar: FC<CustomSearchBarProps> = (props): ReactElement => {
 
 export default CustomSearchBar;
 
-interface CustomSearchBarProps {
+export interface CustomSearchBarProps {
   value: string;
   onChange: Function;
   label?: string;

@@ -3,10 +3,11 @@ import { BrowserRouter as Router } from "react-router-dom";
 import DispatchNav, { DispatchNavProps } from "../components/DispatchNav";
 
 const testUser: {email: string, admin: boolean, password: string, name: string} = {email: 'test@email.com', admin: false, password: 'shouldntbehere', name: "Testy Testerson"};
+const onLogout = jest.fn();
 
 const renderDispatchNav = (props: Partial<DispatchNavProps> = {}) => {
   const defaultProps = {
-    onLogout: () => {},
+    onLogout,
     user: testUser
   };
   return render(
@@ -32,4 +33,9 @@ describe('DispatchNav component', () => {
     expect(screen.queryByTestId('signup-button')).not.toBeInTheDocument();
   });
 
+  it("calls onLogout when logout button is clicked", () => {
+    renderDispatchNav();
+    screen.getByText(/Log Out/).click();
+    expect(onLogout).toHaveBeenCalled();
+  });
 });
