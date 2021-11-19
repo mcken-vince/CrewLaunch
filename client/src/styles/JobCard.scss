@@ -45,9 +45,13 @@
 
   @media (max-width: $med) {
     grid-template-columns: 50% 50%;
+
+    .jobcard-complete-button {  
+      align-self: flex-end;
+    }
   }
 
   @media (max-width: $sm) {
-
+    grid-template-columns: 100%;
   }
 }
