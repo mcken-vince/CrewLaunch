@@ -22,9 +22,10 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
     try {
       setLoading(true);
       await assignJobToCrew(thisCrew._id, props.job);
-      setLoading(false);
     } catch (err) {
       throw err;
+    } finally {
+      setLoading(false);
     }
   };
 
