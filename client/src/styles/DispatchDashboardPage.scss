@@ -1,3 +1,5 @@
-.dispatch-dashboard-container {
+@import 'mixins';
 
+.dispatch-dashboard-container {
+  @include pageStyles;
 }

@@ -2,7 +2,8 @@
 @import 'variables';
 
 .crews-dashboard-container {
-
+  @include pageStyles;
+  
   .edit-profile-button {
     height:max-content;
     justify-self: center;
