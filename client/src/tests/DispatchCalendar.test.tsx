@@ -38,4 +38,16 @@ describe('DispatchCalendar component', () => {
     expect(await screen.findByText(new RegExp(months[prevMonth]))).toBeInTheDocument();
     expect(screen.getByText(new RegExp(prevMonthsYear.toString()))).toBeInTheDocument();
   });
+
+  it('switches back to current month when clicking "Today" button', async () => {
+    renderDispatchCalendar();
+    screen.getByText(/>/).click();
+    expect(await screen.findByText(new RegExp(months[nextMonth]))).toBeInTheDocument();
+    screen.getByText(/Today/i).click();
+    expect(await screen.findByText(new RegExp(months[currentMonth]))).toBeInTheDocument();
+
+  });
 });
+
+// needs a test to verify jobs are displayed when a day with jobs is clicked,
+// and a day contains '0/0' if no jobs are booked
