@@ -37,7 +37,7 @@ const CrewsPage: FC<CrewsPageProps> = (props): ReactElement => {
 
   return (
     <div className='crews-container'>
-      <h1>Crews: {crews.length}</h1>
+      <h1>Crews: {filteredCrews.length}/{crews.length}</h1>
       <Alert dismissible show={alert.show} variant={alertVariant} onClose={() => setAlert({show: false, type: true, message: ''})}>
         <Alert.Heading>{alert.message}</Alert.Heading>
       </Alert>

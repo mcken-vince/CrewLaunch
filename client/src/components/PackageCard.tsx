@@ -10,7 +10,7 @@ const PackageCard: FC<PackageCardProps> = (props): ReactElement => {
   const clearConfirm: IConfirm = {show: false, message: '', action: 'NONE'};
   const [confirm, setConfirm] = useState<IConfirm>(clearConfirm);
   const { onSelect, packageDetails, onEdit, onDelete } = props;
-  const { title, description, cost } = packageDetails;
+  const { title, description, cost, contract_length_days, visit_interval_days, man_hrs_per_visit } = packageDetails;
 
   const handleConfirm = () => {
     if (confirm.action === 'DELETE') {
@@ -37,6 +37,8 @@ const PackageCard: FC<PackageCardProps> = (props): ReactElement => {
         <Card.Title>{title}</Card.Title>
         <Card.Text>
           ${cost}.00 
+          <br/>
+          <b>{man_hrs_per_visit === 1 ? `${1}hour` : `${man_hrs_per_visit} hours`}</b> every <b>{visit_interval_days === 1 ? 'single day' : `${visit_interval_days} days`}</b> for <b>{contract_length_days} days</b>.
           <br/>
           {description}
         </Card.Text>
