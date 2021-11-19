@@ -3,13 +3,6 @@ import { IClient, IPackage, IJob, IContract, ICrew } from '../definitions';
 import { ReactDatePickerProps } from 'react-datepicker';
 import { EventHandler } from 'react';
 
-export interface PackagesOffcanvasProps {
-  show: boolean;
-  handleClose: Function;
-  packages: IPackage[];
-  selectPackage: Function;
-};
-
 export interface IthisMonth {
   startsOn: number;
   name: string;

@@ -1,7 +1,7 @@
 import { FC, ReactElement } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import PackageCard from '../components/PackageCard';
-import { PackagesOffcanvasProps } from '../components/component-types';
+import { IPackage } from '../definitions';
 import '../styles/PackagesOffcanvas.scss';
 
 const PackagesOffcanvas: FC<PackagesOffcanvasProps> = (props): ReactElement => {
@@ -24,3 +24,10 @@ const PackagesOffcanvas: FC<PackagesOffcanvasProps> = (props): ReactElement => {
 };
 
 export default PackagesOffcanvas;
+
+export interface PackagesOffcanvasProps {
+  show: boolean;
+  handleClose: Function;
+  packages: IPackage[];
+  selectPackage: Function;
+};
