@@ -5,7 +5,6 @@ import Button from 'react-bootstrap/Button';
 import { NavLink, Link, useHistory } from 'react-router-dom';
 import { ICrew, IUser } from '../definitions';
 import { Nav } from 'react-bootstrap';
-import { markJobComplete } from '../helpers/jobHandlers';
 
 
 const CrewsNav = (props: CrewsNavProps) => {
@@ -15,9 +14,7 @@ const CrewsNav = (props: CrewsNavProps) => {
   return (
     <Navbar className="crews-nav">
       <Link className='crews-nav-logo-link' to='/'><span className="crews-nav-logo">CrewLauncher</span></Link>
-      
       <div className="crews-nav-right">
-
         <div className='crews-nav-buttons'>
           {user && user.email ? (
             <>
