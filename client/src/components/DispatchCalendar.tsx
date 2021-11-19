@@ -1,6 +1,6 @@
 import DayCard from './DayCard';
 import '../styles/DispatchCalendar.scss';
-import { isEqual, addMonths, getDaysInMonth } from 'date-fns';
+import { isSameDay, addMonths, getDaysInMonth } from 'date-fns';
 import { IthisMonth, IJobLocal } from './component-types';
 import { useState, FC, ReactElement } from 'react';
 import Modal from 'react-bootstrap/Modal';
@@ -10,12 +10,12 @@ import { getMonthObject } from '../helpers/dataFormatters';
 import { ICrew } from '../definitions';
 
 const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement => {
-  const { jobs, crews, assignJobToCrew } = props;
   const [showDayDetails, setShowDayDetails] = useState<IShowDayDetails>({show: false, day: {date: 0, jobs: []}});
+  const { jobs, crews, assignJobToCrew, markJobComplete } = props;
   
   const today: Date = new Date();
-  
   const [selectedMonth, setSelectedMonth] = useState<IthisMonth>(getMonthObject(today));
+  
   
   // Opens a canvas of this day's jobs with details
   const selectDay = (date: number, jobs: IJobLocal[]): void => {
@@ -24,7 +24,7 @@ const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement =
   
   const selectedDayJobs: ReactElement[] = showDayDetails.day.jobs && showDayDetails.day.jobs.map((job, idx) => {
     console.log('job: ', job);
-    return (<JobCard key={idx} job={job} crews={crews} assignJobToCrew={assignJobToCrew}/>);
+    return (<JobCard markJobComplete={markJobComplete} key={idx} job={job} crews={crews} assignJobToCrew={assignJobToCrew}/>);
   });
   
   
@@ -34,10 +34,10 @@ const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement =
   const dayCards: ReactElement[] = [];
   for (let d = 1; d <= selectedMonth.days; d++) {
     const dayOfMonth: string = (0 < d && d < 10) ? `0${d}` : `${d}`;
-    const todayJobs: IJobLocal[] = jobs ? jobs.filter((job: IJobLocal) => isEqual(new Date(job.date), new Date(`${selectedMonth.name} ${d}, ${selectedMonth.year}`))) : [];
+    const todayJobs: IJobLocal[] = jobs ? jobs.filter((job: IJobLocal) => isSameDay(new Date(job.date), new Date(`${selectedMonth.name} ${d}, ${selectedMonth.year}`))) : [];
     dayCards.push(<DayCard date={dayOfMonth} key={d} jobs={todayJobs} selectDay={():void => selectDay(d, todayJobs)} />);
   };
-  
+
   const prevMonthDays = getDaysInMonth(addMonths(new Date(), -1))
   // Adds blank DayCards to beginning of dayCards list
   for (let blankDay = 1; blankDay <= selectedMonth.startsOn; blankDay++) {
@@ -106,4 +106,5 @@ export interface DispatchCalendarProps {
   jobs: IJobLocal[];
   crews: ICrew[];
   assignJobToCrew: Function;
+  markJobComplete: Function;
 };

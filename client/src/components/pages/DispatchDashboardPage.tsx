@@ -77,7 +77,7 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
             </Route>
 
             <Route path={`/dispatch`}>
-              <DispatchCalendar jobs={detailedJobs} crews={state ? state.crews : []} assignJobToCrew={(crewId: string, job: IJob) => state && assignJobToCrew(crewId, job, state, updateState)}/>
+              <DispatchCalendar jobs={detailedJobs} crews={state ? state.crews : []} assignJobToCrew={(crewId: string, job: IJob) => state && assignJobToCrew(crewId, job, state, updateState)} markJobComplete={(job: IJob) => state && markJobComplete(job, state, updateState)}/>
             </Route>
           </Switch>
 

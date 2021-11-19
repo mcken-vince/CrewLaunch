@@ -10,8 +10,8 @@
   border-radius: 20px 20px;
   height: max-content;
   align-self: flex-start;
+
   .dispatch-calendar-header {
-    
     display: flex;
     justify-content: center;
 
@@ -23,21 +23,17 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     min-width: 100%;
-    
 
     .weekday-container {
       border: 1px black solid;
       padding: 5px 0px 0px 0px;
-
       text-align: center;
       box-sizing: border-box;
-      
     }
     .daycard-container {
       margin: 5px;
       
       &:hover {
-
         box-shadow: 0 0 12px $border-color1;
         cursor: pointer;
       }

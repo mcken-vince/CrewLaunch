@@ -56,15 +56,14 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
         <p>{crew ? crew.foreman_name : 'No crew assigned'}</p>
         <CrewSelector disabled={completed} crews={crews} onSelect={handleCrewSelect} selectedCrew={crew ? crew : null}/>
       </div>
-        {markJobComplete && 
-        <Button disabled={confirm || completed || !crew}
-          className='jobcard-complete-button' 
-          onClick={toggleConfirm}
-        > 
-          {loading ? <Spinner animation='border'/> : buttonText}
+      <Button disabled={confirm || completed || !crew}
+        className='jobcard-complete-button' 
+        onClick={toggleConfirm}
+      > 
+        {loading ? <Spinner animation='border'/> : buttonText}
           
-        </Button>}
-        <ConfirmAlert show={confirm} message='Mark this job as complete?' onConfirm={handleConfirm} onCancel={toggleConfirm}/>
+      </Button>
+      <ConfirmAlert show={confirm} message='Mark this job as complete?' onConfirm={handleConfirm} onCancel={toggleConfirm}/>
     </Card>
   );
 };
@@ -75,5 +74,5 @@ export interface JobCardProps {
   job: IJobLocal;
   crews: ICrew[];
   assignJobToCrew: Function;
-  markJobComplete?: Function;
+  markJobComplete: Function;
 };

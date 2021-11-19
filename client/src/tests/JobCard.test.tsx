@@ -19,6 +19,7 @@ const renderJobCard = (props: Partial<JobCardProps> = {}) => {
 };
 
 describe('<JobCard />', () => {
+  // This is a hack to silence the 'not wrapped in act' warning
   const originalError = console.error
   beforeAll(() => {
     console.error = (...args) => {
