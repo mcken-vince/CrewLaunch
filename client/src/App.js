@@ -39,7 +39,7 @@ function App() {
     <div className="App">
 
       <Router basename={'/'}>
-        <DispatchNav user={user} onLogout={handleLogout}/>
+        {!user && <DispatchNav user={user} onLogout={handleLogout}/>}
             <Switch>
               <Route path="/login">
                 <LoginForm onLogin={handleLogin} /> 
