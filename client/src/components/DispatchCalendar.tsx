@@ -16,7 +16,6 @@ const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement =
   const today: Date = new Date();
   const [selectedMonth, setSelectedMonth] = useState<IthisMonth>(getMonthObject(today));
   
-  
   // Opens a canvas of this day's jobs with details
   const selectDay = (date: number, jobs: IJobLocal[]): void => {
     setShowDayDetails({show: true, day: {date: date, jobs: jobs}});
@@ -38,7 +37,7 @@ const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement =
     dayCards.push(<DayCard date={dayOfMonth} key={d} jobs={todayJobs} selectDay={():void => selectDay(d, todayJobs)} />);
   };
 
-  const prevMonthDays = getDaysInMonth(addMonths(new Date(), -1))
+  const prevMonthDays: number = getDaysInMonth(addMonths(new Date(), -1));
   // Adds blank DayCards to beginning of dayCards list
   for (let blankDay = 1; blankDay <= selectedMonth.startsOn; blankDay++) {
     dayCards.unshift(<DayCard date={(prevMonthDays + 1 - blankDay).toString()} key={blankDay + selectedMonth.days} />);
