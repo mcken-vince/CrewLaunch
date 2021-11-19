@@ -1,3 +1,6 @@
+@import 'mixins';
+@import 'variables';
+
 .daycard-container {
   border: 1px black solid;
   border-radius: 7px 7px;
@@ -6,9 +9,43 @@
   text-align: right;
   box-sizing: border-box;
   height: 6rem; 
+
+  &.daycard-container-empty {
+    .daycard-jobcount {
+      color: white;
+    }  
+  }
+  
+  .daycard-date {
+    color: black;
+  }
+  .daycard-jobcount {
+    color: $accent-color1;
+  }
   .daycard-job-li {
     &.daycard-job-li-complete {
       text-decoration: line-through;
+    }
+  }
+
+  @media (max-width: $sm) {
+    padding: 2px;
+    height: 3rem;
+    font-size: 12em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    // width: max-content;
+    * {
+      margin: 0;
+    }
+    .daycard-date {
+      font-size: .1em;
+    }
+    .daycard-jobcount {
+      font-size: .08em;
+      text-align: left;
     }
   }
 }

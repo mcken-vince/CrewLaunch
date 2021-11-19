@@ -26,7 +26,6 @@ const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement =
     return (<JobCard markJobComplete={markJobComplete} key={idx} job={job} crews={crews} assignJobToCrew={assignJobToCrew}/>);
   });
   
-  
   const week: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const daysOfWeek: ReactElement[] = week.map((wd, idx) => <div key={idx} className='weekday-container'><h3>{wd}</h3></div>);
   
@@ -69,10 +68,12 @@ const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement =
   return (
     <div className='dispatch-calendar-container'>
       <div className='dispatch-calendar-header'>
-      <Button onClick={selectCurrentMonth}>Today</Button>
-      <Button onClick={selectPreviousMonth}>{'<'}</Button>
       <h1 className='dispatch-calendar-title'>{`${selectedMonth.name} ${selectedMonth.year}`}</h1>
-      <Button onClick={selectNextMonth}>{'>'}</Button>
+        <div className='dispatch-calendar-buttons'>
+          <Button onClick={selectCurrentMonth}>Today</Button>
+          <Button onClick={selectPreviousMonth}>{'<<<'}</Button>
+          <Button onClick={selectNextMonth}>{'>>>'}</Button>
+        </div>
       </div>
       <div className='dispatch-calendar-days-container'>
         {daysOfWeek}

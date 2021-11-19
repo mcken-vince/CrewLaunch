@@ -1,15 +1,14 @@
 @import 'variables';
+@import 'mixins';
 
 .dispatch-calendar-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 50em;
-  min-width: fit-content;
+  max-width: 100%;
   border: 5px solid $border-color1;
   border-radius: 20px 20px;
-  height: max-content;
-  align-self: flex-start;
+  height: fit-content;
+  align-items: center;
 
   .dispatch-calendar-header {
     display: flex;
@@ -21,8 +20,10 @@
   }
   .dispatch-calendar-days-container {
     display: grid;
+    gap: $grid-gap;
     grid-template-columns: repeat(7, 1fr);
-    min-width: 100%;
+    width: 100%;
+
 
     .weekday-container {
       border: 1px black solid;
@@ -31,14 +32,39 @@
       box-sizing: border-box;
     }
     .daycard-container {
-      margin: 5px;
       
       &:hover {
         box-shadow: 0 0 12px $border-color1;
         cursor: pointer;
       }
-
     }
   }
 
+  @media (max-width: $sm) {
+
+    .dispatch-calendar-header {
+      flex-direction: column;
+      width: 90vw;
+
+      button {
+        height: max-content;
+        align-self: center;
+        margin: 1px;
+      }
+    }
+    .dispatch-calendar-days-container {
+      gap: 1px;
+
+      .weekday-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 3px;
+        
+        h3 {
+          font-size: .9em;
+        }
+      }
+    }
+  }
 }

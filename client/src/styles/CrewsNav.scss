@@ -7,7 +7,7 @@ $logo-shadow: 0 0 10px white;
   position: sticky;
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-self: center;
   align-items: center;
   padding: 1em;
@@ -39,11 +39,11 @@ $logo-shadow: 0 0 10px white;
     margin-left: auto; 
 
     .crews-nav-links {
-      // display: flex;
-      // flex-direction: row;
+      display: flex;
+      flex-direction: row;
       a.nav-link {
         width: max-content;
-        // margin-left: .5em;
+        margin-left: .5em;
         justify-self: center;
 
         color: white;
