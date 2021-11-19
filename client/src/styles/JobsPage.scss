@@ -3,7 +3,20 @@
 
 .jobs-container {
   @include pageStyles;
-  
+  .jobs-page-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    .radio-filters {
+      width: 100%;
+      border-radius: 5px;
+      border: 1px $bg-color2 dotted;
+      padding: 1em 0em;
+      margin-bottom: .5em;
+    }
+  }
   .jobs-grid {
     width: 100%;
     display: grid;
