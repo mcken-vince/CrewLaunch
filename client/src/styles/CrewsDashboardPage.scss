@@ -1,0 +1,41 @@
+@import 'mixins';
+@import 'variables';
+
+.crews-dashboard-container {
+  display: flex;
+  flex-direction: column;
+  .edit-profile-button {
+    height:max-content;
+    justify-self: center;
+    
+    a {
+      color: white;
+      text-decoration: none;
+    }
+  }
+  .profile {
+    border: 5px $accent-color1 dotted;
+    padding: 1em;
+    border-radius: $card-border-radius;
+    display: flex;
+    justify-content: space-between;
+    .crew-status {
+      border: 1px $accent-color1 solid;
+      padding: .25em;
+      border-radius: 20px 20px;
+      color: white;
+      &.active-crew {
+        background-color: green;
+      }
+      &.inactive-crew {
+        background-color: gray;
+      }
+    }
+    img {
+      height: 50vw;
+      width: 50vw;
+      border-radius: 50%;
+      background-color: $accent-color1;
+    }
+  }
+}

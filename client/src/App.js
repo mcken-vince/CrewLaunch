@@ -50,15 +50,15 @@ function App() {
                
               <Route path="/crews/:id">
                 {user ?
-                <CrewsDashboardPage user={user}  /> :
-                <Redirect to='/'/>
+                  <CrewsDashboardPage user={user} onLogout={handleLogout} /> :
+                  <Redirect to='/'/>
                 }
               </Route>
 
               <Route path="/dispatch" user={user}>
                 {user ?
-                <DispatchDashboardPage onLogout={handleLogout} user={user} /> :
-                <Redirect to='/'/>
+                  <DispatchDashboardPage onLogout={handleLogout} user={user} /> :
+                  <Redirect to='/'/>
                 }
               </Route>
 
@@ -68,8 +68,8 @@ function App() {
                   {!user ? <h3>Sign up to create a new account, <br/>or sign in with an existing account.</h3> :
                     <>
                       <Link to="/dispatch">Dispatch</Link> <br/>
-                      <Link to="/crews/1">Crew #1</Link> <br/>
-                      <Link to="/crews/2">Crew #2</Link>
+                      <Link to="/crews/618ecaaf90dc0d9a157ef3b6">Crew #1</Link> <br/>
+                      <Link to="/crews/61954b251808e29044c4cf03">Crew #2</Link>
                     </>
                   }
                 </div>
