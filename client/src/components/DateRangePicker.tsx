@@ -1,7 +1,6 @@
-import { FC, ReactElement } from 'react';
-import DatePicker from 'react-datepicker';
+import { EventHandler, FC, ReactElement } from 'react';
+import DatePicker, { ReactDatePickerProps } from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import { DateRangePickerProps } from './component-types';
 
 
 const DateRangePicker: FC<DateRangePickerProps> = (props): ReactElement => {
@@ -21,3 +20,11 @@ const DateRangePicker: FC<DateRangePickerProps> = (props): ReactElement => {
 };
 
 export default DateRangePicker;
+
+export interface DateRangePickerProps extends ReactDatePickerProps {
+  onChange: EventHandler<any>;
+  selected?: Date;
+  startDate: Date;
+  endDate: Date
+  inheritClassName? : string;
+};

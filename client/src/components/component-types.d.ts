@@ -18,14 +18,6 @@ export interface DayCardProps {
   selectDay?: VoidFunction<number>;
 };
 
-export interface DateRangePickerProps extends ReactDatePickerProps {
-  onChange: EventHandler<any>;
-  selected?: Date;
-  startDate: Date;
-  endDate: Date
-  inheritClassName? : string;
-};
-
 // Job interface used in CrewCard component
 // Includes address & jobNotes
 export interface IJobLocal {
