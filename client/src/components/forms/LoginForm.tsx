@@ -4,7 +4,7 @@ import axios from 'axios';
 import { FormEventHandler, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
-const LoginForm = (props: any) => {
+const LoginForm = (props: LoginFormProps) => {
   const onLogin = props.onLogin;
   const blankUser = {email: '', password: '', privileges: ''};
   const [user, setUser] = useState(blankUser);
@@ -61,10 +61,14 @@ const LoginForm = (props: any) => {
           <InputGroup.Text>Password:</InputGroup.Text>
           <Form.Control className='login-form-password' value={user.password} onChange={(e) => setUser(prev => ({...prev, password: e.target.value}))} name='password' type='password' placeholder='Enter password'/>
         </InputGroup>
-        <Button className='login-form-submit form-submit' disabled={!fieldsFilled} type='submit'>{loading ? <Spinner animation='border' /> : 'Login'}</Button>
+        <Button data-testid='login' className='login-form-submit form-submit' disabled={!fieldsFilled} type='submit'>{loading ? <Spinner animation='border' /> : 'Login'}</Button>
       </Form>
     </div>
   );
 };
 
 export default LoginForm;
+
+export interface LoginFormProps {
+  onLogin: Function;
+};

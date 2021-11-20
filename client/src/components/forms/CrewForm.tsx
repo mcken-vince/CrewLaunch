@@ -72,19 +72,14 @@ const CrewForm: FC<CrewFormProps> = (props): ReactElement => {
         </div>
           <Image src={avatar} alt='avatar preview'/>
       </div>
-  
+
           <Form.Label>Status:</Form.Label>
           <InputGroup className='mb-3'>
             <Form.Check disabled={loading} type="checkbox" checked={isActive} onChange={(e) => setIsActive(prev => !prev)} label="Active crew" />
           </InputGroup>
-    
-   
-
-      
       <Button className='crew-form-submit form-submit' disabled={!loading && !formFilled} type='submit' onClick={validate}>
       {loading ? <Spinner animation='border' variant='primary' /> : 'Submit'}
       </Button>
-  
     </Form>
   </div>
   );
