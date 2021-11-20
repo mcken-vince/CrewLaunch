@@ -92,7 +92,7 @@ const CrewForm: FC<CrewFormProps> = (props): ReactElement => {
 
 export default CrewForm;
 
-interface CrewFormProps {
+export interface CrewFormProps {
   onSubmit: Function;
   editCrew: ICrew | null;
 };
