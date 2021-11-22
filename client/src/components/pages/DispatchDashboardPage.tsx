@@ -1,7 +1,7 @@
 import '../../styles/DispatchDashboardPage.scss';
 import { MouseEventHandler, useMemo } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { ICrew, IJob, IPackage, IUser } from '../../definitions';
+import { ICrew, IJob, IPackage, IUserLocal } from '../../definitions';
 import { IClientLocal, IContractLocal, IJobLocal } from '../component-types';
 import DispatchCalendar from '../DispatchCalendar';
 import ContractForm from '../forms/ContractForm';
@@ -89,6 +89,6 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
 export default DispatchDashboardPage;
 
 export interface DispatchDashboardPageProps {
-  user: IUser;
+  user: IUserLocal;
   onLogout: MouseEventHandler<HTMLButtonElement>;
 };

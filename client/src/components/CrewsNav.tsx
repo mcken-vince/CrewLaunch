@@ -3,7 +3,7 @@ import '../styles/CrewsNav.scss';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import { NavLink, Link, useHistory } from 'react-router-dom';
-import { ICrew, IUser } from '../definitions';
+import { ICrew, IUserLocal } from '../definitions';
 import { Nav } from 'react-bootstrap';
 
 
@@ -48,7 +48,7 @@ const CrewsNav = (props: CrewsNavProps) => {
 export default CrewsNav;
 
 export interface CrewsNavProps {
-  user?: IUser;
+  user?: IUserLocal;
   onLogout: MouseEventHandler<HTMLButtonElement>;
   crew: ICrew | null;
 };

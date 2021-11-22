@@ -1,5 +1,5 @@
 import { MouseEventHandler, useEffect, useState } from 'react';
-import { ICrew, IJob, IUser } from '../../definitions';
+import { ICrew, IJob,  IUserLocal } from '../../definitions';
 import useAppData from '../../hooks/useAppData';
 import '../../styles/CrewsDashboardPage.scss';
 import CrewsNav from '../CrewsNav';
@@ -69,5 +69,5 @@ export default CrewsDashboardPage;
 
 export interface CrewsDashboardPageProps {
   onLogout: MouseEventHandler<HTMLButtonElement>;
-  user: IUser;
+  user: IUserLocal;
 };

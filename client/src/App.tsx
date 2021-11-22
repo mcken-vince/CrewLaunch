@@ -6,10 +6,11 @@ import DispatchDashboardPage from './components/pages/DispatchDashboardPage';
 import LoginForm from './components/forms/LoginForm';
 import RegisterForm from './components/forms/RegisterForm';
 import DispatchNav from './components/DispatchNav';
+import { IUserLocal } from './definitions';
 
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<IUserLocal | undefined>(undefined);
 
   // const Data = React.createContext(state);
   // const DataUpdate = React.createContext(updateState);
@@ -25,13 +26,13 @@ function App() {
     });
   }, []);
 
-  const handleLogin = (email, admin) => {
+  const handleLogin = (email: string, admin: boolean) => {
     setUser({email, admin});
     sessionStorage.setItem('user', JSON.stringify({email, admin}));
   };
 
   const handleLogout = () => {
-    setUser(null);
+    setUser(undefined);
     sessionStorage.removeItem('user');
   };
 
@@ -55,7 +56,7 @@ function App() {
                 }
               </Route>
 
-              <Route path="/dispatch" user={user}>
+              <Route path="/dispatch" >
                 {user ?
                   <DispatchDashboardPage onLogout={handleLogout} user={user} /> :
                   <Redirect to='/'/>
