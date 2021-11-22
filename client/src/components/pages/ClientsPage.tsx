@@ -32,6 +32,6 @@ const ClientsPage = (props: ClientsPageProps): ReactElement => {
 
 export default ClientsPage;
 
-interface ClientsPageProps {
+export interface ClientsPageProps {
   clients: IClientLocal[];
 };
