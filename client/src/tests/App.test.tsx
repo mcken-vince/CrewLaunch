@@ -7,7 +7,7 @@ import userEvent from '@testing-library/user-event';
 jest.mock('axios');
 
 describe('App', () => {
-  it('fetches data from the database', () => {
+  it('renders without crashing', () => {
 
     render(<App />);
     expect(screen.getByText(/Crew Launcher/)).toBeInTheDocument();
