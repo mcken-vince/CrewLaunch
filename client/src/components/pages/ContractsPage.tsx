@@ -36,6 +36,8 @@ const ContractsPage: FC<ContractsPageProps> = (props): ReactElement => {
     };
     const prefilteredContracts: IContractLocal[] = filterFn ? contracts.filter(filterFn) : contracts;
 
+  const handleRadioChange = (e: ChangeEvent<HTMLInputElement>) => {setChecked(e.target.value)};
+
   const lcSearchTerm: string = searchTerm.toLowerCase();
   const filteredContracts = searchTerm ? prefilteredContracts.filter(c => {
     return (
@@ -57,11 +59,11 @@ const ContractsPage: FC<ContractsPageProps> = (props): ReactElement => {
       <h1>Contracts: {filteredContracts.length}/{contracts.length}</h1> 
       <div className='radio-filters'>
           <h5>Filter by status:</h5>
-              <Form.Group onChange={(e: ChangeEvent<HTMLFormElement>) => {setChecked(e.target.getAttribute('value'))}}>
-                <Form.Check inline type='radio' label='None' name='contractFilter' id='none' value='none' checked={checked === 'none'} />
-                <Form.Check inline type='radio' label='Upcoming contracts' name='contractFilter' id='upcoming' value='upcoming' checked={checked === 'upcoming'}/>
-                <Form.Check inline type='radio' label='Complete contracts' name = 'contractFilter' id='complete' value='complete' checked={checked === 'complete'}/>
-                <Form.Check inline type='radio' label='Active contracts' name='contractFilter' id='active' value='active' checked={checked === 'active'}/>
+              <Form.Group >
+                <Form.Check onChange={handleRadioChange} inline type='radio' label='None' name='contractFilter' id='none' value='none' checked={checked === 'none'} />
+                <Form.Check onChange={handleRadioChange} inline type='radio' label='Upcoming contracts' name='contractFilter' id='upcoming' value='upcoming' checked={checked === 'upcoming'}/>
+                <Form.Check onChange={handleRadioChange} inline type='radio' label='Complete contracts' name = 'contractFilter' id='complete' value='complete' checked={checked === 'complete'}/>
+                <Form.Check onChange={handleRadioChange} inline type='radio' label='Active contracts' name='contractFilter' id='active' value='active' checked={checked === 'active'}/>
               </Form.Group>
         </div>
       </div>
@@ -78,6 +80,6 @@ const ContractsPage: FC<ContractsPageProps> = (props): ReactElement => {
 
 export default ContractsPage;
 
-interface ContractsPageProps {
+export interface ContractsPageProps {
   contracts: IContractLocal[];
 };
