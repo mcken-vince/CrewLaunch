@@ -1,7 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import ContractForm, { ContractFormProps } from '../components/forms/ContractForm';
 import BrowserRouter from 'react-router';
-import { act } from 'react-dom/test-utils';
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
@@ -40,7 +39,7 @@ describe('<ContractForm />', () => {
     submitButton.click();
     
     // This validation is not working for some reason
-    // expect(await screen.findByText(/great success/i)).toBeInTheDocument();
+    // expect(await screen.findByText(/success/i)).toBeInTheDocument();
     // expect(onSubmit).toHaveBeenCalled();        
   });
 });

@@ -22,6 +22,12 @@ export interface IState  {
   contracts: Array<IContract>;
 };
 
+export interface IUserLocal {
+  // name: string;
+  email: string;
+  admin: boolean;
+};
+
 export interface IUser {
   name: string;
   email: string;

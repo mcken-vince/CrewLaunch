@@ -1,5 +1,5 @@
 import { MouseEventHandler, useEffect, useState } from 'react';
-import { ICrew, IJob, IUser } from '../../definitions';
+import { ICrew, IJob,  IUserLocal } from '../../definitions';
 import useAppData from '../../hooks/useAppData';
 import '../../styles/CrewsDashboardPage.scss';
 import CrewsNav from '../CrewsNav';
@@ -15,7 +15,7 @@ import { assignJobToCrew, markJobComplete } from '../../helpers/jobHandlers';
 
 const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
   const params: {id: string | undefined} = useParams();
-  const crewId = params.id;
+  const crewId = params && params.id;
   const {state, updateState} = useAppData();
   const [crew, setCrew] = useState<ICrew | null>(null);
   const { onLogout, user } = props;
@@ -69,5 +69,5 @@ export default CrewsDashboardPage;
 
 export interface CrewsDashboardPageProps {
   onLogout: MouseEventHandler<HTMLButtonElement>;
-  user: IUser;
+  user: IUserLocal;
 };

@@ -4,9 +4,9 @@ import JobCard from "../JobCard";
 const CrewJobsPage = (props: CrewJobsPageProps) => {
   const { jobs, assignJobtoCrew, markJobComplete } = props;
 
-  const jobCards = jobs.map(j => {
+  const jobCards = jobs.map((j, idx) => {
     return (
-      <JobCard job={j} assignJobToCrew={assignJobtoCrew} markJobComplete={markJobComplete}/>
+      <JobCard key={idx} job={j} assignJobToCrew={assignJobtoCrew} markJobComplete={markJobComplete}/>
     );
   });
 

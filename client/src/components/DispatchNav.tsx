@@ -5,7 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import { NavLink, Link, useHistory } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
-import { IUser } from '../definitions';
+import { IUserLocal } from '../definitions';
 
 
 const DispatchNav: FC<DispatchNavProps> = (props): ReactElement => {
@@ -61,6 +61,6 @@ const DispatchNav: FC<DispatchNavProps> = (props): ReactElement => {
 export default DispatchNav;
 
 export interface DispatchNavProps {
-  user?: IUser,
+  user?: IUserLocal,
   onLogout: MouseEventHandler<HTMLButtonElement>
 };

@@ -1,5 +1,4 @@
 import { ReactElement, useState } from "react";
-import { IClient, IContract } from "../../definitions";
 import ClientCard from "../ClientCard";
 import CustomSearchBar from "../CustomSearchBar";
 import '../../styles/ClientsPage.scss';
@@ -33,6 +32,6 @@ const ClientsPage = (props: ClientsPageProps): ReactElement => {
 
 export default ClientsPage;
 
-interface ClientsPageProps {
+export interface ClientsPageProps {
   clients: IClientLocal[];
 };

@@ -54,7 +54,7 @@ const CrewsPage: FC<CrewsPageProps> = (props): ReactElement => {
 
 export default CrewsPage;
 
-interface CrewsPageProps {
+export interface CrewsPageProps {
   crews: ICrew[];
   onDelete: any;
 };

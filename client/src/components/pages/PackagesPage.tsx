@@ -65,7 +65,7 @@ const PackagesPage: FC<PackagesPageProps> = (props): ReactElement => {
 
 export default PackagesPage;
 
-interface PackagesPageProps {
+export interface PackagesPageProps {
   packages: IPackage[];
   onDelete: any;
 };
