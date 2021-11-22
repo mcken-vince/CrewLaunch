@@ -2,6 +2,7 @@
 import { IClient, IPackage, IJob, IContract, ICrew } from '../definitions';
 import { ReactDatePickerProps } from 'react-datepicker';
 import { EventHandler } from 'react';
+import { Types } from 'mongoose';
 
 export interface IthisMonth {
   startsOn: number;
@@ -21,6 +22,7 @@ export interface DayCardProps {
 // Job interface used in CrewCard component
 // Includes address & jobNotes
 export interface IJobLocal {
+  _id? : Types.ObjectId | string;
   crew_id?: Types.ObjectId | string;
   contract_id: Types.ObjectId | string;
   date: Date;
