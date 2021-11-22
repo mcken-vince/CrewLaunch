@@ -1,7 +1,5 @@
 /* istanbul ignore file */
-import { IClient, IPackage, IJob, IContract, ICrew } from '../definitions';
-import { ReactDatePickerProps } from 'react-datepicker';
-import { EventHandler } from 'react';
+import { IClient, IPackage, IContract, ICrew } from '../definitions';
 import { Types } from 'mongoose';
 
 export interface IthisMonth {
