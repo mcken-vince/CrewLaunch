@@ -19,6 +19,7 @@ import ClientsPage from './ClientsPage';
 import JobsPage from './JobsPage';
 import { assignJobToCrew, markJobComplete } from '../../helpers/jobHandlers';
 import DispatchNav from '../DispatchNav';
+import ScrollTop from '../ScrollTop';
 
 const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
   const {state, updateState} = useAppData();
@@ -81,7 +82,7 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
               <DispatchCalendar jobs={detailedJobs} crews={state ? state.crews : []} assignJobToCrew={(crewId: string, job: IJob) => state && assignJobToCrew(crewId, job, state, updateState)} markJobComplete={(job: IJob, complete: boolean) => state && markJobComplete(job, complete, state, updateState)}/>
             </Route>
           </Switch>
-
+        <ScrollTop />
       </div>
   );
 };

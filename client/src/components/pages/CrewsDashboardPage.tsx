@@ -13,6 +13,7 @@ import { IJobLocal } from '../component-types';
 import CrewJobsPage from './CrewJobsPage';
 import { markJobComplete } from '../../helpers/jobHandlers';
 import {PencilSquare} from 'react-bootstrap-icons';
+import ScrollTop from '../ScrollTop';
 
 const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
   const params: {id: string | undefined} = useParams();
@@ -64,6 +65,7 @@ const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
       </Switch>
     </>}
     </div>
+    <ScrollTop />
   </>);
 };
 

@@ -12,6 +12,7 @@ import { ICrew } from '../definitions';
 const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement => {
   const [showDayDetails, setShowDayDetails] = useState<IShowDayDetails>({show: false, day: {date: 0, jobs: []}});
   const today: Date = new Date();
+  // Set the class '.today' on today's daycard
   const todaysDate = formatDate(today);
   const [selectedMonth, setSelectedMonth] = useState<IthisMonth>(getMonthObject(today));
   

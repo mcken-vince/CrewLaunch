@@ -1,0 +1,33 @@
+@import 'variables';
+
+.scrolltop {
+  color: white;
+  position: fixed;
+  right: .5em;
+  bottom: .5em;
+  border-radius: 50%;
+  background-color: $accent-color1;
+  width: 3.5em;
+  height: 3.5em;
+  justify-content: center;
+  align-items: center;
+  animation: slidein;
+  animation-duration: 300ms;
+
+
+  @keyframes slidein {
+    from {
+      transform: translateX(200%);
+    }
+    to {
+      transform: translateX(0%);
+    }
+  }
+
+
+  &:hover {
+    box-shadow: 0 0 7px black;
+    cursor: pointer;
+    color: red;
+  }
+}
