@@ -13,6 +13,7 @@ import { IJobLocal } from '../component-types';
 import CrewJobsPage from './CrewJobsPage';
 import { markJobComplete } from '../../helpers/jobHandlers';
 import {PencilSquare} from 'react-bootstrap-icons';
+import ScrollTop from '../ScrollTop';
 
 const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
   const params: {id: string | undefined} = useParams();
@@ -43,7 +44,7 @@ const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
       <Route path='/crews/:id/jobs'>
         <CrewJobsPage 
           jobs={jobs} 
-          markJobComplete={(job: IJob) => state && markJobComplete(job, state, updateState)}
+          markJobComplete={(job: IJob, complete: boolean) => state && markJobComplete(job, complete, state, updateState)}
         />
       </Route>
       
@@ -64,6 +65,7 @@ const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
       </Switch>
     </>}
     </div>
+    <ScrollTop />
   </>);
 };
 

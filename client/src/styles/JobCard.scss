@@ -2,10 +2,14 @@
 
 .card.jobcard-container {
 
+  &.hidden-date {
+    grid-template-columns: 50% 40% 10%;
+  }
+
   padding: 0.5em 1em 0.5em 1em;
   background-color: $bg-color2;
   display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-columns: 30% 30% 30% 10%;
   border-radius: $card-border-radius;
   align-items: center;
   text-align: center;
@@ -46,15 +50,13 @@
   @media (max-width: $med) {
     grid-template-columns: 50% 50%;
 
-    .jobcard-complete-button {  
-      align-self: flex-end;
-      margin: 0;
-    }
   }
 
   @media (max-width: $sm) {
     grid-template-columns: 100%;
+
     
+
     .jobcard-complete-button {
       margin: .3em 0em;
     }

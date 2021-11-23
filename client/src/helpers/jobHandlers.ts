@@ -15,13 +15,15 @@ const assignJob = (job: IJob, crewId: string | undefined): Promise<AxiosResponse
   return axios.post(`/jobs/${job._id}`, updatedJob);
 };
 
-const markComplete = (job: IJob): Promise<AxiosResponse<IJob>> => {
+const markComplete = (job: IJob, completed: boolean): Promise<AxiosResponse<IJob>> => {
   const updatedJob: IJob = {
     ...job,
-    completed: true
+    completed
   };
   return axios.post(`/jobs/${job._id}`, updatedJob);
 };
+
+
 
 export const generateJobsFromContract = async (contract: IContractLocal): Promise<IJobLocal[]> => {
   try {
@@ -83,10 +85,10 @@ export const assignJobToCrew = async (crewId: string | undefined, job: IJob, sta
   }
 };
 
-export const markJobComplete = async (job: IJob, state: IState, updateState: Function): Promise<IJob> => {
+export const markJobComplete = async (job: IJob, complete: boolean, state: IState, updateState: Function): Promise<IJob> => {
   try {
     if (!state) throw new Error('NO STATE');
-    const response = await markComplete(job);
+    const response = await markComplete(job, complete);
     const updatedJob: IJob = response.data;
     const updatedJobs: IJob[] = [...[...state.jobs].filter(j => j._id.toString() !== job._id), updatedJob];
     await updateState({jobs: updatedJobs});
