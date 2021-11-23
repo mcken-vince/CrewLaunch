@@ -44,14 +44,14 @@ const ContractCard: FC<ContractCardProps> = (props): ReactElement => {
         <p><b>Contact:</b> {thisContract.client.name} - {thisContract.client.email} - {thisContract.client.phone}</p>
       </Card.Body>
       <Card.Footer className='contractcard-footer'>
-        <div className='contractcard-actions'>
-          <Button onClick={handleDeleteClick} disabled={confirm.show} variant='danger'>Delete</Button>
-        </div>
         <p>Status: 
           <span className={statusClasses}>
           {status}
           </span>
         </p>
+        <div className='contractcard-actions'>
+          <Button onClick={handleDeleteClick} disabled={confirm.show} variant='danger'>Delete</Button>
+        </div>
       </Card.Footer>
       {confirm &&
         <ConfirmAlert 

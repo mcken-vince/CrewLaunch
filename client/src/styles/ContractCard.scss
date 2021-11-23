@@ -29,7 +29,7 @@
   .card-footer.contractcard-footer {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-end;
     // bg color and border-top are bootstrap styles, so they need to be removed
     background-color: transparent;
@@ -51,15 +51,26 @@
         background-color: purple;
       }
     }
-    .contractcard-actions {
-      padding: .5em;
-    }  
+    
+      .contractcard-actions {
+        padding: .5em;
+      }  
+
   }
 
   
   @media (max-width: $med) {
     flex-direction: column;
-    .contractcard-body {
+
+    .card-footer.contractcard-footer {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: $sm) {
+
+    .card-footer.contractcard-footer {
       flex-direction: column;
     }
   }
