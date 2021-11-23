@@ -1,4 +1,4 @@
-import { IthisMonth } from "../components/component-types";
+import { IthisMonth } from "../definitions";
 import { getMonthObject, formatDate, calculateContractStatus } from "./dataFormatters";
 import { addDays } from 'date-fns';
 
@@ -8,7 +8,6 @@ describe('formatDate()', () => {
     expect(typeof result).toBe('string');
   });
 });
-
 
 describe('getMonthObject()', () => {
   it("should return an object with 'startsOn', 'name', 'days' properties", () => {
