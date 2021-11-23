@@ -86,7 +86,6 @@ export const assignJobToCrew = async (crewId: string | undefined, job: IJob, sta
 };
 
 export const markJobComplete = async (job: IJob, complete: boolean, state: IState, updateState: Function): Promise<IJob> => {
-  console.log('marking job complete: ', complete)
   try {
     if (!state) throw new Error('NO STATE');
     const response = await markComplete(job, complete);
