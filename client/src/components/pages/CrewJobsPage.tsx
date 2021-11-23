@@ -1,4 +1,4 @@
-import { IJobLocal } from "../component-types";
+import { IJobLocal } from "../../definitions";
 import JobCard from "../JobCard";
 import '../../styles/CrewJobsPage.scss';
 import CustomSearchBar from "../CustomSearchBar";

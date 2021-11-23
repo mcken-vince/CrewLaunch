@@ -1,5 +1,5 @@
 import { Modal } from "react-bootstrap"
-import { IContractLocal } from "./component-types";
+import { IContractLocal } from "../definitions";
 
 const ContractModal = (props: ContractModalProps) => {
 

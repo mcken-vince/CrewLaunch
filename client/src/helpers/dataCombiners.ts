@@ -1,5 +1,4 @@
-import { IJob, IContract, IPackage, IClient, ICrew } from "../definitions";
-import { IClientLocal, IContractLocal, IJobLocal } from "../components/component-types";
+import { IJob, IContract, IPackage, IClient, ICrew, IClientLocal, IContractLocal, IJobLocal } from "../definitions";
 
 
 /**

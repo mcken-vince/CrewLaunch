@@ -2,7 +2,7 @@ import { ReactElement, useState } from "react";
 import ClientCard from "../ClientCard";
 import CustomSearchBar from "../CustomSearchBar";
 import '../../styles/ClientsPage.scss';
-import { IClientLocal, IContractLocal } from "../component-types";
+import { IClientLocal, IContractLocal } from "../../definitions";
 
 const ClientsPage = (props: ClientsPageProps): ReactElement => {
   const [searchTerm, setSearchTerm] = useState<string>('');

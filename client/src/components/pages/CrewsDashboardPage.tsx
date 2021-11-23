@@ -1,5 +1,5 @@
 import { MouseEventHandler, useEffect, useState } from 'react';
-import { ICrew, IJob,  IUserLocal } from '../../definitions';
+import { ICrew, IJob, IUserLocal, IJobLocal } from '../../definitions';
 import useAppData from '../../hooks/useAppData';
 import '../../styles/CrewsDashboardPage.scss';
 import CrewsNav from '../CrewsNav';
@@ -9,7 +9,6 @@ import Button from 'react-bootstrap/Button';
 import classNames from 'classnames';
 import EditProfileForm from '../forms/EditProfileForm';
 import { getCrewJobsWithDetails } from '../../helpers/dataCombiners';
-import { IJobLocal } from '../component-types';
 import CrewJobsPage from './CrewJobsPage';
 import { markJobComplete } from '../../helpers/jobHandlers';
 import {PencilSquare} from 'react-bootstrap-icons';

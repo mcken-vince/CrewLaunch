@@ -1,7 +1,6 @@
 import JobCard from "../JobCard";
 import '../../styles/JobsPage.scss';
-import { IJobLocal } from "../component-types";
-import { IAlert, ICrew } from "../../definitions";
+import { IAlert, ICrew, IJobLocal } from "../../definitions";
 import { ChangeEvent, useMemo, useState } from "react";
 import { Alert, Form } from "react-bootstrap";
 import classNames from "classnames";

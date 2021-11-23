@@ -1,11 +1,10 @@
-import { IPackage } from '../../definitions';
+import { IPackage, IAlert } from '../../definitions';
 import '../../styles/PackagesPage.scss';
 import { FC, ReactElement, useState } from 'react';
 import PackageCard from '../PackageCard';
 import CustomSearchBar from '../CustomSearchBar';
 import { Alert } from 'react-bootstrap';
 import classNames from 'classnames';
-import { IAlert } from '../../definitions';
 import { useHistory } from 'react-router-dom';
 
 

@@ -3,10 +3,9 @@ import Button from 'react-bootstrap/Button';
 import '../styles/CrewCard.scss';
 import format from 'date-fns/format';
 import classNames from 'classnames';
-import { IJobLocal } from './component-types';
 import { FC, ReactElement, useMemo, useState } from 'react';
 import ConfirmAlert from './ConfirmAlert';
-import { ICrew, IConfirm } from '../definitions';
+import { ICrew, IConfirm, IJobLocal} from '../definitions';
 import Card from 'react-bootstrap/Card';
 
 

@@ -1,13 +1,12 @@
 import DayCard from './DayCard';
 import '../styles/DispatchCalendar.scss';
 import { isSameDay, addMonths, getDaysInMonth } from 'date-fns';
-import { IthisMonth, IJobLocal } from './component-types';
 import { useState, FC, ReactElement, useMemo } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import JobCard from './JobCard';
 import { formatDate, getMonthObject } from '../helpers/dataFormatters';
-import { ICrew } from '../definitions';
+import { ICrew, IthisMonth, IJobLocal } from '../definitions';
 
 const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement => {
   const [showDayDetails, setShowDayDetails] = useState<IShowDayDetails>({show: false, day: {date: 0, jobs: []}});

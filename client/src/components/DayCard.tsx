@@ -1,7 +1,7 @@
 import '../styles/DayCard.scss';
 import classNames from 'classnames';
 import { FC, ReactElement } from 'react';
-import { IJobLocal } from './component-types';
+import { IJobLocal } from '../definitions';
 
 
 const DayCard: FC<DayCardProps> = (props): ReactElement => {

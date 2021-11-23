@@ -1,12 +1,11 @@
 import { FC, ReactElement, useState } from 'react';
 import '../styles/ContractCard.scss';
-import { IContractLocal } from './component-types';
 import { addDays } from 'date-fns';
 import Button from 'react-bootstrap/Button';
 import ConfirmAlert from './ConfirmAlert';
 import classNames from 'classnames';
 import { formatDate } from '../helpers/dataFormatters';
-import { IConfirm } from '../definitions';
+import { IConfirm, IContractLocal } from '../definitions';
 import { calculateContractStatus } from '../helpers/dataFormatters';
 import { Card } from 'react-bootstrap';
 

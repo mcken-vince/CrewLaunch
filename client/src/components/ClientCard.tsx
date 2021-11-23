@@ -1,6 +1,6 @@
 import { FC, ReactElement } from 'react';
 import '../styles/ClientCard.scss';
-import { IClientLocal, IContractLocal } from './component-types';
+import { IClientLocal, IContractLocal } from '../definitions';
 import { formatDate } from '../helpers/dataFormatters';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';

@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { IContractLocal } from '../components/component-types';
-import { IClient, IContract, IState } from "../definitions";
+import { IClient, IContract, IState, IContractLocal } from "../definitions";
 import { handleClientCreation } from './clientHandlers';
 import { handleJobCreation } from './jobHandlers';
 

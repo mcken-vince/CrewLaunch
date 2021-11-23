@@ -1,8 +1,7 @@
 import '../../styles/DispatchDashboardPage.scss';
 import { MouseEventHandler, useMemo } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { ICrew, IJob, IPackage, IUserLocal } from '../../definitions';
-import { IClientLocal, IContractLocal, IJobLocal } from '../component-types';
+import { ICrew, IJob, IPackage, IUserLocal, IClientLocal, IContractLocal, IJobLocal  } from '../../definitions';
 import DispatchCalendar from '../DispatchCalendar';
 import ContractForm from '../forms/ContractForm';
 import PackageForm from '../forms/PackageForm';
