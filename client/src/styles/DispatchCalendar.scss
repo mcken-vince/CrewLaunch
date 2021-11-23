@@ -4,6 +4,7 @@
 .dispatch-calendar-container {
   display: flex;
   flex-direction: column;
+  min-width: 50%;
   max-width: 100%;
   border: 5px solid $border-color1;
   border-radius: 20px 20px;
@@ -11,8 +12,9 @@
   align-items: center;
 
   .dispatch-calendar-header {
+    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 
     .dispatch-calendar-title {
       margin: 0em 1em;

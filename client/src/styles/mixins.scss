@@ -37,6 +37,14 @@
   }
 }
 
+@mixin mainPageStyles {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 @mixin pageStyles {
   width: 99%;
   display: flex;
