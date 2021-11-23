@@ -13,12 +13,18 @@
   z-index: 10;
   border-radius: $card-border-radius;
   .alert-body {
+    width: 95%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    Button {
-      margin: .25em 0em .5em .25em;
+    .alert-actions {
+      display: flex;
+      
+      Button {
+        margin: .25em 0em .5em .25em;
+      }
     }
-    }
+  }
+
 }

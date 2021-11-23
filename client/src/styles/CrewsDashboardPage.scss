@@ -19,23 +19,66 @@
     border-radius: $card-border-radius;
     display: flex;
     justify-content: space-between;
-    .crew-status {
-      border: 1px $accent-color1 solid;
-      padding: .25em;
-      border-radius: 20px 20px;
-      color: white;
-      &.active-crew {
-        background-color: green;
+    flex-direction: column;
+    align-self: flex-start;
+  
+    .profile-header {
+      text-align: right;
+    }
+    .profile-details {
+      .crew-status {
+        border: 1px $accent-color1 solid;
+        padding: .25em;
+        border-radius: 20px 20px;
+        color: white;
+        &.active-crew {
+          background-color: green;
+        }
+        &.inactive-crew {
+          background-color: gray;
+        }
       }
-      &.inactive-crew {
-        background-color: gray;
+      img {
+        height: 10em;
+        width: 10em;
+        border-radius: 50%;
+        background-color: $accent-color1;
       }
     }
-    img {
-      height: 50vw;
-      width: 50vw;
-      border-radius: 50%;
-      background-color: $accent-color1;
+
+  }
+
+  @media (max-width: $med) and (min-width: $sm) {
+    .profile {
+      align-self: center;
+      flex-direction: row;
+      
+      .profile-header {
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .profile-details {
+        width: 100%;
+      }
+      button {
+        margin-left: .5em;
+      }
+    }
+  }
+
+  @media (max-width: $sm) {
+    .profile {
+      width: 100%;
+
+      .profile-details {
+        
+        img.profile-avatar {
+          height: 40vw;
+          width: 40vw;
+        }
+      }
     }
   }
 }
