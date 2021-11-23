@@ -8,7 +8,7 @@ import { Card, Image, Spinner } from 'react-bootstrap';
 import CrewSelector from './CrewSelector';
 import { ICrew } from '../definitions';
 import { formatDate } from '../helpers/dataFormatters';
-
+import { Check, X } from 'react-bootstrap-icons';
 
 const JobCard: FC<JobCardProps> = (props): ReactElement => {
   const [confirm, setConfirm] = useState<boolean>(false);
@@ -19,6 +19,7 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
   // const servicePackage = props.servicePackage;
 
   const handleCrewSelect = async (thisCrew: ICrew | {_id: undefined}) => {
+    if (!assignJobToCrew) return;
     try {
       setLoading(true);
       await assignJobToCrew(thisCrew._id, props.job);
@@ -32,6 +33,7 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
   const handleConfirm = async () => {
     setLoading(true);
     setConfirm(false);
+    // add a route to mark job as incomplete 
     const jobToMark = job;
     markJobComplete && await markJobComplete(jobToMark);
     setLoading(false);
@@ -43,27 +45,28 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
 
   const jobCardClass: string = ClassNames('jobcard-container', {'jobcard-complete': completed, 'selected': confirm})
   const formattedDate: string[] = formatDate(new Date(date)).split(' ');
-  const buttonText: string = completed ? 'Job Completed' : 'Mark Complete'
+  const completeButtonContent = completed ? <X/> : <Check/>;
   return (
     <Card className={jobCardClass}>
       <h4>{address}</h4>
       <h4 className='jobcard-date'><span>{formattedDate[0]}</span><span>{formattedDate.slice(1).join(' ')}</span></h4> 
-      <div className='jobcard-crew'>
-        {crew ? 
-          (<Image alt={crew.foreman_name} src={crew.avatar || 'https://www.pngfind.com/pngs/m/154-1540407_png-file-svg-silhouette-of-head-and-shoulders.png'} />) : 
-          (<span className='crew-image' />)
-        }
-        <p>{crew ? crew.foreman_name : 'No crew assigned'}</p>
-        {crews && <CrewSelector disabled={completed} crews={crews || []} onSelect={handleCrewSelect} selectedCrew={crew ? crew : null}/>}
-      </div>
-      <Button disabled={confirm || completed || !crew}
+      {assignJobToCrew && 
+        <div className='jobcard-crew'>
+          {crew ? 
+            (<Image alt={crew.foreman_name} src={crew.avatar || 'https://www.pngfind.com/pngs/m/154-1540407_png-file-svg-silhouette-of-head-and-shoulders.png'} />) : 
+            (<span className='crew-image' />)
+          }
+          <p>{crew ? crew.foreman_name : 'No crew assigned'}</p>
+          {crews && <CrewSelector disabled={completed} crews={crews || []} onSelect={handleCrewSelect} selectedCrew={crew ? crew : null}/>}
+        </div>}
+      <Button disabled={confirm || !crew}
         className='jobcard-complete-button' 
         onClick={toggleConfirm}
       > 
-        {loading ? <Spinner animation='border'/> : buttonText}
+        {loading ? <Spinner animation='border'/> : completeButtonContent}
           
       </Button>
-      <ConfirmAlert show={confirm} message='Mark this job as complete?' onConfirm={handleConfirm} onCancel={toggleConfirm}/>
+      <ConfirmAlert variant={completed ? 'DELETE' : 'NONE'} show={confirm} message={completed ? 'Job is already complete, do you want to mark it as incomplete?' : 'Mark this job as complete?'} onConfirm={handleConfirm} onCancel={toggleConfirm}/>
     </Card>
   );
 };
@@ -73,6 +76,6 @@ export default JobCard;
 export interface JobCardProps {
   job: IJobLocal;
   crews?: ICrew[];
-  assignJobToCrew: Function;
+  assignJobToCrew?: Function;
   markJobComplete: Function;
 };

@@ -11,7 +11,7 @@ import EditProfileForm from '../forms/EditProfileForm';
 import { getCrewJobsWithDetails } from '../../helpers/dataCombiners';
 import { IJobLocal } from '../component-types';
 import CrewJobsPage from './CrewJobsPage';
-import { assignJobToCrew, markJobComplete } from '../../helpers/jobHandlers';
+import { markJobComplete } from '../../helpers/jobHandlers';
 import {PencilSquare} from 'react-bootstrap-icons';
 
 const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
@@ -43,7 +43,6 @@ const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
       <Route path='/crews/:id/jobs'>
         <CrewJobsPage 
           jobs={jobs} 
-          assignJobtoCrew={(crewId: string, job: IJob) => state && assignJobToCrew(crewId, job, state, updateState)} 
           markJobComplete={(job: IJob) => state && markJobComplete(job, state, updateState)}
         />
       </Route>
