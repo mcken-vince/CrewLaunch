@@ -12,6 +12,7 @@ import { getCrewJobsWithDetails } from '../../helpers/dataCombiners';
 import { IJobLocal } from '../component-types';
 import CrewJobsPage from './CrewJobsPage';
 import { assignJobToCrew, markJobComplete } from '../../helpers/jobHandlers';
+import {PencilSquare} from 'react-bootstrap-icons';
 
 const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
   const params: {id: string | undefined} = useParams();
@@ -49,14 +50,16 @@ const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
       
       <Route path='/crews/:id'>
       
-        <h1>Welcome, {crew.foreman_name}.</h1>
         <div className='profile'>
-          <div className='profile-details'>
-            <Image alt='avatar' src={crew.avatar || 'https://www.pngfind.com/pngs/m/154-1540407_png-file-svg-silhouette-of-head-and-shoulders.png'} />
-            <h4>Your crew size: {crew.crew_size}</h4>
-            <h4>Status: <span className={statusClasses}>{crew.is_active ? 'Active' : 'Inactive'}</span></h4>
+          <div>
+            <h1 className='profile-welcome-message'>Welcome, {crew.foreman_name}.</h1>
+            <div className='profile-details'>
+              <Image className='profile-avatar' alt='avatar' src={crew.avatar || 'https://www.pngfind.com/pngs/m/154-1540407_png-file-svg-silhouette-of-head-and-shoulders.png'} />
+              <h4>Your crew size: {crew.crew_size}</h4>
+              <h4>Status: <span className={statusClasses}>{crew.is_active ? 'Active' : 'Inactive'}</span></h4>
+            </div>
           </div>
-        <Button className='edit-profile-button'><Link to={`/crews/${crewId}/edit`}>Edit Profile</Link></Button>
+            <Button className='edit-profile-button'><Link to={`/crews/${crewId}/edit`}><PencilSquare /> Edit</Link></Button>
         </div>
       </Route>
       </Switch>

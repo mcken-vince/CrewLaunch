@@ -7,7 +7,7 @@ $logo-shadow: 0 0 10px white;
   position: sticky;
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-self: center;
   align-items: center;
   padding: 1em;
@@ -18,6 +18,8 @@ $logo-shadow: 0 0 10px white;
   
   .crews-nav-logo-link {
     text-decoration: none;
+    align-self: flex-start;
+    font-size: 1.2em;
   }
   .crews-nav-logo {
     color: $logo-text-color;
@@ -55,18 +57,16 @@ $logo-shadow: 0 0 10px white;
       }
     }
   }
-}
 
-@media (max-width: $sm) and (min-width: $med) {
-  .crews-nav {
+
+  @media (max-width: $med) {
+
     padding-top: .3em;
-    width: 100%;
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     .crews-nav-logo {
-      font-size: 3em;
+      font-size: 2.5em;
     }
 
     .crews-nav-right {
@@ -79,6 +79,13 @@ $logo-shadow: 0 0 10px white;
         display: flex;
         flex-direction: row; 
       }
+    }
+  }
+
+  @media (max-width: $sm) {
+
+    .crews-nav-logo {
+      font-size: 2em;
     }
   }
 }
