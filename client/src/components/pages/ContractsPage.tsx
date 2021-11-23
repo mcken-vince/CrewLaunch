@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, ReactElement, useState } from "react";
 import '../../styles/ContractsPage.scss';
-import { IContractLocal } from "../component-types"; 
+import { IContractLocal } from "../../definitions"; 
 import ContractCard from "../ContractCard";
 import CustomSearchBar from "../CustomSearchBar";
 import Form from 'react-bootstrap/Form';

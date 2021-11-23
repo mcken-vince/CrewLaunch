@@ -1,5 +1,6 @@
 import DispatchCalendar, { DispatchCalendarProps } from '../components/DispatchCalendar';
 import { screen, render } from '@testing-library/react';
+import { sampleState } from './sampleData';
 
 const months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const currentMonth: number = new Date().getMonth();
@@ -10,7 +11,9 @@ const nextMonth: number = (currentMonth === 11) ? 0 : currentMonth + 1;
 const nextMonthsYear: number = (nextMonth === 0) ? currentYear + 1 : currentYear;
 
 const renderDispatchCalendar = (props: Partial<DispatchCalendarProps> = {}) => {
-  const defaultProps = {};
+  const defaultProps = {
+    crews: sampleState.crews
+  };
   return render (
     <DispatchCalendar {...defaultProps} {...props} />
   );

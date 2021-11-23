@@ -1,6 +1,4 @@
 import { screen, render } from '@testing-library/react';
-import axios from 'axios';
-import { getCrews, getClients, getPackages, getContracts, getJobs } from './sampleData';
 import App from '../App';
 import userEvent from '@testing-library/user-event';
 

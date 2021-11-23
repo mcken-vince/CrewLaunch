@@ -8,33 +8,31 @@
   margin-bottom: 5px;
   display: flex;
   flex-direction: row;
-  background-color: $bg-color2;
+  background-color: $bg-color1;
 
   .client-card-info {
     padding: .5em;
   }
 
   .client-card-body {
-    .client-contract-container {
-      background-color: white;
-      border: 1px $border-color2 solid;
-      border-radius: 10px 10px;
-      padding: .5em;
-      &.current {
-        background-color: $current-color;
-      }
-      &.upcoming {
-        background-color: $upcoming-color;
-      }
-      &.past {
-        background-color: $past-color;
-      }
-
+    .contractcard-container {
+      width: 100%;
+      // border: 1px $border-color2 solid;
+      // border-radius: 10px 10px;
+      // padding: .5em;
     }
   }
   
   a {
     text-decoration: none;
     color: white;
+  }
+
+  @media (max-width: $med) {
+
+  }
+
+  @media (max-width: $sm) {
+    flex-direction: column;
   }
 }

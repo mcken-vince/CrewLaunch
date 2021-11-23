@@ -3,10 +3,9 @@ import { FC, ReactElement, useState } from 'react';
 import '../styles/JobCard.scss';
 import Button from 'react-bootstrap/Button';
 import ConfirmAlert from './ConfirmAlert';
-import { IJobLocal } from './component-types';
 import { Card, Image, Spinner } from 'react-bootstrap';
 import CrewSelector from './CrewSelector';
-import { ICrew } from '../definitions';
+import { ICrew, IJobLocal } from '../definitions';
 import { formatDate } from '../helpers/dataFormatters';
 import { Check, X } from 'react-bootstrap-icons';
 

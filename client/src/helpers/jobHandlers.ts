@@ -1,6 +1,5 @@
-import { IContractLocal, IJobLocal } from "../components/component-types";
 import addDays from 'date-fns/addDays';
-import { IJob, IState } from "../definitions";
+import { IJob, IState, IContractLocal, IJobLocal } from "../definitions";
 import axios, { AxiosResponse } from "axios";
 
 const createNewJob = (job: IJobLocal): Promise<AxiosResponse<IJob>> => {

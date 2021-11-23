@@ -8,8 +8,7 @@ import addDays from 'date-fns/addDays';
 import { EventHandler, FC, ReactElement, useState } from 'react';
 import DateRangePicker from '../DateRangePicker';
 import PackagesOffcanvas from '../PackagesOffcanvas';
-import { IContractLocal } from '../component-types';
-import { IClient, IPackage } from '../../definitions';
+import { IClient, IPackage, IContractLocal } from '../../definitions';
 import { useParams } from 'react-router';
 
 const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
@@ -59,6 +58,9 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
           start_date: new Date(startDate),
           job_notes: jobNotes
         };
+
+        console.log('submitting contract: ', newContract);
+
         await onSubmit(newContract)
         setAlert({error: false, success: true});
         setLoading(false);

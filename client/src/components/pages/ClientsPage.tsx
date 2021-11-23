@@ -2,16 +2,16 @@ import { ReactElement, useState } from "react";
 import ClientCard from "../ClientCard";
 import CustomSearchBar from "../CustomSearchBar";
 import '../../styles/ClientsPage.scss';
-import { IClientLocal } from "../component-types";
+import { IClientLocal, IContractLocal } from "../../definitions";
 
 const ClientsPage = (props: ClientsPageProps): ReactElement => {
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const clients = props.clients;
+  const { clients, contracts } = props;
 
   const filteredClients = clients.filter(c => c.email.toLowerCase().includes(searchTerm.toLowerCase()));
 
   const clientCards = filteredClients.map((client, idx) => {
-    return <ClientCard key={idx} client={client} />;
+    return <ClientCard key={idx} client={client} contracts={contracts} />;
   }).reverse();
 
 
@@ -34,4 +34,5 @@ export default ClientsPage;
 
 export interface ClientsPageProps {
   clients: IClientLocal[];
+  contracts: IContractLocal[];
 };

@@ -1,5 +1,5 @@
 import { format, getDaysInMonth, getDay } from 'date-fns';
-import { IthisMonth } from '../components/component-types';
+import { IthisMonth } from '../definitions';
 
 export const formatDate = (date: string | Date): string => {
   return format(new Date(date), 'eeee MMMM dd, yyyy');

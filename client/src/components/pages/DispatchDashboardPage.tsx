@@ -1,8 +1,7 @@
 import '../../styles/DispatchDashboardPage.scss';
 import { MouseEventHandler, useMemo } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { ICrew, IJob, IPackage, IUserLocal } from '../../definitions';
-import { IClientLocal, IContractLocal, IJobLocal } from '../component-types';
+import { ICrew, IJob, IPackage, IUserLocal, IClientLocal, IContractLocal, IJobLocal  } from '../../definitions';
 import DispatchCalendar from '../DispatchCalendar';
 import ContractForm from '../forms/ContractForm';
 import PackageForm from '../forms/PackageForm';
@@ -25,13 +24,12 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
   const {state, updateState} = useAppData();
   const { user, onLogout } = props;
 
-  const handleSubmit = (resource: any) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-      resolve(resource)}, 500);
-    });
-  };
-
+  // const handleSubmit = (resource: any) => {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //     resolve(resource)}, 500);
+  //   });
+  // };
  
   const detailedJobs: IJobLocal[] = useMemo(() => {
     return state ? getJobsWithDetails(state.jobs, state.contracts, state.packages, state.crews) : 
@@ -45,41 +43,63 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
         <DispatchNav user={user} onLogout={onLogout}/>
           <Switch>
             <Route path={`/dispatch/crews/new`}>
-              <CrewForm onSubmit={(crew: ICrew) => {state && handleCrewCreation(crew, state, updateState)}} editCrew={null}/>
+              <CrewForm 
+                onSubmit={(crew: ICrew) => {state && handleCrewCreation(crew, state, updateState)}} 
+                editCrew={null}
+              />
             </Route>
             <Route path={`/dispatch/packages/new`}>
-              <PackageForm onSubmit={(pkg: IPackage) => state && handlePackageCreation(pkg, state, updateState)} packages={state ? state.packages : []}/>
+              <PackageForm 
+                onSubmit={(pkg: IPackage) => state && handlePackageCreation(pkg, state, updateState)} 
+                packages={state ? state.packages : []}
+              />
+            </Route>
+            <Route path={`/dispatch/contracts/new/clients/:client_id`}>
+              <ContractForm 
+                packages={state ? state.packages : []} 
+                onSubmit={(con: IContractLocal) => {state && handleContractCreation(con, state, updateState)}} 
+                contracts={detailedContracts} 
+                clients={state ? state.clients : []}
+              />
             </Route>
             <Route path={`/dispatch/contracts/new`}>
-              <ContractForm packages={state ? state.packages : []} onSubmit={(con: IContractLocal) => {state && handleContractCreation(con, state, updateState)}} contracts={detailedContracts} clients={state ? state.clients : []}/>
-            </Route>
-            <Route path={`/dispatch/contracts/clients/:client_id`}>
-              <ContractForm packages={state ? state.packages : []} onSubmit={handleSubmit} contracts={detailedContracts} clients={state ? state.clients : []}/>
-            </Route>
-            <Route path={`/dispatch/contracts/edit/:id`}>
-              <ContractForm contracts={detailedContracts} packages={state ? state.packages : []} onSubmit={handleSubmit} clients={state ? state.clients : []}/>
-            </Route>
-            <Route path={`/dispatch/packages/edit/:id`}>
-              <PackageForm onSubmit={handleSubmit} packages={state ? state.packages : []}/>
+              <ContractForm 
+                packages={state ? state.packages : []} 
+                onSubmit={(con: IContractLocal) => {state && handleContractCreation(con, state, updateState)}} 
+                contracts={detailedContracts} 
+                clients={state ? state.clients : []}
+              />
             </Route>
             <Route path={`/dispatch/crews`}>
-              <CrewsPage onDelete={(id: string) => state && handleCrewDeletion(id, state, updateState)} crews={state ? state.crews : []}/>
+              <CrewsPage 
+                onDelete={(id: string) => state && handleCrewDeletion(id, state, updateState)} 
+                crews={state ? state.crews : []}
+              />
             </Route>
             <Route path={`/dispatch/packages`}>
-              <PackagesPage packages={state ? state.packages : []} onDelete={(id: string) => state && handlePackageDeletion(id, state, updateState)}/>
+              <PackagesPage 
+                packages={state ? state.packages : []} 
+                onDelete={(id: string) => state && handlePackageDeletion(id, state, updateState)}/>
             </Route>
             <Route path={`/dispatch/contracts`}>
               <ContractsPage contracts={detailedContracts}/>
             </Route>
             <Route path={`/dispatch/clients`}>
-              <ClientsPage clients={clientsWithContracts}/>
+              <ClientsPage clients={clientsWithContracts} contracts={detailedContracts}/>
             </Route>
             <Route path={`/dispatch/jobs`}>
-              <JobsPage jobs={detailedJobs} crews={state ? state.crews : []} assignJobToCrew={(crewId: string | undefined, job: IJob) => state && assignJobToCrew(crewId, job, state, updateState)} markJobComplete={(job: IJob, complete: boolean) => state && markJobComplete(job, complete, state, updateState)} />
+              <JobsPage 
+                jobs={detailedJobs} 
+                crews={state ? state.crews : []} 
+                assignJobToCrew={(crewId: string | undefined, job: IJob) => state && assignJobToCrew(crewId, job, state, updateState)} 
+                markJobComplete={(job: IJob, complete: boolean) => state && markJobComplete(job, complete, state, updateState)} />
             </Route>
-
             <Route path={`/dispatch`}>
-              <DispatchCalendar jobs={detailedJobs} crews={state ? state.crews : []} assignJobToCrew={(crewId: string, job: IJob) => state && assignJobToCrew(crewId, job, state, updateState)} markJobComplete={(job: IJob, complete: boolean) => state && markJobComplete(job, complete, state, updateState)}/>
+              <DispatchCalendar 
+                jobs={detailedJobs} 
+                crews={state ? state.crews : []} 
+                assignJobToCrew={(crewId: string, job: IJob) => state && assignJobToCrew(crewId, job, state, updateState)} 
+                markJobComplete={(job: IJob, complete: boolean) => state && markJobComplete(job, complete, state, updateState)}/>
             </Route>
           </Switch>
         <ScrollTop />

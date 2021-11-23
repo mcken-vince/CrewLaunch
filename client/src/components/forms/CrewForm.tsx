@@ -1,8 +1,7 @@
 import { FC, ReactElement, useState } from "react";
 import { Alert, Form, InputGroup, Button, Spinner, Image } from "react-bootstrap";
 import '../../styles/CrewForm.scss';
-import { ICrew } from "../../definitions";
-import { ICrewLocal } from "../component-types";
+import { ICrew, ICrewLocal } from "../../definitions";
 
 const CrewForm: FC<CrewFormProps> = (props): ReactElement => {
   const [foremanName, setForemanName] = useState(props.editCrew && props.editCrew.foreman_name ? props.editCrew.foreman_name : '');

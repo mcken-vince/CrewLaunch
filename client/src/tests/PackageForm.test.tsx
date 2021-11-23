@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import PackageForm, { PackageFormProps } from '../components/forms/PackageForm';
 import BrowserRouter from 'react-router';
+import { sampleState } from './sampleData';
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
@@ -8,12 +9,11 @@ jest.mock("react-router-dom", () => ({
  }));
 
 const onSubmit = jest.fn();
-const packages = [ { "_id": "616f7ceea703ecd4ec419647", "title": "Lawn Care Silver", "cost": 5000, "contract_length_days": 90, "visit_interval_days": 14, "man_hrs_per_visit": 4, "description": "3 Month, Biweekly: Mow, edge trim, blow off pathways", "createdAt": "2021-10-20T02:20:30.796Z", "updatedAt": "2021-10-20T02:20:30.796Z" }];
 
 const renderPackageForm = (props: Partial<PackageFormProps> = {}) => {
   const defaultProps = {
     onSubmit,
-    packages
+    packages: sampleState.packages
   };
   return render (
     <PackageForm {...defaultProps} {...props} /> 
