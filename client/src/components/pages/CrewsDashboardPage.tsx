@@ -43,7 +43,7 @@ const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
       <Route path='/crews/:id/jobs'>
         <CrewJobsPage 
           jobs={jobs} 
-          markJobComplete={(job: IJob) => state && markJobComplete(job, state, updateState)}
+          markJobComplete={(job: IJob, complete: boolean) => state && markJobComplete(job, complete, state, updateState)}
         />
       </Route>
       

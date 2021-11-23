@@ -74,11 +74,11 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
               <ClientsPage clients={clientsWithContracts}/>
             </Route>
             <Route path={`/dispatch/jobs`}>
-              <JobsPage jobs={detailedJobs} crews={state ? state.crews : []} assignJobToCrew={(crewId: string | undefined, job: IJob) => state && assignJobToCrew(crewId, job, state, updateState)} markJobComplete={(job: IJob) => state && markJobComplete(job, state, updateState)} />
+              <JobsPage jobs={detailedJobs} crews={state ? state.crews : []} assignJobToCrew={(crewId: string | undefined, job: IJob) => state && assignJobToCrew(crewId, job, state, updateState)} markJobComplete={(job: IJob, complete: boolean) => state && markJobComplete(job, complete, state, updateState)} />
             </Route>
 
             <Route path={`/dispatch`}>
-              <DispatchCalendar jobs={detailedJobs} crews={state ? state.crews : []} assignJobToCrew={(crewId: string, job: IJob) => state && assignJobToCrew(crewId, job, state, updateState)} markJobComplete={(job: IJob) => state && markJobComplete(job, state, updateState)}/>
+              <DispatchCalendar jobs={detailedJobs} crews={state ? state.crews : []} assignJobToCrew={(crewId: string, job: IJob) => state && assignJobToCrew(crewId, job, state, updateState)} markJobComplete={(job: IJob, complete: boolean) => state && markJobComplete(job, complete, state, updateState)}/>
             </Route>
           </Switch>
 

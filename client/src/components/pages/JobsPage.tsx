@@ -2,7 +2,7 @@ import JobCard from "../JobCard";
 import '../../styles/JobsPage.scss';
 import { IJobLocal } from "../component-types";
 import { IAlert, ICrew } from "../../definitions";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useMemo, useState } from "react";
 import { Alert, Form } from "react-bootstrap";
 import classNames from "classnames";
 import CustomSearchBar from "../CustomSearchBar";
@@ -13,10 +13,9 @@ const JobsPage = (props: JobsPageProps) => {
   const [alert, setAlert] = useState<IAlert>({show: false, type: true, message: ''});
   const { jobs, crews, assignJobToCrew, markJobComplete } = props;
 
-
   const handleMarkComplete = async (job: IJobLocal) => {
     try {
-      await markJobComplete(job);
+      await markJobComplete(job, !job.completed);
       setAlert({show: true, type: true, message: 'Job completed!'});
     } catch (err) {
       setAlert({show: true, type: false, message: `Internal Error: ${err}`});
@@ -56,12 +55,15 @@ const JobsPage = (props: JobsPageProps) => {
     );
   });
 
-  const jobCards = filteredJobs.map((j, idx) => {
-    return (<JobCard assignJobToCrew={assignJobToCrew} markJobComplete={handleMarkComplete} key={idx} job={j} crews={crews}/>);
-  });
   const alertVariant: string = classNames({'success': alert.type, 'danger': !alert.type});
   const unassignedJobs: IJobLocal[] = filteredJobs.filter(j => j.crew_id === undefined) ;
-  const uncompletedJobs: IJobLocal[] = filteredJobs.filter(j => j.completed === false)
+  const uncompletedJobs: IJobLocal[] = filteredJobs.filter(j => j.completed === false);
+  const activeCrews: ICrew[] = useMemo(() => crews.filter(c => c.is_active), [crews]);
+  
+  const jobCards = filteredJobs.map((j, idx) => {
+    return (<JobCard assignJobToCrew={assignJobToCrew} markJobComplete={handleMarkComplete} key={idx} job={j} crews={activeCrews}/>);
+  });
+
   return (
     <div className='jobs-container'>
       <div className='jobs-page-header'>

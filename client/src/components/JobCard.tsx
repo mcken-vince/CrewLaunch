@@ -13,7 +13,7 @@ import { Check, X } from 'react-bootstrap-icons';
 const JobCard: FC<JobCardProps> = (props): ReactElement => {
   const [confirm, setConfirm] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const { crews, assignJobToCrew, markJobComplete, job } = props;
+  const { crews, assignJobToCrew, markJobComplete, job, hideDate } = props;
   const { address, date, completed, crew } = job;
   
   // const servicePackage = props.servicePackage;
@@ -31,25 +31,29 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
   };
 
   const handleConfirm = async () => {
-    setLoading(true);
-    setConfirm(false);
-    // add a route to mark job as incomplete 
-    const jobToMark = job;
-    markJobComplete && await markJobComplete(jobToMark);
-    setLoading(false);
+    try {
+      setLoading(true);
+      setConfirm(false);
+      const jobToMark = job;
+      markJobComplete && await markJobComplete(jobToMark, !jobToMark.completed);
+    } catch (err) {
+      throw err;
+    } finally {
+      setLoading(false);
+    }
   };
 
   const toggleConfirm = () => {
     setConfirm(prev => !prev);
   };
 
-  const jobCardClass: string = ClassNames('jobcard-container', {'jobcard-complete': completed, 'selected': confirm})
+  const jobCardClass: string = ClassNames('jobcard-container', {'jobcard-complete': completed, 'selected': confirm, 'hidden-date': hideDate});
   const formattedDate: string[] = formatDate(new Date(date)).split(' ');
   const completeButtonContent = completed ? <X/> : <Check/>;
   return (
     <Card className={jobCardClass}>
       <h4>{address}</h4>
-      <h4 className='jobcard-date'><span>{formattedDate[0]}</span><span>{formattedDate.slice(1).join(' ')}</span></h4> 
+      {!hideDate && <h4 className='jobcard-date'><span>{formattedDate[0]}</span><span>{formattedDate.slice(1).join(' ')}</span></h4> }
       {assignJobToCrew && 
         <div className='jobcard-crew'>
           {crew ? 
@@ -78,4 +82,5 @@ export interface JobCardProps {
   crews?: ICrew[];
   assignJobToCrew?: Function;
   markJobComplete: Function;
+  hideDate?: boolean;
 };

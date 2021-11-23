@@ -2,7 +2,7 @@ import DayCard from './DayCard';
 import '../styles/DispatchCalendar.scss';
 import { isSameDay, addMonths, getDaysInMonth } from 'date-fns';
 import { IthisMonth, IJobLocal } from './component-types';
-import { useState, FC, ReactElement } from 'react';
+import { useState, FC, ReactElement, useMemo } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import JobCard from './JobCard';
@@ -21,11 +21,31 @@ const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement =
     setShowDayDetails({show: true, day: {date: date, jobs: jobs}});
   };
   
-  const selectedDayJobs: ReactElement[] = showDayDetails.day.jobs && showDayDetails.day.jobs.map((job, idx) => {
-    console.log('job: ', job);
-    return (<JobCard markJobComplete={markJobComplete} key={idx} job={job} crews={crews} assignJobToCrew={assignJobToCrew}/>);
-  });
+  const prevMonthDays: number = getDaysInMonth(addMonths(new Date(), -1));
   
+  const selectPreviousMonth = () => {
+    setSelectedMonth(prev => {
+      const date = new Date(`${prev.name} 1, ${prev.year}`);
+      const minusMonth = addMonths(date, -1);
+      const previousMonth = getMonthObject(minusMonth);
+      return previousMonth;
+    });
+  };
+  
+  const selectNextMonth = () => {
+    setSelectedMonth(prev => {
+      const date = new Date(`${prev.name} 1, ${prev.year}`);
+      const addMonth = addMonths(date, 1);
+      const nextMonth = getMonthObject(addMonth);
+      return nextMonth;
+    });
+  };
+  
+  const selectCurrentMonth = () => {
+    const thisMonth = getMonthObject(new Date());
+    setSelectedMonth(thisMonth);
+  };
+
   const week: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const daysOfWeek: ReactElement[] = week.map((wd, idx) => <div key={idx} className='weekday-container'><h3>{wd}</h3></div>);
   
@@ -36,34 +56,17 @@ const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement =
     dayCards.push(<DayCard date={dayOfMonth} key={d} jobs={todayJobs} selectDay={():void => selectDay(d, todayJobs)} />);
   };
 
-  const prevMonthDays: number = getDaysInMonth(addMonths(new Date(), -1));
   // Adds blank DayCards to beginning of dayCards list
   for (let blankDay = 1; blankDay <= selectedMonth.startsOn; blankDay++) {
     dayCards.unshift(<DayCard date={(prevMonthDays + 1 - blankDay).toString()} key={blankDay + selectedMonth.days} />);
   };
 
-  const selectPreviousMonth = () => {
-    setSelectedMonth(prev => {
-      const date = new Date(`${prev.name} 1, ${prev.year}`);
-      const minusMonth = addMonths(date, -1);
-      const previousMonth = getMonthObject(minusMonth);
-      return previousMonth;
-    });
-  };
+  const activeCrews: ICrew[] = useMemo(() => crews.filter(c => c.is_active), [crews]);
 
-  const selectNextMonth = () => {
-    setSelectedMonth(prev => {
-      const date = new Date(`${prev.name} 1, ${prev.year}`);
-      const addMonth = addMonths(date, 1);
-      const nextMonth = getMonthObject(addMonth);
-      return nextMonth;
-    });
-  };
-
-  const selectCurrentMonth = () => {
-    const thisMonth = getMonthObject(new Date());
-    setSelectedMonth(thisMonth);
-  };
+  const selectedDayJobs: ReactElement[] = showDayDetails.day.jobs && showDayDetails.day.jobs.map((job, idx) => {
+    console.log('job: ', job);
+    return (<JobCard markJobComplete={markJobComplete} key={idx} job={job} crews={activeCrews} assignJobToCrew={assignJobToCrew} hideDate={true}/>);
+  });
 
   return (
     <div className='dispatch-calendar-container'>
