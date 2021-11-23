@@ -12,8 +12,7 @@ import { ICrew } from '../definitions';
 const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement => {
   const [showDayDetails, setShowDayDetails] = useState<IShowDayDetails>({show: false, day: {date: 0, jobs: []}});
   const today: Date = new Date();
-  // Set the class '.today' on today's daycard
-  const todaysDate = formatDate(today);
+  const todaysDate = formatDate(today).split(' ');
   const [selectedMonth, setSelectedMonth] = useState<IthisMonth>(getMonthObject(today));
   
   const { jobs, crews, assignJobToCrew, markJobComplete } = props;
@@ -56,7 +55,9 @@ const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement =
   for (let d = 1; d <= selectedMonth.days; d++) {
     const dayOfMonth: string = (0 < d && d < 10) ? `0${d}` : `${d}`;
     const todayJobs: IJobLocal[] = jobs ? jobs.filter((job: IJobLocal) => isSameDay(new Date(job.date), new Date(`${selectedMonth.name} ${d}, ${selectedMonth.year}`))) : [];
-    dayCards.push(<DayCard date={dayOfMonth} key={d} jobs={todayJobs} selectDay={():void => selectDay(d, todayJobs)} />);
+    console.log('todays date: ', todaysDate)
+    const isToday = (dayOfMonth === todaysDate[2].slice(0, 2) && selectedMonth.name === todaysDate[1] && selectedMonth.year.toString() === todaysDate[3]) ? true : false;
+    dayCards.push(<DayCard date={dayOfMonth} key={d} jobs={todayJobs} selectDay={():void => selectDay(d, todayJobs)} isToday={isToday} />);
   };
 
   // Adds blank DayCards to beginning of dayCards list

@@ -10,13 +10,6 @@ export interface IthisMonth {
   today: number;
 };
 
-export interface DayCardProps {
-  date?: string;
-  jobs?: IJobLocal[];
-  key: number;
-  selectDay?: VoidFunction<number>;
-};
-
 // Job interface used in CrewCard component
 // Includes address & jobNotes
 export interface IJobLocal {
