@@ -1,5 +1,8 @@
 import DispatchCalendar, { DispatchCalendarProps } from '../components/DispatchCalendar';
 import { screen, render } from '@testing-library/react';
+import { ICrew } from '../definitions';
+
+const crews: ICrew[] = [ { "_id": "616f7ceea703ecd4ec419645", "foreman_name": "Heddy Ready", "crew_size": 4, "is_active": true, "avatar": "https://getavataaars.com/?accessoriesType=Prescription02&avatarStyle=Transparent&clotheColor=PastelRed&clotheType=ShirtCrewNeck&eyeType=Squint&eyebrowType=FlatNatural&facialHairColor=BrownDark&facialHairType=BeardMajestic&graphicType=Resist&hairColor=PastelPink&mouthType=Smile&skinColor=Tanned&topType=WinterHat2", "createdAt": "2021-10-20T02:20:30.796Z", "updatedAt": "2021-10-20T02:20:30.796Z" }];
 
 const months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const currentMonth: number = new Date().getMonth();
@@ -10,7 +13,9 @@ const nextMonth: number = (currentMonth === 11) ? 0 : currentMonth + 1;
 const nextMonthsYear: number = (nextMonth === 0) ? currentYear + 1 : currentYear;
 
 const renderDispatchCalendar = (props: Partial<DispatchCalendarProps> = {}) => {
-  const defaultProps = {};
+  const defaultProps = {
+    crews
+  };
   return render (
     <DispatchCalendar {...defaultProps} {...props} />
   );
