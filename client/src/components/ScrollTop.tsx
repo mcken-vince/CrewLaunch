@@ -8,9 +8,9 @@ const ScrollTop = () => {
   useEffect(() => {
     const onScroll = () => {
       const scrolled = document.documentElement.scrollTop;
-      if (scrolled >= 601 && visible === false) {
+      if (scrolled >= 401 && visible === false) {
         setVisible(true);
-      } else if (scrolled <= 600 && visible === true) {
+      } else if (scrolled <= 400 && visible === true) {
         setVisible(false);
       }
     };

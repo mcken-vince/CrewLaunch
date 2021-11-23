@@ -3,6 +3,7 @@
 .scrolltop {
   color: white;
   position: fixed;
+  display: flex;
   right: .5em;
   bottom: .5em;
   border-radius: 50%;
@@ -13,6 +14,7 @@
   align-items: center;
   animation: slidein;
   animation-duration: 300ms;
+
 
 
   @keyframes slidein {
