@@ -35,7 +35,7 @@ const LoginForm = (props: LoginFormProps) => {
   };
 
   const fieldsFilled: boolean = (user.email && user.password && user.email.includes('@') && user.password.length >= 8) ? true : false;
-  console.log('alert: ', alert)
+
   return (
     <div className='login-form-container'>
       {alert.error && 

@@ -1,13 +1,12 @@
 import { screen, render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import CrewsNav, { CrewsNavProps } from '../components/CrewsNav';
-
+import { sampleState } from './sampleData';
 const onLogout = jest.fn();
-const crew = { "_id": "616f7ceea703ecd4ec419645", "foreman_name": "Heddy Ready", "crew_size": 4, "is_active": true, "avatar": "https://getavataaars.com/?accessoriesType=Prescription02&avatarStyle=Transparent&clotheColor=PastelRed&clotheType=ShirtCrewNeck&eyeType=Squint&eyebrowType=FlatNatural&facialHairColor=BrownDark&facialHairType=BeardMajestic&graphicType=Resist&hairColor=PastelPink&mouthType=Smile&skinColor=Tanned&topType=WinterHat2", "createdAt": "2021-10-20T02:20:30.796Z", "updatedAt": "2021-10-20T02:20:30.796Z" };
 
 const renderCrewsNav = (props: Partial<CrewsNavProps> = {}) => {
   const defaultProps = {
-    user: {email: 'user@test.com', name: 'Testy Testerson', password: 'secretness'},
+    user: { email: 'user@test.com', name: 'Testy Testerson', admin: false },
     onLogout,
     crew: null
   };
@@ -27,7 +26,7 @@ describe('<CrewsNav />', () => {
   });
 
   it("displays links if a crew is given", () => {
-    renderCrewsNav({crew});
+    renderCrewsNav({crew: sampleState.crews[0]});
     expect(screen.getByText(/My Jobs/)).toBeInTheDocument();
     expect(screen.getByText(/Dashboard/)).toBeInTheDocument();
   });
