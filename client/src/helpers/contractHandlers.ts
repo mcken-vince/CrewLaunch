@@ -10,8 +10,13 @@ export const createNewContract = (newContract: IContract): Promise<AxiosResponse
 
 export const handleContractCreation = async (contract: IContractLocal, state: IState, updateState: Function): Promise<IContract> => {
   try {
-    const client: IClient = await handleClientCreation(contract.client, state, updateState);
-    
+    let client: IClient;
+    if (contract.client._id) {
+      client = contract.client;
+    } else {
+      client = await handleClientCreation(contract.client, state, updateState);
+    }
+     
     const response = await createNewContract({...contract, client_id: client._id});
     const newContract: IContract = response.data;
     const contracts = [ ...state.contracts, newContract ];

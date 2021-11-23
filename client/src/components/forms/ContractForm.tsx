@@ -59,6 +59,9 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
           start_date: new Date(startDate),
           job_notes: jobNotes
         };
+
+        console.log('submitting contract: ', newContract);
+
         await onSubmit(newContract)
         setAlert({error: false, success: true});
         setLoading(false);
