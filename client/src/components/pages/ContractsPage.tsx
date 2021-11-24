@@ -58,9 +58,9 @@ const ContractsPage: FC<ContractsPageProps> = (props): ReactElement => {
       <div className='contracts-page-header'>
       <h1>Contracts: {filteredContracts.length}/{contracts.length}</h1> 
       <div className='radio-filters'>
-          <h5>Filter by status:</h5>
+          <h5>Show:</h5>
               <Form.Group >
-                <Form.Check onChange={handleRadioChange} inline type='radio' label='None' name='contractFilter' id='none' value='none' checked={checked === 'none'} />
+                <Form.Check onChange={handleRadioChange} inline type='radio' label='All' name='contractFilter' id='none' value='none' checked={checked === 'none'} />
                 <Form.Check onChange={handleRadioChange} inline type='radio' label='Upcoming contracts' name='contractFilter' id='upcoming' value='upcoming' checked={checked === 'upcoming'}/>
                 <Form.Check onChange={handleRadioChange} inline type='radio' label='Complete contracts' name = 'contractFilter' id='complete' value='complete' checked={checked === 'complete'}/>
                 <Form.Check onChange={handleRadioChange} inline type='radio' label='Active contracts' name='contractFilter' id='active' value='active' checked={checked === 'active'}/>

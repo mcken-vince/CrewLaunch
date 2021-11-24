@@ -72,9 +72,9 @@ const JobsPage = (props: JobsPageProps) => {
           <h3>Incomplete jobs: {uncompletedJobs.length}</h3>
         </div>
         <div className='radio-filters'>
-          <h5>Filter by:</h5>
+          <h5>Show:</h5>
               <Form.Group >
-                <Form.Check onChange={(e: ChangeEvent<HTMLInputElement>) => {setChecked(e.target.value)}} inline type='radio' label='None' name='jobFilter' id='none' value='none' checked={checked === 'none'} />
+                <Form.Check onChange={(e: ChangeEvent<HTMLInputElement>) => {setChecked(e.target.value)}} inline type='radio' label='All' name='jobFilter' id='none' value='none' checked={checked === 'none'} />
                 <Form.Check onChange={(e: ChangeEvent<HTMLInputElement>) => {setChecked(e.target.value)}} inline type='radio' label='Completed jobs' name='jobFilter' id='completedJobs' value='completed' checked={checked === 'completed'}/>
                 <Form.Check onChange={(e: ChangeEvent<HTMLInputElement>) => {setChecked(e.target.value)}} inline type='radio' label='Uncompleted jobs' name = 'jobFilter' id='uncompletedJobs' value='uncompleted' checked={checked === 'uncompleted'}/>
                 <Form.Check onChange={(e: ChangeEvent<HTMLInputElement>) => {setChecked(e.target.value)}} inline type='radio' label='Unassigned jobs' name='jobFilter' id='unassignedJobs' value='unassigned'checked={checked === 'unassigned'}/>
