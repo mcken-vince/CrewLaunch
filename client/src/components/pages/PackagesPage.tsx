@@ -47,7 +47,7 @@ const PackagesPage: FC<PackagesPageProps> = (props): ReactElement => {
 
   return (
     <div className='packages-container'>
-      <h1>Packages: {packages.length}</h1>
+      <h1>Packages: {filteredPackages.length}/{packages.length}</h1>
       <Alert dismissible show={alert.show} variant={alertVariant} onClose={() => setAlert({show: false, type: true, message: ''})}>
         <Alert.Heading>{alert.message}</Alert.Heading>
       </Alert>

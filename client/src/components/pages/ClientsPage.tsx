@@ -8,7 +8,14 @@ const ClientsPage = (props: ClientsPageProps): ReactElement => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const { clients, contracts } = props;
 
-  const filteredClients = clients.filter(c => c.email.toLowerCase().includes(searchTerm.toLowerCase()));
+  const lcSearchTerm = searchTerm.toLowerCase();
+  const filteredClients = clients.filter(c => {
+    return (
+      c.email.toLowerCase().includes(lcSearchTerm) ||
+      c.name.toLowerCase().includes(lcSearchTerm) ||
+      (c.phone && c.phone.includes(lcSearchTerm))
+    );
+  });
 
   const clientCards = filteredClients.map((client, idx) => {
     return <ClientCard key={idx} client={client} contracts={contracts} />;
@@ -17,10 +24,10 @@ const ClientsPage = (props: ClientsPageProps): ReactElement => {
 
   return (
     <div className='clients-container'>
-       <h1>Clients: {clients.length}</h1>
+       <h1>Clients: {filteredClients.length}/{clients.length}</h1>
 
        <div className='clients-search search'>
-          <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search by name'/>
+          <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search by name, email, or phone number'/>
           {
             clientCards && clientCards.length > 0 ? 
             clientCards : <h2>No matching clients found.</h2>
