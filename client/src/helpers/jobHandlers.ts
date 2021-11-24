@@ -24,13 +24,13 @@ const markComplete = (job: IJob, completed: boolean): Promise<AxiosResponse<IJob
 
 
 
-export const generateJobsFromContract = async (contract: IContractLocal): Promise<IJobLocal[]> => {
+export const generateJobsFromContract = async (contract: IContractLocal): Promise<any> => {
   try {
     const start: Date = new Date(contract.start_date);
     const contractLength: number = contract.selectedPackage.contract_length_days;
     const visitInterval: number = contract.selectedPackage.visit_interval_days;
     const jobCount = Math.round(contractLength / visitInterval);
-    const jobsArray: IJobLocal[] = [];
+    const jobsArray = [];
     for (let x = 0; x < jobCount; x++) {
       const thisJobDate: Date = addDays(start, x * visitInterval);
       jobsArray.push(
@@ -48,7 +48,7 @@ export const generateJobsFromContract = async (contract: IContractLocal): Promis
 };
 
 
-export const createJobs = async (jobs: IJobLocal[]): Promise<IJobLocal[]> => {
+export const createJobs = async (jobs: IJobLocal[]): Promise<IJob[]> => {
   try {
     const response: AxiosResponse<IJob>[] = await Promise.all(
       jobs.map(j => createNewJob(j))
@@ -63,7 +63,7 @@ export const createJobs = async (jobs: IJobLocal[]): Promise<IJobLocal[]> => {
 export const handleJobCreation = async (contract: IContractLocal, state: IState, updateState: Function): Promise<string> => {
   try {
     const jobArray = await generateJobsFromContract(contract);
-    const createdJobs: IJobLocal[] = await createJobs(jobArray);
+    const createdJobs: IJob[] = await createJobs(jobArray);
     const updatedJobs = [...state.jobs, ...createdJobs];
     await updateState({jobs: updatedJobs});
     return 'Jobs created!';
