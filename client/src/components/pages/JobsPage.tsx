@@ -8,7 +8,7 @@ import CustomSearchBar from "../CustomSearchBar";
 import DropdownSortBy from "../DropdownSortBy";
 
 const JobsPage = (props: JobsPageProps) => {
-  const [checked, setChecked] = useState<string | null>('none');
+  const [checked, setChecked] = useState<string | null>('uncompleted');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [alert, setAlert] = useState<IAlert>({show: false, type: true, message: ''});
   const [sortBy, setSortBy] = useState<string>('Date');
@@ -46,13 +46,13 @@ const JobsPage = (props: JobsPageProps) => {
   let sortFn;
   switch(sortBy) {
     case 'Date - reverse':
-      sortFn = ((a: IJobLocal, b: IJobLocal) => a.date > b.date ? 1 : -1);
-      break;
-    case 'Address':
-      sortFn = ((a: IJobLocal, b: IJobLocal) => a.address > b.address ? 1 : -1);
-      break;
-    default:
       sortFn = ((a: IJobLocal, b: IJobLocal) => a.date < b.date ? 1 : -1);
+      break;
+      case 'Address':
+        sortFn = ((a: IJobLocal, b: IJobLocal) => a.address > b.address ? 1 : -1);
+        break;
+        default:
+      sortFn = ((a: IJobLocal, b: IJobLocal) => a.date > b.date ? 1 : -1);
   };
   
   const sortedJobs: IJobLocal[] = [...prefilteredJobs].sort(sortFn);

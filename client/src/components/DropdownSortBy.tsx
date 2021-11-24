@@ -8,6 +8,7 @@ const DropdownSortBy = (props: DropdownSortByProps) => {
   const dropDownItems = props.items.map((i, idx) => {
     return (
       <Dropdown.Item 
+        key={idx}
         onClick={() => {
           i.onClick(i.name)
           setSortBy(i.name);
