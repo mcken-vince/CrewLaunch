@@ -8,14 +8,16 @@ import { IJob, IContract, IPackage, IClient, ICrew, IClientLocal, IContractLocal
  */
 export const getJobsWithDetails = (jobs: IJob[], contracts: IContract[], packages: IPackage[], crews: ICrew[]): IJobLocal[] => {
   const jobsWithDetails: IJobLocal[] = jobs.map(job => {
-    const newJob: IJobLocal = {...job};
     const thisContract = contracts.filter(c => c._id.toString() === job.contract_id.toString())[0];
-    newJob.address = thisContract.address;
-    newJob.jobNotes = thisContract.job_notes; 
     const thisCrew = crews.filter(c => c._id.toString() === job.crew_id)[0];
-    newJob.crew = thisCrew;
     const thisPackage = packages.filter(p => p._id.toString() === thisContract.package_id.toString())[0];
-    newJob.servicePackage = thisPackage;
+    const newJob: IJobLocal = {
+      ...job,
+      address: thisContract.address,
+      jobNotes: thisContract.job_notes,
+      crew: thisCrew,
+      servicePackage: thisPackage
+    };
     return newJob;
   });
    

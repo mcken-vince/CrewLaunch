@@ -5,11 +5,13 @@ import { ChangeEvent, useMemo, useState } from "react";
 import { Alert, Form } from "react-bootstrap";
 import classNames from "classnames";
 import CustomSearchBar from "../CustomSearchBar";
+import DropdownSortBy from "../DropdownSortBy";
 
 const JobsPage = (props: JobsPageProps) => {
   const [checked, setChecked] = useState<string | null>('none');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [alert, setAlert] = useState<IAlert>({show: false, type: true, message: ''});
+  const [sortBy, setSortBy] = useState<string>('Date');
   const { jobs, crews, assignJobToCrew, markJobComplete } = props;
 
   const handleMarkComplete = async (job: IJobLocal) => {
@@ -41,10 +43,19 @@ const JobsPage = (props: JobsPageProps) => {
   };
   const prefilteredJobs: IJobLocal[] = filterFn ? jobs.filter(filterFn) : jobs;
     
-  // Sort jobs in reverse chronological order
-  const sortedJobs: IJobLocal[] = [...prefilteredJobs].sort((a, b) => {
-    return a.date < b.date ? 1 : -1;
-  });
+  let sortFn;
+  switch(sortBy) {
+    case 'Date - reverse':
+      sortFn = ((a: IJobLocal, b: IJobLocal) => a.date > b.date ? 1 : -1);
+      break;
+    case 'Address':
+      sortFn = ((a: IJobLocal, b: IJobLocal) => a.address > b.address ? 1 : -1);
+      break;
+    default:
+      sortFn = ((a: IJobLocal, b: IJobLocal) => a.date < b.date ? 1 : -1);
+  };
+  
+  const sortedJobs: IJobLocal[] = [...prefilteredJobs].sort(sortFn);
 
   const lcSearchTerm: string = searchTerm.toLowerCase();
   const filteredJobs: IJobLocal[] = sortedJobs.filter(j => {
@@ -63,6 +74,12 @@ const JobsPage = (props: JobsPageProps) => {
     return (<JobCard assignJobToCrew={assignJobToCrew} markJobComplete={handleMarkComplete} key={idx} job={j} crews={activeCrews}/>);
   });
 
+  const dropdownSortItems = [
+    {name: 'Date', onClick: (itemName: string) => (setSortBy(itemName))},
+    {name: 'Date - reverse', onClick: (itemName: string) => (setSortBy(itemName))},
+    {name: 'Address', onClick: (itemName: string) => (setSortBy(itemName))}
+  ];
+
   return (
     <div className='jobs-container'>
       <div className='jobs-page-header'>
@@ -70,11 +87,12 @@ const JobsPage = (props: JobsPageProps) => {
           <h1>Jobs: {filteredJobs.length}/{jobs && jobs.length}</h1>
           <h3>Unassigned jobs: {unassignedJobs.length}</h3>
           <h3>Incomplete jobs: {uncompletedJobs.length}</h3>
+          <DropdownSortBy items={dropdownSortItems}/>
         </div>
         <div className='radio-filters'>
-          <h5>Filter by:</h5>
+          <h5>Show:</h5>
               <Form.Group >
-                <Form.Check onChange={(e: ChangeEvent<HTMLInputElement>) => {setChecked(e.target.value)}} inline type='radio' label='None' name='jobFilter' id='none' value='none' checked={checked === 'none'} />
+                <Form.Check onChange={(e: ChangeEvent<HTMLInputElement>) => {setChecked(e.target.value)}} inline type='radio' label='All' name='jobFilter' id='none' value='none' checked={checked === 'none'} />
                 <Form.Check onChange={(e: ChangeEvent<HTMLInputElement>) => {setChecked(e.target.value)}} inline type='radio' label='Completed jobs' name='jobFilter' id='completedJobs' value='completed' checked={checked === 'completed'}/>
                 <Form.Check onChange={(e: ChangeEvent<HTMLInputElement>) => {setChecked(e.target.value)}} inline type='radio' label='Uncompleted jobs' name = 'jobFilter' id='uncompletedJobs' value='uncompleted' checked={checked === 'uncompleted'}/>
                 <Form.Check onChange={(e: ChangeEvent<HTMLInputElement>) => {setChecked(e.target.value)}} inline type='radio' label='Unassigned jobs' name='jobFilter' id='unassignedJobs' value='unassigned'checked={checked === 'unassigned'}/>
