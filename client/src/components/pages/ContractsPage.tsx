@@ -40,10 +40,13 @@ const ContractsPage: FC<ContractsPageProps> = (props): ReactElement => {
 
   let sortFn;
   switch(sortBy) {
-    case 'Start Date':
+    case 'Start Date - a-z':
       sortFn = ((a: IContractLocal, b: IContractLocal) => a.start_date > b.start_date ? 1 : -1);
       break;
-    case 'Modified':
+    case 'Start Date - z-a':
+      sortFn = ((a: IContractLocal, b: IContractLocal) => a.start_date < b.start_date ? 1 : -1);
+      break;
+    case 'Modified - z-a':
       sortFn = ((a: IContractLocal, b: IContractLocal) => -1);
       break;
     default:
@@ -52,9 +55,10 @@ const ContractsPage: FC<ContractsPageProps> = (props): ReactElement => {
   const sortedContracts: IContractLocal[] = [...prefilteredContracts].sort(sortFn);
   
   const dropdownSortItems = [
-    {name: 'Modified', onClick: (itemName: string) => (setSortBy(itemName))},
-    {name: 'Modified - reverse', onClick: (itemName: string) => (setSortBy(itemName))},
-    {name: 'Start Date', onClick: (itemName: string) => (setSortBy(itemName))}
+    {name: 'Modified - a-z', onClick: setSortBy},
+    {name: 'Modified - z-a', onClick: setSortBy},
+    {name: 'Start Date - a-z', onClick: setSortBy},
+    {name: 'Start Date - z-a', onClick: setSortBy}
   ];
 
   const handleRadioChange = (e: ChangeEvent<HTMLInputElement>) => {setChecked(e.target.value)};
