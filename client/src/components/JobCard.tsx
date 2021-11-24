@@ -16,7 +16,6 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
   const { address, date, completed, crew } = job;
   
   // const servicePackage = props.servicePackage;
-
   const handleCrewSelect = async (thisCrew: ICrew | {_id: undefined}) => {
     if (!assignJobToCrew) return;
     try {
