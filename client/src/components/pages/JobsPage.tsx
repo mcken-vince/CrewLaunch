@@ -8,10 +8,10 @@ import CustomSearchBar from "../CustomSearchBar";
 import DropdownSortBy from "../DropdownSortBy";
 
 const JobsPage = (props: JobsPageProps) => {
-  const [checked, setChecked] = useState<string | null>('none');
+  const [checked, setChecked] = useState<string | null>('uncompleted');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [alert, setAlert] = useState<IAlert>({show: false, type: true, message: ''});
-  const [sortBy, setSortBy] = useState<string>('Date');
+  const [sortBy, setSortBy] = useState<string>('Date - a-z');
   const { jobs, crews, assignJobToCrew, markJobComplete } = props;
 
   const handleMarkComplete = async (job: IJobLocal) => {
@@ -45,16 +45,28 @@ const JobsPage = (props: JobsPageProps) => {
     
   let sortFn;
   switch(sortBy) {
-    case 'Date - reverse':
+    case 'Date - a-z':
       sortFn = ((a: IJobLocal, b: IJobLocal) => a.date > b.date ? 1 : -1);
       break;
-    case 'Address':
-      sortFn = ((a: IJobLocal, b: IJobLocal) => a.address > b.address ? 1 : -1);
-      break;
-    default:
-      sortFn = ((a: IJobLocal, b: IJobLocal) => a.date < b.date ? 1 : -1);
+      case 'Address - a-z':
+        sortFn = ((a: IJobLocal, b: IJobLocal) => {
+          if (a.address === b.address) {
+            return a.date > b.date ? 1 : -1;
+          } else {
+            return a.address > b.address ? 1 : -1;
+          }
+        });
+        break;
+        default:
+          sortFn = ((a: IJobLocal, b: IJobLocal) => a.date < b.date ? 1 : -1);
   };
-  
+
+  const dropdownSortItems = [
+    {name: 'Date - a-z', onClick: (itemName: string) => (setSortBy(itemName))},
+    {name: 'Date - z-a', onClick: (itemName: string) => (setSortBy(itemName))},
+    {name: 'Address - a-z', onClick: (itemName: string) => (setSortBy(itemName))}
+  ];
+
   const sortedJobs: IJobLocal[] = [...prefilteredJobs].sort(sortFn);
 
   const lcSearchTerm: string = searchTerm.toLowerCase();
@@ -74,11 +86,6 @@ const JobsPage = (props: JobsPageProps) => {
     return (<JobCard assignJobToCrew={assignJobToCrew} markJobComplete={handleMarkComplete} key={idx} job={j} crews={activeCrews}/>);
   });
 
-  const dropdownSortItems = [
-    {name: 'Date', onClick: (itemName: string) => (setSortBy(itemName))},
-    {name: 'Date - reverse', onClick: (itemName: string) => (setSortBy(itemName))},
-    {name: 'Address', onClick: (itemName: string) => (setSortBy(itemName))}
-  ];
 
   return (
     <div className='jobs-container'>

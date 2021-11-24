@@ -6,13 +6,14 @@
   .jobcard-container {
     width: 100%;
     margin-bottom: $grid-gap;
-    grid-template-columns: 40% 40% 20%;
+    grid-template-columns: 45% 45% 10%;
   
   }
 
   @media (max-width: $sm) {
     .jobcard-container {
-      grid-template-columns: 33.3% 33.3% 33.3%;
+      display: flex;
+      // grid-template-columns: 40% 40% 20%;
     }
   }
 }

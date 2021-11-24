@@ -1,4 +1,4 @@
-import { format, getDaysInMonth, getDay } from 'date-fns';
+import { format, getDaysInMonth, getDay, addMonths } from 'date-fns';
 import { IthisMonth } from '../definitions';
 
 export const formatDate = (date: string | Date): string => {
@@ -6,13 +6,16 @@ export const formatDate = (date: string | Date): string => {
 };
 
 export const getMonthObject = (date: Date) => {
-
+  const prevMonth = addMonths(new Date(date), -1);
   const thisMonth: IthisMonth = {
     startsOn: 0,
     name: format(date, 'MMMM'),
     year: format(date, 'yyyy'),
     days: getDaysInMonth(date),
-    today: parseInt(format(date, 'dd'))
+    today: parseInt(format(date, 'dd')),
+    prevMonthName: format(prevMonth, 'MMMM'),
+    prevMonthDays: getDaysInMonth(prevMonth),
+    prevMonthYear: format(prevMonth, 'yyyy')
   };  
   // Calculate which day of the week the selected month starts on
   thisMonth.startsOn = getDay(new Date(`${thisMonth.name} 1, ${thisMonth.year}`));

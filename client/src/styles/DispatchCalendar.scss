@@ -37,12 +37,14 @@
       box-sizing: border-box;
     }
     .daycard-container {
-      
+
       &:hover {
         box-shadow: 0 0 12px $border-color1;
         cursor: pointer;
       }
     }
+
+    
   }
 
   @media (max-width: $sm) {
@@ -68,6 +70,28 @@
         
         h3 {
           font-size: .9em;
+        }
+      }
+    }
+  }
+}
+
+.modal.jobs-full-page-modal {
+  .modal-dialog.modal-fullscreen {
+
+    .modal-content {
+      
+      .modal-body {
+        
+        .jobcard-container {
+          margin-bottom: $grid-gap;   
+          padding: .5em .5em .5em 0em;
+
+          @media (max-width: $sm) {
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+          }
         }
       }
     }

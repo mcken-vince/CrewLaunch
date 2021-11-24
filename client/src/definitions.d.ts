@@ -96,6 +96,9 @@ export interface IthisMonth {
   year: string;
   days: number;
   today: number;
+  prevMonthName: string;
+  prevMonthDays: number;
+  prevMonthYear: string;
 };
 
 // Job interface used in CrewCard component

@@ -8,9 +8,10 @@ const CrewJobsPage = (props: CrewJobsPageProps) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const { jobs, markJobComplete } = props;
 
+  const preFilteredJobs = jobs.filter(j => !(j.completed && new Date(j.date) < new Date()));
 
   const lcSearchTerm = searchTerm.toLowerCase();
-  const filteredJobs = jobs.filter(j => {
+  const filteredJobs = preFilteredJobs.filter(j => {
     return ( 
       j.address && j.address.toLowerCase().includes(lcSearchTerm)
     );
@@ -28,7 +29,7 @@ const CrewJobsPage = (props: CrewJobsPageProps) => {
 
   return (
     <div className='crew-jobspage-container'>
-      <h1>My Jobs: {filteredJobs.length}/{jobs.length}</h1>
+      <h1>My Jobs: {filteredJobs.length}/{preFilteredJobs.length}</h1>
       <CustomSearchBar value={searchTerm} onChange={setSearchTerm} placeholder='Search by address'/>
       {jobCards}
     </div>
