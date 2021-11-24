@@ -9,17 +9,15 @@ import { formatDate, getMonthObject } from '../helpers/dataFormatters';
 import { ICrew, IthisMonth, IJobLocal } from '../definitions';
 
 const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement => {
-  const [showDayDetails, setShowDayDetails] = useState<IShowDayDetails>({show: false, day: {date: 0, jobs: []}});
+  const [showDayDetails, setShowDayDetails] = useState<IShowDayDetails>({show: false, day: {date: '', jobs: []}});
   const today: Date = new Date();
   const todaysDate = formatDate(today).split(' ');
   const [selectedMonth, setSelectedMonth] = useState<IthisMonth>(getMonthObject(today));
   
   const { jobs, crews, assignJobToCrew, markJobComplete } = props;
-  
-  const prevMonthDays: number = getDaysInMonth(addMonths(new Date(), -1));
 
   // Opens a canvas of this day's jobs with details
-  const selectDay = (date: number, jobs: IJobLocal[]): void => {
+  const selectDay = (date: string, jobs: IJobLocal[]): void => {
     setShowDayDetails({show: true, day: {date: date, jobs: jobs}});
   };
   
@@ -55,12 +53,21 @@ const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement =
     const dayOfMonth: string = (0 < d && d < 10) ? `0${d}` : `${d}`;
     const todayJobs: IJobLocal[] = jobs ? jobs.filter((job: IJobLocal) => isSameDay(new Date(job.date), new Date(`${selectedMonth.name} ${d}, ${selectedMonth.year}`))) : [];
     const isToday = (dayOfMonth === todaysDate[2].slice(0, 2) && selectedMonth.name === todaysDate[1] && selectedMonth.year.toString() === todaysDate[3]) ? true : false;
-    dayCards.push(<DayCard date={dayOfMonth} key={d} jobs={todayJobs} selectDay={():void => selectDay(d, todayJobs)} isToday={isToday} />);
+    dayCards.push(<DayCard date={dayOfMonth} key={d} jobs={todayJobs} selectDay={():void => selectDay(`${selectedMonth.name} ${d}, ${selectedMonth.year}`, todayJobs)} isToday={isToday} />);
   };
 
-  // Adds blank DayCards to beginning of dayCards list
-  for (let blankDay = 1; blankDay <= selectedMonth.startsOn; blankDay++) {
-    dayCards.unshift(<DayCard date={(prevMonthDays + 1 - blankDay).toString()} key={blankDay + selectedMonth.days} />);
+  // Adds prevMonth DayCards to beginning of dayCards list
+  for (let prevMonthDay = 1; prevMonthDay <= selectedMonth.startsOn; prevMonthDay++) {
+    const dayCardDate = (selectedMonth.prevMonthDays + 1 - prevMonthDay).toString();
+    const dateString: string = `${selectedMonth.prevMonthName} ${dayCardDate}, ${selectedMonth.prevMonthYear}`;
+    const todayJobs = jobs.filter(j => isSameDay(new Date(j.date), new Date(dateString)));
+    dayCards.unshift(
+      <DayCard 
+        date={dayCardDate} 
+        key={prevMonthDay + selectedMonth.days} 
+        jobs={todayJobs}
+        selectDay={() => selectDay(dateString, todayJobs)}
+      />);
   };
 
   const activeCrews: ICrew[] = useMemo(() => crews.filter(c => c.is_active), [crews]);
@@ -87,9 +94,14 @@ const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement =
         {dayCards}
       </div>
 
-      <Modal show={showDayDetails.day.jobs.length > 0 && showDayDetails.show} fullscreen={true} onHide={() => setShowDayDetails({show: false, day: {date: 0, jobs: []}})}>
+      <Modal 
+        className='jobs-full-page-modal'
+        show={showDayDetails.day.jobs.length > 0 && showDayDetails.show} 
+        fullscreen={true} 
+        onHide={() => setShowDayDetails({show: false, day: {date: '', jobs: []}})}
+      >
         <Modal.Header closeButton>
-          <Modal.Title>{selectedMonth.name} {showDayDetails.day.date}, {selectedMonth.year}</Modal.Title>
+          <Modal.Title>{showDayDetails.day.date}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{selectedDayJobs}</Modal.Body>
       </Modal>
@@ -101,7 +113,7 @@ const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement =
 export default DispatchCalendar;
 
 interface ISelectedDay {
-  date: number;
+  date: string;
   jobs: IJobLocal[] | [];
 };
 interface IShowDayDetails {
