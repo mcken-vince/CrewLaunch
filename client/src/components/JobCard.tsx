@@ -60,7 +60,7 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
             (<span className='crew-image' />)
           }
           <p>{crew ? crew.foreman_name : 'No crew assigned'}</p>
-          {crews && <CrewSelector disabled={completed} crews={crews || []} onSelect={handleCrewSelect} selectedCrew={crew ? crew : null}/>}
+          {crews && !completed && <CrewSelector disabled={completed} crews={crews || []} onSelect={handleCrewSelect} selectedCrew={crew ? crew : null}/>}
         </div>}
       <Button disabled={confirm || !crew}
         className='jobcard-complete-button' 
@@ -69,7 +69,7 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
         {loading ? <Spinner animation='border'/> : completeButtonContent}
           
       </Button>
-      <ConfirmAlert variant={completed ? 'DELETE' : 'NONE'} show={confirm} message={completed ? 'Job is already complete, do you want to mark it as incomplete?' : 'Mark this job as complete?'} onConfirm={handleConfirm} onCancel={toggleConfirm}/>
+      <ConfirmAlert variant={completed ? 'DELETE' : 'NONE'} show={confirm} message={completed ? 'Mark this job as incomplete?' : 'Mark this job as complete?'} onConfirm={handleConfirm} onCancel={toggleConfirm}/>
     </Card>
   );
 };

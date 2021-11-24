@@ -11,7 +11,7 @@ const JobsPage = (props: JobsPageProps) => {
   const [checked, setChecked] = useState<string | null>('uncompleted');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [alert, setAlert] = useState<IAlert>({show: false, type: true, message: ''});
-  const [sortBy, setSortBy] = useState<string>('Date');
+  const [sortBy, setSortBy] = useState<string>('Date - a-z');
   const { jobs, crews, assignJobToCrew, markJobComplete } = props;
 
   const handleMarkComplete = async (job: IJobLocal) => {
@@ -46,7 +46,7 @@ const JobsPage = (props: JobsPageProps) => {
   let sortFn;
   switch(sortBy) {
     case 'Date - a-z':
-      sortFn = ((a: IJobLocal, b: IJobLocal) => a.date < b.date ? 1 : -1);
+      sortFn = ((a: IJobLocal, b: IJobLocal) => a.date > b.date ? 1 : -1);
       break;
       case 'Address - a-z':
         sortFn = ((a: IJobLocal, b: IJobLocal) => {
@@ -58,7 +58,7 @@ const JobsPage = (props: JobsPageProps) => {
         });
         break;
         default:
-      sortFn = ((a: IJobLocal, b: IJobLocal) => a.date > b.date ? 1 : -1);
+          sortFn = ((a: IJobLocal, b: IJobLocal) => a.date < b.date ? 1 : -1);
   };
 
   const dropdownSortItems = [
