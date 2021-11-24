@@ -15,5 +15,5 @@ Default.args = {
     address: "177 Mornersome Drive SW, Calgary AB",
     jobNotes: "There are no notes. Nothing to see here.",
     selectedPackage: { "_id": "616f7ceea703ecd4ec419647", "title": "Lawn Care Silver", "cost": 5000, "contract_length_days": 90, "visit_interval_days": 14,"man_hrs_per_visit": 4, "description": "3 Month, Biweekly: Mow, edge trim, blow off pathways", "createdAt": "2021-10-20T02:20:30.796Z", "updatedAt": "2021-10-20T02:20:30.796Z", "__v": 0 },
-    startDate: "2021-10-28T06:00:00.000Z" }
+    startDate: new Date("2021-10-28T06:00:00.000Z") }
 };
