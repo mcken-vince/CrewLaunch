@@ -108,7 +108,7 @@ export interface IJobLocal {
   completed: boolean; 
   createdAt?: Date | string;
   updatedAt?: Date | string;
-  address?: string;
+  address: string;
   jobNotes?: string;
   servicePackage?: IPackage;
   crew? : ICrew;
