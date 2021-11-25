@@ -2,7 +2,7 @@ import { IJobLocal, IShowDayDetails, IthisWeek } from '../definitions';
 import '../styles/CrewCalendar.scss';
 import DayCard from './DayCard';
 import { formatDate, getWeekObject } from '../helpers/dataFormatters';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { addDays, isSameDay, format } from 'date-fns';
 import JobsPage from './pages/JobsPage';
@@ -54,6 +54,11 @@ const CrewCalendar = (props: CrewCalendarProps) => {
     thisDay = new Date(addDays(thisDay, 1));
   };
 
+  const jobsToShow: IJobLocal[] = useMemo(() => jobs ? jobs.filter((job: IJobLocal) => {
+    const thisDate: Date = new Date(showDayDetails.day.date);
+    return isSameDay(new Date(job.date), thisDate);
+  }) : [], [jobs, showDayDetails]);
+
 
   return (
     <div className='crew-calendar-container'>
@@ -76,7 +81,7 @@ const CrewCalendar = (props: CrewCalendarProps) => {
       <JobsFullPageModal
       show={showDayDetails.show}
       onHide={() => setShowDayDetails({show: false, day: {date: '', jobs: []}})}
-      jobs={showDayDetails.day.jobs}
+      jobs={jobsToShow}
       date={showDayDetails.day.date}
       markJobComplete={markJobComplete}
     />
