@@ -1,29 +1,13 @@
 @import 'variables';
 
-.modal.jobs-full-page-modal {
-  .modal-dialog.modal-fullscreen {
+// .modal.jobs-full-page-modal {
+//   .modal-dialog.modal-fullscreen {
 
-    .modal-content {
+//     .modal-content {
       
-      .modal-body {
-        
-        .jobcard-container {
-          margin-bottom: $grid-gap;   
-          padding: .5em;
+//       .modal-body {
 
-          @media (max-width: $sm) {
-            display: flex;
-            flex-direction: column;
-            // padding: 0;
-          }
-          &.hidden-crew {
-            padding: 0em .5em;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-          }
-        }
-      }
-    }
-  }
-}
+//       }
+//     }
+//   }
+// }

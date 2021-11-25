@@ -1,6 +1,7 @@
 @import 'variables';
 
 .card.jobcard-container {
+  width: 100%;
 
   &.hidden-date {
     grid-template-columns: 50% 40% 10%;
@@ -12,6 +13,16 @@
   border-radius: $card-border-radius;
   align-items: center;
   text-align: center;
+  
+  &.hidden-crew {
+    margin-bottom: $grid-gap;
+    padding: 0em .5em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+
   .jobcard-date {
     display: flex;
     flex-direction: column;
@@ -30,7 +41,8 @@
     margin: .3em 0em;
     max-height: 4em;
     max-width: 10em;
-    justify-self: center;
+    justify-self: flex-end;
+
   }
 
   &.selected {
@@ -47,12 +59,27 @@
   }
 
   @media (max-width: $med) {
-    grid-template-columns: 100%;
+    display: flex;
     padding: 0;
+
+    &.hidden-crew {
+      display: flex;
+      flex-direction: row;
+    }
   }
 
   @media (max-width: $sm) {
-
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    &.hidden-date {
+     display: flex;
+     flex-direction: column; 
+    }
+    &.hidden-crew {
+      display: flex;
+      flex-direction: row;
+    }
     .jobcard-complete-button {
       margin: .3em 0em;
     }

@@ -13,8 +13,13 @@
   justify-self: center;
   z-index: 10;
   border-radius: $card-border-radius;
+  padding: .5em;
+  .alert-heading {
+    margin-bottom: 0;
+  }
   .alert-body {
-    width: 95%;
+    
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -37,6 +42,15 @@
   @media (max-width: $sm) {
     .alert-heading {
       font-size: 1em;
+    }
+    .alert-body {
+
+      .alert-actions {
+
+        Button {
+          padding: 2px;
+        }
+      }
     }
   }
 }
