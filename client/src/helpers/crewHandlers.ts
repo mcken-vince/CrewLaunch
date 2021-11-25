@@ -23,9 +23,10 @@ const deleteCrew = (id: string): Promise<AxiosResponse<any>> => {
 
 export const handleCrewDeletion = async (id: string, state: IState, updateState: Function): Promise<{type: boolean, message: string}> => {
   try {
-    const jobsAssignedToCrew = state.jobs.filter(j => j.crew_id && j.crew_id.toString() === id);
+    const jobsAssignedToCrew = state.jobs.filter(j => (j.crew_id && j.crew_id.toString() === id && !j.completed));
+    console.log('jobs assigned to crew: ', jobsAssignedToCrew.length);
     if (jobsAssignedToCrew.length !== 0) {
-      return {type: false, message: 'This crew cannot be deleted, they still have jobs assigned.'};
+      return {type: false, message: 'This crew cannot be deleted, they still have uncompleted jobs assigned.'};
     }
     await deleteCrew(id);
     const updatedCrews = state.crews.filter(c => c._id?.toString() !== id);
