@@ -10,9 +10,10 @@ import { calculateContractStatus } from '../helpers/dataFormatters';
 import { Card } from 'react-bootstrap';
 
 const ContractCard: FC<ContractCardProps> = (props): ReactElement => {
-  const thisContract = props.contract;
   const clearConfirm: IConfirm = {show: false, message: '', action: 'NONE'};
   const [confirm, setConfirm] = useState<IConfirm>(clearConfirm);
+  const thisContract: IContractLocal = props.contract;
+  const onDelete = props.onDelete;
   
   const handleDeleteClick = (): void => {
     setConfirm({show: true, message: 'Are you sure you want to delete this contract?', action: 'DELETE'});
@@ -48,17 +49,19 @@ const ContractCard: FC<ContractCardProps> = (props): ReactElement => {
           {status}
           </span>
         </p>
-        <div className='contractcard-actions'>
+        {/* Delete button will never show as long as false is here, 
+        need to delete all jobs along with a contract to prevent errors*/}
+        {false && onDelete && <div className='contractcard-actions'>
           <Button onClick={handleDeleteClick} disabled={confirm.show} variant='danger'>Delete</Button>
-        </div>
+        </div>}
       </Card.Footer>
       {confirm &&
         <ConfirmAlert 
         variant={confirm.action}
         show={confirm.show} 
         message={confirm.message} 
-        onConfirm={() => {alert('confirmed!'); setConfirm(clearConfirm)}}
-        onCancel={() => {alert('canceled!'); setConfirm(clearConfirm)}}
+        onConfirm={() => {onDelete && onDelete(thisContract._id); setConfirm(clearConfirm)}}
+        onCancel={() => {setConfirm(clearConfirm)}}
         />}
     </Card>
   );
@@ -68,5 +71,6 @@ export default ContractCard;
 
 export interface ContractCardProps {
   contract: IContractLocal;
+  onDelete?: Function;
 };
 

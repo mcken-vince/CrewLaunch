@@ -16,7 +16,7 @@ describe('handleContractCreation()', () => {
 
 describe('handleContractDeletion()', () => {
   it('calls updateState', async () => {
-    const contractId = sampleState.contracts[0]._id.toString();
+    const contractId = 'f209fasgGHAH3402gha0hsdglsdjf';
     const updateState = jest.fn();
     mockedAxios.get.mockResolvedValue({});
     mockedAxios.post.mockResolvedValue({});

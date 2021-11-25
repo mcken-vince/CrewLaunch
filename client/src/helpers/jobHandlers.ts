@@ -6,7 +6,7 @@ const createNewJob = (job: IJobLocal): Promise<AxiosResponse<IJob>> => {
   return axios.post('/jobs', job);
 };
 
-const assignJob = (job: IJob, crewId: string | undefined): Promise<AxiosResponse<IJob>> => {
+export const assignJob = (job: IJob, crewId: string | undefined): Promise<AxiosResponse<IJob>> => {
   const updatedJob: IJob = {
     ...job,
     crew_id: crewId
@@ -14,7 +14,7 @@ const assignJob = (job: IJob, crewId: string | undefined): Promise<AxiosResponse
   return axios.post(`/jobs/${job._id}`, updatedJob);
 };
 
-const markComplete = (job: IJob, completed: boolean): Promise<AxiosResponse<IJob>> => {
+export const markComplete = (job: IJob, completed: boolean): Promise<AxiosResponse<IJob>> => {
   const updatedJob: IJob = {
     ...job,
     completed

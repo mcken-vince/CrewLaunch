@@ -32,8 +32,17 @@ export const deleteContract = (contractId: string) => {
   return axios.delete(`/contracts/${contractId}`);
 };
 
-export const handleContractDeletion = async (contractId: string, state: IState, updateState: Function) => {
-  await deleteContract(contractId);
-  const contracts = state.contracts.filter(c => c._id?.toString() !== contractId);
-  updateState({contracts});
+export const handleContractDeletion = async (contractId: string, state: IState, updateState: Function): Promise<{type: boolean, message: string}> => {
+  try {
+    const activeJobs = state.jobs.filter(j => j.contract_id.toString() === contractId && !j.completed);
+    if (activeJobs.length > 0) {
+      return { type: false, message: 'This contract cannot be deleted, it still has uncompleted jobs.'};
+    }
+    await deleteContract(contractId);
+    const contracts = state.contracts.filter(c => c._id?.toString() !== contractId);
+    updateState({contracts});
+    return { type: true, message: 'Contract deleted.'};
+  } catch (err) {
+    throw err;
+  }
 };

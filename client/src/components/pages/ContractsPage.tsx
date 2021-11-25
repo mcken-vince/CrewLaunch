@@ -13,6 +13,7 @@ const ContractsPage: FC<ContractsPageProps> = (props): ReactElement => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [sortBy, setSortBy] = useState<string>('Modified');
   const contracts: IContractLocal[] = props.contracts;
+  const onDelete = props.onDelete;
 
   // Calculate function for radio filter
   const contractStatus = (contract: IContractLocal): 'Active' | 'Complete' | 'Upcoming'  => {
@@ -75,7 +76,7 @@ const ContractsPage: FC<ContractsPageProps> = (props): ReactElement => {
   }) : sortedContracts;
 
   const contractCards = filteredContracts.map((contract, idx) => {
-    return <ContractCard key={idx} contract={contract}/>
+    return <ContractCard key={idx} contract={contract} onDelete={onDelete}/>
   });
 
   return (
@@ -108,4 +109,5 @@ export default ContractsPage;
 
 export interface ContractsPageProps {
   contracts: IContractLocal[];
+  onDelete: Function;
 };

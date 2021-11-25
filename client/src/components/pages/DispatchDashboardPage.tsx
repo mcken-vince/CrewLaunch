@@ -12,7 +12,7 @@ import CrewForm from '../forms/CrewForm';
 import { getJobsWithDetails, getContractsWithDetails, getClientsWithContracts } from '../../helpers/dataCombiners';
 import { handlePackageCreation, handlePackageDeletion } from '../../helpers/packageHandlers';
 import useAppData from '../../hooks/useAppData';
-import { handleContractCreation } from '../../helpers/contractHandlers';
+import { handleContractCreation, handleContractDeletion } from '../../helpers/contractHandlers';
 import { handleCrewCreation, handleCrewDeletion } from '../../helpers/crewHandlers';
 import ClientsPage from './ClientsPage';
 import JobsPage from './JobsPage';
@@ -82,7 +82,10 @@ const DispatchDashboardPage = (props: DispatchDashboardPageProps) => {
                 onDelete={(id: string) => state && handlePackageDeletion(id, state, updateState)}/>
             </Route>
             <Route path={`/dispatch/contracts`}>
-              <ContractsPage contracts={detailedContracts}/>
+              <ContractsPage 
+                contracts={detailedContracts} 
+                onDelete={(id: string) => state && handleContractDeletion(id, state, updateState)}
+              />
             </Route>
             <Route path={`/dispatch/clients`}>
               <ClientsPage clients={clientsWithContracts} contracts={detailedContracts}/>

@@ -16,7 +16,7 @@ describe('handleCrewCreation()', () => {
 
 describe('handleCrewDeletion()', () => {
   it('calls updateState', async () => {
-    const crewId = sampleState.crews[0]._id.toString();
+    const crewId = 'GJ20a9hg0sc9hv09h209zgggj';
     const updateState = jest.fn();
     mockedAxios.get.mockResolvedValue({});
     mockedAxios.post.mockResolvedValue({});
