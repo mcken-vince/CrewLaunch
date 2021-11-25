@@ -1,6 +1,31 @@
 /* istanbul ignore file */
 import { Types } from 'mongoose';
 
+export interface ISelectedDay {
+  date: string;
+  jobs: IJobLocal[] | [];
+};
+export interface IShowDayDetails {
+  show: boolean;
+  day: ISelectedDay;
+};
+export interface IthisMonth {
+  startsOn: number;
+  name: string;
+  year: string;
+  days: number;
+  today: number;
+  prevMonthName: string;
+  prevMonthDays: number;
+  prevMonthYear: string;
+};
+export interface IthisWeek {
+  monthName: string;
+  year: string;
+  startDate: Date;
+  endDate: Date;
+  daysInMonth: number;
+};
 
 export interface IAlert {
   show: boolean;
@@ -87,17 +112,6 @@ export interface IContract {
   job_notes?: string;
   createdAt?: Date | string;
   updatedAt?: Date | string;
-};
-
-export interface IthisMonth {
-  startsOn: number;
-  name: string;
-  year: string;
-  days: number;
-  today: number;
-  prevMonthName: string;
-  prevMonthDays: number;
-  prevMonthYear: string;
 };
 
 // Job interface used in CrewCard component

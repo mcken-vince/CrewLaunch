@@ -6,13 +6,13 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import JobCard from './JobCard';
 import { formatDate, getMonthObject } from '../helpers/dataFormatters';
-import { ICrew, IthisMonth, IJobLocal } from '../definitions';
+import { ICrew, IthisMonth, IJobLocal, IShowDayDetails } from '../definitions';
 
 const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement => {
   const [showDayDetails, setShowDayDetails] = useState<IShowDayDetails>({show: false, day: {date: '', jobs: []}});
   const today: Date = new Date();
-  const todaysDate = formatDate(today).split(' ');
   const [selectedMonth, setSelectedMonth] = useState<IthisMonth>(getMonthObject(today));
+  const todaysDate = formatDate(today).split(' ');
   
   const { jobs, crews, assignJobToCrew, markJobComplete } = props;
 
@@ -82,7 +82,7 @@ const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement =
   return (
     <div className='dispatch-calendar-container'>
       <div className='dispatch-calendar-header'>
-      <h1 className='dispatch-calendar-title'>{`${selectedMonth.name} ${selectedMonth.year}`}</h1>
+        <h1 className='dispatch-calendar-title'>{`${selectedMonth.name} ${selectedMonth.year}`}</h1>
         <div className='dispatch-calendar-buttons'>
           <Button onClick={selectCurrentMonth}>Today</Button>
           <Button onClick={selectPreviousMonth}>{'<<<'}</Button>
@@ -111,15 +111,6 @@ const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement =
 };
 
 export default DispatchCalendar;
-
-interface ISelectedDay {
-  date: string;
-  jobs: IJobLocal[] | [];
-};
-interface IShowDayDetails {
-  show: boolean;
-  day: ISelectedDay;
-};
 
 export interface DispatchCalendarProps {
   jobs: IJobLocal[];

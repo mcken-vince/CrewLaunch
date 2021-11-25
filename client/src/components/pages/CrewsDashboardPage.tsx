@@ -13,6 +13,7 @@ import CrewJobsPage from './CrewJobsPage';
 import { markJobComplete } from '../../helpers/jobHandlers';
 import {PencilSquare} from 'react-bootstrap-icons';
 import ScrollTop from '../ScrollTop';
+import CrewCalendar from '../CrewCalendar';
 
 const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
   const params: {id: string | undefined} = useParams();
@@ -48,7 +49,7 @@ const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
       </Route>
       
       <Route path='/crews/:id'>
-      
+      <>
         <div className='profile'>
           <div>
             <h1 className='profile-welcome-message'>Welcome, {crew.foreman_name}.</h1>
@@ -58,8 +59,13 @@ const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
               <h4>Status: <span className={statusClasses}>{crew.is_active ? 'Active' : 'Inactive'}</span></h4>
             </div>
           </div>
-            <Button className='edit-profile-button'><Link to={`/crews/${crewId}/edit`}><PencilSquare /> Edit</Link></Button>
-        </div>
+          <Button className='edit-profile-button'><Link to={`/crews/${crewId}/edit`}><PencilSquare /> Edit</Link></Button>
+          </div>
+          <CrewCalendar
+            jobs={jobs} 
+            markJobComplete={(job: IJob, complete: boolean) => state && markJobComplete(job, complete, state, updateState)}
+          />
+        </>
       </Route>
       </Switch>
     </>}
