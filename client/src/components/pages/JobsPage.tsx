@@ -78,14 +78,13 @@ const JobsPage = (props: JobsPageProps) => {
   });
 
   const alertVariant: string = classNames({'success': alert.type, 'danger': !alert.type});
-  const unassignedJobs: IJobLocal[] = filteredJobs.filter(j => j.crew_id === undefined) ;
+  const unassignedJobs: IJobLocal[] = filteredJobs.filter(j => j.crew_id === undefined);
   const uncompletedJobs: IJobLocal[] = filteredJobs.filter(j => j.completed === false);
   const activeCrews: ICrew[] = useMemo(() => crews.filter(c => c.is_active), [crews]);
   
   const jobCards = filteredJobs.map((j, idx) => {
     return (<JobCard assignJobToCrew={assignJobToCrew} markJobComplete={handleMarkComplete} key={idx} job={j} crews={activeCrews}/>);
   });
-
 
   return (
     <div className='jobs-container'>
@@ -112,9 +111,9 @@ const JobsPage = (props: JobsPageProps) => {
       </Alert>
       <CustomSearchBar value={searchTerm} onChange={(val: string) => setSearchTerm(val)} placeholder='Search by address or foreman name'/>
       <div className='jobs-grid'>
-      {
-        jobCards && jobCards.length > 0 ? 
-        jobCards : <h2>No matching jobs found.</h2>
+        {
+          jobCards && jobCards.length > 0 ? 
+          jobCards : <h2>No matching jobs found.</h2>
         }
       </div>
     </div>

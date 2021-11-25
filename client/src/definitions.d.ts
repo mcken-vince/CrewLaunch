@@ -89,7 +89,6 @@ export interface IContract {
   updatedAt?: Date | string;
 };
 
-
 export interface IthisMonth {
   startsOn: number;
   name: string;

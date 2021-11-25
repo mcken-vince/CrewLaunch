@@ -1,6 +1,7 @@
 import DispatchCalendar, { DispatchCalendarProps } from '../components/DispatchCalendar';
 import { screen, render } from '@testing-library/react';
 import { sampleState } from './sampleData';
+import { localJobs } from './sampleData';
 
 const months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const currentMonth: number = new Date().getMonth();
@@ -12,14 +13,15 @@ const nextMonthsYear: number = (nextMonth === 0) ? currentYear + 1 : currentYear
 
 const renderDispatchCalendar = (props: Partial<DispatchCalendarProps> = {}) => {
   const defaultProps = {
-    crews: sampleState.crews
+    crews: sampleState.crews,
+    jobs: localJobs
   };
   return render (
     <DispatchCalendar {...defaultProps} {...props} />
   );
 };
 
-describe('DispatchCalendar component', () => {
+describe('<DispatchCalendar />', () => {
   it('renders without crashing and displays the current month and year by default', async () => {
     renderDispatchCalendar();
     expect(await screen.findByText(new RegExp(months[currentMonth]))).toBeInTheDocument();
