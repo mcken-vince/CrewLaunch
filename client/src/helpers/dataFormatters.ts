@@ -7,11 +7,13 @@ export const formatDate = (date: string | Date): string => {
 
 export const getWeekObject = (date: Date): IthisWeek => {
   const thisDate: Date = new Date(date);
+  const endDate: Date = addDays(thisDate, 7);
   const thisWeek: IthisWeek = {
     startDate: thisDate,
-    endDate: addDays(thisDate, 7),
-    year: format(thisDate, 'yyyy'),
-    monthName: format(thisDate, 'MMMM'),
+    endDate,
+    year: format(endDate, 'yyyy'),
+    startMonthName: format(thisDate, 'MMM'),
+    endMonthName: format(endDate, 'MMM'),
     daysInMonth: getDaysInMonth(thisDate)
   };
   return thisWeek;

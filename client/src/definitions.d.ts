@@ -20,11 +20,12 @@ export interface IthisMonth {
   prevMonthYear: string;
 };
 export interface IthisWeek {
-  monthName: string;
   year: string;
   startDate: Date;
   endDate: Date;
   daysInMonth: number;
+  startMonthName: string;
+  endMonthName: string;
 };
 
 export interface IAlert {
