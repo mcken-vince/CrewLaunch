@@ -1,6 +1,7 @@
-import { isExistingClient } from './clientHandlers';
+import { handleClientCreation, isExistingClient } from './clientHandlers';
 import axios from 'axios';
-import { getClients } from '../tests/sampleData';
+import { getClients, sampleState } from '../tests/sampleData';
+
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -20,5 +21,15 @@ describe('isExistingClient()', () => {
   it('should return null if the requested client does not exist', async () => {
     const result = await isExistingClient(nonExistentClient);
     expect(result).toBe(null);
+  });
+});
+
+describe('handleClientCreation()', () => {
+  it('calls updateState function', async () => {
+    const updateState = jest.fn((prev = []) => prev);
+    mockedAxios.get.mockResolvedValue(getClients);
+    mockedAxios.post.mockResolvedValue({_id: 'testing'});
+    await handleClientCreation(sampleState.clients[0], sampleState, updateState);
+    expect(updateState).toHaveBeenCalled();
   });
 });
