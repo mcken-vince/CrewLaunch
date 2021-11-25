@@ -54,25 +54,19 @@ const CrewCalendar = (props: CrewCalendarProps) => {
     thisDay = new Date(addDays(thisDay, 1));
   };
 
-  // for (let d = 1; d <= selectedMonth.days; d++) {
-  //   const dayOfMonth: string = (0 < d && d < 10) ? `0${d}` : `${d}`;
-  //   const todayJobs: IJobLocal[] = jobs ? jobs.filter((job: IJobLocal) => isSameDay(new Date(job.date), new Date(`${selectedMonth.name} ${d}, ${selectedMonth.year}`))) : [];
-  //   const isToday = (dayOfMonth === todaysDate[2].slice(0, 2) && selectedMonth.name === todaysDate[1] && selectedMonth.year.toString() === todaysDate[3]) ? true : false;
-  //   dayCards.push(<DayCard date={dayOfMonth} key={d} jobs={todayJobs} selectDay={():void => selectDay(`${selectedMonth.name} ${d}, ${selectedMonth.year}`, todayJobs)} isToday={isToday} />);
-  // };
 
   return (
     <div className='crew-calendar-container'>
       <div className='crew-calendar-header'>
-        <h2 className='crew-calendar-title'>
-          {selectedWeek.startMonthName === selectedWeek.endMonthName ? 
-            `${selectedWeek.startMonthName}` : `${selectedWeek.startMonthName} - ${selectedWeek.endMonthName}`} {selectedWeek.year}
-        </h2>
         <div className='crew-calendar-buttons'>
           <Button onClick={selectThisWeek}>Today</Button>
           <Button onClick={selectPreviousWeek}>{'<<<'}</Button>
           <Button onClick={selectNextWeek}>{'>>>'}</Button>
         </div>
+        <h2 className='crew-calendar-title'>
+          {selectedWeek.startMonthName === selectedWeek.endMonthName ? 
+            `${selectedWeek.startMonthName}` : `${selectedWeek.startMonthName} - ${selectedWeek.endMonthName}`} {selectedWeek.year}
+        </h2>
       </div>
       <div className='crew-calendar-days-container'>
         {daysOfWeek}
