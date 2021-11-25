@@ -2,12 +2,13 @@
 @import 'variables';
 
 .alert.confirm-alert {
+  position: absolute;
   margin: 0;
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   align-self: center;
   justify-self: center;
   z-index: 10;
@@ -22,8 +23,20 @@
       display: flex;
       
       Button {
-        margin: .25em 0em .5em .25em;
+        margin: .25em .1em;
       }
+    }
+  }
+
+  @media (max-width: $med) {
+    .alert-heading {
+      font-size: 1.2em;
+    }
+  }
+
+  @media (max-width: $sm) {
+    .alert-heading {
+      font-size: 1em;
     }
   }
 }
