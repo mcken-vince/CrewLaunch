@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
-import "./App.scss";
+import "./styles/App.scss";
 import { useEffect, useState } from "react";
 import CrewsDashboardPage from './components/pages/CrewsDashboardPage';
 import DispatchDashboardPage from './components/pages/DispatchDashboardPage';
