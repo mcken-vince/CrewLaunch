@@ -2,7 +2,6 @@ import { handleContractCreation, handleContractDeletion } from './contractHandle
 import axios from 'axios';
 import { sampleState, localContracts } from '../tests/sampleData';
 
-
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
