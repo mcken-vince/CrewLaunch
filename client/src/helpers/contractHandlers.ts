@@ -15,19 +15,13 @@ export const handleContractCreation = async (contract: IContractLocal, state: IS
     } else {
       client = await handleClientCreation(contract.client, state, updateState);
     }
-     
     const response = await createNewContract({...contract, client_id: client._id});
     const newContract: IContract = response.data;
     const contracts = [ ...state.contracts, newContract ];
     updateState({contracts});
 
-    console.log('about to call handleJobCreation');
-    console.log('contract in handleContractCreation: ', contract);
     const newContractWithDetails: IContractLocal = {...newContract, client: contract.client, selectedPackage: contract.selectedPackage };
     await handleJobCreation(newContractWithDetails, state, updateState);
-    
-    console.log('and done!');
-    
     return newContract;
   } catch (err){
     throw err;
