@@ -1,4 +1,4 @@
-import { IJobLocal, IthisWeek } from '../definitions';
+import { IJobLocal, IShowDayDetails, IthisWeek } from '../definitions';
 import '../styles/CrewCalendar.scss';
 import DayCard from './DayCard';
 import { formatDate, getWeekObject } from '../helpers/dataFormatters';
@@ -6,14 +6,19 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { addDays, isSameDay, format } from 'date-fns';
 import JobsPage from './pages/JobsPage';
+import JobsFullPageModal from './JobsFullPageModal';
 
 
 const CrewCalendar = (props: CrewCalendarProps) => {
+  const [showDayDetails, setShowDayDetails] = useState<IShowDayDetails>({show: false, day: {date: '', jobs: []}});
   const today: Date = new Date();
   const [selectedWeek, setSelectedWeek] = useState<IthisWeek>(getWeekObject(today));
-  const todaysDate = formatDate(today).split(' ');
   const { jobs, markJobComplete } = props;
   
+  const selectDay = (date: string, jobs: IJobLocal[]): void => {
+    setShowDayDetails({show: true, day: {date: date, jobs: jobs}});
+  };
+
   const selectNextWeek = () => {
     setSelectedWeek(prev => {
       return getWeekObject(addDays(new Date(prev.startDate), 7));
@@ -35,9 +40,17 @@ const CrewCalendar = (props: CrewCalendarProps) => {
   const dayCards = [];
   for (let d = 0; d < 7; d++) {
     let thisDay: Date = new Date(addDays(new Date(selectedWeek.startDate), d));
+    const dateString: string = formatDate(thisDay);
     const day: string = format(thisDay, 'dd');
     const todayJobs: IJobLocal[] = jobs ? jobs.filter((job: IJobLocal) => isSameDay(new Date(job.date), thisDay)) : [];
-    dayCards.push(<DayCard jobs={todayJobs} date={day} key={d} isToday={isSameDay(new Date(), thisDay)}/>);
+    dayCards.push(
+      <DayCard 
+        jobs={todayJobs} 
+        date={day} 
+        key={d} 
+        isToday={isSameDay(new Date(), thisDay)}
+        selectDay={() => selectDay(dateString, todayJobs)}
+      />);
     thisDay = new Date(addDays(thisDay, 1));
   };
 
@@ -65,6 +78,14 @@ const CrewCalendar = (props: CrewCalendarProps) => {
         {daysOfWeek}
         {dayCards}
       </div>
+
+      <JobsFullPageModal
+      show={showDayDetails.show}
+      onHide={() => setShowDayDetails({show: false, day: {date: '', jobs: []}})}
+      jobs={showDayDetails.day.jobs}
+      date={showDayDetails.day.date}
+      markJobComplete={markJobComplete}
+    />
     </div>
   );
 };

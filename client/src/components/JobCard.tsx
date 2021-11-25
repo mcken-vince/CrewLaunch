@@ -45,7 +45,7 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
     setConfirm(prev => !prev);
   };
 
-  const jobCardClass: string = ClassNames('jobcard-container', {'jobcard-complete': completed, 'selected': confirm, 'hidden-date': hideDate});
+  const jobCardClass: string = ClassNames('jobcard-container', {'jobcard-complete': completed, 'selected': confirm, 'hidden-date': hideDate, 'hidden-crew' : !assignJobToCrew});
   const formattedDate: string[] = formatDate(new Date(date)).split(' ');
   const completeButtonContent = completed ? <X/> : <Check/>;
   return (

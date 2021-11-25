@@ -9,12 +9,18 @@
         
         .jobcard-container {
           margin-bottom: $grid-gap;   
-          padding: .5em .5em .5em 0em;
+          padding: .5em;
 
           @media (max-width: $sm) {
             display: flex;
             flex-direction: column;
-            padding: 0;
+            // padding: 0;
+          }
+          &.hidden-crew {
+            padding: 0em .5em;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
           }
         }
       }

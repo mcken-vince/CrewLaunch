@@ -75,10 +75,6 @@ const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement =
 
   const jobsToShow: IJobLocal[] = useMemo(() => jobs ? jobs.filter((job: IJobLocal) => isSameDay(new Date(job.date), new Date(`${selectedMonth.name} ${showDayDetails.day.date}, ${selectedMonth.year}`))) : [], [showDayDetails, jobs, selectedMonth]);
 
-  const selectedDayJobs: ReactElement[] = jobsToShow.map((job, idx) => {
-    return (<JobCard markJobComplete={markJobComplete} key={idx} job={job} crews={activeCrews} assignJobToCrew={assignJobToCrew} hideDate={true}/>);
-  });
-
 
   return (
     <div className='dispatch-calendar-container'>
@@ -98,8 +94,11 @@ const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement =
     <JobsFullPageModal 
       show={showDayDetails.show}
       onHide={() => setShowDayDetails({show: false, day: {date: '', jobs: []}})}
-      jobComponents={selectedDayJobs}
+      jobs={jobsToShow}
       date={showDayDetails.day.date}
+      markJobComplete={markJobComplete}
+      activeCrews={activeCrews}
+      assignJobToCrew={assignJobToCrew}
     />
 
     </div>
