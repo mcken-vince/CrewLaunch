@@ -21,7 +21,7 @@ const renderDispatchCalendar = (props: Partial<DispatchCalendarProps> = {}) => {
   );
 };
 
-describe('DispatchCalendar component', () => {
+describe('<DispatchCalendar />', () => {
   it('renders without crashing and displays the current month and year by default', async () => {
     renderDispatchCalendar();
     expect(await screen.findByText(new RegExp(months[currentMonth]))).toBeInTheDocument();
