@@ -5,6 +5,7 @@ import { useState, FC, ReactElement, useMemo } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import JobCard from './JobCard';
+import JobsFullPageModal from './JobsFullPageModal';
 import { formatDate, getMonthObject } from '../helpers/dataFormatters';
 import { ICrew, IthisMonth, IJobLocal, IShowDayDetails } from '../definitions';
 
@@ -94,17 +95,12 @@ const DispatchCalendar: FC<any> = (props: DispatchCalendarProps): ReactElement =
         {dayCards}
       </div>
 
-      <Modal 
-        className='jobs-full-page-modal'
-        show={showDayDetails.day.jobs.length > 0 && showDayDetails.show} 
-        fullscreen={true} 
-        onHide={() => setShowDayDetails({show: false, day: {date: '', jobs: []}})}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>{showDayDetails.day.date}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{selectedDayJobs}</Modal.Body>
-      </Modal>
+    <JobsFullPageModal 
+      show={showDayDetails.show}
+      onHide={() => setShowDayDetails({show: false, day: {date: '', jobs: []}})}
+      jobComponents={selectedDayJobs}
+      date={showDayDetails.day.date}
+    />
 
     </div>
   );

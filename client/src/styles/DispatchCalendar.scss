@@ -75,25 +75,3 @@
     }
   }
 }
-
-.modal.jobs-full-page-modal {
-  .modal-dialog.modal-fullscreen {
-
-    .modal-content {
-      
-      .modal-body {
-        
-        .jobcard-container {
-          margin-bottom: $grid-gap;   
-          padding: .5em .5em .5em 0em;
-
-          @media (max-width: $sm) {
-            display: flex;
-            flex-direction: column;
-            padding: 0;
-          }
-        }
-      }
-    }
-  }
-}
