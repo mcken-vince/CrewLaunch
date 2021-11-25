@@ -1,4 +1,4 @@
-import { handleClientCreation, isExistingClient } from './clientHandlers';
+import { handleClientCreation, handleClientUpdate, isExistingClient } from './clientHandlers';
 import axios from 'axios';
 import { getClients, sampleState } from '../tests/sampleData';
 
@@ -26,10 +26,19 @@ describe('isExistingClient()', () => {
 
 describe('handleClientCreation()', () => {
   it('calls updateState function', async () => {
-    const updateState = jest.fn((prev = []) => prev);
+    const updateState = jest.fn();
     mockedAxios.get.mockResolvedValue(getClients);
-    mockedAxios.post.mockResolvedValue({_id: 'testing'});
+    mockedAxios.post.mockResolvedValue({});
     await handleClientCreation(sampleState.clients[0], sampleState, updateState);
     expect(updateState).toHaveBeenCalled();
+  });
+});
+
+describe('handleClientUpdate()', () => {
+  it('calls updateState function', async () => {
+    const updateState = jest.fn();
+    mockedAxios.get.mockResolvedValue(getClients);
+    mockedAxios.post.mockResolvedValue({});
+    await handleClientUpdate(sampleState.clients[0], sampleState, updateState);
   });
 });
