@@ -1,0 +1,98 @@
+@import 'variables';
+
+.crew-profile {
+  border: 5px $accent-color1 dotted;
+  padding: 1em;
+  border-radius: $card-border-radius;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  .profile-header {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .profile-body {
+
+    .profile-details {
+      display: flex;
+      
+    
+      .crew-status {
+        border: 1px $accent-color1 solid;
+        padding: .25em;
+        border-radius: 20px 20px;
+        color: white;
+        &.active-crew {
+          background-color: green;
+        }
+        &.inactive-crew {
+          background-color: gray;
+        }
+      }
+      img {
+        height: 10em;
+        width: 10em;
+        border-radius: 50%;
+        background-color: $accent-color1;
+      }
+    }
+  }
+  .profile-footer {
+    display: flex;
+    justify-content: flex-end;
+    button.edit-profile-button {
+      height:max-content;
+      
+      a {
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }
+
+
+  @media (max-width: $med) and (min-width: $sm) {
+
+    align-self: center;
+
+    .profile-body {
+      // flex-direction: column;
+      justify-content: space-between;
+
+      .profile-details {
+        justify-content: space-around;
+        width: 100%;
+      }
+    }
+    // .profile-footer {
+    //   width: 100%;
+    //   // justify-content: flex-end;
+    // }
+  }
+
+  @media (max-width: $sm) {
+    width: 100%;
+    .profile-header {
+      flex-flow: column-reverse;
+    }
+
+    .profile-body {
+      
+      .profile-details {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;        
+      }
+    }
+    .profile-footer {
+      width: 100%;
+      justify-content: center;
+      button.edit-profile-button {
+        width: 60%;
+        margin-top: .5em;
+      }
+    }
+  }
+}

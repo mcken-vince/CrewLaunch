@@ -50,8 +50,10 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
   const completeButtonContent = completed ? <X/> : <Check/>;
   return (
     <Card className={jobCardClass}>
-      <h4>{address}</h4>
-      {!hideDate && <h4 className='jobcard-date'><span>{formattedDate[0]}</span><span>{formattedDate.slice(1).join(' ')}</span></h4> }
+      <div className='jobcard-header'>
+        {!hideDate && <h4 className='jobcard-date'><span>{formattedDate[0]},</span><span>{formattedDate.slice(1).join(' ')}</span></h4> }
+        <h4>{address}</h4>
+      </div>
       {assignJobToCrew && 
         <div className='jobcard-crew'>
           {crew ? 

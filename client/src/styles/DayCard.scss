@@ -9,7 +9,9 @@
   text-align: right;
   box-sizing: border-box;
   height: 6rem; 
-
+  &:hover {
+    cursor: pointer;
+  }
   &.today {
     .daycard-date {
       color: red;
@@ -17,6 +19,9 @@
   }
 
   &.daycard-container-empty {
+    &:hover {
+      cursor: default;
+    }
     .daycard-jobcount {
       color: white;
     }  

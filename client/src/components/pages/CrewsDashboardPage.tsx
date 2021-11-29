@@ -3,17 +3,15 @@ import { ICrew, IJob, IUserLocal, IJobLocal } from '../../definitions';
 import useAppData from '../../hooks/useAppData';
 import '../../styles/CrewsDashboardPage.scss';
 import CrewsNav from '../CrewsNav';
-import { Link, useParams, Route, Switch } from 'react-router-dom';
-import Image from 'react-bootstrap/Image';
-import Button from 'react-bootstrap/Button';
-import classNames from 'classnames';
+import { useParams, Route, Switch } from 'react-router-dom';
+
 import EditProfileForm from '../forms/EditProfileForm';
 import { getCrewJobsWithDetails } from '../../helpers/dataCombiners';
 import CrewJobsPage from './CrewJobsPage';
 import { markJobComplete } from '../../helpers/jobHandlers';
-import {PencilSquare} from 'react-bootstrap-icons';
 import ScrollTop from '../ScrollTop';
 import CrewCalendar from '../CrewCalendar';
+import CrewProfile from '../CrewProfile';
 
 const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
   const params: {id: string | undefined} = useParams();
@@ -27,8 +25,6 @@ const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
     setCrew(findCrew);
   }, [state, crewId]);
 
-
-  const statusClasses = classNames('crew-status', crew && {'active-crew': crew.is_active, 'inactive-crew': !crew.is_active});
 
   const jobs: IJobLocal[] = (state && crewId) ? getCrewJobsWithDetails(crewId, state.crews, state.jobs, state.packages, state.contracts, state.clients) : [];
 
@@ -49,18 +45,9 @@ const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
       </Route>
       
       <Route path='/crews/:id'>
-      <>
-        <div className='profile'>
-          <div>
-            <h1 className='profile-welcome-message'>Welcome, {crew.foreman_name}.</h1>
-            <div className='profile-details'>
-              <Image className='profile-avatar' alt='avatar' src={crew.avatar || 'https://www.pngfind.com/pngs/m/154-1540407_png-file-svg-silhouette-of-head-and-shoulders.png'} />
-              <h4>Your crew size: {crew.crew_size}</h4>
-              <h4>Status: <span className={statusClasses}>{crew.is_active ? 'Active' : 'Inactive'}</span></h4>
-            </div>
-          </div>
-          <Button className='edit-profile-button'><Link to={`/crews/${crewId}/edit`}><PencilSquare /> Edit</Link></Button>
-          </div>
+        <>
+          <CrewProfile crew={crew} />
+          
           <CrewCalendar
             jobs={jobs} 
             markJobComplete={(job: IJob, complete: boolean) => state && markJobComplete(job, complete, state, updateState)}
