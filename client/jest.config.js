@@ -28,5 +28,6 @@ module.exports = {
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
   testPathIgnorePatters: [
     "stories"
-  ]
+  ],
+  maxWorkers: 2
 };
