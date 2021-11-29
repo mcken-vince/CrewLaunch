@@ -29,5 +29,10 @@ module.exports = {
   testPathIgnorePatters: [
     "stories"
   ],
-  maxWorkers: 2
+  maxWorkers: 2,
+  globals: {
+    'ts-jest': {
+      isolatedModules: true
+    }
+  }
 };

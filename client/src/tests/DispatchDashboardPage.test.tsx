@@ -7,7 +7,7 @@ const testUser: {email: string, admin: boolean, password: string, name: string} 
 const renderDispatchDashboardPage = (props: Partial<DispatchDashboardPageProps> = {}) => {
   const defaultProps: DispatchDashboardPageProps = {
     user: testUser,
-    onLogout: () => {},
+    onLogout: jest.fn(),
   };
   return render(
     <Router basename={'/'}>
