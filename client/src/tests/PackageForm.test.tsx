@@ -2,10 +2,12 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import PackageForm, { PackageFormProps } from '../components/forms/PackageForm';
 import { sampleState } from './sampleData';
 
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useParams: jest.fn(() => Promise.resolve({})),
- }));
+beforeEach(() => {
+  jest.mock("react-router-dom", () => ({
+    ...jest.requireActual("react-router-dom"),
+    useParams: jest.fn(() => Promise.resolve({})),
+  }));
+});
 
 const onSubmit = jest.fn();
 

@@ -1,13 +1,13 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import ContractForm, { ContractFormProps } from '../components/forms/ContractForm';
-import BrowserRouter from 'react-router';
 import { localContracts, sampleState } from './sampleData';
 
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useParams: jest.fn(() => Promise.resolve({})),
- }));
- 
+beforeEach(() => {
+  jest.mock("react-router-dom", () => ({
+    ...jest.requireActual("react-router-dom"),
+    useParams: jest.fn(() => Promise.resolve({})),
+  }));
+});
 const onSubmit = jest.fn((resource) => Promise.resolve(resource));
 
 const renderContractForm = (props: Partial<ContractFormProps> = {}) => {
