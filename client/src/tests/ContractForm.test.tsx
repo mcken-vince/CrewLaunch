@@ -5,7 +5,7 @@ import { localContracts, sampleState } from './sampleData';
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
-  useParams: jest.fn(() => Promise.resolve('yes')),
+  useParams: jest.fn(() => Promise.resolve({})),
  }));
  
 const onSubmit = jest.fn((resource) => Promise.resolve(resource));
@@ -24,7 +24,6 @@ const renderContractForm = (props: Partial<ContractFormProps> = {}) => {
 
 describe('<ContractForm />', () => {
   it('renders without crashing and calls onSubmit when submitting contract', async () => {
-    jest.spyOn(BrowserRouter, 'useParams').mockReturnValue({});
     renderContractForm();
     fireEvent.change(screen.getByPlaceholderText(/Enter name/), {target: {value: 'Client Name'}});
     fireEvent.change(screen.getByPlaceholderText(/Enter email/), {target: {value: 'client@email.com'}});
