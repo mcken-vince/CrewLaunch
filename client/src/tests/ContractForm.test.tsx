@@ -2,12 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import ContractForm, { ContractFormProps } from '../components/forms/ContractForm';
 import { localContracts, sampleState } from './sampleData';
 
-beforeEach(() => {
-  jest.mock("react-router-dom", () => ({
-    ...jest.requireActual("react-router-dom"),
-    useParams: jest.fn(() => Promise.resolve({})),
-  }));
-});
+
 const onSubmit = jest.fn((resource) => Promise.resolve(resource));
 
 const renderContractForm = (props: Partial<ContractFormProps> = {}) => {
@@ -18,11 +13,19 @@ const renderContractForm = (props: Partial<ContractFormProps> = {}) => {
     onSubmit
   };
   return render (
-      <ContractForm {...defaultProps} {...props} />
-  );
-};
-
+    <ContractForm {...defaultProps} {...props} />
+    );
+  };
+  
+  
 describe('<ContractForm />', () => {
+  beforeEach(() => {
+    jest.mock("react-router-dom", () => ({
+      ...jest.requireActual("react-router-dom"),
+      useParams: jest.fn(() => Promise.resolve({})),
+    }));
+  });
+
   it('renders without crashing and calls onSubmit when submitting contract', async () => {
     renderContractForm();
     fireEvent.change(screen.getByPlaceholderText(/Enter name/), {target: {value: 'Client Name'}});

@@ -2,12 +2,6 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import PackageForm, { PackageFormProps } from '../components/forms/PackageForm';
 import { sampleState } from './sampleData';
 
-beforeEach(() => {
-  jest.mock("react-router-dom", () => ({
-    ...jest.requireActual("react-router-dom"),
-    useParams: jest.fn(() => Promise.resolve({})),
-  }));
-});
 
 const onSubmit = jest.fn();
 
@@ -18,10 +12,17 @@ const renderPackageForm = (props: Partial<PackageFormProps> = {}) => {
   };
   return render (
     <PackageForm {...defaultProps} {...props} /> 
-  );
-};
-
+    );
+  };
+  
+  
 describe('<PackageForm />', () => {
+    beforeEach(() => {
+      jest.mock("react-router-dom", () => ({
+        ...jest.requireActual("react-router-dom"),
+        useParams: jest.fn(() => Promise.resolve({})),
+      }));
+    });
   it('renders without crashing and calls onSubmit when package is submitted', async () => {
     
     renderPackageForm();
