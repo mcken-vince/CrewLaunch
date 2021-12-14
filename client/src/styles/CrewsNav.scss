@@ -13,22 +13,22 @@ $logo-shadow: 0 0 10px white;
   padding: 1em;
   background-color: $nav-background;
   border: black 2px solid;
+  box-shadow: black  0px 0px 2px;
   border-bottom-left-radius: 20px 20px;
   border-bottom-right-radius: 20px 20px;
   
   .crews-nav-logo-link {
     text-decoration: none;
-    align-self: flex-start;
-    font-size: 1.2em;
-  }
-  .crews-nav-logo {
-    color: $logo-text-color;
-    font-size: 2em;
-    text-shadow: none;
-    transition: text-shadow 500ms ease-in-out;
-    &:hover {
-      animation: shadowFade 500ms 1;
-      text-shadow: $logo-shadow;
+
+    .crews-nav-logo {
+      color: $logo-text-color;
+      font-size: 2.5em;
+      text-shadow: none;
+      transition: text-shadow 500ms ease-in-out;
+      &:hover {
+        animation: shadowFade 500ms 1;
+        text-shadow: $logo-shadow;
+      }
     }
 
     @keyframes shadowFade {
@@ -65,8 +65,9 @@ $logo-shadow: 0 0 10px white;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    .crews-nav-logo {
-      font-size: 2em;
+    
+    .crews-nav-logo-link {
+        align-self: flex-start;
     }
 
     .crews-nav-right {
@@ -82,10 +83,13 @@ $logo-shadow: 0 0 10px white;
     }
   }
 
-  // @media (max-width: $sm) {
+  @media (max-width: $sm) {
 
-  //   .crews-nav-logo {
-  //     font-size: 2em;
-  //   }
-  // }
+    .crews-nav-logo-link {
+      
+      .crews-nav-logo {
+        font-size: 2.2em;
+      }
+    }
+  }
 }
