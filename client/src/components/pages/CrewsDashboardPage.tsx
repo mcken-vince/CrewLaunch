@@ -44,7 +44,7 @@ const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
         <>
           <CrewProfile 
             crew={crew} 
-            editCrew={(crew: ICrew) => state && handleCrewEdit(crew, state, updateState)}
+            editCrew={(id: string, crew: ICrew) => state && handleCrewEdit(id, crew, state, updateState)}
           />
           
           <CrewCalendar

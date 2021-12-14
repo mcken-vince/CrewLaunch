@@ -15,7 +15,7 @@ const CrewProfile = (props: CrewProfileProps) => {
   const statusClasses = classNames('crew-status', crew && {'active-crew': crew.is_active, 'inactive-crew': !crew.is_active});
 
   const saveChanges = async () => {
-    await editCrew(crewDetails);
+    await editCrew(crew._id, crewDetails);
   };
 
   const clickEdit = async () => {
@@ -73,8 +73,8 @@ const CrewProfile = (props: CrewProfileProps) => {
       </>
       }
       <div className='profile-footer'>
-        <Button className='edit-profile-button' onClick={clickEdit}><PencilSquare /> {edit ? 'Save' : 'Edit'}</Button>
-        {edit && <Button className='edit-profile-button' onClick={() => setEdit(false)}><BackspaceReverse/> Cancel</Button>}
+        <Button disabled={!crewDetails.foreman_name} className='edit-profile-button' onClick={clickEdit}><PencilSquare /> {edit ? 'Save' : 'Edit'}</Button>
+        {edit && <Button className='edit-profile-button' onClick={() => {setEdit(false); setCrewDetails(crew)}}><BackspaceReverse/> Cancel</Button>}
       </div>
     </div>
   );

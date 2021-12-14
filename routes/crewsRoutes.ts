@@ -20,19 +20,17 @@ const crewsRoutes = (Crew: Model<ICrew>) => {
   router.post('/:id', (req, res) => {
     const update: ICrew = req.body;
 
-    Crew.findOne({
-      id: req.params.id
-    })
-    .then(crew => {
-      if (!crew) {
-        throw Error('Error updating nonexistent crew');
-      }
-      crew.foreman_name = update.foreman_name;
-      crew.crew_size = update.crew_size;
-      crew.is_active = update.is_active;
-      crew.avatar = update.avatar;
-      return crew.save()
-    })
+    const query = { _id: req.params.id };
+    Crew.findOneAndUpdate(
+      query,
+      {
+        foreman_name: update.foreman_name,
+        crew_size: update.crew_size,
+        is_active: update.is_active,
+        avatar: update.avatar
+      },
+      { new: true, overwrite: true }
+    )
     .then(crew => {
       console.log('Crew updated successfully');
       res.json(crew);
