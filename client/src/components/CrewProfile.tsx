@@ -7,19 +7,21 @@ import '../styles/CrewProfile.scss';
 import { useState } from "react";
 import { Form, InputGroup } from "react-bootstrap";
 
+
 const CrewProfile = (props: CrewProfileProps) => {
   const [edit, setEdit] = useState<boolean>(false);
-  const crew = props.crew;
+  const { crew, editCrew } = props;
   const [crewDetails, setCrewDetails] = useState<ICrew>(crew);
   const statusClasses = classNames('crew-status', crew && {'active-crew': crew.is_active, 'inactive-crew': !crew.is_active});
 
-  const saveChanges = () => {
-    
+  const saveChanges = async () => {
+    await editCrew(crewDetails);
   };
 
-  const clickEdit = () => {
+  const clickEdit = async () => {
     if (edit) {
-      saveChanges();
+      await saveChanges();
+      setEdit(false);
     } else {
       setEdit(true);
     }
@@ -53,7 +55,6 @@ const CrewProfile = (props: CrewProfileProps) => {
         <Form.Group className='mb-3' controlId='crewEditCrewSize'>
           <Form.Label>Crew Size:</Form.Label>
           <Form.Select value={crewDetails.crew_size} aria-label='crewsize' onChange={(e) => {setCrewDetails(prev => ({...prev, crew_size: parseInt(e.currentTarget.value)}))}}>
-            <option value="0">Select a number of workers</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -83,4 +84,5 @@ export default CrewProfile;
 
 export interface CrewProfileProps {
   crew: ICrew;
+  editCrew: Function;
 };
