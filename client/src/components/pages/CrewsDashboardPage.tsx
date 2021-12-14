@@ -12,6 +12,7 @@ import { markJobComplete } from '../../helpers/jobHandlers';
 import ScrollTop from '../ScrollTop';
 import CrewCalendar from '../CrewCalendar';
 import CrewProfile from '../CrewProfile';
+import { handleCrewEdit } from '../../helpers/crewHandlers';
 
 const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
   const params: {id: string | undefined} = useParams();
@@ -46,7 +47,10 @@ const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
       
       <Route path='/crews/:id'>
         <>
-          <CrewProfile crew={crew} />
+          <CrewProfile 
+            crew={crew} 
+            editCrew={(crew: ICrew) => state && handleCrewEdit(crew, state, updateState)}
+          />
           
           <CrewCalendar
             jobs={jobs} 
