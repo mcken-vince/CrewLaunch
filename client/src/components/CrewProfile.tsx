@@ -45,12 +45,8 @@ const CrewProfile = (props: CrewProfileProps) => {
       </> :
       <>
         <Form.Group>
-          <Form.Label>Foreman Name:</Form.Label>
-          <Form.Control 
-            type='text' 
-            value={crewDetails.foreman_name} 
-            onChange={(e) => setCrewDetails(prev => ({...prev, foreman_name: e.target.value}))}
-          />
+          <Form.Label>Foreman Avatar:</Form.Label>
+          <Form.Control type='textarea' value={crewDetails.avatar} onChange={(e) => {setCrewDetails(prev => ({...prev, avatar: e.target.value}))}}/>
         </Form.Group>
         <Form.Group className='mb-3' controlId='crewEditCrewSize'>
           <Form.Label>Crew Size:</Form.Label>
