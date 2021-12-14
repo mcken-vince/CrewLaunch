@@ -35,3 +35,7 @@ export const handleCrewDeletion = async (id: string, state: IState, updateState:
     throw err;
   }
 };
+
+const editCrew = (crew: ICrew): Promise<AxiosResponse<ICrew>> => {
+  return axios.post('/crews/:id', crew);
+};
