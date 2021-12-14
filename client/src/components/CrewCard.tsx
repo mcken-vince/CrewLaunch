@@ -7,10 +7,11 @@ import { FC, ReactElement, useMemo, useState } from 'react';
 import ConfirmAlert from './ConfirmAlert';
 import { ICrew, IConfirm, IJobLocal} from '../definitions';
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
 
 
 const CrewCard: FC<CrewCardProps> = (props): ReactElement => {
-  const { foreman_name, crew_size, avatar, is_active } = props.crew;
+  const { foreman_name, crew_size, avatar, is_active, _id } = props.crew;
   const onDelete = props.onDelete;
   const clearConfirm: IConfirm = {show: false, message: '', action: 'NONE'};
   const [confirm, setConfirm] = useState<IConfirm>(clearConfirm);
@@ -43,7 +44,7 @@ const CrewCard: FC<CrewCardProps> = (props): ReactElement => {
   return (
     <Card className='crewCard-container'>
         <Card.Body className='crewCard-body'>
-          <Image className='crewCard-avatar' src={avatar ? avatar : 'https://www.pngfind.com/pngs/m/154-1540407_png-file-svg-silhouette-of-head-and-shoulders.png'} alt='foreman avatar' roundedCircle />
+          <Link to={`/crews/${_id}`}><Image className='crewCard-avatar' src={avatar ? avatar : 'https://www.pngfind.com/pngs/m/154-1540407_png-file-svg-silhouette-of-head-and-shoulders.png'} alt='foreman avatar' roundedCircle /></Link>
           <div className='crewCard-info'>
             <h3>{foreman_name}</h3>
             <p>Status:
