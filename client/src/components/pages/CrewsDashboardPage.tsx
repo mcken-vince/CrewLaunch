@@ -4,8 +4,6 @@ import useAppData from '../../hooks/useAppData';
 import '../../styles/CrewsDashboardPage.scss';
 import CrewsNav from '../CrewsNav';
 import { useParams, Route, Switch } from 'react-router-dom';
-
-import EditProfileForm from '../forms/EditProfileForm';
 import { getCrewJobsWithDetails } from '../../helpers/dataCombiners';
 import CrewJobsPage from './CrewJobsPage';
 import { markJobComplete } from '../../helpers/jobHandlers';
@@ -34,9 +32,6 @@ const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
     <div className='crews-dashboard-container'>
     {crew && <>
     <Switch>
-      <Route path='/crews/:id/edit'>
-        <EditProfileForm crew={crew}/>
-      </Route>
       
       <Route path='/crews/:id/jobs'>
         <CrewJobsPage 
