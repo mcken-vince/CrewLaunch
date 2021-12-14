@@ -9,7 +9,7 @@ import { EventHandler, FC, ReactElement, useState } from 'react';
 import DateRangePicker from '../DateRangePicker';
 import PackagesOffcanvas from '../PackagesOffcanvas';
 import { IClient, IPackage, IContractLocal } from '../../definitions';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 
 const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
   const params: {id?: string, client_id?: string} = useParams();
@@ -17,10 +17,10 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
   // empty skeleton to satisfy typescript compiler
   const packageSkeleton = {title: '', cost: 0, visit_interval_days: 0, man_hrs_per_visit: 0, contract_length_days: 0, _id: ''};
   const clientSkeleton = {name: '', email: '', phone: ''};
-  const genFromClient = params.client_id ? props.clients.filter(c => c._id.toString() === params.client_id)[0] : clientSkeleton;
+  const generateFromClient = params.client_id ? props.clients.filter(c => c._id.toString() === params.client_id)[0] : clientSkeleton;
   const [packagesShow, setPackagesShow] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState(editContract && editContract.selectedPackage ? editContract.selectedPackage : packageSkeleton);
-  const [client, setClient] = useState<IClientLocal>(editContract && editContract.client ? editContract.client : genFromClient);
+  const [client, setClient] = useState<IClientLocal>(editContract && editContract.client ? editContract.client : generateFromClient);
   const [address, setAddress] = useState(editContract && editContract.address ? editContract.address : '');
   const [startDate, setStartDate] = useState(editContract && editContract.start_date ? editContract.start_date : new Date());
   const [endDate, setEndDate] = useState(editContract && editContract.start_date ? addDays(new Date(editContract.start_date), selectedPackage.contract_length_days - 1) : new Date());
