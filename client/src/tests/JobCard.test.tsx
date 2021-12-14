@@ -41,7 +41,7 @@ afterAll(() => {
   });
 
   it('renders without crashing and displays job information', () => {
-    expect(screen.getByText('177 Mornersome Drive SW, Calgary AB')).toBeInTheDocument();
+    expect(screen.getByText(/177 Mornersome Drive SW, Calgary AB/i)).toBeInTheDocument();
     // check that day of week and full date are displayed
     expect(screen.getByText(new RegExp(formattedDate[0], 'i'))).toBeInTheDocument();
     expect(screen.getByText(new RegExp(formattedDate.slice(1).join(' '), 'i'))).toBeInTheDocument();

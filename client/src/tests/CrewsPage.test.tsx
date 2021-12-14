@@ -1,4 +1,5 @@
 import {render} from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import CrewsPage, { CrewsPageProps } from '../components/pages/CrewsPage';
 import { sampleState } from './sampleData';
 
@@ -10,7 +11,9 @@ const renderCrewsPage = (props: Partial<CrewsPageProps> = {} ) => {
     onDelete
   };
   return render (
-    <CrewsPage {...defaultProps} {...props} />
+    <BrowserRouter>
+      <CrewsPage {...defaultProps} {...props} />
+    </BrowserRouter>
   );
 };
 

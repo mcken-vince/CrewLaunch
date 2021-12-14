@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
 import CrewCard, { CrewCardProps} from "../components/CrewCard";
 import { sampleState } from './sampleData'
 
@@ -11,7 +12,9 @@ const renderCrewCard = (props: Partial<CrewCardProps> = {}) => {
     onDelete
   };
   return render(
+    <BrowserRouter>
       <CrewCard {...defaultProps} {...props}/>
+    </BrowserRouter>
   );
 };
 
