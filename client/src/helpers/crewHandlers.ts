@@ -39,3 +39,16 @@ export const handleCrewDeletion = async (id: string, state: IState, updateState:
 const editCrew = (crew: ICrew): Promise<AxiosResponse<ICrew>> => {
   return axios.post('/crews/:id', crew);
 };
+
+export const handleCrewEdit = async (crew: ICrew, state: IState, updateState: Function): Promise<{type: boolean, message: string}> => {
+  try {
+    const response = await editCrew(crew);
+    const updatedCrew = response.data;
+    const updatedCrews: ICrew[] = state.crews.filter(c => c._id.toString() !== crew._id.toString());
+    const updatedState = {...state, crews: [...updatedCrews, updatedCrew]};
+    updateState(updatedState);
+    return {type: true, message: 'Crew details updated!'};
+  } catch (err) {
+    throw err;
+  }
+};
