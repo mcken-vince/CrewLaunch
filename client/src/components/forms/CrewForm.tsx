@@ -69,7 +69,7 @@ const CrewForm: FC<CrewFormProps> = (props): ReactElement => {
             <Form.Control disabled={loading} type='text' value={avatar} onChange={(e) => setAvatar(e.target.value)} placeholder='Enter avatar url' /> 
           </InputGroup>     
         </div>
-          <Image src={avatar} alt='avatar preview'/>
+          <Image src={avatar ? avatar : 'nada'} alt='foreman-avatar'/>
       </div>
 
           <Form.Label>Status:</Form.Label>

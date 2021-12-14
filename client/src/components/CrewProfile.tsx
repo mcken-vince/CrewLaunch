@@ -1,4 +1,4 @@
-import { ICrew, ICrewLocal } from "../definitions";
+import { ICrew } from "../definitions";
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import { PencilSquare, BackspaceReverse  } from "react-bootstrap-icons";
@@ -54,7 +54,7 @@ const CrewProfile = (props: CrewProfileProps) => {
         </Form.Group>
         <Form.Group className='mb-3' controlId='crewEditCrewSize'>
           <Form.Label>Crew Size:</Form.Label>
-          <Form.Select value={crewDetails.crew_size} aria-label='crewsize' onChange={(e) => {setCrewDetails(prev => ({...prev, crew_size: parseInt(e.currentTarget.value)}))}}>
+          <Form.Select defaultValue={crewDetails.crew_size} aria-label='crewsize' onChange={(e) => setCrewDetails(prev => ({...prev, crew_size: parseInt(e.target.value)}))}>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
