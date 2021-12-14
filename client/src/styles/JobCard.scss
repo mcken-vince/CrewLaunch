@@ -19,11 +19,11 @@
   
   &.hidden-crew {
     margin-bottom: $grid-gap;
-    padding: 0em .5em;
+    padding: 0em 1em;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
   }
 
   .jobcard-header {
