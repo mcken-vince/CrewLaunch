@@ -13,7 +13,7 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
   const [confirm, setConfirm] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const { crews, assignJobToCrew, markJobComplete, job, hideDate } = props;
-  const { address, date, completed, crew } = job;
+  const { address, date, completed, crew, servicePackage } = job;
   
   // const servicePackage = props.servicePackage;
   const handleCrewSelect = async (thisCrew: ICrew | {_id: undefined}) => {
@@ -48,11 +48,13 @@ const JobCard: FC<JobCardProps> = (props): ReactElement => {
   const jobCardClass: string = ClassNames('jobcard-container', {'jobcard-complete': completed, 'selected': confirm, 'hidden-date': hideDate, 'hidden-crew' : !assignJobToCrew});
   const formattedDate: string[] = formatDate(new Date(date)).split(' ');
   const completeButtonContent = completed ? <X/> : <Check/>;
+
+  const timeEstimate = (servicePackage && crew) ? (servicePackage.man_hrs_per_visit / crew.crew_size).toFixed(1) : (servicePackage && servicePackage.man_hrs_per_visit) || 0;
   return (
     <Card className={jobCardClass}>
       <div className='jobcard-header'>
         {!hideDate && <h4 className='jobcard-date'><span>{formattedDate[0]},</span><span>{formattedDate.slice(1).join(' ')}</span></h4> }
-        <h4>{address}</h4>
+        <h4>{address} - ({timeEstimate} hrs)</h4>
       </div>
       {assignJobToCrew && 
         <div className='jobcard-crew'>

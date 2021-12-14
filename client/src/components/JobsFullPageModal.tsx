@@ -7,6 +7,16 @@ import { ReactElement } from 'react';
 const JobsFullPageModal = (props: JobsFullPageModalProps) => {
   const { jobs, date, show, onHide, markJobComplete, activeCrews, assignJobToCrew } = props;
 
+  let totalTimeEstimate: number = 0;
+  jobs.forEach(job => {
+    if (job.servicePackage) {
+      if (job.crew) {
+        totalTimeEstimate += (job.servicePackage.man_hrs_per_visit / job.crew.crew_size);
+      } else {
+        totalTimeEstimate += job.servicePackage.man_hrs_per_visit;
+      }
+    } 
+  });
   const jobComponents: ReactElement[] = jobs.map((job, idx) => {
     return (<JobCard markJobComplete={markJobComplete} key={idx} job={job} crews={activeCrews && activeCrews} assignJobToCrew={assignJobToCrew} hideDate={true}/>);
   });
@@ -19,7 +29,7 @@ const JobsFullPageModal = (props: JobsFullPageModalProps) => {
       onHide={onHide}
     >
       <Modal.Header closeButton>
-        <Modal.Title>{date}</Modal.Title>
+        <Modal.Title>{date} - (Total: {totalTimeEstimate.toFixed(1)} hrs)</Modal.Title>
       </Modal.Header>
       <Modal.Body>{jobComponents}</Modal.Body>
     </Modal>
