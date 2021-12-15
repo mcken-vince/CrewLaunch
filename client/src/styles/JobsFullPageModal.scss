@@ -1,13 +1,16 @@
 @import 'variables';
 
-// .modal.jobs-full-page-modal {
-//   .modal-dialog.modal-fullscreen {
+.modal.jobs-full-page-modal {
+  .modal-dialog.modal-fullscreen {
 
-//     .modal-content {
+    .modal-content {
       
-//       .modal-body {
+      .modal-body {
 
-//       }
-//     }
-//   }
-// }
+        .jobcard-container {
+          margin-bottom: $grid-gap;
+        }
+      }
+    }
+  }
+}
