@@ -26,6 +26,10 @@
     justify-content: space-between;
   }
 
+  &.selected {
+    padding: 0;
+  }
+
   .jobcard-header {
     display: flex;
     flex-direction: column;
@@ -80,6 +84,7 @@
     &.hidden-crew {
       display: flex;
       flex-direction: row;
+      
     }
     .jobcard-header {
       text-align: center;
