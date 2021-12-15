@@ -6,7 +6,7 @@ interface registrationErrors {
   password1?: string;
   password2?: string;
   user?: string;
-}
+};
 
 const checkRegistrationFields = (data: any) => {
   // An errors object is created

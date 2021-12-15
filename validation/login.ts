@@ -5,7 +5,7 @@ interface loginErrors {
   email?: string;
   password?: string;
   user?: string;
-}
+};
 
 const validateLoginInput = (data: any) => {
   let errors: loginErrors = {};
