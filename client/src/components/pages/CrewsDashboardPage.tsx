@@ -11,6 +11,7 @@ import ScrollTop from '../ScrollTop';
 import CrewCalendar from '../CrewCalendar';
 import CrewProfile from '../CrewProfile';
 import { handleCrewEdit } from '../../helpers/crewHandlers';
+import isToday from 'date-fns/isToday';
 
 const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
   const params: {id: string | undefined} = useParams();
@@ -27,6 +28,7 @@ const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
 
   const jobs: IJobLocal[] = (state && crewId) ? getCrewJobsWithDetails(crewId, state.crews, state.jobs, state.packages, state.contracts, state.clients) : [];
   const uncompletedOverdueJobs = jobs.filter(j => new Date(j.date) < new Date() && !j.completed);
+  const todayJobs = jobs.filter(j => isToday(new Date(j.date)) && !j.completed);
 
   return (<>
     <CrewsNav onLogout={onLogout} user={user} crew={crew}/>
@@ -49,7 +51,12 @@ const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
           />
           <div className='notifications'>
             {uncompletedOverdueJobs.length !== 0 && 
-              <h3>{`You have ${uncompletedOverdueJobs.length} overdue jobs.`}</h3>
+              <h3>{`You have ${uncompletedOverdueJobs.length} overdue job${uncompletedOverdueJobs.length === 1 ? '' : 's'}.`}</h3>
+              
+            }
+            {todayJobs.length !==0 && 
+              
+              <h3>{`You have ${todayJobs.length} job${todayJobs.length === 1 ? '' : 's'} remaining today.`}</h3>
             }
           </div>
           <CrewCalendar
