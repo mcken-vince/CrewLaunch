@@ -26,6 +26,7 @@ const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
 
 
   const jobs: IJobLocal[] = (state && crewId) ? getCrewJobsWithDetails(crewId, state.crews, state.jobs, state.packages, state.contracts, state.clients) : [];
+  const uncompletedOverdueJobs = jobs.filter(j => new Date(j.date) < new Date() && !j.completed);
 
   return (<>
     <CrewsNav onLogout={onLogout} user={user} crew={crew}/>
@@ -46,7 +47,11 @@ const CrewsDashboardPage = (props: CrewsDashboardPageProps) => {
             crew={crew} 
             editCrew={(id: string, crew: ICrew) => state && handleCrewEdit(id, crew, state, updateState)}
           />
-          
+          <div className='notifications'>
+            {uncompletedOverdueJobs.length !== 0 && 
+              <h3>{`You have ${uncompletedOverdueJobs.length} overdue jobs.`}</h3>
+            }
+          </div>
           <CrewCalendar
             jobs={jobs} 
             markJobComplete={(job: IJob, complete: boolean) => state && markJobComplete(job, complete, state, updateState)}
