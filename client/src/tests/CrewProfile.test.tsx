@@ -14,8 +14,9 @@ const renderCrewProfile = (props: Partial<CrewProfileProps> = {}) => {
 };
 
 describe('<CrewProfile/>', () => {
-  it('renders without crashing', () => {
+  it('renders without crashing, and displays cancel button when edit button is clicked', async () => {
     renderCrewProfile();
     screen.getByTestId('edit-profile-button').click();
+    expect(await screen.findByText(/Cancel/)).toBeInTheDocument();
   });
 });
