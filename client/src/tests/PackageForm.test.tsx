@@ -12,7 +12,9 @@ const renderPackageForm = (props: Partial<PackageFormProps> = {}) => {
     packages: sampleState.packages
   };
   return render (
+    <ReactRouterDom.BrowserRouter>
     <PackageForm {...defaultProps} {...props} /> 
+    </ReactRouterDom.BrowserRouter>
     );
   };
   
