@@ -97,13 +97,15 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
           {selectedPackage && 
           <>
             <Form.Label>Select Contract Start Date:</Form.Label>
-            <DateRangePicker startDate={new Date(startDate)} endDate={new Date(endDate)} onChange={handleDateChange} inheritClassName='contract-form-daterangepicker'/>
+            <div data-testid='date-picker'>
+              <DateRangePicker startDate={new Date(startDate)} endDate={new Date(endDate)} onChange={handleDateChange} inheritClassName='contract-form-daterangepicker'/>
+            </div>
           </>}
           <Form.Group className='mb-3' controlId='contractFormJobNotes'>
             <Form.Label>Job Notes:</Form.Label>
             <Form.Control disabled={loading} type='textarea' value={jobNotes} onChange={(e):void => setJobNotes(e.target.value)} placeholder='Enter relevant job notes here.' />
           </Form.Group>
-          <Button className='contract-form-submit form-submit' disabled={!loading && !formFilled} type='submit' data-testid='submit-button' onClick={validate}>
+          <Button className='contract-form-submit form-submit' disabled={!loading && !formFilled ? true : false} type='submit' data-testid='submit-button' onClick={validate}>
             {loading ? <Spinner animation='border' variant='primary'/> : 'Submit'}
           </Button>
             
