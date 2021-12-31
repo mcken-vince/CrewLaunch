@@ -26,7 +26,7 @@ describe('<ContractForm />', () => {
     }));
   });
 
-  it('renders without crashing and submitButton is disabled if contract start date is not selected', async () => {
+  it('renders without crashing and submit button is disabled if contract start date is not selected', async () => {
     renderContractForm();
     fireEvent.change(screen.getByPlaceholderText(/Enter name/), {target: {value: 'Client Name'}});
     fireEvent.change(screen.getByPlaceholderText(/Enter email/), {target: {value: 'client@email.com'}});
