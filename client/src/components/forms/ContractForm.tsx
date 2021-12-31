@@ -59,8 +59,6 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
           job_notes: jobNotes
         };
 
-        console.log('submitting contract: ', newContract);
-
         await onSubmit(newContract)
         setAlert({error: false, success: true});
         setLoading(false);
@@ -93,7 +91,7 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
           
           <InputGroup className='mb-3'>
             <Form.Control disabled={loading} type='text' readOnly={true} value={selectedPackage && selectedPackage.title ? `${selectedPackage.title} - $${selectedPackage.cost} - ${selectedPackage.contract_length_days} days` : 'Please select a package'} />
-            <Button className='select-package-button' disabled={loading} onClick={():void => setPackagesShow(true)}>Select Package</Button>
+            <Button className='select-package-button' disabled={loading} data-testid='selectPackage-button' onClick={():void => setPackagesShow(true)}>Select Package</Button>
           </InputGroup>
 
           {selectedPackage && 
@@ -105,7 +103,7 @@ const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
             <Form.Label>Job Notes:</Form.Label>
             <Form.Control disabled={loading} type='textarea' value={jobNotes} onChange={(e):void => setJobNotes(e.target.value)} placeholder='Enter relevant job notes here.' />
           </Form.Group>
-          <Button className='contract-form-submit form-submit' disabled={!loading && !formFilled} type='submit' onClick={validate}>
+          <Button className='contract-form-submit form-submit' disabled={!loading && !formFilled} type='submit' data-testid='submit-button' onClick={validate}>
             {loading ? <Spinner animation='border' variant='primary'/> : 'Submit'}
           </Button>
             
