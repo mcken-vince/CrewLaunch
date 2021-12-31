@@ -9,7 +9,7 @@ import { EventHandler, FC, ReactElement, useState } from 'react';
 import DateRangePicker from '../DateRangePicker';
 import PackagesOffcanvas from '../PackagesOffcanvas';
 import { IClient, IPackage, IContractLocal } from '../../definitions';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 
 const ContractForm: FC<ContractFormProps> = (props): ReactElement  => {
   const params: {id?: string, client_id?: string} = useParams();
