@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import CrewProfile, { CrewProfileProps } from "../components/CrewProfile";
 import { sampleState } from "./sampleData";
 
@@ -16,5 +16,6 @@ const renderCrewProfile = (props: Partial<CrewProfileProps> = {}) => {
 describe('<CrewProfile/>', () => {
   it('renders without crashing', () => {
     renderCrewProfile();
-  })
+    screen.getByTestId('edit-profile-button').click();
+  });
 });

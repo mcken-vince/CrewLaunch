@@ -73,7 +73,7 @@ const CrewProfile = (props: CrewProfileProps) => {
       </>
       }
       <div className='profile-footer'>
-        <Button disabled={!crewDetails.foreman_name} className='edit-profile-button' onClick={clickEdit}><PencilSquare /> {edit ? 'Save' : 'Edit'}</Button>
+        <Button disabled={!crewDetails.foreman_name} data-testid='edit-profile-button' className='edit-profile-button' onClick={clickEdit}><PencilSquare /> {edit ? 'Save' : 'Edit'}</Button>
         {edit && <Button className='edit-profile-button' onClick={() => {setEdit(false); setCrewDetails(crew)}}><BackspaceReverse/> Cancel</Button>}
       </div>
     </div>
