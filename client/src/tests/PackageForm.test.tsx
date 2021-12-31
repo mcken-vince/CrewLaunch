@@ -24,7 +24,7 @@ describe('<PackageForm />', () => {
         useParams: jest.fn(() => Promise.resolve({})),
       }));
     });
-  it.skip('renders without crashing and calls onSubmit when package is submitted', async () => {
+  it('renders without crashing and calls onSubmit when package is submitted', async () => {
     renderPackageForm();
     fireEvent.change(screen.getByPlaceholderText(/Enter package title/i), {target: {value: 'package title'}});
     fireEvent.change(screen.getByPlaceholderText(/Enter description/i), {target: {value: 'description here :)'}});
