@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import ContractForm, { ContractFormProps } from '../components/forms/ContractForm';
 import { localContracts, sampleState } from './sampleData';
+import ReactRouterDom from 'react-router-dom';
 
 
 const onSubmit = jest.fn((resource) => Promise.resolve(resource));
@@ -13,7 +14,9 @@ const renderContractForm = (props: Partial<ContractFormProps> = {}) => {
     onSubmit
   };
   return render (
-    <ContractForm {...defaultProps} {...props} />
+    <ReactRouterDom.BrowserRouter>
+      <ContractForm {...defaultProps} {...props} />
+    </ReactRouterDom.BrowserRouter>
     );
   };
   
