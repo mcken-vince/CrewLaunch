@@ -1,3 +1,4 @@
+import { BrowserRouter } from "react-router-dom";
 import DispatchNav from "../components/DispatchNav";
 
 export default {
@@ -5,12 +6,19 @@ export default {
   component: DispatchNav,
 };
 
-const Template = (args) => <DispatchNav {...args} />;
+const Template = (args) => {
+
+  return (
+    <BrowserRouter>
+      <DispatchNav {...args} />
+    </BrowserRouter>
+  );
+};
 
 export const LoggedOut = Template.bind({});
 
 export const LoggedIn = Template.bind({});
 
 LoggedIn.args = {
-  user: {name: 'Abe', email: 'abe_rahama@mail.com'}
+  user: {name: 'Test Test', email: 'testy_testerson@mail.com'}
 };
