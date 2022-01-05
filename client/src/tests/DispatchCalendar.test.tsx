@@ -6,7 +6,7 @@ import { localJobs } from './sampleData';
 const months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const currentMonth: number = new Date().getMonth();
 const currentYear: number = new Date().getFullYear();
-const prevMonth: number = (currentMonth === 1) ? 11 : currentMonth - 1;
+const prevMonth: number = (currentMonth === 0) ? 11 : currentMonth - 1;
 const prevMonthsYear: number = (prevMonth === 11) ? currentYear - 1 : currentYear;
 const nextMonth: number = (currentMonth === 11) ? 0 : currentMonth + 1;
 const nextMonthsYear: number = (nextMonth === 0) ? currentYear + 1 : currentYear;
