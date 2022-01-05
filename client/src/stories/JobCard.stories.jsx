@@ -1,5 +1,5 @@
 import JobCard from "../components/JobCard";
-import { format } from 'date-fns';
+import { localJobs, sampleState } from "../tests/sampleData";
 
 export default {
   title: 'CrewLauncher/JobCard',
@@ -10,14 +10,16 @@ const Template = (args) => <JobCard {...args}/>;
 
 export const IncompleteJob = Template.bind({});
 IncompleteJob.args = {
-  address: '121 Bowermere Crescent NW, Calgary AB',
-  date: format(new Date(), 'EEEE MMMM dd, yyyy'),
-  completed: false
+  job: localJobs[0],
+  crews: sampleState.crews,
+  markJobComplete: () => {},
+  assignJobToCrew: () => {}
 };
 
 export const CompleteJob = Template.bind({});
 CompleteJob.args = {
-  address: '121 Bowermere Crescent NW, Calgary AB',
-  date: format(new Date(), 'EEEE MMMM dd, yyyy'),
-  completed: true
+  job: {...localJobs[0], completed: true},
+  crews: sampleState.crews,
+  markJobComplete: () => {},
+  assignJobtoCrew: () => {}
 };
