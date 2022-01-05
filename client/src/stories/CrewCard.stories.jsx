@@ -1,3 +1,4 @@
+import { BrowserRouter } from "react-router-dom";
 import CrewCard from "../components/CrewCard";
 
 export default {
@@ -5,7 +6,13 @@ export default {
   component: CrewCard
 };
 
-const Template = (args) => <CrewCard {...args} />;
+const Template = (args) => {
+  return (
+    <BrowserRouter>
+      <CrewCard {...args} />
+    </BrowserRouter>
+  );
+}
 
 export const WithNoJobs = Template.bind({});
 
@@ -15,7 +22,8 @@ WithNoJobs.args = {
     crew_size: 2,
     avatar: "https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShaggyMullet&accessoriesType=Wayfarers&hairColor=Brown&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=ShirtScoopNeck&clotheColor=Red&eyeType=Happy&eyebrowType=RaisedExcitedNatural&mouthType=Twinkle&skinColor=Pale'"
   }, 
-  jobs: []
+  jobs: [],
+  onDelete: () => {}
 }
 
 export const WithJobs = Template.bind({});
