@@ -12,15 +12,15 @@ JobSorter.args = {
   items: [
     { 
       name: 'Date',
-      onClick: () => alert('hi')
+      onClick: () => {}
     },
     { 
       name: 'A-Z', 
-      onClick: () => alert('hi')
+      onClick: () => {}
     },
     {
       name: 'Z-A',
-      onClick: () => alert('hi')
+      onClick: () => {}
     }
   ],
 }
