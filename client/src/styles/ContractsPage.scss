@@ -3,6 +3,7 @@
 .contracts-container {
   @include pageStyles;
   .contracts-page-header {
+    text-align: center;
     width: 100%;
     display: flex;
     flex-direction: column;
