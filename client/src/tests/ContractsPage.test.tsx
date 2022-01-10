@@ -23,6 +23,10 @@ describe('<ContractsPage />', () => {
     renderContractsPage();
     expect(screen.getByText(firstContract.address)).toBeInTheDocument()
     expect(screen.getByText(new RegExp(firstContract.client.name))).toBeInTheDocument();
+  });
+  it('filters contracts correctly with radio filters', () => {
+    const firstContract = localContracts[0];
+    renderContractsPage();
     fireEvent.click(screen.getByTestId('upcoming-contracts'));
     expect(screen.queryByText(firstContract.address)).not.toBeInTheDocument();
     fireEvent.click(screen.getByTestId('complete-contracts'));
@@ -30,6 +34,5 @@ describe('<ContractsPage />', () => {
     fireEvent.click(screen.getByTestId('active-contracts'));
     expect(screen.queryByText(firstContract.address)).not.toBeInTheDocument();
   });
-
-  // write tests for searchbar and filter
+  // write tests for searchbar
 });
