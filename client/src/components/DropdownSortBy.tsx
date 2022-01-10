@@ -7,7 +7,8 @@ const DropdownSortBy = (props: DropdownSortByProps) => {
 
   const dropDownItems = props.items.map((i, idx) => {
     return (
-      <Dropdown.Item 
+      <Dropdown.Item
+        data-testid={`dropdown-sort-item-${i}`}
         key={idx}
         onClick={() => {
           i.onClick(i.name)
@@ -20,7 +21,7 @@ const DropdownSortBy = (props: DropdownSortByProps) => {
   });
 
   return (
-    <DropdownButton id='dropdown-button' title={`Sort By: ${sortBy}`}>
+    <DropdownButton data-testid='dropdown-sort-by-button' id='dropdown-button' title={`Sort By: ${sortBy}`}>
       {dropDownItems}
     </DropdownButton>
   );
