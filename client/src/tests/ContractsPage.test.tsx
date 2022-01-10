@@ -3,9 +3,12 @@ import { BrowserRouter } from 'react-router-dom';
 import ContractsPage, { ContractsPageProps } from '../components/pages/ContractsPage';
 import { localContracts } from './sampleData';
 
+const onDelete = jest.fn();
+
 const renderContractsPage = (props: Partial<ContractsPageProps> = {} ) => {
   const defaultProps = {
-    contracts: localContracts
+    contracts: localContracts,
+    onDelete
   };
   return render (
     <BrowserRouter>
