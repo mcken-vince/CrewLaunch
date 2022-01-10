@@ -42,4 +42,24 @@ describe('<ContractsPage />', () => {
     fireEvent.change(screen.getByPlaceholderText(/Search by/i), {target: {value: 'zagagaga'}});
     expect(screen.queryByText(firstContract.address)).not.toBeInTheDocument();
   });
+  it('sorts contracts using the sort dropdown', async () => {
+    renderContractsPage({contracts: [...localContracts, {...localContracts[0], start_date: new Date(), address: '500 Mornersome Drive SW, Calgary AB'}]});
+    fireEvent.click(screen.getByTestId('dropdown-sort-by-button'));
+    setTimeout(() => {
+      fireEvent.click(screen.getByTestId('dropdown-sort-item-2'));
+    }, 0);
+    setTimeout(async () => {
+      const allContracts = await screen.findAllByText(new RegExp(/Calgary AB/i));
+      expect(allContracts.length).toBe(2);
+      expect(allContracts[0].textContent).toContain("500 Mornersome Drive SW, Calgary AB");
+    }, 0);
+    setTimeout(() => {
+      fireEvent.click(screen.getByTestId('dropdown-sort-item-3'));
+    }, 0);
+    setTimeout(async () => {
+      const allContracts = await screen.findAllByText(new RegExp(/Calgary AB/i));
+      expect(allContracts.length).toBe(2);
+      expect(allContracts[1].textContent).toContain("500 Mornersome Drive SW, Calgary AB");
+    }, 0);
+  });
 });
